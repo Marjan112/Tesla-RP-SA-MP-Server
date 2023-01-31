@@ -1,0 +1,3292 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="file:///C|/Users/Maki/Desktop/Server/pawno/xml/pawndoc.xsl" type="text/xsl"?>
+<doc source="c:\Users\Maki\Desktop\Server\filterscripts\garaze.pwn">
+	<assembly>
+		<name>garaze.pwn</name>
+	</assembly>
+	<members>
+
+		<!-- enumerations -->
+		<member name="T:pGaragem" value="5">
+			<tagname value="pGaragem"/>
+			<member name="C:cnX" value="0">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:cnY" value="1">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:cnZ" value="2">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:cnLock" value="3">
+			</member>
+			<member name="C:cnCar" value="4">
+			</member>
+		</member>
+
+		<!-- constants -->
+		<member name="C:cellmax" value="2147483647">
+			<referrer name="operator!(Float:)"/>
+		</member>
+		<member name="C:cellmin" value="-2147483648">
+			<referrer name="operator-(Float:)"/>
+		</member>
+		<member name="C:false" value="0">
+			<tagname value="bool"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_GetStringEx"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_IsSet"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="fwritechars"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="C:true" value="1">
+			<tagname value="bool"/>
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_GetBool"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_ParseLine"/>
+			<referrer name="fwritechars"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+
+		<!-- variables -->
+		<member name="F:CaseSensitive">
+			<tagname value="bool"/>
+			<referrer name="DOF2_SetCaseSensitivity"/>
+			<referrer name="DOF2_GetCaseSensitivity"/>
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_HashKey"/>
+		</member>
+		<member name="F:CurrentFile">
+			<referrer name="DOF2_SetFile"/>
+			<referrer name="DOF2_GetFile"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_RemoveFile"/>
+			<referrer name="DOF2_MakeBackup"/>
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_GetStringEx"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_IsSet"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_ReparseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+		</member>
+		<member name="F:Deletado">
+			<tagname value="bool"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:EditandoGaragem">
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="OnDialogResponse"/>
+		</member>
+		<member name="F:Entries_Count">
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SwapEntries"/>
+		</member>
+		<member name="F:Entries_Line">
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+		</member>
+		<member name="F:Entries_NextEntry">
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_SwapEntries"/>
+		</member>
+		<member name="F:Entries_PreviousEntry">
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SwapEntries"/>
+		</member>
+		<member name="F:Entries_Section">
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_ParseFile"/>
+		</member>
+		<member name="F:Entries_Tag">
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_ParseFile"/>
+		</member>
+		<member name="F:FileChanged">
+			<tagname value="bool"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+		</member>
+		<member name="F:Garagem">
+			<referrer name="GetLockGaragem"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="OnVehicleSpawn"/>
+		</member>
+		<member name="F:GaragemAtual">
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:LabelEntrada">
+			<tagname value="Text3D"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:LabelSaida">
+			<tagname value="Text3D"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:LabelString">
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:NameString">
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:Sections_Count">
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_SortSection_Internal"/>
+			<referrer name="DOF2_SwapEntries"/>
+		</member>
+		<member name="F:Sections_FirstEntry">
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_SwapEntries"/>
+		</member>
+		<member name="F:Sections_LastEntry">
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SwapEntries"/>
+		</member>
+		<member name="F:Sections_Tag">
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortSection"/>
+		</member>
+		<member name="F:SortedEntryList">
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_ParseFile"/>
+		</member>
+		<member name="F:UseUTF8">
+			<tagname value="bool"/>
+			<referrer name="DOF2_SetUTF8"/>
+			<referrer name="DOF2_GetUTF8"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="fwritechars"/>
+		</member>
+		<member name="F:__date">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__time">
+		</member>
+
+		<!-- functions -->
+		<member name="M:operator!(Float:)" syntax="operator!(Float:)(oper)">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="cellmax"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(_:,Float:)" syntax="operator%(_:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(Float:,_:)" syntax="operator%(Float:,_:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator%(Float:,Float:)" syntax="operator%(Float:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,_:)" syntax="operator!=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,Float:)" syntax="operator!=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(_:,Float:)" syntax="operator-(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,_:)" syntax="operator-(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator+(Float:,_:)" syntax="operator+(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatadd"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator/(_:,Float:)" syntax="operator/(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator/(Float:,_:)" syntax="operator/(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator*(Float:,_:)" syntax="operator*(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatmul"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator++(Float:)" syntax="operator++(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator+(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:)" syntax="operator-(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="PlayerToPoint"/>
+			<dependency name="cellmin"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator--(Float:)" syntax="operator--(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,Float:)" syntax="operator-(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator--(Float:)"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="PlayerToPoint"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator+(Float:,Float:)" syntax="operator+(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator++(Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,Float:)" syntax="operator==(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,_:)" syntax="operator==(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,Float:)" syntax="operator&gt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="PlayerToPoint"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,_:)" syntax="operator&gt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(_:,Float:)" syntax="operator&gt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,Float:)" syntax="operator&gt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,_:)" syntax="operator&gt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;=(_:,Float:)" syntax="operator&gt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,Float:)" syntax="operator&lt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<referrer name="GarageToPoint"/>
+			<referrer name="PlayerToPoint"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,_:)" syntax="operator&lt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;(_:,Float:)" syntax="operator&lt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,Float:)" syntax="operator&lt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,_:)" syntax="operator&lt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;=(_:,Float:)" syntax="operator&lt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:@receivepacket" syntax="@receivepacket(packet[], size, source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="packet">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:@receivestring" syntax="@receivestring(message[], source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:AbrirGaragem" syntax="AbrirGaragem(playerid, garageid)">
+			<attribute name="public"/>
+			<stacksize value="330"/>
+			<dependency name="Deletado"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="Update3DTextLabelText"/>
+			<dependency name="cnLock"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<param name="playerid">
+			</param>
+			<param name="garageid">
+			</param>
+		</member>
+		<member name="M:CallRemoteFunction" syntax="CallRemoteFunction(function[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="DOF2_ParseFile"/>
+			<param name="function">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:CarregarGaragens" syntax="CarregarGaragens()">
+			<attribute name="public"/>
+			<stacksize value="524"/>
+			<referrer name="OnFilterScriptInit"/>
+			<dependency name="Create3DTextLabel"/>
+			<dependency name="DOF2_GetFloat"/>
+			<dependency name="DOF2_GetInt"/>
+			<dependency name="DOF2_GetString"/>
+			<dependency name="DOF2_GetString"/>
+			<dependency name="Deletado"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GaragemAtual"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="cnLock"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+		</member>
+		<member name="M:Create3DTextLabel" syntax="Create3DTextLabel(text[], color, X, Y, Z, DrawDistance, virtualworld, testLOS)">
+			<tagname value="Text3D"/>
+			<attribute name="native"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="SetGaragemPos"/>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="DrawDistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="virtualworld">
+			</param>
+			<param name="testLOS">
+			</param>
+		</member>
+		<member name="M:CreateGarage" syntax="CreateGarage(playerowner[], garageid, gx, gy, gz, coment[], lock)">
+			<attribute name="public"/>
+			<stacksize value="395"/>
+			<referrer name="OnPlayerCommandText"/>
+			<dependency name="Create3DTextLabel"/>
+			<dependency name="DOF2_CreateFile"/>
+			<dependency name="GarageToPoint"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GaragemAtual"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="cnLock"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+			<param name="playerowner">
+				<paraminfo> [64] </paraminfo>
+			</param>
+			<param name="garageid">
+			</param>
+			<param name="gx">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="gy">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="gz">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="coment">
+				<paraminfo> [128] </paraminfo>
+			</param>
+			<param name="lock">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:CreateObject" syntax="CreateObject(modelid, X, Y, Z, rX, rY, rZ, DrawDistance)">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptInit"/>
+			<param name="modelid">
+			</param>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="DrawDistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:Creditos" syntax="Creditos()">
+			<attribute name="public"/>
+			<stacksize value="4"/>
+			<dependency name="SendClientMessageToAll"/>
+		</member>
+		<member name="M:DOF2_CheckLogin" syntax="DOF2_CheckLogin(file[], password[])">
+			<tagname value="bool"/>
+			<stacksize value="7"/>
+			<dependency name="DOF2_GetInt"/>
+			<dependency name="DOF2_num_hash"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_CopyFile" syntax="DOF2_CopyFile(filetocopy[], newfile[])">
+			<stacksize value="6"/>
+			<referrer name="DOF2_MakeBackup"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SetFile"/>
+			<dependency name="DOF2_WriteFile"/>
+			<dependency name="FileChanged"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="strcmp"/>
+			<param name="filetocopy">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="newfile">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_CreateFile" syntax="DOF2_CreateFile(file[], password[])">
+			<stacksize value="7"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<dependency name="DOF2_SetInt"/>
+			<dependency name="DOF2_num_hash"/>
+			<dependency name="fclose"/>
+			<dependency name="fexist"/>
+			<dependency name="fopen"/>
+			<dependency name="io_append"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_Exit" syntax="DOF2_Exit()">
+			<stacksize value="3"/>
+			<referrer name="OnFilterScriptExit"/>
+			<dependency name="DOF2_WriteFile"/>
+		</member>
+		<member name="M:DOF2_File" syntax="DOF2_File(user[])">
+			<stacksize value="71"/>
+			<dependency name="DOF2_File"/>
+			<dependency name="DOF2_udb_encode"/>
+			<dependency name="format"/>
+			<param name="user">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetBin" syntax="DOF2_GetBin(file[], key[], tag[])">
+			<stacksize value="43"/>
+			<dependency name="DOF2_GetStringEx"/>
+			<dependency name="DOF2_strbin"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetBool" syntax="DOF2_GetBool(file[], key[], tag[])">
+			<tagname value="bool"/>
+			<stacksize value="24"/>
+			<dependency name="DOF2_GetStringEx"/>
+			<dependency name="strcmp"/>
+			<dependency name="strval"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetCaseSensitivity" syntax="DOF2_GetCaseSensitivity()">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="CaseSensitive"/>
+		</member>
+		<member name="M:DOF2_GetFile" syntax="DOF2_GetFile()">
+			<stacksize value="1"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_GetFile"/>
+		</member>
+		<member name="M:DOF2_GetFloat" syntax="DOF2_GetFloat(file[], key[], tag[])">
+			<tagname value="Float"/>
+			<stacksize value="40"/>
+			<referrer name="CarregarGaragens"/>
+			<dependency name="DOF2_GetStringEx"/>
+			<dependency name="floatstr"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetHex" syntax="DOF2_GetHex(file[], key[], tag[])">
+			<stacksize value="24"/>
+			<dependency name="DOF2_GetStringEx"/>
+			<dependency name="DOF2_strhex"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetInt" syntax="DOF2_GetInt(file[], key[], tag[])">
+			<stacksize value="24"/>
+			<referrer name="DOF2_CheckLogin"/>
+			<referrer name="CarregarGaragens"/>
+			<dependency name="DOF2_GetStringEx"/>
+			<dependency name="strval"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetString" syntax="DOF2_GetString(file[], key[], tag[])">
+			<stacksize value="136"/>
+			<referrer name="CarregarGaragens"/>
+			<dependency name="DOF2_GetString"/>
+			<dependency name="DOF2_GetStringEx"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetStringEx" syntax="DOF2_GetStringEx(file[], key[], result[], size, tag[])">
+			<stacksize value="139"/>
+			<referrer name="DOF2_GetString"/>
+			<referrer name="DOF2_GetInt"/>
+			<referrer name="DOF2_GetHex"/>
+			<referrer name="DOF2_GetBin"/>
+			<referrer name="DOF2_GetFloat"/>
+			<referrer name="DOF2_GetBool"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SearchEntry"/>
+			<dependency name="false"/>
+			<dependency name="strcmp"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="result">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_GetUTF8" syntax="DOF2_GetUTF8()">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="UseUTF8"/>
+		</member>
+		<member name="M:DOF2_HashKey" syntax="DOF2_HashKey(key[])">
+			<stacksize value="6"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_ParseFile"/>
+			<dependency name="CaseSensitive"/>
+			<dependency name="tolower"/>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_IsSet" syntax="DOF2_IsSet(file[], key[], tag[])">
+			<tagname value="bool"/>
+			<stacksize value="267"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SearchEntry"/>
+			<dependency name="false"/>
+			<dependency name="strcmp"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_MakeBackup" syntax="DOF2_MakeBackup(file[])">
+			<stacksize value="84"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_CopyFile"/>
+			<dependency name="GetTickCount"/>
+			<dependency name="format"/>
+			<dependency name="getdate"/>
+			<dependency name="gettime"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_ParseFile" syntax="DOF2_ParseFile(file[], extraid, callback)">
+			<stacksize value="526"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_GetStringEx"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_IsSet"/>
+			<referrer name="DOF2_ReparseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<dependency name="CallRemoteFunction"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_HashKey"/>
+			<dependency name="DOF2_ParseLine"/>
+			<dependency name="DOF2_SetFile"/>
+			<dependency name="DOF2_SortEntries"/>
+			<dependency name="DOF2_WriteFile"/>
+			<dependency name="Entries_Count"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Entries_PreviousEntry"/>
+			<dependency name="Entries_Section"/>
+			<dependency name="Entries_Tag"/>
+			<dependency name="Entries_Tag"/>
+			<dependency name="FileChanged"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_LastEntry"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="UseUTF8"/>
+			<dependency name="false"/>
+			<dependency name="fclose"/>
+			<dependency name="fexist"/>
+			<dependency name="fgetchar"/>
+			<dependency name="flength"/>
+			<dependency name="fopen"/>
+			<dependency name="format"/>
+			<dependency name="io_readwrite"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="extraid">
+			</param>
+			<param name="callback">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_ParseLine" syntax="DOF2_ParseLine(line[], key[], value[], keysize, valuesize)">
+			<stacksize value="8"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<dependency name="charfind"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="line">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="keysize">
+			</param>
+			<param name="valuesize">
+			</param>
+		</member>
+		<member name="M:DOF2_PrintFile" syntax="DOF2_PrintFile(comment[])">
+			<stacksize value="9"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="false"/>
+			<dependency name="print"/>
+			<dependency name="printf"/>
+			<dependency name="true"/>
+			<param name="comment">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_RemoveFile" syntax="DOF2_RemoveFile(file[])">
+			<stacksize value="6"/>
+			<referrer name="DeletarGaragem"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="fremove"/>
+			<dependency name="strcmp"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_RemoveSection" syntax="DOF2_RemoveSection(file[], tag[])">
+			<stacksize value="9"/>
+			<dependency name="CaseSensitive"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_ParseLine"/>
+			<dependency name="DOF2_Unset"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Entries_Section"/>
+			<dependency name="FileChanged"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_LastEntry"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="false"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_RenameFile" syntax="DOF2_RenameFile(oldfile[], newfile[])">
+			<stacksize value="6"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SetFile"/>
+			<dependency name="DOF2_WriteFile"/>
+			<dependency name="FileChanged"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="fremove"/>
+			<dependency name="strcmp"/>
+			<param name="oldfile">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="newfile">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_RenameKey" syntax="DOF2_RenameKey(file[], oldkey[], newkey[], tag[])">
+			<stacksize value="268"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_HashKey"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SearchEntry"/>
+			<dependency name="DOF2_SwapSortedEntries"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="FileChanged"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="oldkey">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="newkey">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_ReparseFile" syntax="DOF2_ReparseFile(file[], extraid, callback)">
+			<stacksize value="6"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="strcmp"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="extraid">
+			</param>
+			<param name="callback">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SearchEntry" syntax="DOF2_SearchEntry(key[], tag[], keybuf[], valbuf[], &amp;pos, keybufsize, valbufsize)">
+			<stacksize value="14"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_GetStringEx"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_IsSet"/>
+			<dependency name="CaseSensitive"/>
+			<dependency name="DOF2_HashKey"/>
+			<dependency name="DOF2_ParseLine"/>
+			<dependency name="Entries_Count"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Tag"/>
+			<dependency name="Entries_Tag"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="false"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="keybuf">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="valbuf">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="pos">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="keybufsize">
+			</param>
+			<param name="valbufsize">
+			</param>
+		</member>
+		<member name="M:DOF2_SectionExists" syntax="DOF2_SectionExists(file[], tag[])">
+			<tagname value="bool"/>
+			<stacksize value="7"/>
+			<dependency name="CaseSensitive"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="false"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetBin" syntax="DOF2_SetBin(file[], key[], value, tag[])">
+			<stacksize value="42"/>
+			<dependency name="DOF2_SetString"/>
+			<dependency name="DOF2_binstr"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetBool" syntax="DOF2_SetBool(file[], key[], value, tag[])">
+			<stacksize value="7"/>
+			<dependency name="DOF2_SetString"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetCaseSensitivity" syntax="DOF2_SetCaseSensitivity(set)">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="CaseSensitive"/>
+			<param name="set">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetFile" syntax="DOF2_SetFile(file[])">
+			<stacksize value="5"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_strcpy"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetFloat" syntax="DOF2_SetFloat(file[], key[], value, tag[])">
+			<stacksize value="39"/>
+			<referrer name="SalvarGaragens"/>
+			<dependency name="DOF2_SetString"/>
+			<dependency name="format"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetHex" syntax="DOF2_SetHex(file[], key[], value, tag[])">
+			<stacksize value="23"/>
+			<dependency name="DOF2_SetString"/>
+			<dependency name="DOF2_hexstr"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetInt" syntax="DOF2_SetInt(file[], key[], value, tag[])">
+			<stacksize value="23"/>
+			<referrer name="DOF2_CreateFile"/>
+			<referrer name="SalvarGaragens"/>
+			<dependency name="DOF2_SetString"/>
+			<dependency name="format"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetString" syntax="DOF2_SetString(file[], key[], value[], tag[])">
+			<stacksize value="270"/>
+			<referrer name="DOF2_SetInt"/>
+			<referrer name="DOF2_SetHex"/>
+			<referrer name="DOF2_SetBin"/>
+			<referrer name="DOF2_SetFloat"/>
+			<referrer name="DOF2_SetBool"/>
+			<referrer name="SalvarGaragens"/>
+			<dependency name="CaseSensitive"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_HashKey"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SearchEntry"/>
+			<dependency name="DOF2_SwapSortedEntries"/>
+			<dependency name="DOF2_strcpy"/>
+			<dependency name="Entries_Count"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Entries_PreviousEntry"/>
+			<dependency name="Entries_Section"/>
+			<dependency name="Entries_Tag"/>
+			<dependency name="Entries_Tag"/>
+			<dependency name="FileChanged"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_LastEntry"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SetUTF8" syntax="DOF2_SetUTF8(set)">
+			<stacksize value="1"/>
+			<dependency name="UseUTF8"/>
+			<param name="set">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SortAllSections" syntax="DOF2_SortAllSections(file[], ignorecase, ascending)">
+			<stacksize value="33549"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_ParseLine"/>
+			<dependency name="DOF2_SortSection_Internal"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="false"/>
+			<dependency name="strcat"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="ascending">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SortEntries" syntax="DOF2_SortEntries(entries[][], l, r, randomize)">
+			<stacksize value="10"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_SortEntries"/>
+			<dependency name="DOF2_SwapSortedEntries"/>
+			<dependency name="random"/>
+			<param name="entries">
+				<paraminfo> [][2] </paraminfo>
+			</param>
+			<param name="l">
+			</param>
+			<param name="r">
+			</param>
+			<param name="randomize">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SortSection" syntax="DOF2_SortSection(file[], tag[], ignorecase, ascending)">
+			<stacksize value="33549"/>
+			<dependency name="CaseSensitive"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_ParseLine"/>
+			<dependency name="DOF2_SortSection_Internal"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="false"/>
+			<dependency name="strcat"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="ascending">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SortSection_Internal" syntax="DOF2_SortSection_Internal(section, entries[], keys[][], l, r, ignorecase, ascending)">
+			<stacksize value="140"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_SortSection_Internal"/>
+			<dependency name="DOF2_SwapEntries"/>
+			<dependency name="DOF2_strcpy"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="strcat"/>
+			<dependency name="strcmp"/>
+			<param name="section">
+			</param>
+			<param name="entries">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="keys">
+				<paraminfo> [][] </paraminfo>
+			</param>
+			<param name="l">
+			</param>
+			<param name="r">
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="ascending">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_SwapEntries" syntax="DOF2_SwapEntries(section, entry1, entry2)">
+			<stacksize value="2"/>
+			<referrer name="DOF2_SortSection_Internal"/>
+			<dependency name="Entries_Count"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Entries_PreviousEntry"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_LastEntry"/>
+			<param name="section">
+			</param>
+			<param name="entry1">
+			</param>
+			<param name="entry2">
+			</param>
+		</member>
+		<member name="M:DOF2_SwapSortedEntries" syntax="DOF2_SwapSortedEntries(a[], b[])">
+			<stacksize value="3"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_SortEntries"/>
+			<param name="a">
+				<paraminfo> [2] </paraminfo>
+			</param>
+			<param name="b">
+				<paraminfo> [2] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_Unset" syntax="DOF2_Unset(file[], key[], tag[])">
+			<stacksize value="268"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="DOF2_ParseFile"/>
+			<dependency name="DOF2_SearchEntry"/>
+			<dependency name="DOF2_SwapSortedEntries"/>
+			<dependency name="Entries_Count"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="Entries_PreviousEntry"/>
+			<dependency name="Entries_Section"/>
+			<dependency name="FileChanged"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_LastEntry"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="SortedEntryList"/>
+			<dependency name="false"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="key">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="tag">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_WriteFile" syntax="DOF2_WriteFile()">
+			<stacksize value="9"/>
+			<referrer name="DOF2_Exit"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="SalvarGaragens"/>
+			<dependency name="CurrentFile"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_Line"/>
+			<dependency name="Entries_NextEntry"/>
+			<dependency name="FileChanged"/>
+			<dependency name="Sections_Count"/>
+			<dependency name="Sections_FirstEntry"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="Sections_Tag"/>
+			<dependency name="UseUTF8"/>
+			<dependency name="false"/>
+			<dependency name="fclose"/>
+			<dependency name="fopen"/>
+			<dependency name="fputchar"/>
+			<dependency name="fwritechars"/>
+			<dependency name="io_write"/>
+			<dependency name="true"/>
+		</member>
+		<member name="M:DOF2_binstr" syntax="DOF2_binstr(value, dest[], size)">
+			<stacksize value="41"/>
+			<referrer name="DOF2_SetBin"/>
+			<dependency name="DOF2_strcpy"/>
+			<param name="value">
+			</param>
+			<param name="dest">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:DOF2_hexstr" syntax="DOF2_hexstr(value, dest[], size)">
+			<stacksize value="17"/>
+			<referrer name="DOF2_SetHex"/>
+			<dependency name="DOF2_strcpy"/>
+			<param name="value">
+			</param>
+			<param name="dest">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:DOF2_num_hash" syntax="DOF2_num_hash(buf[])">
+			<stacksize value="5"/>
+			<referrer name="DOF2_CreateFile"/>
+			<referrer name="DOF2_CheckLogin"/>
+			<dependency name="strlen"/>
+			<param name="buf">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_strbin" syntax="DOF2_strbin(string[])">
+			<stacksize value="3"/>
+			<referrer name="DOF2_GetBin"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_strcpy" syntax="DOF2_strcpy(dest[], src[], size)">
+			<stacksize value="5"/>
+			<referrer name="DOF2_SetFile"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_binstr"/>
+			<referrer name="DOF2_hexstr"/>
+			<referrer name="DOF2_SortSection_Internal"/>
+			<referrer name="DOF2_udb_encode"/>
+			<referrer name="DOF2_udb_decode"/>
+			<dependency name="strcat"/>
+			<param name="dest">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="src">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:DOF2_strhex" syntax="DOF2_strhex(string[])">
+			<stacksize value="3"/>
+			<referrer name="DOF2_GetHex"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_strreplace" syntax="DOF2_strreplace(newstr[], oldstr[], srcstr[], deststr[], ignorecase, size)">
+			<stacksize value="12"/>
+			<referrer name="DOF2_udb_encode"/>
+			<referrer name="DOF2_udb_decode"/>
+			<dependency name="strcat"/>
+			<dependency name="strcmp"/>
+			<dependency name="strlen"/>
+			<param name="newstr">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="oldstr">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="srcstr">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="deststr">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:DOF2_udb_decode" syntax="DOF2_udb_decode(nickname[])">
+			<stacksize value="522"/>
+			<dependency name="DOF2_strcpy"/>
+			<dependency name="DOF2_strreplace"/>
+			<dependency name="DOF2_udb_decode"/>
+			<dependency name="strcat"/>
+			<param name="nickname">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DOF2_udb_encode" syntax="DOF2_udb_encode(nickname[])">
+			<stacksize value="522"/>
+			<referrer name="DOF2_File"/>
+			<dependency name="DOF2_strcpy"/>
+			<dependency name="DOF2_strreplace"/>
+			<dependency name="DOF2_udb_encode"/>
+			<dependency name="strcat"/>
+			<param name="nickname">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:DeletarGaragem" syntax="DeletarGaragem(garageid)">
+			<attribute name="public"/>
+			<stacksize value="200"/>
+			<referrer name="OnPlayerCommandText"/>
+			<dependency name="DOF2_RemoveFile"/>
+			<dependency name="Deletado"/>
+			<dependency name="Delete3DTextLabel"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GetPlayerState"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetPlayerVirtualWorld"/>
+			<dependency name="GetVehicleVirtualWorld"/>
+			<dependency name="IsPlayerInVehicle"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerInterior"/>
+			<dependency name="SetPlayerPos"/>
+			<dependency name="SetPlayerVirtualWorld"/>
+			<dependency name="SetVehiclePos"/>
+			<dependency name="SetVehicleToRespawn"/>
+			<dependency name="SetVehicleVirtualWorld"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+			<dependency name="true"/>
+			<param name="garageid">
+			</param>
+		</member>
+		<member name="M:Delete3DTextLabel" syntax="Delete3DTextLabel(id)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemPos"/>
+			<param name="id">
+				<paraminfo>Text3D </paraminfo>
+			</param>
+		</member>
+		<member name="M:FecharGaragem" syntax="FecharGaragem(playerid, garageid)">
+			<attribute name="public"/>
+			<stacksize value="330"/>
+			<dependency name="Deletado"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="Update3DTextLabelText"/>
+			<dependency name="cnLock"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<param name="playerid">
+			</param>
+			<param name="garageid">
+			</param>
+		</member>
+		<member name="M:GarageToPoint" syntax="GarageToPoint(radi, garageid, x, y, z)">
+			<attribute name="public"/>
+			<stacksize value="8"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="OnPlayerCommandText"/>
+			<dependency name="operator-(Float:)"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<dependency name="operator&gt;(Float:,Float:)"/>
+			<dependency name="operator&lt;(Float:,Float:)"/>
+			<dependency name="Deletado"/>
+			<dependency name="Garagem"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="false"/>
+			<param name="radi">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="garageid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetLockGaragem" syntax="GetLockGaragem(garageid)">
+			<stacksize value="65"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<dependency name="Garagem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="cnLock"/>
+			<param name="garageid">
+			</param>
+		</member>
+		<member name="M:GetPlayerName" syntax="GetPlayerName(playerid, name[], len)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="OnDialogResponse"/>
+			<param name="playerid">
+			</param>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="len">
+			</param>
+		</member>
+		<member name="M:GetPlayerPos" syntax="GetPlayerPos(playerid, &amp;x, &amp;y, &amp;z)">
+			<attribute name="native"/>
+			<referrer name="PlayerToPoint"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+			<param name="x">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetPlayerState" syntax="GetPlayerState(playerid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID(playerid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetPlayerVirtualWorld" syntax="GetPlayerVirtualWorld(playerid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetTickCount" syntax="GetTickCount()">
+			<attribute name="native"/>
+			<referrer name="DOF2_MakeBackup"/>
+		</member>
+		<member name="M:GetVehicleVirtualWorld" syntax="GetVehicleVirtualWorld(vehicleid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnVehicleSpawn"/>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:IsPlayerAdmin" syntax="IsPlayerAdmin(playerid)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsPlayerConnected" syntax="IsPlayerConnected(playerid)">
+			<attribute name="native"/>
+			<referrer name="PlayerToPoint"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsPlayerInVehicle" syntax="IsPlayerInVehicle(playerid, vehicleid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:LinkVehicleToInterior" syntax="LinkVehicleToInterior(vehicleid, interiorid)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="vehicleid">
+			</param>
+			<param name="interiorid">
+			</param>
+		</member>
+		<member name="M:OnActorStreamIn" syntax="OnActorStreamIn(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnActorStreamOut" syntax="OnActorStreamOut(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnDialogResponse" syntax="OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])">
+			<attribute name="public"/>
+			<stacksize value="134"/>
+			<dependency name="EditandoGaragem"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="SetGaragemComent"/>
+			<dependency name="SetGaragemDono"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="format"/>
+			<dependency name="strlen"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="listitem">
+			</param>
+			<param name="inputtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnEnterExitModShop" syntax="OnEnterExitModShop(playerid, enterexit, interiorid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="enterexit">
+			</param>
+			<param name="interiorid">
+			</param>
+		</member>
+		<member name="M:OnFilterScriptExit" syntax="OnFilterScriptExit()">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="DOF2_Exit"/>
+		</member>
+		<member name="M:OnFilterScriptInit" syntax="OnFilterScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="10"/>
+			<dependency name="CarregarGaragens"/>
+			<dependency name="CreateObject"/>
+			<dependency name="SetTimer"/>
+			<dependency name="print"/>
+			<dependency name="true"/>
+		</member>
+		<member name="M:OnGameModeExit" syntax="OnGameModeExit()">
+			<stacksize value="1"/>
+		</member>
+		<member name="M:OnGameModeInit" syntax="OnGameModeInit()">
+			<stacksize value="1"/>
+		</member>
+		<member name="M:OnIncomingConnection" syntax="OnIncomingConnection(playerid, ip_address[], port)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="ip_address">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="port">
+			</param>
+		</member>
+		<member name="M:OnObjectMoved" syntax="OnObjectMoved(objectid)">
+			<stacksize value="1"/>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnPlayerClickMap" syntax="OnPlayerClickMap(playerid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClickPlayer" syntax="OnPlayerClickPlayer(playerid, clickedplayerid, source)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="clickedplayerid">
+			</param>
+			<param name="source">
+			</param>
+		</member>
+		<member name="M:OnPlayerClickPlayerTextDraw" syntax="OnPlayerClickPlayerTextDraw(playerid, playertextid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="playertextid">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClickTextDraw" syntax="OnPlayerClickTextDraw(playerid, clickedid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="clickedid">
+				<paraminfo>Text </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandText" syntax="OnPlayerCommandText(playerid, cmdtext[])">
+			<attribute name="public"/>
+			<stacksize value="355"/>
+			<dependency name="CreateGarage"/>
+			<dependency name="Deletado"/>
+			<dependency name="DeletarGaragem"/>
+			<dependency name="EditandoGaragem"/>
+			<dependency name="GarageToPoint"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GaragemAtual"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetPlayerState"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetPlayerVirtualWorld"/>
+			<dependency name="IsPlayerAdmin"/>
+			<dependency name="IsPlayerInVehicle"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="LinkVehicleToInterior"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="PlayerToPoint"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerInterior"/>
+			<dependency name="SetPlayerPos"/>
+			<dependency name="SetPlayerVirtualWorld"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="SetVehiclePos"/>
+			<dependency name="SetVehicleVirtualWorld"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="Update3DTextLabelText"/>
+			<dependency name="cnCar"/>
+			<dependency name="cnLock"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerConnect" syntax="OnPlayerConnect(playerid)">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerDeath" syntax="OnPlayerDeath(playerid, killerid, reason)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="killerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:OnPlayerDisconnect" syntax="OnPlayerDisconnect(playerid, reason)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:OnPlayerEditAttachedObject" syntax="OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="index">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="boneid">
+			</param>
+			<param name="fOffsetX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEditObject" syntax="OnPlayerEditObject(playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="playerobject">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterCheckpoint" syntax="OnPlayerEnterCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterRaceCheckpoint" syntax="OnPlayerEnterRaceCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterVehicle" syntax="OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="ispassenger">
+			</param>
+		</member>
+		<member name="M:OnPlayerExitVehicle" syntax="OnPlayerExitVehicle(playerid, vehicleid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnPlayerExitedMenu" syntax="OnPlayerExitedMenu(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamage" syntax="OnPlayerGiveDamage(playerid, damagedid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="damagedid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamageActor" syntax="OnPlayerGiveDamageActor(playerid, damaged_actorid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="damaged_actorid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerInteriorChange" syntax="OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newinteriorid">
+			</param>
+			<param name="oldinteriorid">
+			</param>
+		</member>
+		<member name="M:OnPlayerKeyStateChange" syntax="OnPlayerKeyStateChange(playerid, newkeys, oldkeys)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newkeys">
+			</param>
+			<param name="oldkeys">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveCheckpoint" syntax="OnPlayerLeaveCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveRaceCheckpoint" syntax="OnPlayerLeaveRaceCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerObjectMoved" syntax="OnPlayerObjectMoved(playerid, objectid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnPlayerPickUpPickup" syntax="OnPlayerPickUpPickup(playerid, pickupid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="pickupid">
+			</param>
+		</member>
+		<member name="M:OnPlayerRequestClass" syntax="OnPlayerRequestClass(playerid, classid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="classid">
+			</param>
+		</member>
+		<member name="M:OnPlayerRequestSpawn" syntax="OnPlayerRequestSpawn(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectObject" syntax="OnPlayerSelectObject(playerid, type, objectid, modelid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="type">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectedMenuRow" syntax="OnPlayerSelectedMenuRow(playerid, row)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="row">
+			</param>
+		</member>
+		<member name="M:OnPlayerSpawn" syntax="OnPlayerSpawn(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStateChange" syntax="OnPlayerStateChange(playerid, newstate, oldstate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newstate">
+			</param>
+			<param name="oldstate">
+			</param>
+		</member>
+		<member name="M:OnPlayerStreamIn" syntax="OnPlayerStreamIn(playerid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStreamOut" syntax="OnPlayerStreamOut(playerid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerTakeDamage" syntax="OnPlayerTakeDamage(playerid, issuerid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="issuerid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerText" syntax="OnPlayerText(playerid, text[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerUpdate" syntax="OnPlayerUpdate(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerWeaponShot" syntax="OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="hittype">
+			</param>
+			<param name="hitid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnRconCommand" syntax="OnRconCommand(cmd[])">
+			<stacksize value="1"/>
+			<param name="cmd">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnRconLoginAttempt" syntax="OnRconLoginAttempt(ip[], password[], success)">
+			<stacksize value="1"/>
+			<param name="ip">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="success">
+			</param>
+		</member>
+		<member name="M:OnTrailerUpdate" syntax="OnTrailerUpdate(playerid, vehicleid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnUnoccupiedVehicleUpdate" syntax="OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, new_x, new_y, new_z, vel_x, vel_y, vel_z)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="passenger_seat">
+			</param>
+			<param name="new_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="new_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="new_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnVehicleDamageStatusUpdate" syntax="OnVehicleDamageStatusUpdate(vehicleid, playerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleDeath" syntax="OnVehicleDeath(vehicleid, killerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="killerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleMod" syntax="OnVehicleMod(playerid, vehicleid, componentid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="componentid">
+			</param>
+		</member>
+		<member name="M:OnVehiclePaintjob" syntax="OnVehiclePaintjob(playerid, vehicleid, paintjobid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="paintjobid">
+			</param>
+		</member>
+		<member name="M:OnVehicleRespray" syntax="OnVehicleRespray(playerid, vehicleid, color1, color2)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="color1">
+			</param>
+			<param name="color2">
+			</param>
+		</member>
+		<member name="M:OnVehicleSirenStateChange" syntax="OnVehicleSirenStateChange(playerid, vehicleid, newstate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="newstate">
+			</param>
+		</member>
+		<member name="M:OnVehicleSpawn" syntax="OnVehicleSpawn(vehicleid)">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="Garagem"/>
+			<dependency name="GetVehicleVirtualWorld"/>
+			<dependency name="SetVehicleVirtualWorld"/>
+			<dependency name="cnCar"/>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnVehicleStreamIn" syntax="OnVehicleStreamIn(vehicleid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleStreamOut" syntax="OnVehicleStreamOut(vehicleid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:PlayerToPoint" syntax="PlayerToPoint(radi, playerid, x, y, z)">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<referrer name="OnPlayerCommandText"/>
+			<dependency name="operator-(Float:)"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<dependency name="operator&gt;(Float:,Float:)"/>
+			<dependency name="operator&lt;(Float:,Float:)"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="IsPlayerConnected"/>
+			<param name="radi">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:SalvarGaragens" syntax="SalvarGaragens()">
+			<attribute name="public"/>
+			<stacksize value="137"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<dependency name="DOF2_CreateFile"/>
+			<dependency name="DOF2_SetFloat"/>
+			<dependency name="DOF2_SetInt"/>
+			<dependency name="DOF2_SetString"/>
+			<dependency name="DOF2_WriteFile"/>
+			<dependency name="Deletado"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GaragemAtual"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="cnLock"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+		</member>
+		<member name="M:SendClientMessage" syntax="SendClientMessage(playerid, color, message[])">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+			<param name="color">
+			</param>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SendClientMessageToAll" syntax="SendClientMessageToAll(color, message[])">
+			<attribute name="native"/>
+			<referrer name="Creditos"/>
+			<param name="color">
+			</param>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetGaragemComent" syntax="SetGaragemComent(garageid, coment[])">
+			<attribute name="public"/>
+			<stacksize value="266"/>
+			<referrer name="OnDialogResponse"/>
+			<dependency name="Deletado"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="Update3DTextLabelText"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+			<param name="garageid">
+			</param>
+			<param name="coment">
+				<paraminfo> [128] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetGaragemDono" syntax="SetGaragemDono(garageid, playerowner[])">
+			<attribute name="public"/>
+			<stacksize value="266"/>
+			<referrer name="OnDialogResponse"/>
+			<dependency name="Deletado"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelSaida"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="Update3DTextLabelText"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+			<param name="garageid">
+			</param>
+			<param name="playerowner">
+				<paraminfo> [64] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetGaragemPos" syntax="SetGaragemPos(garageid, gx, gy, gz)">
+			<attribute name="public"/>
+			<stacksize value="266"/>
+			<dependency name="Create3DTextLabel"/>
+			<dependency name="Deletado"/>
+			<dependency name="Delete3DTextLabel"/>
+			<dependency name="Garagem"/>
+			<dependency name="Garagem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="GetLockGaragem"/>
+			<dependency name="LabelEntrada"/>
+			<dependency name="LabelString"/>
+			<dependency name="LabelString"/>
+			<dependency name="NameString"/>
+			<dependency name="NameString"/>
+			<dependency name="SalvarGaragens"/>
+			<dependency name="cnX"/>
+			<dependency name="cnY"/>
+			<dependency name="cnZ"/>
+			<dependency name="false"/>
+			<dependency name="fexist"/>
+			<dependency name="format"/>
+			<dependency name="printf"/>
+			<param name="garageid">
+			</param>
+			<param name="gx">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="gy">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="gz">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetPlayerInterior" syntax="SetPlayerInterior(playerid, interiorid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+			<param name="interiorid">
+			</param>
+		</member>
+		<member name="M:SetPlayerPos" syntax="SetPlayerPos(playerid, x, y, z)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetPlayerVirtualWorld" syntax="SetPlayerVirtualWorld(playerid, worldid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="playerid">
+			</param>
+			<param name="worldid">
+			</param>
+		</member>
+		<member name="M:SetTimer" syntax="SetTimer(funcname[], interval, repeating)">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptInit"/>
+			<param name="funcname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="interval">
+			</param>
+			<param name="repeating">
+			</param>
+		</member>
+		<member name="M:SetTimerEx" syntax="SetTimerEx(funcname[], interval, repeating, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="funcname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="interval">
+			</param>
+			<param name="repeating">
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetVehiclePos" syntax="SetVehiclePos(vehicleid, x, y, z)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="vehicleid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetVehicleToRespawn" syntax="SetVehicleToRespawn(vehicleid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:SetVehicleVirtualWorld" syntax="SetVehicleVirtualWorld(vehicleid, worldid)">
+			<attribute name="native"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="OnVehicleSpawn"/>
+			<param name="vehicleid">
+			</param>
+			<param name="worldid">
+			</param>
+		</member>
+		<member name="M:ShowPlayerDialog" syntax="ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="OnDialogResponse"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="style">
+			</param>
+			<param name="caption">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="info">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button2">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:Update3DTextLabelText" syntax="Update3DTextLabelText(id, color, text[])">
+			<attribute name="native"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="id">
+				<paraminfo>Text3D </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:charfind" syntax="charfind(string[], c)">
+			<stacksize value="5"/>
+			<referrer name="DOF2_ParseLine"/>
+			<dependency name="strlen"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="c">
+			</param>
+		</member>
+		<member name="M:fclose" syntax="fclose(handle)">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="DOF2_CreateFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+		</member>
+		<member name="M:fexist" syntax="fexist(pattern[])">
+			<attribute name="native"/>
+			<referrer name="DOF2_CreateFile"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<param name="pattern">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:fgetchar" syntax="fgetchar(handle, value, utf8)">
+			<attribute name="native"/>
+			<referrer name="DOF2_ParseFile"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="utf8">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:flength" syntax="flength(handle)">
+			<attribute name="native"/>
+			<referrer name="DOF2_ParseFile"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+		</member>
+		<member name="M:float" syntax="float(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="value">
+			</param>
+		</member>
+		<member name="M:floatadd" syntax="floatadd(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatcmp" syntax="floatcmp(oper1, oper2)">
+			<attribute name="native"/>
+			<referrer name="operator==(Float:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,Float:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,Float:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatdiv" syntax="floatdiv(dividend, divisor)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<param name="dividend">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="divisor">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatmul" syntax="floatmul(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatstr" syntax="floatstr(string[])">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="DOF2_GetFloat"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatsub" syntax="floatsub(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:fopen" syntax="fopen(name[], mode)">
+			<tagname value="File"/>
+			<attribute name="native"/>
+			<referrer name="DOF2_CreateFile"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="DOF2_ParseFile"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="mode">
+				<paraminfo>filemode </paraminfo>
+			</param>
+		</member>
+		<member name="M:format" syntax="format(output[], len, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="DOF2_MakeBackup"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_SetInt"/>
+			<referrer name="DOF2_SetFloat"/>
+			<referrer name="DOF2_ParseFile"/>
+			<referrer name="DOF2_File"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<referrer name="FecharGaragem"/>
+			<referrer name="AbrirGaragem"/>
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="OnDialogResponse"/>
+			<param name="output">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="len">
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:fputchar" syntax="fputchar(handle, value, utf8)">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="DOF2_WriteFile"/>
+			<referrer name="fwritechars"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="utf8">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:fremove" syntax="fremove(name[])">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_RemoveFile"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:fwritechars" syntax="fwritechars(handle, c[])">
+			<stacksize value="6"/>
+			<referrer name="DOF2_WriteFile"/>
+			<dependency name="UseUTF8"/>
+			<dependency name="false"/>
+			<dependency name="fputchar"/>
+			<dependency name="true"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+			<param name="c">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:getdate" syntax="getdate(&amp;year, &amp;month, &amp;day)">
+			<attribute name="native"/>
+			<referrer name="DOF2_MakeBackup"/>
+			<param name="year">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="month">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="day">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:gettime" syntax="gettime(&amp;hour, &amp;minute, &amp;second)">
+			<attribute name="native"/>
+			<referrer name="DOF2_MakeBackup"/>
+			<param name="hour">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="minute">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="second">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:print" syntax="print(string[])">
+			<attribute name="native"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="OnFilterScriptInit"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:printf" syntax="printf(format[], ...)">
+			<attribute name="native"/>
+			<referrer name="DOF2_PrintFile"/>
+			<referrer name="CarregarGaragens"/>
+			<referrer name="SalvarGaragens"/>
+			<referrer name="CreateGarage"/>
+			<referrer name="DeletarGaragem"/>
+			<referrer name="SetGaragemComent"/>
+			<referrer name="SetGaragemDono"/>
+			<referrer name="SetGaragemPos"/>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:random" syntax="random(max)">
+			<attribute name="native"/>
+			<referrer name="DOF2_SortEntries"/>
+			<param name="max">
+			</param>
+		</member>
+		<member name="M:strcat" syntax="strcat(dest[], source[], maxlength)">
+			<attribute name="native"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_SortSection_Internal"/>
+			<referrer name="DOF2_strcpy"/>
+			<referrer name="DOF2_strreplace"/>
+			<referrer name="DOF2_udb_encode"/>
+			<referrer name="DOF2_udb_decode"/>
+			<param name="dest">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="maxlength">
+			</param>
+		</member>
+		<member name="M:strcmp" syntax="strcmp(string1[], string2[], ignorecase, length)">
+			<attribute name="native"/>
+			<referrer name="DOF2_RenameFile"/>
+			<referrer name="DOF2_CopyFile"/>
+			<referrer name="DOF2_RemoveFile"/>
+			<referrer name="DOF2_SectionExists"/>
+			<referrer name="DOF2_RemoveSection"/>
+			<referrer name="DOF2_SearchEntry"/>
+			<referrer name="DOF2_SetString"/>
+			<referrer name="DOF2_GetStringEx"/>
+			<referrer name="DOF2_Unset"/>
+			<referrer name="DOF2_RenameKey"/>
+			<referrer name="DOF2_IsSet"/>
+			<referrer name="DOF2_GetBool"/>
+			<referrer name="DOF2_ReparseFile"/>
+			<referrer name="DOF2_ParseLine"/>
+			<referrer name="DOF2_SortAllSections"/>
+			<referrer name="DOF2_SortSection"/>
+			<referrer name="DOF2_SortSection_Internal"/>
+			<referrer name="DOF2_strreplace"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="string1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="string2">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="length">
+			</param>
+		</member>
+		<member name="M:strlen" syntax="strlen(string[])">
+			<attribute name="native"/>
+			<referrer name="charfind"/>
+			<referrer name="DOF2_strreplace"/>
+			<referrer name="DOF2_num_hash"/>
+			<referrer name="OnDialogResponse"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:strval" syntax="strval(string[])">
+			<attribute name="native"/>
+			<referrer name="DOF2_GetInt"/>
+			<referrer name="DOF2_GetBool"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:tolower" syntax="tolower(c)">
+			<attribute name="native"/>
+			<referrer name="DOF2_HashKey"/>
+			<param name="c">
+			</param>
+		</member>
+
+	</members>
+</doc>

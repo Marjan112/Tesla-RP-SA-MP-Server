@@ -1,0 +1,4187 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="file:///C|/Users/Maki/Desktop/Server/pawno/xml/pawndoc.xsl" type="text/xsl"?>
+<doc source="c:\Users\Maki\Desktop\Server\filterscripts\animacije.pwn">
+	<assembly>
+		<name>animacije.pwn</name>
+	</assembly>
+
+	<!-- general -->
+	<general>
+		<library  name="sscanf"  summary="Extracts structured information from strings."  license="Copyright (c) 2022 Alex &quot;Y_Less&quot; Cole.  Licensed under MPL 1.1"  >  <summary pawndoc="true">  This library uses the enhanced <em>pawndoc.xsl</em> from  <a href="https://github.com/pawn-lang/pawndoc">pawn-lang/pawndoc</a>.  This XSL has features such as library and markdown support, and will not  render this message when used.  </summary>  <remarks>  This is the <em>sscanf</em> plugin, which provides the <c>sscanf</c>  function to extract basic structured data from strings.  This is slightly  different to regular expressions, but both have their place.  A regular  expression gives you total control over the exact structure of data down  to the character level; however, extracting structured data like numbers  using it is tricky.  Conversely this gives slightly higher-level  <em>specifiers</em> which can easily extract data types, at the expense  of fine-grained control.  To convert a string in to two numbers would  look like:  <code>  new num1, num2;                                                          <br />  sscanf("45 100", "ii", num1, num2);  </code>  <c>ii</c> is the specifier string, which here means "integer integer";  stating that the input string should be two whole numbers in a row (which  is - <c>"45 100"</c>).  <c>num1</c> and <c>num2</c> are the destination  variables to store the found numbers in (after conversion from strings).  You can check if the conversion failed by looking for a non-naught return  value:  <code>  new num1, num2;                                                          <br />  if (sscanf("hello 100", "ii", num1, num2))                               <br />  {                                                                        <br /><indent />  printf("The input was not two numbers.");                            <br />  }  </code>  This will fail because <c>"hello"</c> is not a whole number (or indeed  any type of number at all).  For more information on using the function  refer to the tutorials or the reference documentation in  <a href="https://github.com/Y-Less/sscanf/blob/master/README.md">the  attached readme</a>.  </remarks>  </library> <p/> <p/>
+	</general>
+
+	<members>
+
+		<!-- enumerations -->
+
+		<!-- constants -->
+		<member name="C:EOS" value="0">
+			<referrer name="strtok"/>
+			<referrer name="strrest"/>
+			<referrer name="token_by_delim"/>
+		</member>
+		<member name="C:SSCANF_VERSION" value="135937">
+			<library>sscanf</library>  <remarks>  The sscanf version in BCD as a proper constant.  Example:  <code>  2.10.3  <br />  => 02 10 03 <br />  => 0x021003  </code>  </remarks> 
+		</member>
+		<member name="C:__PawnBuild" value="4">
+		</member>
+		<member name="C:__line" value="1603">
+			<referrer name="cmd_sit"/>
+			<referrer name="cmd_sleep"/>
+			<referrer name="cmd_cheer"/>
+			<referrer name="cmd_dj"/>
+			<referrer name="cmd_breathless"/>
+			<referrer name="cmd_poli"/>
+			<referrer name="cmd_seat"/>
+			<referrer name="cmd_dance"/>
+			<referrer name="cmd_cross"/>
+			<referrer name="cmd_jiggy"/>
+			<referrer name="cmd_ped"/>
+			<referrer name="cmd_rap"/>
+			<referrer name="cmd_gesture"/>
+			<referrer name="cmd_smoke"/>
+			<referrer name="cmd_chat"/>
+			<referrer name="cmd_sup"/>
+			<referrer name="cmd_knife"/>
+			<referrer name="cmd_basket"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_gwalk"/>
+			<referrer name="cmd_aim"/>
+			<referrer name="cmd_lean"/>
+			<referrer name="cmd_strip"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_die"/>
+			<referrer name="cmd_lranim"/>
+		</member>
+		<member name="C:cellmax" value="2147483647">
+			<referrer name="operator!(Float:)"/>
+		</member>
+		<member name="C:cellmin" value="-2147483648">
+			<referrer name="operator-(Float:)"/>
+			<referrer name="SSCANF_GetSimilarString"/>
+			<referrer name="SSCANF_GetSimilarValue"/>
+			<referrer name="SSCANF_GetClosestString"/>
+			<referrer name="SSCANF_GetClosestValue"/>
+		</member>
+		<member name="C:false" value="0">
+			<tagname value="bool"/>
+			<referrer name="isNumeric"/>
+		</member>
+		<member name="C:true" value="1">
+			<tagname value="bool"/>
+			<referrer name="isNumeric"/>
+			<referrer name="ReturnUser"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_die"/>
+		</member>
+
+		<!-- variables -->
+		<member name="F:CELLMIN_ON_MATCHES">
+			<library>sscanf</library>  <remarks>  The <c>CELLMIN_ON_MATCHES</c> option as a constant string so you can get  compile-time spell checking on the name.  Whatever the value of  <c>MATCH_NAME_PARTIAL</c>, the first found player will always be returned,  so if you do a search for <c>_</c> on an RP server, you could get almost  anyone.  To detect this case, if more than one player will match the  specified string then <em>sscanf</em> will return an ID of <c>cellmin</c>  instead.  This can be combined with <c>U</c> for a lot more power:  <code>  sscanf(params, "?&lt;CELLMIN_ON_MATCHES=1&gt;U(-1)", id);                <br />  if (id == -1)                                                            <br />  {                                                                        <br /><indent />  // No player was entered.                                            <br />  }                                                                        <br />  else if (id == cellmin)                                                  <br />  {                                                                        <br /><indent />  // Multiple matches found                                            <br />  }                                                                        <br />  else if (id == INVALID_PLAYER_ID)                                        <br />  {                                                                        <br /><indent />  // Entered player is not connected.                                  <br />  }                                                                        <br />  else                                                                     <br />  {                                                                        <br /><indent />  // Found just one player.                                            <br />  }  </code>  </remarks> 
+		</member>
+		<member name="F:MATCH_NAME_FIRST">
+			<library>sscanf</library>  <remarks>  The <c>MATCH_NAME_FIRST</c> option as a constant string so you can get compile-  time spell checking on the name.  Specify whether <c>u</c> etc keep searching  for better matching player names after finding one:  <code>  SSCANF_Option(MATCH_NAME_FIRST, 0); // Enable scanning for the best name match not the first (default).  <br />  SSCANF_Option(MATCH_NAME_FIRST, 1); // Enable scanning for the first name match not the best (old behaviour).  </code>  </remarks> 
+		</member>
+		<member name="F:MATCH_NAME_PARTIAL">
+			<library>sscanf</library>  <remarks>  The <c>MATCH_NAME_PARTIAL</c> option as a constant string so you can get  compile-time spell checking on the name.  Currently sscanf will search for  players by name, and will <em>always</em> search for player whose name  <em>starts</em> with the specified string.  If someone types <c>Y_Less</c>,  sscanf will not find say <c>[CLAN]Y_Less</c> because there name doesn't start  with the specified text.  This option, when set to <c>1</c>, will search  <em>anywhere</em> in the player's name for the given string.  </remarks> 
+		</member>
+		<member name="F:MATCH_NAME_SIMILARITY">
+			<library>sscanf</library>  <remarks>  The <c>MATCH_NAME_SIMILARITY</c> option as a constant string so you can get  compile-time spell checking on the name.  Specify whether <c>u</c> etc should  use the ngrams-based similarity algorithm when searching for players matching  a given name.  I.e. enable or disable fuzzy name matching.  It will return  the best match found, but depending on the threshold that may still be very  different to what was typed.  <code>  SSCANF_Option(MATCH_NAME_SIMILARITY, 0.0); // Will find all names, regardless of input. <br />  SSCANF_Option(MATCH_NAME_SIMILARITY, 1.0); // Will find exact matches only. <br />  SSCANF_Option(MATCH_NAME_SIMILARITY, 0.5); // Will find names somewhat similar to the input. <br />  SSCANF_Option(MATCH_NAME_SIMILARITY, -1.0); // Disable fuzzy name matching.  </code>  </remarks> 
+		</member>
+		<member name="F:OLD_DEFAULT_CUSTOM">
+			<library>sscanf</library>  <remarks>  The <c>OLD_DEFAULT_CUSTOM</c> option as a constant string so you can get  compile-time spell checking on the name.  This is the same as  <c>OLD_DEFAULT_KUSTOM</c>, but with an alternate spelling.  </remarks> 
+		</member>
+		<member name="F:OLD_DEFAULT_KUSTOM">
+			<library>sscanf</library>  <remarks>  The <c>OLD_DEFAULT_KUSTOM</c> option as a constant string so you can get  compile-time spell checking on the name.  As with <c>U</c>, <c>K</c> used to  require a valid identifier as the default and would parse it using the  specified callback, so this would <em>not</em> work:  <code>  K&lt;vehicle&gt;(Veyron)  </code>  Because that is not a valid vehicle name in GTA.  The new version now just  takes a number and returns that regardless:  <code>  K&lt;vehicle&gt;(999)  </code>  This setting reverts to the old behaviour.  </remarks> 
+		</member>
+		<member name="F:OLD_DEFAULT_NAME">
+			<library>sscanf</library>  <remarks>  The <c>OLD_DEFAULT_NAME</c> option as a constant string so you can get  compile-time spell checking on the name.  The behaviour of <c>U</c>, <c>Q</c>  and <c>R</c> have been changed to take any number as a default, instead of a  connected player.  Setting <c>OLD_DEFAULT_NAME</c> to <c>1</c> will revert to  the old version.  </remarks> 
+		</member>
+		<member name="F:SSCANF_ALPHA">
+			<library>sscanf</library>  <remarks>  The <c>SSCANF_ALPHA</c> option as a constant string so you can get compile-  time spell checking on the name.  Specify the default alpha value for colours  (<c>m</c>) which don't manually specify an alpha channel.  The alpha values  are specified as a <em>decimal</em> number, <em>not</em> a <em>hex</em>  number, so setting an alpha of <c>0x80</c> would be:  <code>  SSCANF_Option(SSCANF_ALPHA, 128);  </code>  </remarks> 
+		</member>
+		<member name="F:SSCANF_ARGB">
+			<library>sscanf</library>  <remarks>  The <c>SSCANF_ARGB</c> option as a constant string so you can get compile-  time spell checking on the name.  Specify whether the returned colour is  <c>ARGB</c> or <c>RGBA</c>:  <code>  SSCANF_Option(SSCANF_ARGB, 1); // Set 3- and 6-digit colour outputs to `AARRGGBB`. <br />  SSCANF_Option(SSCANF_ARGB, 0); // Set 3- and 6-digit colour outputs to `RRGGBBAA` (default).  </code>  </remarks> 
+		</member>
+		<member name="F:SSCANF_COLOUR_FORMS">
+			<library>sscanf</library>  <remarks>  The <c>SSCANF_COLOUR_FORMS</c> option as a constant string so you can get  compile-time spell checking on the name.  There are multiple valid colour  input formats, which you can enable or disable here.  The parameter is a  bit map (flags) for all the following values:  <ul>  <li><c>1</c> - <c>#RGB</c></li>  <li><c>2</c> - <c>#RRGGBB</c></li>  <li><c>4</c> - <c>0xRRGGBB</c></li>  <li><c>8</c> - <c>RRGGBB</c></li>  <li><c>16</c> - <c>{RRGGBB}</c></li>  <li><c>32</c> - <c>0xRRGGBBAA</c></li>  <li><c>64</c> - <c>RRGGBBAA</c></li>  </ul>  So to ONLY accept SA:MP `SendClientMessage` colours use:  <code>  SSCANF_Option(SSCANF_COLOUR_FORMS, 16);  </code>  To only accept 8-digit values use:  <code>  SSCANF_Option(SSCANF_COLOUR_FORMS, 96);  </code>  Default values (those specified between <c>()</c>s for <c>M</c>) ignore this  setting - they can always use any form.  </remarks> 
+		</member>
+		<member name="F:SSCANF_EXT_">
+			<library>sscanf</library>  <remarks>  The fallback for the filename in <c>extract</c> on the old compiler, which  doesn't have the inbuilt <c>__file</c> macro.  This is the "feature" enabled  by <c>SSCANF_NO_NICE_FEATURES</c>.  Appends <c>"unknown file"</c> in the  plugin when line number <c>&lt; 0</c>.  </remarks> 
+		</member>
+		<member name="F:SSCANF_FOM_">
+			<library>sscanf</library>  <remarks>  The fallback for the filename in <c>unformat</c> on the old compiler, which  doesn't have the inbuilt <c>__file</c> macro.  This is the "feature" enabled  by <c>SSCANF_NO_NICE_FEATURES</c>.  Appends <c>"unknown file"</c> in the  plugin when line number <c>&lt; 0</c>.  </remarks> 
+		</member>
+		<member name="F:SSCANF_NPC">
+			<library>sscanf</library>  <remarks>  Was sscanf built for an NPC mode or a normal mode?  </remarks> 
+		</member>
+		<member name="F:SSCANF_QUIET">
+			<library>sscanf</library>  <remarks>  The <c>SSCANF_QUIET</c> option as a constant string so you can get compile-  time spell checking on the name.  Don't print any errors to the console.  <em>Really</em> not recommended unless you <em>know</em> your code is stable  and in production.  </remarks> 
+		</member>
+		<member name="F:SSCANF_UNK_">
+			<library>sscanf</library>  <remarks>  The fallback for the filename in <c>sscanf</c> on the old compiler, which  doesn't have the inbuilt <c>__file</c> macro.  This is the "feature" enabled  by <c>SSCANF_NO_NICE_FEATURES</c>.  Appends <c>"unknown file"</c> in the  plugin when line number <c>&lt; 0</c>.  </remarks> 
+		</member>
+		<member name="F:SSCANF_VERSION_BCD">
+			<referrer name="SSCANF_Version"/>
+			<library>sscanf</library>  <remarks>  The sscanf version in BCD.  Example:  <code>  2.10.3  <br />  => 02 10 03 <br />  => 0x021003  </code>  </remarks> 
+		</member>
+		<member name="F:SSCANF_VERSION_BUILD">
+			<library>sscanf</library>  <remarks>  The sscanf build number.  </remarks> 
+		</member>
+		<member name="F:SSCANF_VERSION_MAJOR">
+			<library>sscanf</library>  <remarks>  The sscanf major version number.  </remarks> 
+		</member>
+		<member name="F:SSCANF_VERSION_MINOR">
+			<library>sscanf</library>  <remarks>  The sscanf minor version number.  </remarks> 
+		</member>
+		<member name="F:SSCANF_VERSION_STRING">
+			<library>sscanf</library>  <remarks>  The sscanf version as a string.  E.g. <c>"2.8.1"</c>.  </remarks> 
+		</member>
+		<member name="F:SSCANF_gInit">
+			<referrer name="SSCANF_RunInit"/>
+			<referrer name="OnScriptInit"/>
+			<referrer name="zcmd_OnFilterScriptInit"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnPlayerDisconnect"/>
+			<library>sscanf</library>  <remarks>  Has sscanf been initialised at least once already in this script?  Avoids the  need to define <c>FILTERSCRIPT</c> by including <c>OnFilterScriptInit</c>  and <c>OnGameModeInit</c> (plus <c>OnNPCModeInit</c>) and seeing which one  gets called first.  </remarks> 
+		</member>
+		<member name="F:__date">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+			<referrer name="cmd_sit"/>
+			<referrer name="cmd_sleep"/>
+			<referrer name="cmd_cheer"/>
+			<referrer name="cmd_dj"/>
+			<referrer name="cmd_breathless"/>
+			<referrer name="cmd_poli"/>
+			<referrer name="cmd_seat"/>
+			<referrer name="cmd_dance"/>
+			<referrer name="cmd_cross"/>
+			<referrer name="cmd_jiggy"/>
+			<referrer name="cmd_ped"/>
+			<referrer name="cmd_rap"/>
+			<referrer name="cmd_gesture"/>
+			<referrer name="cmd_smoke"/>
+			<referrer name="cmd_chat"/>
+			<referrer name="cmd_sup"/>
+			<referrer name="cmd_knife"/>
+			<referrer name="cmd_basket"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_gwalk"/>
+			<referrer name="cmd_aim"/>
+			<referrer name="cmd_lean"/>
+			<referrer name="cmd_strip"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_die"/>
+			<referrer name="cmd_lranim"/>
+		</member>
+		<member name="F:__time">
+		</member>
+		<member name="F:gPlayerAnimLibsPreloaded">
+			<referrer name="OnPlayerSpawn"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
+		</member>
+		<member name="F:gPlayerUsingLoopingAnim">
+			<referrer name="StopLoopingAnim"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+			<referrer name="OnPlayerDeath"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
+		</member>
+		<member name="F:txtAnimHelper">
+			<tagname value="Text"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+			<referrer name="OnPlayerDeath"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+		</member>
+		<member name="F:zcmd_g_HasOPCE">
+			<tagname value="bool"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:zcmd_g_HasOPCS">
+			<tagname value="bool"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+
+		<!-- functions -->
+		<member name="M:operator!(Float:)" syntax="operator!(Float:)(oper)">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="cellmax"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(_:,Float:)" syntax="operator%(_:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(Float:,_:)" syntax="operator%(Float:,_:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator%(Float:,Float:)" syntax="operator%(Float:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,_:)" syntax="operator!=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,Float:)" syntax="operator!=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(_:,Float:)" syntax="operator-(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,_:)" syntax="operator-(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator+(Float:,_:)" syntax="operator+(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatadd"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator/(_:,Float:)" syntax="operator/(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator/(Float:,_:)" syntax="operator/(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator*(Float:,_:)" syntax="operator*(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatmul"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator++(Float:)" syntax="operator++(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator+(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:)" syntax="operator-(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="cellmin"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator--(Float:)" syntax="operator--(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,Float:)" syntax="operator-(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator--(Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator+(Float:,Float:)" syntax="operator+(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator++(Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,Float:)" syntax="operator==(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,_:)" syntax="operator==(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,Float:)" syntax="operator&gt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,_:)" syntax="operator&gt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(_:,Float:)" syntax="operator&gt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,Float:)" syntax="operator&gt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<referrer name="SSCANF_GetSimilarString"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,_:)" syntax="operator&gt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;=(_:,Float:)" syntax="operator&gt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,Float:)" syntax="operator&lt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,_:)" syntax="operator&lt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;(_:,Float:)" syntax="operator&lt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,Float:)" syntax="operator&lt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,_:)" syntax="operator&lt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;=(_:,Float:)" syntax="operator&lt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:@CO_SSCANF" syntax="@CO_SSCANF()">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+		</member>
+		<member name="M:@receivepacket" syntax="@receivepacket(packet[], size, source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="packet">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:@receivestring" syntax="@receivestring(message[], source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:AddStaticVehicleEx" syntax="AddStaticVehicleEx(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren)">
+			<attribute name="native"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<param name="modelid">
+			</param>
+			<param name="spawn_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="spawn_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="spawn_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z_angle">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="color1">
+			</param>
+			<param name="color2">
+			</param>
+			<param name="respawn_delay">
+			</param>
+			<param name="addsiren">
+			</param>
+		</member>
+		<member name="M:ApplyAnimation" syntax="ApplyAnimation(playerid, animlib[], animname[], fDelta, loop, lockx, locky, freeze, time, forcesync)">
+			<attribute name="native"/>
+			<referrer name="StopLoopingAnim"/>
+			<referrer name="PreloadAnimLib"/>
+			<referrer name="cmd_sit"/>
+			<referrer name="cmd_sleep"/>
+			<referrer name="cmd_cheer"/>
+			<referrer name="cmd_dj"/>
+			<referrer name="cmd_breathless"/>
+			<referrer name="cmd_poli"/>
+			<referrer name="cmd_seat"/>
+			<referrer name="cmd_cross"/>
+			<referrer name="cmd_jiggy"/>
+			<referrer name="cmd_ped"/>
+			<referrer name="cmd_rap"/>
+			<referrer name="cmd_gesture"/>
+			<referrer name="cmd_smoke"/>
+			<referrer name="cmd_chora"/>
+			<referrer name="cmd_relax"/>
+			<referrer name="cmd_crabs"/>
+			<referrer name="cmd_greeting"/>
+			<referrer name="cmd_stop"/>
+			<referrer name="cmd_wash"/>
+			<referrer name="cmd_mourn"/>
+			<referrer name="cmd_followme"/>
+			<referrer name="cmd_still"/>
+			<referrer name="cmd_hitch"/>
+			<referrer name="cmd_palmbitch"/>
+			<referrer name="cmd_cpranim"/>
+			<referrer name="cmd_giftgiving"/>
+			<referrer name="cmd_slap2"/>
+			<referrer name="cmd_drunk"/>
+			<referrer name="cmd_pump"/>
+			<referrer name="cmd_tosteal"/>
+			<referrer name="cmd_laugh"/>
+			<referrer name="cmd_lookout"/>
+			<referrer name="cmd_robman"/>
+			<referrer name="cmd_hide"/>
+			<referrer name="cmd_vomit"/>
+			<referrer name="cmd_eat"/>
+			<referrer name="cmd_crack"/>
+			<referrer name="cmd_fuck"/>
+			<referrer name="cmd_taichi"/>
+			<referrer name="cmd_entrenar"/>
+			<referrer name="cmd_kiss"/>
+			<referrer name="cmd_carjacked1"/>
+			<referrer name="cmd_carjacked2"/>
+			<referrer name="cmd_handsup"/>
+			<referrer name="cmd_bomb"/>
+			<referrer name="cmd_getarrested"/>
+			<referrer name="cmd_crossarms"/>
+			<referrer name="cmd_lay"/>
+			<referrer name="cmd_foodeat"/>
+			<referrer name="cmd_wave"/>
+			<referrer name="cmd_slapass"/>
+			<referrer name="cmd_dealer"/>
+			<referrer name="cmd_groundsit"/>
+			<referrer name="cmd_chat"/>
+			<referrer name="cmd_fucku"/>
+			<referrer name="cmd_chairsit"/>
+			<referrer name="cmd_fall"/>
+			<referrer name="cmd_fallback"/>
+			<referrer name="cmd_injured"/>
+			<referrer name="cmd_sup"/>
+			<referrer name="cmd_push"/>
+			<referrer name="cmd_akick"/>
+			<referrer name="cmd_lowbodypush"/>
+			<referrer name="cmd_spray"/>
+			<referrer name="cmd_headbutt"/>
+			<referrer name="cmd_medic"/>
+			<referrer name="cmd_koface"/>
+			<referrer name="cmd_kostomach"/>
+			<referrer name="cmd_lifejump"/>
+			<referrer name="cmd_exhaust"/>
+			<referrer name="cmd_leftslap"/>
+			<referrer name="cmd_rollfall"/>
+			<referrer name="cmd_carlock"/>
+			<referrer name="cmd_rcarjack1"/>
+			<referrer name="cmd_lcarjack1"/>
+			<referrer name="cmd_rcarjack2"/>
+			<referrer name="cmd_lcarjack2"/>
+			<referrer name="cmd_hoodfrisked"/>
+			<referrer name="cmd_lightcig"/>
+			<referrer name="cmd_tapcig"/>
+			<referrer name="cmd_bat"/>
+			<referrer name="cmd_box"/>
+			<referrer name="cmd_lay2"/>
+			<referrer name="cmd_chant"/>
+			<referrer name="cmd_finger"/>
+			<referrer name="cmd_shouting"/>
+			<referrer name="cmd_cop"/>
+			<referrer name="cmd_elbow"/>
+			<referrer name="cmd_kneekick"/>
+			<referrer name="cmd_fstance"/>
+			<referrer name="cmd_gpunch"/>
+			<referrer name="cmd_airkick"/>
+			<referrer name="cmd_gkick"/>
+			<referrer name="cmd_lowthrow"/>
+			<referrer name="cmd_highthrow"/>
+			<referrer name="cmd_dealstance"/>
+			<referrer name="cmd_knife"/>
+			<referrer name="cmd_basket"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_gwalk"/>
+			<referrer name="cmd_aim"/>
+			<referrer name="cmd_lean"/>
+			<referrer name="cmd_clearanim"/>
+			<referrer name="cmd_strip"/>
+			<referrer name="cmd_inbedright"/>
+			<referrer name="cmd_inbedleft"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_stand"/>
+			<referrer name="cmd_follow"/>
+			<referrer name="cmd_getup"/>
+			<referrer name="cmd_slapped"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_yes"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_thankyou"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_scratch"/>
+			<referrer name="cmd_checkout"/>
+			<referrer name="cmd_nod"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_carsmoke"/>
+			<referrer name="cmd_angry"/>
+			<referrer name="cmd_benddown"/>
+			<referrer name="cmd_shakehead"/>
+			<referrer name="cmd_cockgun"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_liftup"/>
+			<referrer name="cmd_putdown"/>
+			<referrer name="cmd_joint"/>
+			<referrer name="cmd_die"/>
+			<referrer name="cmd_lranim"/>
+			<param name="playerid">
+			</param>
+			<param name="animlib">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="animname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="fDelta">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="loop">
+			</param>
+			<param name="lockx">
+			</param>
+			<param name="locky">
+			</param>
+			<param name="freeze">
+			</param>
+			<param name="time">
+			</param>
+			<param name="forcesync">
+			</param>
+		</member>
+		<member name="M:BCD" syntax="BCD(number)">
+			<stacksize value="1"/>
+			<param name="number">
+			</param>
+			<library>sscanf</library>  <remarks>  Converts a version string to  <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">BCD</a>.  For example:  <code>  BCD(5.6.17);  </code>  Returns:  <code>  0x050617  </code>  Each section (between dots) is assigned a single byte and the last section is  always in the lowest byte.  This implies a maximum of four sections and two  digits per section.  </remarks> 
+		</member>
+		<member name="M:CallLocalFunction" syntax="CallLocalFunction(function[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="function">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:ClearAnimations" syntax="ClearAnimations(playerid, forcesync)">
+			<attribute name="native"/>
+			<referrer name="cmd_bomb"/>
+			<param name="playerid">
+			</param>
+			<param name="forcesync">
+			</param>
+		</member>
+		<member name="M:GetMaxPlayers" syntax="GetMaxPlayers()">
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+		</member>
+		<member name="M:GetPVarInt" syntax="GetPVarInt(playerid, varname[])">
+			<attribute name="native"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+			<referrer name="cmd_surrender"/>
+			<referrer name="cmd_urinate"/>
+			<referrer name="cmd_cellin"/>
+			<referrer name="cmd_cellout"/>
+			<referrer name="cmd_pee"/>
+			<referrer name="cmd_clearanim"/>
+			<param name="playerid">
+			</param>
+			<param name="varname">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetPlayerName" syntax="GetPlayerName(playerid, name[], len)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="ReturnUser"/>
+			<param name="playerid">
+			</param>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="len">
+			</param>
+		</member>
+		<member name="M:GetPlayerState" syntax="GetPlayerState(playerid)">
+			<attribute name="native"/>
+			<referrer name="cmd_surrender"/>
+			<referrer name="cmd_lranim"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID(playerid)">
+			<attribute name="native"/>
+			<referrer name="IsInLowRider"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetVehicleModel" syntax="GetVehicleModel(vehicleid)">
+			<attribute name="native"/>
+			<referrer name="IsInLowRider"/>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:IsInLowRider" syntax="IsInLowRider(playerid)">
+			<stacksize value="4"/>
+			<referrer name="cmd_lranim"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetVehicleModel"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsKeyJustDown" syntax="IsKeyJustDown(key, newkeys, oldkeys)">
+			<stacksize value="1"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+			<param name="key">
+			</param>
+			<param name="newkeys">
+			</param>
+			<param name="oldkeys">
+			</param>
+		</member>
+		<member name="M:IsPlayerConnected" syntax="IsPlayerConnected(playerid)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+			<referrer name="PlaySoundForAll"/>
+			<referrer name="PlaySoundForPlayersInRange"/>
+			<referrer name="ReturnUser"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsPlayerInRangeOfPoint" syntax="IsPlayerInRangeOfPoint(playerid, range, x, y, z)">
+			<attribute name="native"/>
+			<referrer name="PlaySoundForPlayersInRange"/>
+			<param name="playerid">
+			</param>
+			<param name="range">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:IsPlayerNPC" syntax="IsPlayerNPC(playerid)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+			<referrer name="OnPlayerConnect"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:LoadStaticVehiclesFromFile" syntax="LoadStaticVehiclesFromFile(filename[])">
+			<stacksize value="341"/>
+			<dependency name="AddStaticVehicleEx"/>
+			<dependency name="fclose"/>
+			<dependency name="floatstr"/>
+			<dependency name="fopen"/>
+			<dependency name="fread"/>
+			<dependency name="io_read"/>
+			<dependency name="printf"/>
+			<dependency name="strval"/>
+			<dependency name="token_by_delim"/>
+			<param name="filename">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnActorStreamIn" syntax="OnActorStreamIn(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnActorStreamOut" syntax="OnActorStreamOut(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnCachedInit" syntax="OnCachedInit()">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="SSCANF_OnCachedInit"/>
+			<dependency name="SSCANF_RunInit"/>
+			<library>sscanf</library>  <remarks>  Called when the script starts if it is (legacy) YSI cached mode.  </remarks> 
+		</member>
+		<member name="M:OnDialogResponse" syntax="OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="listitem">
+			</param>
+			<param name="inputtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnEnterExitModShop" syntax="OnEnterExitModShop(playerid, enterexit, interiorid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="enterexit">
+			</param>
+			<param name="interiorid">
+			</param>
+		</member>
+		<member name="M:OnFilterScriptExit" syntax="OnFilterScriptExit()">
+			<stacksize value="1"/>
+		</member>
+		<member name="M:OnFilterScriptInit" syntax="OnFilterScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="4"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="funcidx"/>
+			<dependency name="zcmd_g_HasOPCE"/>
+			<dependency name="zcmd_g_HasOPCS"/>
+		</member>
+		<member name="M:OnGameModeExit" syntax="OnGameModeExit()">
+			<stacksize value="1"/>
+		</member>
+		<member name="M:OnGameModeInit" syntax="OnGameModeInit()">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="SSCANF_OnGameModeInit"/>
+			<dependency name="SSCANF_RunInit"/>
+			<dependency name="SSCANF_gInit"/>
+			<library>sscanf</library>  <remarks>  Called when the script starts if it is a gamemode.  This callback is also  called in filterscripts so we don't want to reinitialise the system in that  case.  </remarks> 
+		</member>
+		<member name="M:OnIncomingConnection" syntax="OnIncomingConnection(playerid, ip_address[], port)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="ip_address">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="port">
+			</param>
+		</member>
+		<member name="M:OnObjectMoved" syntax="OnObjectMoved(objectid)">
+			<stacksize value="1"/>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnPlayerClickMap" syntax="OnPlayerClickMap(playerid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClickPlayer" syntax="OnPlayerClickPlayer(playerid, clickedplayerid, source)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="clickedplayerid">
+			</param>
+			<param name="source">
+			</param>
+		</member>
+		<member name="M:OnPlayerClickPlayerTextDraw" syntax="OnPlayerClickPlayerTextDraw(playerid, playertextid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="playertextid">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClickTextDraw" syntax="OnPlayerClickTextDraw(playerid, clickedid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="clickedid">
+				<paraminfo>Text </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandPerformed" syntax="OnPlayerCommandPerformed(playerid, cmdtext[], success)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="success">
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandReceived" syntax="OnPlayerCommandReceived(playerid, cmdtext[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandText" syntax="OnPlayerCommandText(playerid, cmdtext[])">
+			<attribute name="public"/>
+			<stacksize value="43"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="format"/>
+			<dependency name="tolower"/>
+			<dependency name="zcmd_g_HasOPCE"/>
+			<dependency name="zcmd_g_HasOPCS"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerConnect" syntax="OnPlayerConnect(playerid)">
+			<attribute name="public"/>
+			<stacksize value="30"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="IsPlayerNPC"/>
+			<dependency name="SSCANF_Join"/>
+			<dependency name="SSCANF_OnPlayerConnect"/>
+			<dependency name="SSCANF_gInit"/>
+			<param name="playerid">
+			</param>
+			<library>sscanf</library>  <remarks>  Called when a player connects.  Actually increments an internal count so that  if a script ends and <c>OnPlayerDisconnect</c> is called then <c>sscanf</c>  still knows that the player is really connected.  Also stores their name  internally.  </remarks> 
+		</member>
+		<member name="M:OnPlayerDeath" syntax="OnPlayerDeath(playerid, killerid, reason)">
+			<attribute name="public"/>
+			<stacksize value="4"/>
+			<dependency name="TextDrawHideForPlayer"/>
+			<dependency name="gPlayerUsingLoopingAnim"/>
+			<dependency name="txtAnimHelper"/>
+			<param name="playerid">
+			</param>
+			<param name="killerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:OnPlayerDisconnect" syntax="OnPlayerDisconnect(playerid, reason)">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="SSCANF_Leave"/>
+			<dependency name="SSCANF_OnPlayerDisconnect"/>
+			<dependency name="SSCANF_gInit"/>
+			<param name="playerid">
+			</param>
+			<param name="reason">
+			</param>
+			<library>sscanf</library>  <remarks>  Called when a player disconnects, or when a script is ended.  </remarks> 
+		</member>
+		<member name="M:OnPlayerEditAttachedObject" syntax="OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="index">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="boneid">
+			</param>
+			<param name="fOffsetX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEditObject" syntax="OnPlayerEditObject(playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="playerobject">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterCheckpoint" syntax="OnPlayerEnterCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterRaceCheckpoint" syntax="OnPlayerEnterRaceCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterVehicle" syntax="OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="ispassenger">
+			</param>
+		</member>
+		<member name="M:OnPlayerExitVehicle" syntax="OnPlayerExitVehicle(playerid, vehicleid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnPlayerExitedMenu" syntax="OnPlayerExitedMenu(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamage" syntax="OnPlayerGiveDamage(playerid, damagedid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="damagedid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamageActor" syntax="OnPlayerGiveDamageActor(playerid, damaged_actorid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="damaged_actorid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerInteriorChange" syntax="OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newinteriorid">
+			</param>
+			<param name="oldinteriorid">
+			</param>
+		</member>
+		<member name="M:OnPlayerKeyStateChange" syntax="OnPlayerKeyStateChange(playerid, newkeys, oldkeys)">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="IsKeyJustDown"/>
+			<dependency name="StopLoopingAnim"/>
+			<dependency name="TextDrawHideForPlayer"/>
+			<dependency name="gPlayerUsingLoopingAnim"/>
+			<dependency name="txtAnimHelper"/>
+			<param name="playerid">
+			</param>
+			<param name="newkeys">
+			</param>
+			<param name="oldkeys">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveCheckpoint" syntax="OnPlayerLeaveCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveRaceCheckpoint" syntax="OnPlayerLeaveRaceCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerObjectMoved" syntax="OnPlayerObjectMoved(playerid, objectid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnPlayerPickUpPickup" syntax="OnPlayerPickUpPickup(playerid, pickupid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="pickupid">
+			</param>
+		</member>
+		<member name="M:OnPlayerRequestClass" syntax="OnPlayerRequestClass(playerid, classid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="classid">
+			</param>
+		</member>
+		<member name="M:OnPlayerRequestSpawn" syntax="OnPlayerRequestSpawn(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectObject" syntax="OnPlayerSelectObject(playerid, type, objectid, modelid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="type">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectedMenuRow" syntax="OnPlayerSelectedMenuRow(playerid, row)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="row">
+			</param>
+		</member>
+		<member name="M:OnPlayerSpawn" syntax="OnPlayerSpawn(playerid)">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="PreloadAnimLib"/>
+			<dependency name="gPlayerAnimLibsPreloaded"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStateChange" syntax="OnPlayerStateChange(playerid, newstate, oldstate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newstate">
+			</param>
+			<param name="oldstate">
+			</param>
+		</member>
+		<member name="M:OnPlayerStreamIn" syntax="OnPlayerStreamIn(playerid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStreamOut" syntax="OnPlayerStreamOut(playerid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerTakeDamage" syntax="OnPlayerTakeDamage(playerid, issuerid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="issuerid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerText" syntax="OnPlayerText(playerid, text[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerUpdate" syntax="OnPlayerUpdate(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerWeaponShot" syntax="OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="hittype">
+			</param>
+			<param name="hitid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnRconCommand" syntax="OnRconCommand(cmd[])">
+			<stacksize value="1"/>
+			<param name="cmd">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnRconLoginAttempt" syntax="OnRconLoginAttempt(ip[], password[], success)">
+			<stacksize value="1"/>
+			<param name="ip">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="success">
+			</param>
+		</member>
+		<member name="M:OnScriptInit" syntax="OnScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="SSCANF_OnScriptInit"/>
+			<dependency name="SSCANF_RunInit"/>
+			<dependency name="SSCANF_gInit"/>
+			<library>sscanf</library>  <remarks>  Called for earlier initialisation by YSI.  </remarks> 
+		</member>
+		<member name="M:OnTrailerUpdate" syntax="OnTrailerUpdate(playerid, vehicleid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnUnoccupiedVehicleUpdate" syntax="OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, new_x, new_y, new_z, vel_x, vel_y, vel_z)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="passenger_seat">
+			</param>
+			<param name="new_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="new_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="new_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnVehicleDamageStatusUpdate" syntax="OnVehicleDamageStatusUpdate(vehicleid, playerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleDeath" syntax="OnVehicleDeath(vehicleid, killerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="killerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleMod" syntax="OnVehicleMod(playerid, vehicleid, componentid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="componentid">
+			</param>
+		</member>
+		<member name="M:OnVehiclePaintjob" syntax="OnVehiclePaintjob(playerid, vehicleid, paintjobid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="paintjobid">
+			</param>
+		</member>
+		<member name="M:OnVehicleRespray" syntax="OnVehicleRespray(playerid, vehicleid, color1, color2)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="color1">
+			</param>
+			<param name="color2">
+			</param>
+		</member>
+		<member name="M:OnVehicleSirenStateChange" syntax="OnVehicleSirenStateChange(playerid, vehicleid, newstate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="newstate">
+			</param>
+		</member>
+		<member name="M:OnVehicleSpawn" syntax="OnVehicleSpawn(vehicleid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnVehicleStreamIn" syntax="OnVehicleStreamIn(vehicleid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleStreamOut" syntax="OnVehicleStreamOut(vehicleid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:PlaySoundForAll" syntax="PlaySoundForAll(soundid, x, y, z)">
+			<stacksize value="8"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="PlayerPlaySound"/>
+			<param name="soundid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:PlaySoundForPlayersInRange" syntax="PlaySoundForPlayersInRange(soundid, range, x, y, z)">
+			<stacksize value="8"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
+			<dependency name="PlayerPlaySound"/>
+			<param name="soundid">
+			</param>
+			<param name="range">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:PlayerPlaySound" syntax="PlayerPlaySound(playerid, soundid, x, y, z)">
+			<attribute name="native"/>
+			<referrer name="PlaySoundForAll"/>
+			<referrer name="PlaySoundForPlayersInRange"/>
+			<param name="playerid">
+			</param>
+			<param name="soundid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:PreloadAnimLib" syntax="PreloadAnimLib(playerid, animlib[])">
+			<stacksize value="12"/>
+			<referrer name="OnPlayerSpawn"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="animlib">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:ReturnUser" syntax="ReturnUser(text[])">
+			<stacksize value="36"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="isNumeric"/>
+			<dependency name="strcmp"/>
+			<dependency name="strlen"/>
+			<dependency name="strval"/>
+			<dependency name="true"/>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SSCANF_GetClosestString" syntax="SSCANF_GetClosestString(input[], candidates[][], threshold, count)">
+			<stacksize value="6"/>
+			<referrer name="SSCANF_GetClosestValue"/>
+			<dependency name="SSCANF_Levenshtein"/>
+			<dependency name="cellmin"/>
+			<param name="input">
+				<paraminfo> [] </paraminfo>
+				The first string to compare.
+			</param>
+			<param name="candidates">
+				<paraminfo> [][] </paraminfo>
+				A list of other strings to compare against.
+			</param>
+			<param name="threshold">
+				How similar the strings must be to be considered a match.
+			</param>
+			<param name="count">
+				The number of candidates.
+			</param>
+			<library>sscanf</library>          <remarks>  Takes an input string and an array of string possibilities (candidates) and  returns the index of the string closest to the input string.  If no valid  match is found, <c>-1</c> is returned.  Note that this will always return the  closest, even if the closest is not that close; which is why an optional  <c>threshold</c> parameter is available.  When this parameter is provided the  closest match must be closer in Levenshtein distance than the threshold,  otherwise again <c>-1</c> is returned.  </remarks> 
+		</member>
+		<member name="M:SSCANF_GetClosestValue" syntax="SSCANF_GetClosestValue(input[], candidates[][], results[], fail, threshold, count, check)">
+			<stacksize value="8"/>
+			<dependency name="SSCANF_GetClosestString"/>
+			<dependency name="cellmin"/>
+			<param name="input">
+				<paraminfo> [] </paraminfo>
+				The first string to compare.
+			</param>
+			<param name="candidates">
+				<paraminfo> [][] </paraminfo>
+				A list of other strings to compare against.
+			</param>
+			<param name="results">
+				<paraminfo> [] </paraminfo>
+				The values to return when the corresponding candidate (by index) is the closest  match.
+			</param>
+			<param name="fail">
+				The value to return when there is no good match.
+			</param>
+			<param name="threshold">
+				How similar the strings must be to be considered a match.
+			</param>
+			<param name="count">
+				The number of candidates (must match <c>check</c>).
+			</param>
+			<param name="check">
+				The number of results (must match <c>count</c>).
+			</param>
+			<library>sscanf</library>                <remarks>  Similar to <c>SSCANF_GetClosestString</c> in that it searches the  <c>candidates</c> array for the string most closely matching the <c>input</c>  and bounded by <c>threshold</c>.  But instead of returning the index this  function returns the value in the second <c>results</c> array at that index;  and instead of returning <c>-1</c> on failure it returns the value of  <c>fail</c>.  The two arrays must match in size and an <c>assert</c> in the  function checks for this.  </remarks> 
+		</member>
+		<member name="M:SSCANF_GetSimilarString" syntax="SSCANF_GetSimilarString(input[], candidates[][], threshold, count)">
+			<stacksize value="6"/>
+			<referrer name="SSCANF_GetSimilarValue"/>
+			<dependency name="operator&gt;=(Float:,Float:)"/>
+			<dependency name="SSCANF_TextSimilarity"/>
+			<dependency name="cellmin"/>
+			<param name="input">
+				<paraminfo> [] </paraminfo>
+				The first string to compare.
+			</param>
+			<param name="candidates">
+				<paraminfo> [][] </paraminfo>
+				A list of other strings to compare against.
+			</param>
+			<param name="threshold">
+				<paraminfo>Float </paraminfo>
+				How similar the strings must be to be considered a match.
+			</param>
+			<param name="count">
+				The number of candidates.
+			</param>
+			<library>sscanf</library>          <remarks>  Takes an input string and an array of string possibilities (candidates) and  returns the index of the string closest to the input string.  If no valid  match is found, <c>-1</c> is returned.  Note that this will always return the  closest, even if the closest is not that close; which is why an optional  <c>threshold</c> parameter is available.  When this parameter is provided the  closest match must be closer in Levenshtein distance than the threshold,  otherwise again <c>-1</c> is returned.  </remarks> 
+		</member>
+		<member name="M:SSCANF_GetSimilarValue" syntax="SSCANF_GetSimilarValue(input[], candidates[][], results[], fail, threshold, count, check)">
+			<stacksize value="8"/>
+			<referrer name="sscanf_weapon"/>
+			<referrer name="sscanf_vehicle"/>
+			<dependency name="SSCANF_GetSimilarString"/>
+			<dependency name="cellmin"/>
+			<param name="input">
+				<paraminfo> [] </paraminfo>
+				The first string to compare.
+			</param>
+			<param name="candidates">
+				<paraminfo> [][] </paraminfo>
+				A list of other strings to compare against.
+			</param>
+			<param name="results">
+				<paraminfo> [] </paraminfo>
+				The values to return when the corresponding candidate (by index) is the closest  match.
+			</param>
+			<param name="fail">
+				The value to return when there is no good match.
+			</param>
+			<param name="threshold">
+				<paraminfo>Float </paraminfo>
+				How similar the strings must be to be considered a match.
+			</param>
+			<param name="count">
+				The number of candidates (must match <c>check</c>).
+			</param>
+			<param name="check">
+				The number of results (must match <c>count</c>).
+			</param>
+			<library>sscanf</library>                <remarks>  Similar to <c>SSCANF_GetClosestString</c> in that it searches the  <c>candidates</c> array for the string most closely matching the <c>input</c>  and bounded by <c>threshold</c>.  But instead of returning the index this  function returns the value in the second <c>results</c> array at that index;  and instead of returning <c>-1</c> on failure it returns the value of  <c>fail</c>.  The two arrays must match in size and an <c>assert</c> in the  function checks for this.  </remarks> 
+		</member>
+		<member name="M:SSCANF_Init" syntax="SSCANF_Init(players, invalid, len)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+			<param name="players">
+				The maximum players on the server.
+			</param>
+			<param name="invalid">
+				The invalid player ID.
+			</param>
+			<param name="len">
+				<c>MAX_PLAYER_NAME</c>.
+			</param>
+			<library>sscanf</library>        <remarks>  Initialise the plugin with real server information.  </remarks> 
+		</member>
+		<member name="M:SSCANF_IsConnected" syntax="SSCANF_IsConnected(playerid)">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+			<param name="playerid">
+				The ID of the player.
+			</param>
+			<library>sscanf</library>    <remarks>  Checks if the plugin knows about a given player ID.  Used when modes restart  to re-add players.  </remarks> 
+		</member>
+		<member name="M:SSCANF_Join" syntax="SSCANF_Join(playerid, name[], npc)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_RunInit"/>
+			<referrer name="OnPlayerConnect"/>
+			<param name="playerid">
+				The ID of the player.
+			</param>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+				The name of the player.
+			</param>
+			<param name="npc">
+				<paraminfo>bool </paraminfo>
+				Is this player an NPC?
+			</param>
+			<library>sscanf</library>        <remarks>  Called when a player joins to inform the plugin of the connection.  </remarks> 
+		</member>
+		<member name="M:SSCANF_Leave" syntax="SSCANF_Leave(playerid)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerDisconnect"/>
+			<param name="playerid">
+				The ID of the player.
+			</param>
+			<library>sscanf</library>    <remarks>  Called when a player leaves to inform the plugin of the disconnection.  </remarks> 
+		</member>
+		<member name="M:SSCANF_Levenshtein" syntax="SSCANF_Levenshtein(string1[], string2[])">
+			<attribute name="native"/>
+			<referrer name="SSCANF_GetClosestString"/>
+			<param name="string1">
+				<paraminfo> [] </paraminfo>
+				The first string to compare.
+			</param>
+			<param name="string2">
+				<paraminfo> [] </paraminfo>
+				The second string to compare.
+			</param>
+			<library>sscanf</library>      <remarks>  Computes the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">  Levenshtein Distance</a> between two strings.  This is simlar to  <c>strcmp</c> in usage, but is slightly more "fuzzy".  Distances are used to  work out which string is the most similar to another one, though they may not  be identical.  Useful in <c>k</c> callback functions to determine if the  entered string is close to a possible string.  </remarks> 
+		</member>
+		<member name="M:SSCANF_OnCachedInit" syntax="SSCANF_OnCachedInit()">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<automaton name="_ALS"/>
+			<referrer name="OnCachedInit"/>
+		</member>
+		<member name="M:SSCANF_OnFilterScriptInit" syntax="SSCANF_OnFilterScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<automaton name="_ALS"/>
+			<referrer name="zcmd_OnFilterScriptInit"/>
+			<dependency name="TextDrawAlignment"/>
+			<dependency name="TextDrawBackgroundColor"/>
+			<dependency name="TextDrawColor"/>
+			<dependency name="TextDrawCreate"/>
+			<dependency name="TextDrawFont"/>
+			<dependency name="TextDrawSetOutline"/>
+			<dependency name="TextDrawSetShadow"/>
+			<dependency name="TextDrawUseBox"/>
+			<dependency name="txtAnimHelper"/>
+		</member>
+		<member name="M:SSCANF_OnGameModeInit" syntax="SSCANF_OnGameModeInit()">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<automaton name="_ALS"/>
+			<referrer name="OnGameModeInit"/>
+		</member>
+		<member name="M:SSCANF_OnPlayerConnect" syntax="SSCANF_OnPlayerConnect(playerid)">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<automaton name="_ALS"/>
+			<referrer name="OnPlayerConnect"/>
+			<dependency name="gPlayerAnimLibsPreloaded"/>
+			<dependency name="gPlayerUsingLoopingAnim"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:SSCANF_OnPlayerDisconnect" syntax="SSCANF_OnPlayerDisconnect(playerid, reason)">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<automaton name="_ALS"/>
+			<referrer name="OnPlayerDisconnect"/>
+			<param name="playerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:SSCANF_OnScriptInit" syntax="SSCANF_OnScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<automaton name="_ALS"/>
+			<referrer name="OnScriptInit"/>
+		</member>
+		<member name="M:SSCANF_Option" syntax="SSCANF_Option(name[], value)">
+			<stacksize value="1"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+				The sscanf option to get or set.  For example <c>SSCANF_ARGB</c>.
+			</param>
+			<param name="value">
+				<paraminfo> {_,Float} </paraminfo>
+				The optional value to use when setting the option.
+			</param>
+			<library>sscanf</library>      <remarks>  Backwards-compatibility with <c>SSCANF_Option</c>.  Usage:  <code>  SSCANF_Option(SSCANF_QUIET, 1);           <br />  new quiet = SSCANF_Option(SSCANF_QUIET);  </code>  This doesn't actually use a default parameter because a user may want to set  the option to whatever that parameter is.  Instead this is a macro that calls  <c>SSCANF_GetOption__</c> when called with one parameter (just a name), or  instead calls <c>SSCANF_SetOption__</c> when called with two - a name and a  value.  </remarks> 
+		</member>
+		<member name="M:SSCANF_RunInit" syntax="SSCANF_RunInit()">
+			<stacksize value="31"/>
+			<referrer name="OnScriptInit"/>
+			<referrer name="zcmd_OnFilterScriptInit"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="OnCachedInit"/>
+			<dependency name="GetMaxPlayers"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="IsPlayerNPC"/>
+			<dependency name="SSCANF_Init"/>
+			<dependency name="SSCANF_IsConnected"/>
+			<dependency name="SSCANF_Join"/>
+			<dependency name="SSCANF_gInit"/>
+			<library>sscanf</library> <remarks> Generic initialisation code called from a range of different init publics. </remarks> <!-- <p/> <p/> There's a bug in the old compiler with the pawndoc generation for functions containing <c>state</c>.  This little trick starts an XML comment at the end of the documentation <c>SSCANF_RunInit</c> and immediately closes it again in a dedicated function <c>SSCANF_RunInit0</c>, which is sorted next lexicographically. --> <transition target="_ALS_go"/>
+
+		</member>
+		<member name="M:SSCANF_TextSimilarity" syntax="SSCANF_TextSimilarity(string1[], string2[])">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="SSCANF_GetSimilarString"/>
+			<param name="string1">
+				<paraminfo> [] </paraminfo>
+				The first string to compare.
+			</param>
+			<param name="string2">
+				<paraminfo> [] </paraminfo>
+				The second string to compare.
+			</param>
+			<library>sscanf</library>      <remarks>  This works out the similarity between two strings.  The Levenshtein distance  often produces results that seem weird to people, for example by that measure  <c>NRG</c> is closer to <c>TUG</c> than <c>NRG-500</c>.  Instead this  function compares all pairs of letters between the two strings to work out  what percentage of each string is in the other string, then multiplies the  results to get the final similarity.  This algorithm produces much more human  sane results, and can handle things like <c>ls police<c> matching  <c>Police Car (LSPD)</c>.  It ignores all punctuation and case as well.  </remarks> 
+		</member>
+		<member name="M:SSCANF_Version" syntax="SSCANF_Version(version[], size)">
+			<stacksize value="1"/>
+			<dependency name="SSCANF_VERSION_BCD"/>
+			<param name="version">
+				<paraminfo> [] </paraminfo>
+				Pass-by-reference return value.
+			</param>
+			<param name="size">
+				The size of the destination array.
+			</param>
+			<library>sscanf</library>      <remarks>  Get the SSCANF plugin version as a string (e.g. <c>"2.11.2"</c>) <em>or</em>  a BCD-encoded value (e.g. <c>0x021102</c>).  This function returns a string  (by reference) when called with parameters, or a number (directly) when not.  </remarks> 
+		</member>
+		<member name="M:SSCANF__" syntax="SSCANF__(file[], line, data[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="cmd_sit"/>
+			<referrer name="cmd_sleep"/>
+			<referrer name="cmd_cheer"/>
+			<referrer name="cmd_dj"/>
+			<referrer name="cmd_breathless"/>
+			<referrer name="cmd_poli"/>
+			<referrer name="cmd_seat"/>
+			<referrer name="cmd_dance"/>
+			<referrer name="cmd_cross"/>
+			<referrer name="cmd_jiggy"/>
+			<referrer name="cmd_ped"/>
+			<referrer name="cmd_rap"/>
+			<referrer name="cmd_gesture"/>
+			<referrer name="cmd_smoke"/>
+			<referrer name="cmd_chat"/>
+			<referrer name="cmd_sup"/>
+			<referrer name="cmd_knife"/>
+			<referrer name="cmd_basket"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_gwalk"/>
+			<referrer name="cmd_aim"/>
+			<referrer name="cmd_lean"/>
+			<referrer name="cmd_strip"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_die"/>
+			<referrer name="cmd_lranim"/>
+			<param name="file">
+				<paraminfo> [] </paraminfo>
+				The file in which this call is found.
+			</param>
+			<param name="line">
+				The line at which this call is found.
+			</param>
+			<param name="data">
+				<paraminfo> [] </paraminfo>
+				The input string containing the data to parse out.
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+				The format description of what the input data should contain.
+			</param>
+			<param name="...">
+				<paraminfo> {T_WEAPON,Float,_} </paraminfo>
+			</param>
+			<library>sscanf</library>          <remarks>  The current true implementation of <c>sscanf</c> in the plugin.  This is  wrapped by macros to provide <c>sscanf</c> enhanced with filenames and line  numbers so that errors have more information.  The plugin also contains a  native function called <c>sscanf</c> which is only for backwards-  compatibility with older versions of this include.  </remarks> 
+		</member>
+		<member name="M:SendClientMessage" syntax="SendClientMessage(playerid, color, message[])">
+			<attribute name="native"/>
+			<referrer name="cmd_surrender"/>
+			<referrer name="cmd_sit"/>
+			<referrer name="cmd_sleep"/>
+			<referrer name="cmd_cheer"/>
+			<referrer name="cmd_urinate"/>
+			<referrer name="cmd_dj"/>
+			<referrer name="cmd_breathless"/>
+			<referrer name="cmd_poli"/>
+			<referrer name="cmd_seat"/>
+			<referrer name="cmd_dance"/>
+			<referrer name="cmd_cross"/>
+			<referrer name="cmd_jiggy"/>
+			<referrer name="cmd_ped"/>
+			<referrer name="cmd_rap"/>
+			<referrer name="cmd_gesture"/>
+			<referrer name="cmd_smoke"/>
+			<referrer name="cmd_cellin"/>
+			<referrer name="cmd_cellout"/>
+			<referrer name="cmd_chat"/>
+			<referrer name="cmd_sup"/>
+			<referrer name="cmd_pee"/>
+			<referrer name="cmd_knife"/>
+			<referrer name="cmd_basket"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_gwalk"/>
+			<referrer name="cmd_aim"/>
+			<referrer name="cmd_lean"/>
+			<referrer name="cmd_clearanim"/>
+			<referrer name="cmd_strip"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_die"/>
+			<referrer name="cmd_lranim"/>
+			<param name="playerid">
+			</param>
+			<param name="color">
+			</param>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetPVarInt" syntax="SetPVarInt(playerid, varname[], int_value)">
+			<attribute name="native"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_stand"/>
+			<referrer name="cmd_follow"/>
+			<referrer name="cmd_getup"/>
+			<referrer name="cmd_slapped"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_yes"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_thankyou"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_scratch"/>
+			<referrer name="cmd_checkout"/>
+			<referrer name="cmd_nod"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_carsmoke"/>
+			<referrer name="cmd_angry"/>
+			<referrer name="cmd_benddown"/>
+			<referrer name="cmd_shakehead"/>
+			<referrer name="cmd_cockgun"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_liftup"/>
+			<referrer name="cmd_putdown"/>
+			<referrer name="cmd_joint"/>
+			<referrer name="cmd_die"/>
+			<param name="playerid">
+			</param>
+			<param name="varname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="int_value">
+			</param>
+		</member>
+		<member name="M:SetPlayerSpecialAction" syntax="SetPlayerSpecialAction(playerid, actionid)">
+			<attribute name="native"/>
+			<referrer name="cmd_surrender"/>
+			<referrer name="cmd_urinate"/>
+			<referrer name="cmd_dance"/>
+			<referrer name="cmd_cellin"/>
+			<referrer name="cmd_cellout"/>
+			<referrer name="cmd_pee"/>
+			<param name="playerid">
+			</param>
+			<param name="actionid">
+			</param>
+		</member>
+		<member name="M:ShowPlayerDialog" syntax="ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])">
+			<attribute name="native"/>
+			<referrer name="cmd_animlist"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="style">
+			</param>
+			<param name="caption">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="info">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button2">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:StopLoopingAnim" syntax="StopLoopingAnim(playerid)">
+			<stacksize value="12"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="gPlayerUsingLoopingAnim"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:TextDrawAlignment" syntax="TextDrawAlignment(text, alignment)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="alignment">
+			</param>
+		</member>
+		<member name="M:TextDrawBackgroundColor" syntax="TextDrawBackgroundColor(text, color)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+		</member>
+		<member name="M:TextDrawColor" syntax="TextDrawColor(text, color)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+		</member>
+		<member name="M:TextDrawCreate" syntax="TextDrawCreate(x, y, text[])">
+			<tagname value="Text"/>
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:TextDrawFont" syntax="TextDrawFont(text, font)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="font">
+			</param>
+		</member>
+		<member name="M:TextDrawHideForPlayer" syntax="TextDrawHideForPlayer(playerid, text)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+			<referrer name="OnPlayerDeath"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+		</member>
+		<member name="M:TextDrawSetOutline" syntax="TextDrawSetOutline(text, size)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:TextDrawSetShadow" syntax="TextDrawSetShadow(text, size)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:TextDrawUseBox" syntax="TextDrawUseBox(text, use)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="use">
+			</param>
+		</member>
+		<member name="M:_SSCANF_IncludeStates" syntax="_SSCANF_IncludeStates()">
+			<stacksize value="1"/>
+			<automaton name="_ALS"/>
+			<library>sscanf</library>  <remarks>  Common ALS boilerplate to ensure that all the <c>&lt;_ALS : &gt;</c> states  are known to the compiler.  </remarks> 
+		</member>
+		<member name="M:cmd_aim" syntax="cmd_aim(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_airkick" syntax="cmd_airkick(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_akick" syntax="cmd_akick(playerid, params)">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+			</param>
+		</member>
+		<member name="M:cmd_angry" syntax="cmd_angry(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_animhelp" syntax="cmd_animhelp(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="cmd_animlist"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_animlist" syntax="cmd_animlist(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="3509"/>
+			<referrer name="cmd_animhelp"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="strcat"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_bar" syntax="cmd_bar(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_basket" syntax="cmd_basket(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_bat" syntax="cmd_bat(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_bed" syntax="cmd_bed(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_benddown" syntax="cmd_benddown(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_bj" syntax="cmd_bj(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_bomb" syntax="cmd_bomb(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="ClearAnimations"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_box" syntax="cmd_box(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_breathless" syntax="cmd_breathless(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_carjacked1" syntax="cmd_carjacked1(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_carjacked2" syntax="cmd_carjacked2(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_carlock" syntax="cmd_carlock(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_carsmoke" syntax="cmd_carsmoke(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_celebrate" syntax="cmd_celebrate(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cellin" syntax="cmd_cellin(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cellout" syntax="cmd_cellout(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_chairsit" syntax="cmd_chairsit(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_chant" syntax="cmd_chant(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_chat" syntax="cmd_chat(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_checkout" syntax="cmd_checkout(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cheer" syntax="cmd_cheer(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_chora" syntax="cmd_chora(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_clearanim" syntax="cmd_clearanim(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SendClientMessage"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cockgun" syntax="cmd_cockgun(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cop" syntax="cmd_cop(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cpranim" syntax="cmd_cpranim(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_crabs" syntax="cmd_crabs(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_crack" syntax="cmd_crack(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cross" syntax="cmd_cross(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_crossarms" syntax="cmd_crossarms(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_cry" syntax="cmd_cry(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_dance" syntax="cmd_dance(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="8"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_deal" syntax="cmd_deal(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_dealer" syntax="cmd_dealer(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_dealstance" syntax="cmd_dealstance(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_die" syntax="cmd_die(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_dj" syntax="cmd_dj(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_drunk" syntax="cmd_drunk(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_eat" syntax="cmd_eat(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_elbow" syntax="cmd_elbow(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_entrenar" syntax="cmd_entrenar(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_exhaust" syntax="cmd_exhaust(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_fall" syntax="cmd_fall(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_fallback" syntax="cmd_fallback(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_finger" syntax="cmd_finger(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_follow" syntax="cmd_follow(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_followme" syntax="cmd_followme(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_foodeat" syntax="cmd_foodeat(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_fstance" syntax="cmd_fstance(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_fuck" syntax="cmd_fuck(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_fucku" syntax="cmd_fucku(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_gesture" syntax="cmd_gesture(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_getarrested" syntax="cmd_getarrested(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_getup" syntax="cmd_getup(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_giftgiving" syntax="cmd_giftgiving(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_gkick" syntax="cmd_gkick(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_gpunch" syntax="cmd_gpunch(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_greeting" syntax="cmd_greeting(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_groundsit" syntax="cmd_groundsit(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_gwalk" syntax="cmd_gwalk(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_handsup" syntax="cmd_handsup(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_headbutt" syntax="cmd_headbutt(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_hide" syntax="cmd_hide(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_highthrow" syntax="cmd_highthrow(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_hitch" syntax="cmd_hitch(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_hoodfrisked" syntax="cmd_hoodfrisked(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_inbedleft" syntax="cmd_inbedleft(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_inbedright" syntax="cmd_inbedright(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_injured" syntax="cmd_injured(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_invite1" syntax="cmd_invite1(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_jiggy" syntax="cmd_jiggy(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_joint" syntax="cmd_joint(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_kiss" syntax="cmd_kiss(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_kneekick" syntax="cmd_kneekick(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_knife" syntax="cmd_knife(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_koface" syntax="cmd_koface(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_kostomach" syntax="cmd_kostomach(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_laugh" syntax="cmd_laugh(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lay" syntax="cmd_lay(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lay2" syntax="cmd_lay2(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lcarjack1" syntax="cmd_lcarjack1(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lcarjack2" syntax="cmd_lcarjack2(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lean" syntax="cmd_lean(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_leftslap" syntax="cmd_leftslap(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lifejump" syntax="cmd_lifejump(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_liftup" syntax="cmd_liftup(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lightcig" syntax="cmd_lightcig(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lookout" syntax="cmd_lookout(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lowbodypush" syntax="cmd_lowbodypush(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lowthrow" syntax="cmd_lowthrow(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_lranim" syntax="cmd_lranim(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="GetPlayerState"/>
+			<dependency name="IsInLowRider"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_medic" syntax="cmd_medic(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_mourn" syntax="cmd_mourn(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_nod" syntax="cmd_nod(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_palmbitch" syntax="cmd_palmbitch(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_ped" syntax="cmd_ped(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_pee" syntax="cmd_pee(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_poli" syntax="cmd_poli(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_pump" syntax="cmd_pump(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_push" syntax="cmd_push(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_putdown" syntax="cmd_putdown(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_rap" syntax="cmd_rap(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_rcarjack1" syntax="cmd_rcarjack1(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_rcarjack2" syntax="cmd_rcarjack2(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_relax" syntax="cmd_relax(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_reload" syntax="cmd_reload(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="140"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_robman" syntax="cmd_robman(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_rollfall" syntax="cmd_rollfall(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_scratch" syntax="cmd_scratch(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_seat" syntax="cmd_seat(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_sexy" syntax="cmd_sexy(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_shakehead" syntax="cmd_shakehead(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_shouting" syntax="cmd_shouting(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_sit" syntax="cmd_sit(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_slap2" syntax="cmd_slap2(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_slapass" syntax="cmd_slapass(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_slapped" syntax="cmd_slapped(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_sleep" syntax="cmd_sleep(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_smoke" syntax="cmd_smoke(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_spray" syntax="cmd_spray(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_stand" syntax="cmd_stand(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_still" syntax="cmd_still(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_stop" syntax="cmd_stop(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_strip" syntax="cmd_strip(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_sup" syntax="cmd_sup(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_surrender" syntax="cmd_surrender(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="GetPlayerState"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_taichi" syntax="cmd_taichi(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_tapcig" syntax="cmd_tapcig(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_thankyou" syntax="cmd_thankyou(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_tosteal" syntax="cmd_tosteal(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_urinate" syntax="cmd_urinate(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_vomit" syntax="cmd_vomit(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_wank" syntax="cmd_wank(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_wash" syntax="cmd_wash(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_wave" syntax="cmd_wave(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_win" syntax="cmd_win(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="44"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="strcmp"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_yes" syntax="cmd_yes(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="SetPVarInt"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:fclose" syntax="fclose(handle)">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+		</member>
+		<member name="M:float" syntax="float(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="value">
+			</param>
+		</member>
+		<member name="M:floatadd" syntax="floatadd(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatcmp" syntax="floatcmp(oper1, oper2)">
+			<attribute name="native"/>
+			<referrer name="operator==(Float:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,Float:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,Float:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatdiv" syntax="floatdiv(dividend, divisor)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<param name="dividend">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="divisor">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatmul" syntax="floatmul(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatstr" syntax="floatstr(string[])">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatsub" syntax="floatsub(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:fopen" syntax="fopen(name[], mode)">
+			<tagname value="File"/>
+			<attribute name="native"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="mode">
+				<paraminfo>filemode </paraminfo>
+			</param>
+		</member>
+		<member name="M:format" syntax="format(output[], len, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="output">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="len">
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:fread" syntax="fread(handle, string[], size, pack)">
+			<attribute name="native"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="pack">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:funcidx" syntax="funcidx(name[])">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptInit"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:isNumeric" syntax="isNumeric(string[])">
+			<stacksize value="4"/>
+			<referrer name="ReturnUser"/>
+			<dependency name="false"/>
+			<dependency name="strlen"/>
+			<dependency name="true"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:printf" syntax="printf(format[], ...)">
+			<attribute name="native"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:sscanf" syntax="sscanf(data[], format[], ...)">
+			<stacksize value="1"/>
+			<param name="data">
+				<paraminfo> [] </paraminfo>
+				The input string containing the data to parse out.
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+				The format description of what the input data should contain.
+			</param>
+			<param name="...">
+				<paraminfo> {T_WEAPON,Float,_} </paraminfo>
+			</param>
+			<library>sscanf</library>      <remarks>  The main entry point.  See the readme for vast amounts of information on how  to call this function and all the details on what it does.  This is a macro  that calls <c>SSCANF__</c> and passes the current file and line number as  well for improved error messages.  </remarks> 
+		</member>
+		<member name="M:sscanf_vehicle" syntax="sscanf_vehicle(string[])">
+			<attribute name="public"/>
+			<stacksize value="10"/>
+			<dependency name="SSCANF_GetSimilarValue"/>
+			<dependency name="strval"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+				The current word being parsed out of the <c>sscanf</c> input.
+			</param>
+			<library>sscanf</library>    <remarks>  The default implementation of <c>k&lt;vehicle&gt;</c>.  Finds the closest  vehicle by Levenshtein distance to the input.  </remarks> 
+		</member>
+		<member name="M:sscanf_weapon" syntax="sscanf_weapon(string[])">
+			<attribute name="public"/>
+			<stacksize value="10"/>
+			<dependency name="SSCANF_GetSimilarValue"/>
+			<dependency name="strval"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+				The current word being parsed out of the <c>sscanf</c> input.
+			</param>
+			<library>sscanf</library>    <remarks>  The default implementation of <c>k&lt;weapon&gt;</c>.  Finds the closest  weapon by Levenshtein distance to the input.  </remarks> 
+		</member>
+		<member name="M:strcat" syntax="strcat(dest[], source[], maxlength)">
+			<attribute name="native"/>
+			<referrer name="cmd_animlist"/>
+			<param name="dest">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="maxlength">
+			</param>
+		</member>
+		<member name="M:strcmp" syntax="strcmp(string1[], string2[], ignorecase, length)">
+			<attribute name="native"/>
+			<referrer name="ReturnUser"/>
+			<referrer name="cmd_reload"/>
+			<referrer name="cmd_wank"/>
+			<referrer name="cmd_sexy"/>
+			<referrer name="cmd_bj"/>
+			<referrer name="cmd_win"/>
+			<referrer name="cmd_celebrate"/>
+			<referrer name="cmd_deal"/>
+			<referrer name="cmd_invite1"/>
+			<referrer name="cmd_cry"/>
+			<referrer name="cmd_bed"/>
+			<referrer name="cmd_bar"/>
+			<referrer name="cmd_die"/>
+			<param name="string1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="string2">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="length">
+			</param>
+		</member>
+		<member name="M:strlen" syntax="strlen(string[])">
+			<attribute name="native"/>
+			<referrer name="strtok"/>
+			<referrer name="strrest"/>
+			<referrer name="isNumeric"/>
+			<referrer name="ReturnUser"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:strrest" syntax="strrest(string[], &amp;index)">
+			<stacksize value="131"/>
+			<dependency name="EOS"/>
+			<dependency name="strlen"/>
+			<dependency name="strrest"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="index">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:strtok" syntax="strtok(string[], &amp;index)">
+			<stacksize value="23"/>
+			<dependency name="EOS"/>
+			<dependency name="strlen"/>
+			<dependency name="strtok"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="index">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:strval" syntax="strval(string[])">
+			<attribute name="native"/>
+			<referrer name="sscanf_weapon"/>
+			<referrer name="sscanf_vehicle"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<referrer name="ReturnUser"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:token_by_delim" syntax="token_by_delim(string[], return_str[], delim, start_index)">
+			<stacksize value="2"/>
+			<referrer name="LoadStaticVehiclesFromFile"/>
+			<dependency name="EOS"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="return_str">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="delim">
+			</param>
+			<param name="start_index">
+			</param>
+		</member>
+		<member name="M:tolower" syntax="tolower(c)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="c">
+			</param>
+		</member>
+		<member name="M:unformat" syntax="unformat(data[], format[], ...)">
+			<stacksize value="1"/>
+			<param name="data">
+				<paraminfo> [] </paraminfo>
+				The input string containing the data to parse out.
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+				The format description of what the input data should contain.
+			</param>
+			<param name="...">
+				<paraminfo> {T_WEAPON,Float,_} </paraminfo>
+			</param>
+			- include <sscanf2> first.  <library>sscanf</library>      <remarks>  An alternative spelling of <c>sscanf</c>, requested by Kalcor because the  original doesn't match the C specification for the format descriptor.  This  is a macro that calls <c>UNFORMAT__</c> and passes the current file and line  number as well for improved error messages.  </remarks> 
+		</member>
+		<member name="M:zcmd_OnFilterScriptInit" syntax="zcmd_OnFilterScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="SSCANF_OnFilterScriptInit"/>
+			<dependency name="SSCANF_RunInit"/>
+			<dependency name="SSCANF_gInit"/>
+			<library>sscanf</library>  <remarks>  Called when the script starts if it is a filterscript, sets up the system,  then calls the "real" OnFilterScriptInit (using the new ALS 2 hook method).  </remarks> 
+		</member>
+		<member name="M:zcmd_OnPlayerCommandText" syntax="zcmd_OnPlayerCommandText(playerid, cmdtext[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+
+	</members>
+</doc>

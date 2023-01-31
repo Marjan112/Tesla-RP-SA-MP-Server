@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Rezervni task ako onaj glavni ne radi",
+            "type": "shell",
+            "command": "${workspaceFolder}/pawno/pawncc.exe",
+            "args": [
+                "${file}",
+                "--%",
+                "-Dgamemodes",
+                "-;+",
+                "-(+",
+                "-d3"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            // "problemMatcher": "$pawncc"
+        }
+    ]
+}
