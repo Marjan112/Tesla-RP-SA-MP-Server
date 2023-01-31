@@ -629,7 +629,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6461">
+		<member name="C:__line" value="6463">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>

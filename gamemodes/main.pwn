@@ -1492,6 +1492,7 @@ public OnGameModeInit() {
 	SetDynamicObjectMaterial(bolnica, 2, 4992, "airportdetail", "bevflower1", 0x00000000);
 	SetDynamicObjectMaterial(bolnica, 3, 3881, "apsecurity_sfxrf", "lostonclad1", 0xFFFFFFFF);
 	//jelka
+	#if SNEG == 1
 	CreateDynamicObject(19076, 1432.422729, -830.832031, 56.613811, 9.999951, 0.899999, -0.199999, -1, -1, -1, 300.00, 300.00); 
 	CreateDynamicObject(19055, 1437.344848, -828.626953, 59.895458, 26.000009, -13.800000, 0.000000, -1, -1, -1, 300.00, 300.00); 
 	CreateDynamicObject(19055, 1436.669677, -831.210510, 57.987468, 23.200008, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
@@ -1505,6 +1506,7 @@ public OnGameModeInit() {
 	CreateDynamicObject(19059, 1432.155639, -832.911499, 59.495330, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
 	CreateDynamicObject(19058, 1434.787719, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
 	CreateDynamicObject(19058, 1432.158081, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	#endif
 	//fib stanica
     CreateDynamicObject(17559, 1310.222534, -1323.534790, -3.336741, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
     CreateDynamicObject(19449, 1326.342285, -1301.865356, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
@@ -3246,7 +3248,7 @@ CMD:kill(playerid, params[]) {
 	if(PlayerInfo[playerid][pAdmin] < 2) return NisteOvlasceni(playerid);
 	if(sscanf(params, "u", id)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/kill [id igraca]");
 	if(!IsPlayerConnected(id)) return SCM(playerid, SIVA, "Igrac nije online!");
-	SetPlayerHealth(playerid, 0);
+	SetPlayerHealth(id, 0);
 	va_SCM(playerid, -1, "Uspesno ste killali igraca %s", GetName(id));
 	return 1;
 }
