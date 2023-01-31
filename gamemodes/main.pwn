@@ -3364,11 +3364,11 @@ CMD:askq(playerid, params[]) {
 CMD:pokrenipljacku(playerid, params[]) {
 	#pragma unused params
 	SCM(playerid, -1, "U drugom update-u!");
-	// if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) {
-	// 	if(!IsPlayerInRangeOfPoint(playerid, 3, 1101.9955,1064.0131,-22.3529)) return SCM(playerid, SIVA, "Niste kod mesta za pocetak pljacke!");
-	// 	GivePlayerMoney(playerid, 100000);
-	// 	SCM(playerid, -1, "Uspesno ste zapoceli pljacku centralne banke!");
-	// } else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
+	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) {
+		if(!IsPlayerInRangeOfPoint(playerid, 3, 1101.9955,1064.0131,-22.3529)) return SCM(playerid, SIVA, "Niste kod mesta za pocetak pljacke!");
+		
+		SCM(playerid, -1, "Uspesno ste zapoceli pljacku centralne banke!");
+	} else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
 	return 1;
 }
 
