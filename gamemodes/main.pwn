@@ -79,6 +79,7 @@ new rented[MAX_VEHICLES];
 new renta[MAX_PLAYERS];
 new rentvreme[MAX_PLAYERS];
 
+
 new Float:pX[MAX_PLAYERS];
 new Float:pY[MAX_PLAYERS];
 new Float:pZ[MAX_PLAYERS];
