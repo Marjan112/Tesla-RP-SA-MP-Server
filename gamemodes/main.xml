@@ -629,7 +629,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6450">
+		<member name="C:__line" value="6452">
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
@@ -1007,6 +1007,7 @@
 		<member name="F:Cops@YSII_Ag">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_pokrenipljacku"/>
 		</member>
 		<member name="F:Cops@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
@@ -1028,6 +1029,7 @@
 		<member name="F:Fibs@YSII_Ag">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_pokrenipljacku"/>
 		</member>
 		<member name="F:Fibs@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
@@ -1169,6 +1171,7 @@
 			<referrer name="S@@_OnPlayerSpawn"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
 			<referrer name="cmd_f_urus"/>
@@ -1247,6 +1250,10 @@
 			<referrer name="BanMessage"/>
 			<referrer name="PayDay"/>
 			<referrer name="CarUpdate"/>
+		</member>
+		<member name="F:PokrenutaPljacka">
+			<tagname value="bool"/>
+			<referrer name="cmd_pokrenipljacku"/>
 		</member>
 		<member name="F:PromInfo">
 			<referrer name="UzetPromSlot"/>
@@ -1676,6 +1683,7 @@
 		<member name="F:Zemunski_Klan@YSII_Ag">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_pokrenipljacku"/>
 		</member>
 		<member name="F:Zemunski_Klan@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
@@ -1687,6 +1695,8 @@
 			<referrer name="Y@"/>
 		</member>
 		<member name="F:__date">
+		</member>
+		<member name="F:__file">
 		</member>
 		<member name="F:__file">
 		</member>
@@ -2165,6 +2175,7 @@
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
 			<referrer name="cmd_f_urus"/>
@@ -4066,6 +4077,7 @@
 		</member>
 		<member name="M:GivePlayerMoney" syntax="GivePlayerMoney(playerid, money)">
 			<attribute name="native"/>
+			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_kredit"/>
 			<referrer name="cmd_withdraw"/>
 			<referrer name="cmd_deposit"/>
@@ -4753,6 +4765,7 @@
 			<referrer name="IC"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
 			<referrer name="cmd_f_urus"/>
@@ -8475,10 +8488,6 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:SendMes" syntax="SendMes()">
-			<attribute name="public"/>
-			<stacksize value="1"/>
-		</member>
 		<member name="M:SendPlayerMessageToAll" syntax="SendPlayerMessageToAll(senderid, message[])">
 			<attribute name="native"/>
 			<referrer name="va_SendPlayerMessageToAll"/>
@@ -10796,8 +10805,19 @@
 		</member>
 		<member name="M:cmd_pokrenipljacku" syntax="cmd_pokrenipljacku(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="5"/>
+			<stacksize value="7"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="Cops@YSII_Ag"/>
+			<dependency name="Fibs@YSII_Ag"/>
+			<dependency name="GivePlayerMoney"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="PokrenutaPljacka"/>
 			<dependency name="SendClientMessage"/>
+			<dependency name="Zemunski_Klan@YSII_Ag"/>
+			<dependency name="pOrganizacija"/>
+			<dependency name="strcmp"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
@@ -12335,6 +12355,7 @@
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_garaza"/>
 			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
 			<referrer name="cmd_f_urus"/>

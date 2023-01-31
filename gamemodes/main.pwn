@@ -8,6 +8,7 @@
 #include <streamer>
 #include <zcmd>
 #include "../gamemodes/data/structures.inc"
+#include "../gamemodes/data/tags.inc"
 ////////////////////////////////////////////////////
 #define ALL MAX_PLAYERS + MAX_PLAYERS
 #define HOUSE 1
@@ -119,6 +120,8 @@ new jobprogress[MAX_PLAYERS];
 
 new platatimer = 60;
 new timer = 10;
+
+new Bool: PokrenutaPljacka[MAX_PLAYERS] = false;
 
 new RandomPoruke[][] = {
 	"{03adfc}[INFO]: {ffffff}Server se ukljucuje u 11 ujutru, a iskljucuje u 23:30.",
@@ -3363,12 +3366,15 @@ CMD:askq(playerid, params[]) {
 // Komanda nije gotova
 CMD:pokrenipljacku(playerid, params[]) {
 	#pragma unused params
-	SCM(playerid, -1, "U drugom update-u!");
-	// if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) {
-	// 	if(!IsPlayerInRangeOfPoint(playerid, 3, 1101.9955,1064.0131,-22.3529)) return SCM(playerid, SIVA, "Niste kod mesta za pocetak pljacke!");
-	// 	GivePlayerMoney(playerid, 100000);
-	// 	SCM(playerid, -1, "Uspesno ste zapoceli pljacku centralne banke!");
-	// } else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
+	if(PokrenutaPljacka[playerid]) return SCM(playerid, SIVA, "Pljacka je vec pokrenuta!");
+	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) {
+		if(!IsPlayerInRangeOfPoint(playerid, 3, 1101.9955,1064.0131,-22.3529)) return SCM(playerid, SIVA, "Niste kod mesta za pocetak pljacke!");
+		SCM(playerid, -1, "Uspesno ste zapoceli pljacku centralne banke!");
+		foreach(new Cop : Cops) SCM(Cop, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
+		foreach(new Fib : Fibs) SCM(Fib, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
+		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) foreach(new Zemunci : Zemunski_Klan) GivePlayerMoney(Zemunci, 150000);
+		
+	} else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
 	return 1;
 }
 
