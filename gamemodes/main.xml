@@ -629,7 +629,8 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6463">
+		<member name="C:__line" value="6466">
+			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -1786,6 +1787,7 @@
 		<member name="F:__file">
 		</member>
 		<member name="F:__file">
+			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -7930,6 +7932,7 @@
 		</member>
 		<member name="M:SSCANF__" syntax="SSCANF__(file[], line, data[], format[], ...)">
 			<attribute name="native"/>
+			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -12211,6 +12214,7 @@
 			<referrer name="va_printf"/>
 			<referrer name="Malloc_SetVAA"/>
 			<referrer name="AMX_OnScriptInit"/>
+			<referrer name="zcmd_OnGameModeInit"/>
 			<param name="format">
 				<paraminfo> [] </paraminfo>
 			</param>
@@ -12858,7 +12862,7 @@
 		</member>
 		<member name="M:zcmd_OnGameModeInit" syntax="zcmd_OnGameModeInit()">
 			<attribute name="public"/>
-			<stacksize value="592"/>
+			<stacksize value="720"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ACTOR"/>
 			<dependency name="AddPlayerClass"/>
@@ -12886,6 +12890,7 @@
 			<dependency name="Orgs@YSII_Cg"/>
 			<dependency name="PromInfo"/>
 			<dependency name="PromInfo"/>
+			<dependency name="SSCANF__"/>
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveBanned"/>
 			<dependency name="SaveProm"/>
@@ -12913,6 +12918,8 @@
 			<dependency name="ZatvorVrata"/>
 			<dependency name="ZatvorenaVrata"/>
 			<dependency name="ZemunciGate"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
 			<dependency name="aDuty"/>
 			<dependency name="aName"/>
 			<dependency name="aNeaktivnost"/>
@@ -12940,6 +12947,7 @@
 			<dependency name="orgX"/>
 			<dependency name="orgY"/>
 			<dependency name="orgZ"/>
+			<dependency name="printf"/>
 			<dependency name="promDuty"/>
 			<dependency name="promName"/>
 			<dependency name="promNeaktivnost"/>
