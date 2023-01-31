@@ -3,4 +3,4 @@
 
 #define Bool: bool:
 
-#endif
+#endif /*_tags_included*/
