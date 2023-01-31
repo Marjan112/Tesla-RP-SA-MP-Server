@@ -629,7 +629,8 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6452">
+		<member name="C:__line" value="6461">
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
@@ -1169,6 +1170,7 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
@@ -1785,6 +1787,7 @@
 		<member name="F:__file">
 		</member>
 		<member name="F:__file">
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
@@ -2170,11 +2173,10 @@
 			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="UpdateBubble"/>
 			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
@@ -2187,11 +2189,6 @@
 			<referrer name="cmd_prevozputnika"/>
 			<referrer name="cmd_getajob"/>
 			<referrer name="cmd_quitjob"/>
-			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -2881,16 +2878,9 @@
 		</member>
 		<member name="M:Attach3DTextLabelToVehicle" syntax="Attach3DTextLabelToVehicle(id, vehicleid, OffsetX, OffsetY, OffsetZ)">
 			<attribute name="native"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
 			<referrer name="cmd_f_urus"/>
-			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -3289,8 +3279,6 @@
 			<tagname value="Text3D"/>
 			<attribute name="native"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_f_tesla"/>
 			<referrer name="cmd_f_gklasa"/>
 			<referrer name="cmd_f_urus"/>
@@ -3298,11 +3286,6 @@
 			<referrer name="cmd_makeleader"/>
 			<referrer name="cmd_kupikucu"/>
 			<referrer name="cmd_napravikucu"/>
-			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -3780,6 +3763,7 @@
 			<stacksize value="157"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
@@ -4732,6 +4716,7 @@
 			<referrer name="S@@_OnGameModeInit"/>
 			<referrer name="Itter_OPDCInternal"/>
 			<referrer name="SSCANF_RunInit"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_kick"/>
 			<referrer name="cmd_lisice"/>
 			<referrer name="cmd_addmem"/>
@@ -5446,6 +5431,7 @@
 		</member>
 		<member name="M:NisteOvlasceni" syntax="NisteOvlasceni(playerid)">
 			<stacksize value="5"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_akomande"/>
 			<referrer name="cmd_setskin"/>
@@ -7944,6 +7930,7 @@
 		</member>
 		<member name="M:SSCANF__" syntax="SSCANF__(file[], line, data[], format[], ...)">
 			<attribute name="native"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
@@ -8385,6 +8372,7 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
@@ -8744,6 +8732,7 @@
 		</member>
 		<member name="M:SetPlayerHealth" syntax="SetPlayerHealth(playerid, health)">
 			<attribute name="native"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_heal"/>
 			<referrer name="cmd_promduty"/>
 			<referrer name="cmd_aduty"/>
@@ -10151,6 +10140,28 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
+		<member name="M:cmd_kill" syntax="cmd_kill(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="137"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="GetName"/>
+			<dependency name="GetName"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="NisteOvlasceni"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerHealth"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="pAdmin"/>
+			<dependency name="va_SendClientMessage"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
 		<member name="M:cmd_komande" syntax="cmd_komande(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="9"/>
@@ -11479,10 +11490,7 @@
 		<member name="M:cmd_z_amg" syntax="cmd_z_amg(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -11514,10 +11522,7 @@
 		<member name="M:cmd_z_aventador" syntax="cmd_z_aventador(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -11549,10 +11554,7 @@
 		<member name="M:cmd_z_cfmoto625" syntax="cmd_z_cfmoto625(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -11584,10 +11586,7 @@
 		<member name="M:cmd_z_gklasam" syntax="cmd_z_gklasam(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -11619,10 +11618,7 @@
 		<member name="M:cmd_z_rover" syntax="cmd_z_rover(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -11654,10 +11650,7 @@
 		<member name="M:cmd_z_teslas" syntax="cmd_z_teslas(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -11689,10 +11682,7 @@
 		<member name="M:cmd_z_urus" syntax="cmd_z_urus(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehicleColor"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -12647,6 +12637,7 @@
 		<member name="M:va_SendClientMessage" syntax="va_SendClientMessage(playerid, colour, fmat[], ...)">
 			<stacksize value="1048"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_kill"/>
 			<referrer name="cmd_heal"/>
 			<referrer name="cmd_pduty"/>
 			<referrer name="cmd_kredit"/>

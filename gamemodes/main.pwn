@@ -70,8 +70,8 @@ new Text: sdtd[3];
 new PlayerText: Fuel_t[MAX_PLAYERS][2];
 
 new ZatvorVrata[4];
-new bool: ZakljucanaVrata[MAX_OBJECTS];
-new bool: ZatvorenaVrata[MAX_OBJECTS];
+new Bool: ZakljucanaVrata[MAX_OBJECTS];
+new Bool: ZatvorenaVrata[MAX_OBJECTS];
 
 new ZemunciGate;
 
@@ -3241,6 +3241,16 @@ public OnPlayerSpawn(playerid) {
 	return 1;
 }
 
+CMD:kill(playerid, params[]) {
+	new id;
+	if(PlayerInfo[playerid][pAdmin] < 2) return NisteOvlasceni(playerid);
+	if(sscanf(params, "u", id)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/kill [id igraca]");
+	if(!IsPlayerConnected(id)) return SCM(playerid, SIVA, "Igrac nije online!");
+	SetPlayerHealth(playerid, 0);
+	va_SCM(playerid, -1, "Uspesno ste killali igraca %s", GetName(id));
+	return 1;
+}
+
 CMD:oc(playerid, params[]) {
 	new str[128];
 	if(sscanf(params, "s[128]", str)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/b [tekst]");
@@ -3285,21 +3295,21 @@ CMD:z_rover(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
@@ -3338,21 +3348,21 @@ CMD:z_amg(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
@@ -4301,21 +4311,21 @@ CMD:z_cfmoto625(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
@@ -4343,21 +4353,21 @@ CMD:z_gklasam(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
@@ -4385,21 +4395,21 @@ CMD:z_teslas(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
@@ -4427,21 +4437,21 @@ CMD:z_aventador(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
@@ -4469,21 +4479,21 @@ CMD:z_urus(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{00ff00}[ Zemunski Klan ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
+		// Attach3DTextLabelToVehicle(
+		// 	Create3DTextLabel(
+		// 		"{00ff00}[ Zemunski Klan ]",
+		// 		-1,
+		// 		X,
+		// 		Y,
+		// 		Z,
+		// 		10,
+		// 		0
+		// 	),
+		// 	vehid,
+		// 	0,
+		// 	0,
+		// 	0
+		// );
 	} else SCM(playerid, SIVA, "Niste kod zemunske kuce.");
 	return 1;
 }
