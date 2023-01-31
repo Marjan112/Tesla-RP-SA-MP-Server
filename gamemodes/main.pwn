@@ -3373,7 +3373,6 @@ CMD:pokrenipljacku(playerid, params[]) {
 		foreach(new Cop : Cops) SCM(Cop, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
 		foreach(new Fib : Fibs) SCM(Fib, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
 		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) foreach(new Zemunci : Zemunski_Klan) GivePlayerMoney(Zemunci, 150000);
-		
 	} else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
 	return 1;
 }
