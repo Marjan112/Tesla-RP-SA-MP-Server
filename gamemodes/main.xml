@@ -1030,7 +1030,6 @@
 		<member name="F:Fibs@YSII_Ag">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
-			<referrer name="cmd_pokrenipljacku"/>
 		</member>
 		<member name="F:Fibs@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
@@ -3701,6 +3700,7 @@
 		<member name="M:GameTextForPlayer" syntax="GameTextForPlayer(playerid, string[], time, style)">
 			<attribute name="native"/>
 			<referrer name="va_GameTextForPlayer"/>
+			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_otvoriracun"/>
 			<referrer name="cmd_enterhouse"/>
 			<referrer name="cmd_unrent"/>
@@ -10819,7 +10819,7 @@
 			<stacksize value="7"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="Cops@YSII_Ag"/>
-			<dependency name="Fibs@YSII_Ag"/>
+			<dependency name="GameTextForPlayer"/>
 			<dependency name="GivePlayerMoney"/>
 			<dependency name="IsPlayerInRangeOfPoint"/>
 			<dependency name="PlayerInfo"/>

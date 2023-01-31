@@ -3380,9 +3380,9 @@ CMD:pokrenipljacku(playerid, params[]) {
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) {
 		if(!IsPlayerInRangeOfPoint(playerid, 3, 1101.9955,1064.0131,-22.3529)) return SCM(playerid, SIVA, "Niste kod mesta za pocetak pljacke!");
 		SCM(playerid, -1, "Uspesno ste zapoceli pljacku centralne banke!");
+		GivePlayerMoney(playerid, 200000);
 		foreach(new Cop : Cops) SCM(Cop, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
-		foreach(new Fib : Fibs) SCM(Fib, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
-		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) foreach(new Zemunci : Zemunski_Klan) GivePlayerMoney(Zemunci, 150000);
+		foreach(new Z : Zemunski_Klan) GameTextForPlayer(Z, "Sacekajte 10 minuta...", 5000, 3);
 	} else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
 	return 1;
 }
