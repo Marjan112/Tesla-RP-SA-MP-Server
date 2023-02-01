@@ -1,4 +1,6 @@
-#if !defined _structures_included
+#if defined _structures_included
+	#endinput
+#endif
 #define _structures_included
 
 #include "../gamemodes/data/macros.inc"
@@ -175,5 +177,3 @@ enum pInfo {
 	pAuto3
 };
 new PlayerInfo[MAX_PLAYERS+1][pInfo];
-
-#endif /*_structures_included*/

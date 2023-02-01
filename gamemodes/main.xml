@@ -629,7 +629,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6469">
+		<member name="C:__line" value="6464">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -1819,6 +1819,9 @@
 			<referrer name="cmd_makeadmin"/>
 		</member>
 		<member name="F:__time">
+		</member>
+		<member name="F:a">
+			<tagname value="int"/>
 		</member>
 		<member name="F:admintext">
 			<tagname value="Text3D"/>
@@ -12130,12 +12133,6 @@
 				<paraminfo> &amp; </paraminfo>
 			</param>
 		</member>
-		<member name="M:getvalue" syntax="getvalue(echo)">
-			<attribute name="native"/>
-			<referrer name="main"/>
-			<param name="echo">
-			</param>
-		</member>
 		<member name="M:hexstr" syntax="hexstr(string[])">
 			<stacksize value="4"/>
 			<param name="string">
@@ -12156,10 +12153,8 @@
 		</member>
 		<member name="M:main" syntax="main()">
 			<attribute name="entry"/>
-			<stacksize value="5"/>
-			<dependency name="getvalue"/>
+			<stacksize value="3"/>
 			<dependency name="print"/>
-			<dependency name="printf"/>
 		</member>
 		<member name="M:memcpy" syntax="memcpy(dest[], source[], index, numbytes, maxlength)">
 			<attribute name="native"/>
@@ -12219,7 +12214,6 @@
 			<referrer name="va_printf"/>
 			<referrer name="Malloc_SetVAA"/>
 			<referrer name="AMX_OnScriptInit"/>
-			<referrer name="main"/>
 			<param name="format">
 				<paraminfo> [] </paraminfo>
 			</param>

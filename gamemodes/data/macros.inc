@@ -1,4 +1,6 @@
-#if !defined _macros_included
+#if defined _macros_included
+    #endinput
+#endif
 #define _macros_included
 
 #pragma library Macro
@@ -56,5 +58,3 @@
 #define FIBOVCI 58
 #define KUCA_NA_PRODAJU 31
 #define KUCA_KUPLJENA 32 
-
-#endif /*_macros_included*/
