@@ -57,4 +57,6 @@
 #define ZEMUNCI 62
 #define FIBOVCI 58
 #define KUCA_NA_PRODAJU 31
-#define KUCA_KUPLJENA 32 
+#define KUCA_KUPLJENA 32
+//FUNCTION
+#define function%1(%2) forward %1(%2); public %1(%2)

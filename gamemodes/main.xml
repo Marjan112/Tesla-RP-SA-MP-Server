@@ -629,7 +629,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6464">
+		<member name="C:__line" value="6230">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -800,6 +800,7 @@
 			<referrer name="INI_ParseFile"/>
 			<referrer name="INI_Load"/>
 			<referrer name="S@@_OnPlayerDisconnect"/>
+			<referrer name="IsVehicleBicycle"/>
 			<referrer name="UzetPromSlot"/>
 			<referrer name="UzetBanSlot"/>
 			<referrer name="UzetSlot"/>
@@ -829,6 +830,7 @@
 			<referrer name="INI_DeleteTag"/>
 			<referrer name="INI_AddToBuffer"/>
 			<referrer name="INI_WriteBuffer"/>
+			<referrer name="IsVehicleBicycle"/>
 			<referrer name="UzetPromSlot"/>
 			<referrer name="ProveraRPImena"/>
 			<referrer name="UzetBanSlot"/>
@@ -943,8 +945,8 @@
 			<referrer name="AMX_GetGlobalAddress"/>
 		</member>
 		<member name="F:AdminInfo">
-			<referrer name="UzetSlot"/>
 			<referrer name="SaveAdmin"/>
+			<referrer name="UzetSlot"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
@@ -969,8 +971,8 @@
 			<referrer name="cmd_makeadmin"/>
 		</member>
 		<member name="F:BannedInfo">
-			<referrer name="UzetBanSlot"/>
 			<referrer name="SaveBanned"/>
+			<referrer name="UzetBanSlot"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_unban"/>
 			<referrer name="cmd_ban"/>
@@ -1163,9 +1165,9 @@
 			<referrer name="Itter_OPDCInternal"/>
 		</member>
 		<member name="F:PlayerInfo">
-			<referrer name="UpdateBubble"/>
 			<referrer name="Sacuvaj"/>
 			<referrer name="SavePlayer"/>
+			<referrer name="UpdateBubble"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
@@ -1257,8 +1259,8 @@
 			<referrer name="cmd_pokrenipljacku"/>
 		</member>
 		<member name="F:PromInfo">
-			<referrer name="UzetPromSlot"/>
 			<referrer name="SaveProm"/>
+			<referrer name="UzetPromSlot"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_skiniprom"/>
@@ -1786,6 +1788,12 @@
 		<member name="F:__file">
 		</member>
 		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -1819,9 +1827,6 @@
 			<referrer name="cmd_makeadmin"/>
 		</member>
 		<member name="F:__time">
-		</member>
-		<member name="F:a">
-			<tagname value="int"/>
 		</member>
 		<member name="F:admintext">
 			<tagname value="Text3D"/>
@@ -4030,6 +4035,7 @@
 		</member>
 		<member name="M:GetVehicleModel" syntax="GetVehicleModel(vehicleid)">
 			<attribute name="native"/>
+			<referrer name="IsVehicleBicycle"/>
 			<referrer name="cmd_prevoznovca"/>
 			<referrer name="cmd_prevozputnika"/>
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
@@ -4807,6 +4813,17 @@
 			<referrer name="SSCANF_RunInit"/>
 			<referrer name="Itter_OnPlayerConnect"/>
 			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsVehicleBicycle" syntax="IsVehicleBicycle(vehid)">
+			<tagname value="bool"/>
+			<stacksize value="3"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="S@@_OnPlayerStateChange"/>
+			<dependency name="GetVehicleModel"/>
+			<dependency name="false"/>
+			<dependency name="true"/>
+			<param name="vehid">
 			</param>
 		</member>
 		<member name="M:Itter_AddInternal" syntax="Itter_AddInternal(&amp;count, array[], value, size)">
@@ -7375,6 +7392,7 @@
 			<dependency name="Fuel_t"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="IsPlayerWorking"/>
+			<dependency name="IsVehicleBicycle"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerTextDrawHide"/>
@@ -11944,16 +11962,16 @@
 			<referrer name="SaveVehicles"/>
 			<referrer name="SaveHouse"/>
 			<referrer name="SaveOrg"/>
-			<referrer name="NewID"/>
 			<referrer name="SaveVr"/>
-			<referrer name="UzetPromSlot"/>
 			<referrer name="SaveProm"/>
-			<referrer name="UpdateBubble"/>
-			<referrer name="UzetBanSlot"/>
 			<referrer name="SaveBanned"/>
 			<referrer name="Sacuvaj"/>
-			<referrer name="UzetSlot"/>
 			<referrer name="SaveAdmin"/>
+			<referrer name="NewID"/>
+			<referrer name="UzetPromSlot"/>
+			<referrer name="UpdateBubble"/>
+			<referrer name="UzetBanSlot"/>
+			<referrer name="UzetSlot"/>
 			<referrer name="GetName"/>
 			<referrer name="UserPath"/>
 			<referrer name="zcmd_OnGameModeInit"/>
@@ -12882,6 +12900,7 @@
 			<dependency name="Houses@YSII_Ag"/>
 			<dependency name="Houses@YSII_Cg"/>
 			<dependency name="INI_ParseFile"/>
+			<dependency name="IsVehicleBicycle"/>
 			<dependency name="Itter_AddInternal"/>
 			<dependency name="OrgInfo"/>
 			<dependency name="OrgInfo"/>
