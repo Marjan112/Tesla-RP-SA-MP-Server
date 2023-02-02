@@ -153,14 +153,6 @@ stock Float:GetDistanceBetweenPoints(Float:pos1X, Float:pos1Y, Float:pos1Z, Floa
 	return floatadd(floatadd(floatsqroot(floatpower(floatsub(pos1X, pos2X), 2)), floatsqroot(floatpower(floatsub(pos1Y, pos2Y), 2))), floatsqroot(floatpower(floatsub(pos1Z, pos2Z), 2)));
 }
 
-stock Float: SpeedVehicle(playerid) {
-	new Float: ST[4];
-	if (IsPlayerInAnyVehicle(playerid)) GetVehicleVelocity(GetPlayerVehicleID(playerid), ST[0], ST[1], ST[2]);
-	else GetPlayerVelocity(playerid, ST[0], ST[1], ST[2]);
-	ST[3] = floatsqroot(floatpower(floatabs(ST[0]), 2.0) + floatpower(floatabs(ST[1]), 2.0) + floatpower(floatabs(ST[2]), 2.0)) * 180.0;
-	return ST[3];
-}
-
 stock WeaponName(wid) {
 	new str[128];
 	GetWeaponName(wid, str, sizeof(str));
