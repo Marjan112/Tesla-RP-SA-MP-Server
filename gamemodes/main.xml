@@ -629,7 +629,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6230">
+		<member name="C:__line" value="6222">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -11893,8 +11893,8 @@
 		<member name="M:floatpower" syntax="floatpower(value, exponent)">
 			<tagname value="Float"/>
 			<attribute name="native"/>
-			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="SpeedVehicle"/>
+			<referrer name="GetDistanceBetweenPoints"/>
 			<param name="value">
 				<paraminfo>Float </paraminfo>
 			</param>
@@ -11905,8 +11905,8 @@
 		<member name="M:floatsqroot" syntax="floatsqroot(value)">
 			<tagname value="Float"/>
 			<attribute name="native"/>
-			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="SpeedVehicle"/>
+			<referrer name="GetDistanceBetweenPoints"/>
 			<param name="value">
 				<paraminfo>Float </paraminfo>
 			</param>
