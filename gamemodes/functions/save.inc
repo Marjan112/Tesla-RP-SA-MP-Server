@@ -25,6 +25,12 @@ stock SaveVehicles(id) {
 	INI_WriteInt(File, "Fuel", VehInfo[id][vFuel]);
 	INI_WriteInt(File, "Lock", VehInfo[id][vLock]);
 	INI_WriteString(File, "Owner", VehInfo[id][vOwner]);
+	INI_WriteFloat(File, "X", VehInfo[id][vX]);
+	INI_WriteFloat(File, "Y", VehInfo[id][vY]);
+	INI_WriteFloat(File, "Z", VehInfo[id][vZ]);
+	INI_WriteFloat(File, "RX", VehInfo[id][vRX]);
+	INI_WriteFloat(File, "RY", VehInfo[id][vRY]);
+	INI_WriteFloat(File, "RZ", VehInfo[id][vRZ]);
 	INI_Close(File);
 }
 

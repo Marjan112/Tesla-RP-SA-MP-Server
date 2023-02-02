@@ -117,7 +117,13 @@ enum vInfo {
 	vObj,
 	vFuel,
 	vLock,
-	vOwner[128]
+	vOwner[128],
+	Float: vX,
+	Float: vY,
+	Float: vZ,
+	Float: vRX,
+	Float: vRY,
+	Float: vRZ
 };
 new VehInfo[MAX_VEHICLES][vInfo];
 

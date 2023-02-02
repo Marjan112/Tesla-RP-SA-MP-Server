@@ -6200,6 +6200,12 @@ function LoadVehs(id, name[], value[]) {
 	INI_Int("Fuel", VehInfo[id][vFuel]);
 	INI_Int("Lock", VehInfo[id][vLock]);
 	INI_String("Owner", VehInfo[id][vOwner], 128);
+	INI_Float("X", VehInfo[id][vX]);
+	INI_Float("Y", VehInfo[id][vY]);
+	INI_Float("Z", VehInfo[id][vZ]);
+	INI_Float("RX", VehInfo[id][vRX]);
+	INI_Float("RY", VehInfo[id][vRY]);
+	INI_Float("RZ", VehInfo[id][vRZ]);
 	return 1;
 }
 

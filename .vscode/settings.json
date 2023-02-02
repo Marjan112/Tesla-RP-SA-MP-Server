@@ -1,6 +1,5 @@
 {
-    "editor.fontSize": 20,
+    "editor.fontSize": 23,
     "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true,
-    "pawn.compilerPath": "/workspaces/Server/pawno"
+    "editor.fontLigatures": true
 }
