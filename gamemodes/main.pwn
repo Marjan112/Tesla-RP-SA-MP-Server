@@ -20,7 +20,7 @@
 #define VEH 3
 #define BANIP 4
 #define SNEG 0
-//--------------- DEFINISANJE MAKROA ---------------
+//-------------------------------------------------
 #define IsPlayerPoliceman(%1) !strcmp(PlayerInfo[%1][pOrganizacija], "LSPD") || !strcmp(PlayerInfo[%1][pOrganizacija], "FIB")
 #define IsPlayerVillian(%1) !strcmp(PlayerInfo[%1][pOrganizacija], "Zemunski Klan") || !strcmp(PlayerInfo[%1][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[%1][pOrganizacija], "Yakuza")
 ////////////////////////////////////////////////////
