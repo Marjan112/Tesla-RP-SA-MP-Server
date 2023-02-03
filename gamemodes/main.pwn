@@ -11,6 +11,7 @@
 #include "../gamemodes/data/tags.inc"
 #include "../gamemodes/functions/f_vehicles.inc"
 #include "../gamemodes/functions/save.inc"
+#include "../gamemodes/functions/textdraws.inc"
 ////////////////////////////////////////////////////
 #define ALL MAX_PLAYERS + MAX_PLAYERS
 #define HOUSE 1
@@ -67,9 +68,8 @@ enum {
 
 new IsPlayerSpec[MAX_PLAYERS];
 
-new Text: lrtd[10];
-new Text: sdtd[3];
-new PlayerText: Fuel_t[MAX_PLAYERS][2];
+// new Text: lrtd[10];
+// new PlayerText: Fuel_t[MAX_PLAYERS][2];
 
 new ZemunciGate;
 
@@ -120,6 +120,8 @@ new platatimer = 60;
 new timer = 10;
 
 new Bool: PokrenutaPljacka[MAX_PLAYERS] = false;
+
+new antiSpam[MAX_PLAYERS];
 
 new RandomPoruke[][] = {
 	"{03adfc}[INFO]: {ffffff}Server se ukljucuje u 11 ujutru, a iskljucuje u 23:30.",
@@ -2653,138 +2655,111 @@ public OnGameModeInit() {
 		}
 	}
 //----------------------- TextDraw ----------------------------
-	lrtd[0] = TextDrawCreate(236.666671, 1.500000, "usebox");
-	TextDrawLetterSize(lrtd[0], 0.000000, 49.415019);
-	TextDrawTextSize(lrtd[0], -2.000000, 0.000000);
-	TextDrawAlignment(lrtd[0], 1);
-	TextDrawColor(lrtd[0], 0);
-	TextDrawUseBox(lrtd[0], true);
-	TextDrawBoxColor(lrtd[0], 102);
-	TextDrawSetShadow(lrtd[0], 0);
-	TextDrawSetOutline(lrtd[0], 0);
-	TextDrawFont(lrtd[0], 0);
+	// lrtd[0] = TextDrawCreate(236.666671, 1.500000, "usebox");
+	// TextDrawLetterSize(lrtd[0], 0.000000, 49.415019);
+	// TextDrawTextSize(lrtd[0], -2.000000, 0.000000);
+	// TextDrawAlignment(lrtd[0], 1);
+	// TextDrawColor(lrtd[0], 0);
+	// TextDrawUseBox(lrtd[0], true);
+	// TextDrawBoxColor(lrtd[0], 102);
+	// TextDrawSetShadow(lrtd[0], 0);
+	// TextDrawSetOutline(lrtd[0], 0);
+	// TextDrawFont(lrtd[0], 0);
 
-	lrtd[1] = TextDrawCreate(115.333259, 95.407310, "Tesla RolePlay");
-	TextDrawLetterSize(lrtd[1], 0.461665, 2.558222);
-	TextDrawAlignment(lrtd[1], 2);
-	TextDrawColor(lrtd[1], 16777215);
-	TextDrawSetShadow(lrtd[1], 2);
-	TextDrawSetOutline(lrtd[1], 0);
-	TextDrawBackgroundColor(lrtd[1], 51);
-	TextDrawFont(lrtd[1], 2);
-	TextDrawSetProportional(lrtd[1], 1);
+	// lrtd[1] = TextDrawCreate(115.333259, 95.407310, "Tesla RolePlay");
+	// TextDrawLetterSize(lrtd[1], 0.461665, 2.558222);
+	// TextDrawAlignment(lrtd[1], 2);
+	// TextDrawColor(lrtd[1], 16777215);
+	// TextDrawSetShadow(lrtd[1], 2);
+	// TextDrawSetOutline(lrtd[1], 0);
+	// TextDrawBackgroundColor(lrtd[1], 51);
+	// TextDrawFont(lrtd[1], 2);
+	// TextDrawSetProportional(lrtd[1], 1);
 
-	lrtd[2] = TextDrawCreate(236.333374, 132.996292, "usebox");
-	TextDrawLetterSize(lrtd[2], 0.000000, -0.869751);
-	TextDrawTextSize(lrtd[2], -2.000053, 0.000000);
-	TextDrawAlignment(lrtd[2], 1);
-	TextDrawColor(lrtd[2], 16777215);
-	TextDrawUseBox(lrtd[2], true);
-	TextDrawBoxColor(lrtd[2], -55);
-	TextDrawSetShadow(lrtd[2], 0);
-	TextDrawSetOutline(lrtd[2], 0);
-	TextDrawFont(lrtd[2], 0);
+	// lrtd[2] = TextDrawCreate(236.333374, 132.996292, "usebox");
+	// TextDrawLetterSize(lrtd[2], 0.000000, -0.869751);
+	// TextDrawTextSize(lrtd[2], -2.000053, 0.000000);
+	// TextDrawAlignment(lrtd[2], 1);
+	// TextDrawColor(lrtd[2], 16777215);
+	// TextDrawUseBox(lrtd[2], true);
+	// TextDrawBoxColor(lrtd[2], -55);
+	// TextDrawSetShadow(lrtd[2], 0);
+	// TextDrawSetOutline(lrtd[2], 0);
+	// TextDrawFont(lrtd[2], 0);
 
-	lrtd[3] = TextDrawCreate(9.000032, 136.888946, "Scripter:");
-	TextDrawLetterSize(lrtd[3], 0.243999, 1.396739);
-	TextDrawAlignment(lrtd[3], 1);
-	TextDrawColor(lrtd[3], -1);
-	TextDrawSetShadow(lrtd[3], 0);
-	TextDrawSetOutline(lrtd[3], 1);
-	TextDrawBackgroundColor(lrtd[3], 51);
-	TextDrawFont(lrtd[3], 2);
-	TextDrawSetProportional(lrtd[3], 1);
+	// lrtd[3] = TextDrawCreate(9.000032, 136.888946, "Scripter:");
+	// TextDrawLetterSize(lrtd[3], 0.243999, 1.396739);
+	// TextDrawAlignment(lrtd[3], 1);
+	// TextDrawColor(lrtd[3], -1);
+	// TextDrawSetShadow(lrtd[3], 0);
+	// TextDrawSetOutline(lrtd[3], 1);
+	// TextDrawBackgroundColor(lrtd[3], 51);
+	// TextDrawFont(lrtd[3], 2);
+	// TextDrawSetProportional(lrtd[3], 1);
 
-	lrtd[4] = TextDrawCreate(68.666648, 137.303710, "Maki");
-	TextDrawLetterSize(lrtd[4], 0.269333, 1.342813);
-	TextDrawAlignment(lrtd[4], 1);
-	TextDrawColor(lrtd[4], 16777215);
-	TextDrawSetShadow(lrtd[4], 0);
-	TextDrawSetOutline(lrtd[4], 1);
-	TextDrawBackgroundColor(lrtd[4], 51);
-	TextDrawFont(lrtd[4], 2);
-	TextDrawSetProportional(lrtd[4], 1);
+	// lrtd[4] = TextDrawCreate(68.666648, 137.303710, "Maki");
+	// TextDrawLetterSize(lrtd[4], 0.269333, 1.342813);
+	// TextDrawAlignment(lrtd[4], 1);
+	// TextDrawColor(lrtd[4], 16777215);
+	// TextDrawSetShadow(lrtd[4], 0);
+	// TextDrawSetOutline(lrtd[4], 1);
+	// TextDrawBackgroundColor(lrtd[4], 51);
+	// TextDrawFont(lrtd[4], 2);
+	// TextDrawSetProportional(lrtd[4], 1);
 
-	lrtd[5] = TextDrawCreate(9.666716, 170.903671, "Mapper:");
-	TextDrawLetterSize(lrtd[5], 0.245665, 1.351111);
-	TextDrawAlignment(lrtd[5], 1);
-	TextDrawColor(lrtd[5], -1);
-	TextDrawSetShadow(lrtd[5], 0);
-	TextDrawSetOutline(lrtd[5], 1);
-	TextDrawBackgroundColor(lrtd[5], 51);
-	TextDrawFont(lrtd[5], 2);
-	TextDrawSetProportional(lrtd[5], 1);
+	// lrtd[5] = TextDrawCreate(9.666716, 170.903671, "Mapper:");
+	// TextDrawLetterSize(lrtd[5], 0.245665, 1.351111);
+	// TextDrawAlignment(lrtd[5], 1);
+	// TextDrawColor(lrtd[5], -1);
+	// TextDrawSetShadow(lrtd[5], 0);
+	// TextDrawSetOutline(lrtd[5], 1);
+	// TextDrawBackgroundColor(lrtd[5], 51);
+	// TextDrawFont(lrtd[5], 2);
+	// TextDrawSetProportional(lrtd[5], 1);
 
-	lrtd[6] = TextDrawCreate(236.666671, 193.559249, "usebox");
-	TextDrawLetterSize(lrtd[6], 0.000000, 0.282510);
-	TextDrawTextSize(lrtd[6], -2.000000, 0.000000);
-	TextDrawAlignment(lrtd[6], 1);
-	TextDrawColor(lrtd[6], 0);
-	TextDrawUseBox(lrtd[6], true);
-	TextDrawBoxColor(lrtd[6], -1);
-	TextDrawSetShadow(lrtd[6], 0);
-	TextDrawSetOutline(lrtd[6], 0);
-	TextDrawFont(lrtd[6], 0);
+	// lrtd[6] = TextDrawCreate(236.666671, 193.559249, "usebox");
+	// TextDrawLetterSize(lrtd[6], 0.000000, 0.282510);
+	// TextDrawTextSize(lrtd[6], -2.000000, 0.000000);
+	// TextDrawAlignment(lrtd[6], 1);
+	// TextDrawColor(lrtd[6], 0);
+	// TextDrawUseBox(lrtd[6], true);
+	// TextDrawBoxColor(lrtd[6], -1);
+	// TextDrawSetShadow(lrtd[6], 0);
+	// TextDrawSetOutline(lrtd[6], 0);
+	// TextDrawFont(lrtd[6], 0);
 
-	lrtd[7] = TextDrawCreate(10.333334, 211.555572, "Verzija:");
-	TextDrawLetterSize(lrtd[7], 0.223333, 1.326221);
-	TextDrawAlignment(lrtd[7], 1);
-	TextDrawColor(lrtd[7], -1);
-	TextDrawSetShadow(lrtd[7], 0);
-	TextDrawSetOutline(lrtd[7], 1);
-	TextDrawBackgroundColor(lrtd[7], 51);
-	TextDrawFont(lrtd[7], 2);
-	TextDrawSetProportional(lrtd[7], 1);
+	// lrtd[7] = TextDrawCreate(10.333334, 211.555572, "Verzija:");
+	// TextDrawLetterSize(lrtd[7], 0.223333, 1.326221);
+	// TextDrawAlignment(lrtd[7], 1);
+	// TextDrawColor(lrtd[7], -1);
+	// TextDrawSetShadow(lrtd[7], 0);
+	// TextDrawSetOutline(lrtd[7], 1);
+	// TextDrawBackgroundColor(lrtd[7], 51);
+	// TextDrawFont(lrtd[7], 2);
+	// TextDrawSetProportional(lrtd[7], 1);
 
-	lrtd[8] = TextDrawCreate(59.666637, 211.970367, "0.1");
-	TextDrawLetterSize(lrtd[8], 0.275332, 1.326221);
-	TextDrawAlignment(lrtd[8], 1);
-	TextDrawColor(lrtd[8], 16777215);
-	TextDrawSetShadow(lrtd[8], 0);
-	TextDrawSetOutline(lrtd[8], 1);
-	TextDrawBackgroundColor(lrtd[8], 51);
-	TextDrawFont(lrtd[8], 2);
-	TextDrawSetProportional(lrtd[8], 1);
+	// lrtd[8] = TextDrawCreate(59.666637, 211.970367, "0.1");
+	// TextDrawLetterSize(lrtd[8], 0.275332, 1.326221);
+	// TextDrawAlignment(lrtd[8], 1);
+	// TextDrawColor(lrtd[8], 16777215);
+	// TextDrawSetShadow(lrtd[8], 0);
+	// TextDrawSetOutline(lrtd[8], 1);
+	// TextDrawBackgroundColor(lrtd[8], 51);
+	// TextDrawFont(lrtd[8], 2);
+	// TextDrawSetProportional(lrtd[8], 1);
 
-	lrtd[9] = TextDrawCreate(63.333335, 171.318511, "Savva");
-	TextDrawLetterSize(lrtd[9], 0.226333, 1.309629);
-	TextDrawAlignment(lrtd[9], 1);
-	TextDrawColor(lrtd[9], 16777215);
-	TextDrawSetShadow(lrtd[9], 0);
-	TextDrawSetOutline(lrtd[9], 1);
-	TextDrawBackgroundColor(lrtd[9], 51);
-	TextDrawFont(lrtd[9], 2);
-	TextDrawSetProportional(lrtd[9], 1);
+	// lrtd[9] = TextDrawCreate(63.333335, 171.318511, "Savva");
+	// TextDrawLetterSize(lrtd[9], 0.226333, 1.309629);
+	// TextDrawAlignment(lrtd[9], 1);
+	// TextDrawColor(lrtd[9], 16777215);
+	// TextDrawSetShadow(lrtd[9], 0);
+	// TextDrawSetOutline(lrtd[9], 1);
+	// TextDrawBackgroundColor(lrtd[9], 51);
+	// TextDrawFont(lrtd[9], 2);
+	// TextDrawSetProportional(lrtd[9], 1);
 
-	sdtd[0] = TextDrawCreate(38.999980, 429.748260, "00:00");
-	TextDrawLetterSize(sdtd[0], 0.449999, 1.600000);
-	TextDrawAlignment(sdtd[0], 1);
-	TextDrawColor(sdtd[0], 16777215);
-	TextDrawSetShadow(sdtd[0], 0);
-	TextDrawSetOutline(sdtd[0], 1);
-	TextDrawBackgroundColor(sdtd[0], 51);
-	TextDrawFont(sdtd[0], 3);
-	TextDrawSetProportional(sdtd[0], 1);
+	CallSDTD();
 
-	sdtd[1] = TextDrawCreate(541.333190, 429.748138, "00/00/0000");
-	TextDrawLetterSize(sdtd[1], 0.438665, 1.591704);
-	TextDrawAlignment(sdtd[1], 1);
-	TextDrawColor(sdtd[1], 16777215);
-	TextDrawSetShadow(sdtd[1], 0);
-	TextDrawSetOutline(sdtd[1], 1);
-	TextDrawBackgroundColor(sdtd[1], 51);
-	TextDrawFont(sdtd[1], 3);
-	TextDrawSetProportional(sdtd[1], 1);
-
-	sdtd[2] = TextDrawCreate(326.666778, 428.918426, "Tesla RolePlay");
-	TextDrawLetterSize(sdtd[2], 0.449999, 1.600000);
-	TextDrawAlignment(sdtd[2], 2);
-	TextDrawColor(sdtd[2], -1);
-	TextDrawSetShadow(sdtd[2], 0);
-	TextDrawSetOutline(sdtd[2], 1);
-	TextDrawBackgroundColor(sdtd[2], 51);
-	TextDrawFont(sdtd[2], 2);
-	TextDrawSetProportional(sdtd[2], 1);
 //----------------------- [PODESAVANJA SVA VOZILA] ----------------------------
 	for(new vehicleid = 0; vehicleid < MAX_VEHICLES; vehicleid++) {
 		if(IsVehicleBicycle(vehicleid)) VehInfo[vehicleid][vEngine] = 1;
@@ -2822,6 +2797,7 @@ public OnGameModeInit() {
 	ACTOR[11] = CreateActor(57, 356.2959,166.3219,1008.3762,269.0106); //ACTOR U VLADI (SALTER)
 	ACTOR[12] = CreateActor(57, 356.2952,163.2074,1008.3762,269.3239); //ACTOR U VLADI (SALTER)
 	ACTOR[13] = CreateActor(179, 290.1594,-104.4914,1001.5156, 175.1689); //ACTOR U AMMUNATIONU
+	ACTOR[14] = CreateActor(20, 1654.6721,-1074.5894,23.8984, 1.9153); //ACTOR KOD PARKING ONAJ KAO ZNAS ONAJ KOD BANKU
 	return 1;
 }
 
@@ -3152,7 +3128,7 @@ CMD:f_tesla(playerid, params[]) {
 		new car, Float:X, Float:Y, Float:Z, Float:R, /*edit,*/ vehid;
 		GetPlayerPos(playerid, X, Y, Z);
 		GetPlayerFacingAngle(playerid, R);
-		car = CreateVehicle(411, X, Y, Z, R, 0x000000ff, 0x000000ff, -1);
+		car = CreateVehicle(411, X, Y, Z, R, 252, 252, -1);
 		// edit = CreateDynamicObject(19620,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
     	// AttachDynamicObjectToVehicle(edit, car, 0.000, 0.000, 0.879, 0.000, 0.000, 0.000);
 		PutPlayerInVehicle(playerid, car, 0);
@@ -3197,7 +3173,7 @@ CMD:f_gklasa(playerid, params[]) {
 		new car, Float:X, Float:Y, Float:Z, Float:R, /*edit,*/ vehid;
 		GetPlayerPos(playerid, X, Y, Z);
 		GetPlayerFacingAngle(playerid, R);
-		car = CreateVehicle(505, X, Y, Z, R, 0x000000ff, 0x000000ff, -1);
+		car = CreateVehicle(505, X, Y, Z, R, 252, 252, -1);
 		// edit = CreateDynamicObject(19620,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
     	// AttachDynamicObjectToVehicle(edit, car, 0.000, 0.000, 0.879, 0.000, 0.000, 0.000);
 		PutPlayerInVehicle(playerid, car, 0);
@@ -3242,7 +3218,7 @@ CMD:f_urus(playerid, params[]) {
 		new car, Float:X, Float:Y, Float:Z, Float:R, /*edit,*/ vehid;
 		GetPlayerPos(playerid, X, Y, Z);
 		GetPlayerFacingAngle(playerid, R);
-		car = CreateVehicle(500, X, Y, Z, R, 0x000000ff, 0x000000ff, -1);
+		car = CreateVehicle(500, X, Y, Z, R, 252, 252, -1);
 		// edit = CreateDynamicObject(19620,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
     	// AttachDynamicObjectToVehicle(edit, car, 0.000, 0.000, 0.879, 0.000, 0.000, 0.000);
 		PutPlayerInVehicle(playerid, car, 0);
@@ -4914,6 +4890,11 @@ CMD:makeadmin(playerid, params[]) {
 }
 
 public OnPlayerText(playerid, text[]) {
+	if(gettime() < antiSpam[playerid]) {
+		SCM(playerid, CRVENA, "[ ANTI-SPAM ]: {ffffff}Morate sacekati 5 sekundi posle kucanja u chatu!");
+		return 0;
+	}
+	else antiSpam[playerid] = gettime() + 5;
 	new str[1024];
 	format(str, sizeof(str), "{696969}[%d] {03adfc}%s {ffffff}kaze: %s", playerid, GetName(playerid), text);
 	IC(20, playerid, -1, str);
@@ -4925,11 +4906,16 @@ public OnPlayerCommandReceived(playerid, cmdtext[]) {
 		SCM(playerid, SIVA, "Morate biti ulogovani!");
 		return 0;
 	}
+	if(gettime() < antiSpam[playerid]) {
+		SCM(playerid, CRVENA, "[ ANTI-SPAM ]: {ffffff}Morate sacekati 5 sekundi posle kucanja komandi!");
+		return 0;
+	}
+	else antiSpam[playerid] = gettime() + 5;
 	return 1;
 }
 
 public OnPlayerDeath(playerid, killerid, reason) {
-	for(new i = 0; i < 2; i++) PlayerTextDrawHide(playerid, Fuel_t[playerid][i]); 
+	// for(new i = 0; i < 2; i++) PlayerTextDrawHide(playerid, Fuel_t[playerid][i]); 
 	if(editaorg[playerid] != -1) {
 		SCM(playerid, SIVA, "Vise ne editujete organizaciju zato sto ste umrli!");
 		editaorg[playerid] = -1;
@@ -5437,8 +5423,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					return 0;
 				}
 				foreach(new i : Admins) {
-					
+					if(pADuty[i]) {
+						va_SCM(i, -1, "Igrac %s je postavio pitanje: %s", GetName(playerid), inputtext);
+						SCM(i, -1, "Da bi ste odgovorili na pitanje igracu, morate se teleportovati do njega komandom /tp ili mozete teleportovati igraca do Vas komandom /rtp.");
+					}
 				}
+				GivePlayerMoney(playerid, -100);
 			}
 		}
 		// case d_dostupna_vozila: {
@@ -5455,7 +5445,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 
 public OnPlayerStateChange(playerid, newstate, oldstate) {
 	if(oldstate == PLAYER_STATE_ONFOOT && newstate == PLAYER_STATE_DRIVER) {
-		for(new i = 0; i < 2; i++) PlayerTextDrawShow(playerid, Fuel_t[playerid][i]);
+		// for(new i = 0; i < 2; i++) PlayerTextDrawShow(playerid, Fuel_t[playerid][i]);
 		new vehid = GetPlayerVehicleID(playerid);
 		if(!VehInfo[vehid][vEngine]) {
 			if(IsVehicleBicycle(vehid)) return 0;
@@ -5503,7 +5493,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate) {
 			}
 		}
 	}
-	if(oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) for(new i = 0; i < 2; i++) PlayerTextDrawHide(playerid, Fuel_t[playerid][i]);
+	// if(oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) for(new i = 0; i < 2; i++) PlayerTextDrawHide(playerid, Fuel_t[playerid][i]);
     return 1;
 }
 
@@ -6107,7 +6097,7 @@ function CarUpdate() {
 		if(IsPlayerInAnyVehicle(playerid)) {
 			new vehid = GetPlayerVehicleID(playerid), fuel[128];
 			format(fuel, sizeof(fuel), "%dL", VehInfo[vehid][vFuel]);
-			PlayerTextDrawSetString(playerid, Fuel_t[playerid][1], fuel);
+			// PlayerTextDrawSetString(playerid, Fuel_t[playerid][1], fuel);
 		}
 	}
 	return 1;

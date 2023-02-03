@@ -598,7 +598,7 @@
 			<member name="C:promNeaktivnost" value="129">
 			</member>
 		</member>
-		<member name="T:vInfo" value="137">
+		<member name="T:vInfo" value="143">
 			<tagname value="vInfo"/>
 			<member name="C:vEngine" value="0">
 			</member>
@@ -621,6 +621,24 @@
 			<member name="C:vOwner" value="9">
 				<size value="128"/>
 			</member>
+			<member name="C:vX" value="137">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:vY" value="138">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:vZ" value="139">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:vRX" value="140">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:vRY" value="141">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:vRZ" value="142">
+				<tagname value="Float"/>
+			</member>
 		</member>
 
 		<!-- constants -->
@@ -629,7 +647,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6222">
+		<member name="C:__line" value="6218">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -1037,12 +1055,6 @@
 			<tagname value="_Y_ITER_C3"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
-		</member>
-		<member name="F:Fuel_t">
-			<tagname value="PlayerText"/>
-			<referrer name="S@@_OnPlayerDeath"/>
-			<referrer name="S@@_OnPlayerStateChange"/>
-			<referrer name="CarUpdate"/>
 		</member>
 		<member name="F:HouseInfo">
 			<referrer name="SaveHouse"/>
@@ -1794,6 +1806,8 @@
 		<member name="F:__file">
 		</member>
 		<member name="F:__file">
+		</member>
+		<member name="F:__file">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -1835,6 +1849,10 @@
 		<member name="F:adminveh">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_v"/>
+		</member>
+		<member name="F:antiSpam">
+			<referrer name="S@@_OnPlayerText"/>
+			<referrer name="OnPlayerCommandReceived"/>
 		</member>
 		<member name="F:editaorg">
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -1878,10 +1896,6 @@
 			<referrer name="BusTimer"/>
 			<referrer name="BankTimer"/>
 		</member>
-		<member name="F:lrtd">
-			<tagname value="Text"/>
-			<referrer name="zcmd_OnGameModeInit"/>
-		</member>
 		<member name="F:m_temp">
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
 		</member>
@@ -1912,6 +1926,7 @@
 			<referrer name="cmd_ban"/>
 			<referrer name="cmd_aduty"/>
 			<referrer name="S@@_OnPlayerDeath"/>
+			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="Fuel"/>
 		</member>
 		<member name="F:pI">
@@ -1971,7 +1986,7 @@
 		</member>
 		<member name="F:sdtd">
 			<tagname value="Text"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
 			<referrer name="TDUpdate"/>
 		</member>
@@ -3086,6 +3101,20 @@
 				<paraminfo> {Float,_} </paraminfo>
 			</param>
 		</member>
+		<member name="M:CallSDTD" syntax="CallSDTD()">
+			<stacksize value="5"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="TextDrawAlignment"/>
+			<dependency name="TextDrawBackgroundColor"/>
+			<dependency name="TextDrawColor"/>
+			<dependency name="TextDrawCreate"/>
+			<dependency name="TextDrawFont"/>
+			<dependency name="TextDrawLetterSize"/>
+			<dependency name="TextDrawSetOutline"/>
+			<dependency name="TextDrawSetProportional"/>
+			<dependency name="TextDrawSetShadow"/>
+			<dependency name="sdtd"/>
+		</member>
 		<member name="M:Callback_Array" syntax="Callback_Array(result[], params[])">
 			<stacksize value="7"/>
 			<dependency name="E_CALLBACK_DATA_ALLOC"/>
@@ -3181,15 +3210,12 @@
 		<member name="M:CarUpdate" syntax="CarUpdate()">
 			<attribute name="public"/>
 			<stacksize value="136"/>
-			<dependency name="Fuel_t"/>
-			<dependency name="Fuel_t"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="GetPlayerWeapon"/>
 			<dependency name="IsPlayerInAnyVehicle"/>
 			<dependency name="Player@YSII_Ag"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerTextDrawSetString"/>
 			<dependency name="SetPlayerAmmo"/>
 			<dependency name="VehInfo"/>
 			<dependency name="VehInfo"/>
@@ -3800,6 +3826,7 @@
 			<referrer name="cmd_afv"/>
 			<referrer name="cmd_makeadmin"/>
 			<referrer name="S@@_OnPlayerText"/>
+			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 			<referrer name="StartEngine"/>
 			<dependency name="GetName"/>
@@ -4563,6 +4590,7 @@
 		</member>
 		<member name="M:INI_WriteFloat" syntax="INI_WriteFloat(file, name[], data, accuracy)">
 			<stacksize value="39"/>
+			<referrer name="SaveVehicles"/>
 			<referrer name="SaveHouse"/>
 			<referrer name="SaveOrg"/>
 			<referrer name="Sacuvaj"/>
@@ -5249,6 +5277,7 @@
 			<stacksize value="6"/>
 			<dependency name="VehInfo"/>
 			<dependency name="VehInfo"/>
+			<dependency name="floatstr"/>
 			<dependency name="strcat"/>
 			<dependency name="strcmp"/>
 			<dependency name="strval"/>
@@ -5263,6 +5292,12 @@
 			<dependency name="vLock"/>
 			<dependency name="vObj"/>
 			<dependency name="vOwner"/>
+			<dependency name="vRX"/>
+			<dependency name="vRY"/>
+			<dependency name="vRZ"/>
+			<dependency name="vX"/>
+			<dependency name="vY"/>
+			<dependency name="vZ"/>
 			<param name="id">
 			</param>
 			<param name="name">
@@ -5653,9 +5688,11 @@
 		</member>
 		<member name="M:OnPlayerCommandReceived" syntax="OnPlayerCommandReceived(playerid, cmdtext[])">
 			<attribute name="public"/>
-			<stacksize value="5"/>
+			<stacksize value="8"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="UlogovanProvera"/>
+			<dependency name="antiSpam"/>
+			<dependency name="gettime"/>
 			<param name="playerid">
 			</param>
 			<param name="cmdtext">
@@ -6557,37 +6594,6 @@
 			<param name="mode">
 			</param>
 		</member>
-		<member name="M:PlayerTextDrawHide" syntax="PlayerTextDrawHide(playerid, text)">
-			<attribute name="native"/>
-			<referrer name="S@@_OnPlayerDeath"/>
-			<referrer name="S@@_OnPlayerStateChange"/>
-			<param name="playerid">
-			</param>
-			<param name="text">
-				<paraminfo>PlayerText </paraminfo>
-			</param>
-		</member>
-		<member name="M:PlayerTextDrawSetString" syntax="PlayerTextDrawSetString(playerid, text, string[])">
-			<attribute name="native"/>
-			<referrer name="CarUpdate"/>
-			<param name="playerid">
-			</param>
-			<param name="text">
-				<paraminfo>PlayerText </paraminfo>
-			</param>
-			<param name="string">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:PlayerTextDrawShow" syntax="PlayerTextDrawShow(playerid, text)">
-			<attribute name="native"/>
-			<referrer name="S@@_OnPlayerStateChange"/>
-			<param name="playerid">
-			</param>
-			<param name="text">
-				<paraminfo>PlayerText </paraminfo>
-			</param>
-		</member>
 		<member name="M:ProveraRPImena" syntax="ProveraRPImena(playerid)">
 			<stacksize value="31"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -6791,6 +6797,8 @@
 			<dependency name="GETIP"/>
 			<dependency name="GETIP"/>
 			<dependency name="GameTextForPlayer"/>
+			<dependency name="GetName"/>
+			<dependency name="GetName"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerHealth"/>
 			<dependency name="GetPlayerMoney"/>
@@ -6877,6 +6885,7 @@
 			<dependency name="orgX"/>
 			<dependency name="orgY"/>
 			<dependency name="orgZ"/>
+			<dependency name="pADuty"/>
 			<dependency name="pAK_47"/>
 			<dependency name="pAK_47Municija"/>
 			<dependency name="pGlock19"/>
@@ -7044,9 +7053,6 @@
 			<attribute name="public"/>
 			<stacksize value="6"/>
 			<dependency name="DestroyVehicle"/>
-			<dependency name="Fuel_t"/>
-			<dependency name="Fuel_t"/>
-			<dependency name="PlayerTextDrawHide"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="editaorg"/>
 			<dependency name="false"/>
@@ -7388,15 +7394,11 @@
 			<attribute name="public"/>
 			<stacksize value="8"/>
 			<dependency name="ClearAnimations"/>
-			<dependency name="Fuel_t"/>
-			<dependency name="Fuel_t"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="IsPlayerWorking"/>
 			<dependency name="IsVehicleBicycle"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerTextDrawHide"/>
-			<dependency name="PlayerTextDrawShow"/>
 			<dependency name="RemovePlayerFromVehicle"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="TogglePlayerControllable"/>
@@ -7450,7 +7452,10 @@
 			<dependency name="GetName"/>
 			<dependency name="GetName"/>
 			<dependency name="IC"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="antiSpam"/>
 			<dependency name="format"/>
+			<dependency name="gettime"/>
 			<param name="playerid">
 			</param>
 			<param name="text">
@@ -8306,9 +8311,10 @@
 			</param>
 		</member>
 		<member name="M:SaveVehicles" syntax="SaveVehicles(id)">
-			<stacksize value="71"/>
+			<stacksize value="72"/>
 			<dependency name="INI_Close"/>
 			<dependency name="INI_Open"/>
+			<dependency name="INI_WriteFloat"/>
 			<dependency name="INI_WriteInt"/>
 			<dependency name="INI_WriteString"/>
 			<dependency name="VehInfo"/>
@@ -8324,6 +8330,12 @@
 			<dependency name="vLock"/>
 			<dependency name="vObj"/>
 			<dependency name="vOwner"/>
+			<dependency name="vRX"/>
+			<dependency name="vRY"/>
+			<dependency name="vRZ"/>
+			<dependency name="vX"/>
+			<dependency name="vY"/>
+			<dependency name="vZ"/>
 			<param name="id">
 			</param>
 		</member>
@@ -8469,6 +8481,7 @@
 			<referrer name="cmd_v"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="cmd_makeadmin"/>
+			<referrer name="S@@_OnPlayerText"/>
 			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="S@@_OnPlayerDeath"/>
 			<referrer name="S@@_OnVehicleDeath"/>
@@ -9165,7 +9178,7 @@
 		</member>
 		<member name="M:TextDrawAlignment" syntax="TextDrawAlignment(text, alignment)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9174,16 +9187,7 @@
 		</member>
 		<member name="M:TextDrawBackgroundColor" syntax="TextDrawBackgroundColor(text, color)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
-			<param name="text">
-				<paraminfo>Text </paraminfo>
-			</param>
-			<param name="color">
-			</param>
-		</member>
-		<member name="M:TextDrawBoxColor" syntax="TextDrawBoxColor(text, color)">
-			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9192,7 +9196,7 @@
 		</member>
 		<member name="M:TextDrawColor" syntax="TextDrawColor(text, color)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9203,7 +9207,7 @@
 			<tagname value="Text"/>
 			<attribute name="native"/>
 			<referrer name="va_TextDrawCreate"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="x">
 				<paraminfo>Float </paraminfo>
 			</param>
@@ -9216,7 +9220,7 @@
 		</member>
 		<member name="M:TextDrawFont" syntax="TextDrawFont(text, font)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9225,7 +9229,7 @@
 		</member>
 		<member name="M:TextDrawLetterSize" syntax="TextDrawLetterSize(text, x, y)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9238,7 +9242,7 @@
 		</member>
 		<member name="M:TextDrawSetOutline" syntax="TextDrawSetOutline(text, size)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9247,7 +9251,7 @@
 		</member>
 		<member name="M:TextDrawSetProportional" syntax="TextDrawSetProportional(text, set)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9256,7 +9260,7 @@
 		</member>
 		<member name="M:TextDrawSetShadow" syntax="TextDrawSetShadow(text, size)">
 			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="CallSDTD"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9280,28 +9284,6 @@
 			</param>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
-			</param>
-		</member>
-		<member name="M:TextDrawTextSize" syntax="TextDrawTextSize(text, x, y)">
-			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
-			<param name="text">
-				<paraminfo>Text </paraminfo>
-			</param>
-			<param name="x">
-				<paraminfo>Float </paraminfo>
-			</param>
-			<param name="y">
-				<paraminfo>Float </paraminfo>
-			</param>
-		</member>
-		<member name="M:TextDrawUseBox" syntax="TextDrawUseBox(text, use)">
-			<attribute name="native"/>
-			<referrer name="zcmd_OnGameModeInit"/>
-			<param name="text">
-				<paraminfo>Text </paraminfo>
-			</param>
-			<param name="use">
 			</param>
 		</member>
 		<member name="M:Time" syntax="Time()">
@@ -11917,6 +11899,7 @@
 			<referrer name="LoadUser_data"/>
 			<referrer name="LoadHouses"/>
 			<referrer name="LoadOrgs"/>
+			<referrer name="LoadVehs"/>
 			<param name="string">
 				<paraminfo> [] </paraminfo>
 			</param>
@@ -12138,6 +12121,8 @@
 		</member>
 		<member name="M:gettime" syntax="gettime(&amp;hour, &amp;minute, &amp;second)">
 			<attribute name="native"/>
+			<referrer name="S@@_OnPlayerText"/>
+			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="TDUpdate"/>
 			<referrer name="Time"/>
 			<referrer name="PayDay"/>
@@ -12888,6 +12873,7 @@
 			<dependency name="AdminInfo"/>
 			<dependency name="BannedInfo"/>
 			<dependency name="BannedInfo"/>
+			<dependency name="CallSDTD"/>
 			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateActor"/>
 			<dependency name="CreateDynamicObject"/>
@@ -12917,18 +12903,6 @@
 			<dependency name="SetGameModeText"/>
 			<dependency name="SetTimer"/>
 			<dependency name="SetVehicleParamsEx"/>
-			<dependency name="TextDrawAlignment"/>
-			<dependency name="TextDrawBackgroundColor"/>
-			<dependency name="TextDrawBoxColor"/>
-			<dependency name="TextDrawColor"/>
-			<dependency name="TextDrawCreate"/>
-			<dependency name="TextDrawFont"/>
-			<dependency name="TextDrawLetterSize"/>
-			<dependency name="TextDrawSetOutline"/>
-			<dependency name="TextDrawSetProportional"/>
-			<dependency name="TextDrawSetShadow"/>
-			<dependency name="TextDrawTextSize"/>
-			<dependency name="TextDrawUseBox"/>
 			<dependency name="VehInfo"/>
 			<dependency name="VehInfo"/>
 			<dependency name="ZakljucanaVrata"/>
@@ -12954,7 +12928,6 @@
 			<dependency name="hZ"/>
 			<dependency name="j_bus"/>
 			<dependency name="j_kombi"/>
-			<dependency name="lrtd"/>
 			<dependency name="orgIme"/>
 			<dependency name="orgLabel"/>
 			<dependency name="orgLeader"/>
@@ -12965,7 +12938,6 @@
 			<dependency name="promDuty"/>
 			<dependency name="promName"/>
 			<dependency name="promNeaktivnost"/>
-			<dependency name="sdtd"/>
 			<dependency name="strcmp"/>
 			<dependency name="true"/>
 			<dependency name="vAlarm"/>
