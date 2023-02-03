@@ -75,6 +75,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	if(!strcmp(cmdtext, "/flymode", true))
 	{
 	    // Place the player in and out of edit mode
+		if(!IsPlayerAdmin(playerid)) return 0;
 		if(GetPVarType(playerid, "FlyMode")) CancelFlyMode(playerid);
 		else FlyMode(playerid);
 		return 1;

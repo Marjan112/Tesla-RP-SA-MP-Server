@@ -2864,6 +2864,7 @@ public OnPlayerConnect(playerid) {
 	SetPlayerMapIcon(playerid, AMMUNATION, 1368.9985,-1279.7140,13.546, AMMUNATION, -1, MAPICON_GLOBAL);
 	SetPlayerMapIcon(playerid, ZEMUNCI, 1244.688964, -738.394348, 95.340431, ZEMUNCI, -1, MAPICON_GLOBAL);
 	SetPlayerMapIcon(playerid, FIBOVCI, 1286.794921, -1327.190795, 13.654617, FIBOVCI, -1, MAPICON_GLOBAL);
+	SetPlayerMapIcon(playerid, AUTO_SALON, 553.4430,-1293.9133,17.2483, AUTO_SALON, -1, MAPICON_GLOBAL);
 
 	RemoveBuildingForPlayer(playerid, 13759, 1413.4141, -804.7422, 83.4375, 0.25);
 	RemoveBuildingForPlayer(playerid, 13722, 1413.4141, -804.7422, 83.4375, 0.25);
@@ -2972,6 +2973,12 @@ public OnPlayerSpawn(playerid) {
 		return 1;
 	}
 	SetPlayerPos(playerid, 1682.222045, -2246.613281, 13.550828);
+	return 1;
+}
+
+CMD:kara(playerid, params[]) {
+	#pragma unused params
+	SetPlayerPos(playerid, 553.4430,-1293.9133,17.2483);
 	return 1;
 }
 
@@ -5447,9 +5454,10 @@ public OnPlayerStateChange(playerid, newstate, oldstate) {
 	if(oldstate == PLAYER_STATE_ONFOOT && newstate == PLAYER_STATE_DRIVER) {
 		// for(new i = 0; i < 2; i++) PlayerTextDrawShow(playerid, Fuel_t[playerid][i]);
 		new vehid = GetPlayerVehicleID(playerid);
-		if(!VehInfo[vehid][vEngine]) {
-			if(IsVehicleBicycle(vehid)) return 0;
-			SCM(playerid, PLAVA_NEBO, "Da bi ste upalili motor pretisnite 2 ili ukucajte /engine");
+		if(!IsVehicleBicycle(vehid)) {
+			if(!VehInfo[vehid][vEngine]) {
+				SCM(playerid, PLAVA_NEBO, "Da bi ste upalili motor pretisnite 2 ili ukucajte /engine");
+			}
 		}
 		if(renta[playerid] != -1) {
 			if(vehid != renta[playerid]) {

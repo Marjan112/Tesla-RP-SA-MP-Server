@@ -647,7 +647,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6218">
+		<member name="C:__line" value="6226">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -8820,6 +8820,7 @@
 			<attribute name="native"/>
 			<referrer name="S@@_OnPlayerRequestClass"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
+			<referrer name="cmd_kara"/>
 			<referrer name="cmd_stuck"/>
 			<referrer name="cmd_exithouse"/>
 			<referrer name="cmd_enterhouse"/>
@@ -10114,6 +10115,16 @@
 			<dependency name="SetPlayerPos"/>
 			<dependency name="SetPlayerSpecialAction"/>
 			<dependency name="pAdmin"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_kara" syntax="cmd_kara(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="SetPlayerPos"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
