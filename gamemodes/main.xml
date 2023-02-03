@@ -647,7 +647,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6226">
+		<member name="C:__line" value="6684">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -1710,6 +1710,8 @@
 			<referrer name="Y@"/>
 		</member>
 		<member name="F:__date">
+		</member>
+		<member name="F:__file">
 		</member>
 		<member name="F:__file">
 		</member>
@@ -3084,6 +3086,13 @@
 			</param>
 			<param name="...">
 				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:CallMapIcons" syntax="CallMapIcons(playerid)">
+			<stacksize value="10"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
+			<dependency name="SetPlayerMapIcon"/>
+			<param name="playerid">
 			</param>
 		</member>
 		<member name="M:CallRemoteFunction" syntax="CallRemoteFunction(function[], format[], ...)">
@@ -7786,6 +7795,7 @@
 			<dependency name="AdminInfo"/>
 			<dependency name="Admins@YSII_Ag"/>
 			<dependency name="Admins@YSII_Cg"/>
+			<dependency name="CallMapIcons"/>
 			<dependency name="Cops@YSII_Ag"/>
 			<dependency name="Cops@YSII_Cg"/>
 			<dependency name="Crveni@YSII_Ag"/>
@@ -7808,7 +7818,6 @@
 			<dependency name="RemoveBuildingForPlayer"/>
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveProm"/>
-			<dependency name="SetPlayerMapIcon"/>
 			<dependency name="SetPlayerScore"/>
 			<dependency name="SetTimer"/>
 			<dependency name="SetTimerEx"/>
@@ -8795,7 +8804,7 @@
 		</member>
 		<member name="M:SetPlayerMapIcon" syntax="SetPlayerMapIcon(playerid, iconid, x, y, z, markertype, color, style)">
 			<attribute name="native"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="CallMapIcons"/>
 			<param name="playerid">
 			</param>
 			<param name="iconid">
@@ -8820,7 +8829,6 @@
 			<attribute name="native"/>
 			<referrer name="S@@_OnPlayerRequestClass"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
-			<referrer name="cmd_kara"/>
 			<referrer name="cmd_stuck"/>
 			<referrer name="cmd_exithouse"/>
 			<referrer name="cmd_enterhouse"/>
@@ -10115,16 +10123,6 @@
 			<dependency name="SetPlayerPos"/>
 			<dependency name="SetPlayerSpecialAction"/>
 			<dependency name="pAdmin"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:cmd_kara" syntax="cmd_kara(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="6"/>
-			<dependency name="SetPlayerPos"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
@@ -12875,7 +12873,7 @@
 		</member>
 		<member name="M:zcmd_OnGameModeInit" syntax="zcmd_OnGameModeInit()">
 			<attribute name="public"/>
-			<stacksize value="592"/>
+			<stacksize value="593"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ACTOR"/>
 			<dependency name="AddPlayerClass"/>
