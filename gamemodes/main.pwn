@@ -3678,12 +3678,6 @@ CMD:f_urus(playerid, params[]) {
 	return 1;
 }
 
-CMD:dostupnavozila(playerid, params[]) {
-	#pragma unused params
-	SPD(playerid, d_dostupna_vozila, DIALOG_STYLE_LIST, "{03adfc}Dostupna Vozila", "Jeftina Vozila\nSkupa Vozila", "{03adfc}Izaberi", "{03adfc}Odustani");
-	return 1;
-}
-
 CMD:leaveorg(playerid, params[]) {
 	#pragma unused params
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Nema")) return SCM(playerid, SIVA, "Vi niste ni u jednoj organizaciji!");
@@ -5853,7 +5847,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						strcat(string, str);
 						format(str, sizeof(str), "6. Range Rover Sport - $400000");
 						strcat(string, str);
-						SPD(playerid, d_dostupna_skupa_vozila, DIALOG_STLYE_LIST, "Dostupna Skupa Vozila", string, "Kupi", "Odustani");
+						SPD(playerid, d_dostupna_skupa_vozila, DIALOG_STYLE_LIST, "Dostupna Skupa Vozila", string, "Kupi", "Odustani");
 					}
 				}
 			}

@@ -647,7 +647,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6592">
+		<member name="C:__line" value="6639">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -721,8 +721,15 @@
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 		</member>
+		<member name="C:d_dostupna_jeftina_vozila" value="30">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_dostupna_skupa_vozila" value="31">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
 		<member name="C:d_dostupna_vozila" value="29">
 			<referrer name="cmd_dostupnavozila"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_gps" value="24">
 			<referrer name="cmd_gps"/>
@@ -2203,6 +2210,7 @@
 			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="UpdateBubble"/>
 			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -4801,6 +4809,7 @@
 		<member name="M:IsPlayerInRangeOfPoint" syntax="IsPlayerInRangeOfPoint(playerid, range, x, y, z)">
 			<attribute name="native"/>
 			<referrer name="IC"/>
+			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
@@ -6796,7 +6805,7 @@
 		</member>
 		<member name="M:S@@_OnDialogResponse" syntax="S@@_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])">
 			<attribute name="public"/>
-			<stacksize value="655"/>
+			<stacksize value="777"/>
 			<dependency name="operator+(Float:,Float:)"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="operator&gt;=(Float:,_:)"/>
@@ -6875,6 +6884,9 @@
 			<dependency name="d_askq"/>
 			<dependency name="d_ban"/>
 			<dependency name="d_bolnica"/>
+			<dependency name="d_dostupna_jeftina_vozila"/>
+			<dependency name="d_dostupna_skupa_vozila"/>
+			<dependency name="d_dostupna_vozila"/>
 			<dependency name="d_gps"/>
 			<dependency name="d_gps_poslovi"/>
 			<dependency name="d_hrentcena"/>
@@ -6929,6 +6941,7 @@
 			<dependency name="renta"/>
 			<dependency name="rented"/>
 			<dependency name="rentvreme"/>
+			<dependency name="strcat"/>
 			<dependency name="strcmp"/>
 			<dependency name="strfind"/>
 			<dependency name="strlen"/>
@@ -8417,6 +8430,7 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
+			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -9003,8 +9017,8 @@
 		<member name="M:ShowPlayerDialog" syntax="ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])">
 			<attribute name="native"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
-			<referrer name="cmd_askq"/>
 			<referrer name="cmd_dostupnavozila"/>
+			<referrer name="cmd_askq"/>
 			<referrer name="cmd_akomande"/>
 			<referrer name="cmd_komande"/>
 			<referrer name="cmd_gps"/>
@@ -9807,6 +9821,9 @@
 		<member name="M:cmd_dostupnavozila" syntax="cmd_dostupnavozila(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="9"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
+			<dependency name="SendClientMessage"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="d_dostupna_vozila"/>
 			<param name="playerid">
@@ -12345,6 +12362,7 @@
 			<referrer name="cmd_stats"/>
 			<referrer name="cmd_promoteri"/>
 			<referrer name="cmd_admini"/>
+			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="LoadUser_data"/>
 			<referrer name="LoadAdmins"/>
 			<referrer name="LoadBanned"/>
