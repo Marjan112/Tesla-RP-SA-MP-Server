@@ -3439,7 +3439,7 @@ public OnPlayerSpawn(playerid) {
 CMD:dostupnavozila(playerid, params[]) {
 	#pragma unused params
 	if(!IsPlayerInRangeOfPoint(playerid, 3, 2261.3198,-1920.5042,13.5508)) return SCM(playerid, SIVA, "Niste kod auto salona!");
-	SPD(playerid, d_dostupna_vozila, DIALOG_STYLE_INPUT, "Dostupna Vozila", "Jeftina Vozila\nSkupa Vozila", "Izaberi", "Odustani");
+	SPD(playerid, d_dostupna_vozila, DIALOG_STYLE_LIST, "Dostupna Vozila", "Jeftina Vozila\nSkupa Vozila", "Izaberi", "Odustani");
 	return 1;
 }
 
@@ -5854,6 +5854,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						format(str, sizeof(str), "6. Range Rover Sport - $400000");
 						strcat(string, str);
 						SPD(playerid, d_dostupna_skupa_vozila, DIALOG_STLYE_LIST, "Dostupna Skupa Vozila", string, "Kupi", "Odustani");
+					}
+				}
+			}
+		}
+		case d_dostupna_jeftina_vozila: {
+			if(response) {
+				switch(listitem + 1) {
+					case 1: {
+						
 					}
 				}
 			}
