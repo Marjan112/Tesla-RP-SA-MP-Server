@@ -649,7 +649,7 @@
 		</member>
 		<member name="C:__line" value="6583">
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_orgkick"/>
@@ -1810,7 +1810,7 @@
 		</member>
 		<member name="F:__file">
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_orgkick"/>
@@ -2197,7 +2197,7 @@
 			<referrer name="UpdateBubble"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_pokrenipljacku"/>
@@ -3788,7 +3788,7 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_garaza"/>
@@ -6622,7 +6622,7 @@
 		</member>
 		<member name="M:ProxDetectorf" syntax="ProxDetectorf(_radius_, playerid, msg[], ...)">
 			<stacksize value="1031"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_lisice"/>
@@ -7943,7 +7943,7 @@
 		<member name="M:SSCANF__" syntax="SSCANF__(file[], line, data[], format[], ...)">
 			<attribute name="native"/>
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_orgkick"/>
@@ -8392,7 +8392,7 @@
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_oc"/>
+			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_z_rover"/>
@@ -10507,7 +10507,7 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:cmd_oc" syntax="cmd_oc(playerid, params[])">
+		<member name="M:cmd_ooc" syntax="cmd_ooc(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="264"/>
 			<dependency name="Float:operator=(_:)"/>

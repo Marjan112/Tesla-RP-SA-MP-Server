@@ -3450,9 +3450,9 @@ CMD:kill(playerid, params[]) {
 	return 1;
 }
 
-CMD:oc(playerid, params[]) {
+CMD:ooc(playerid, params[]) {
 	new str[128];
-	if(sscanf(params, "s[128]", str)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/b [tekst]");
+	if(sscanf(params, "s[128]", str)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/ooc [tekst]");
 	ProxDetectorf(20, playerid, "{696969}(( [OCC] {ffffff}%s kaze: %s{696969} ))", GetName(playerid), str);
 	return 1;
 }
