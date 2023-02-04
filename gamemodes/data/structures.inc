@@ -123,7 +123,8 @@ enum vInfo {
 	Float: vZ,
 	Float: vRX,
 	Float: vRY,
-	Float: vRZ
+	Float: vRZ,
+	vID
 };
 new VehInfo[MAX_VEHICLES][vInfo];
 
@@ -180,6 +181,10 @@ enum pInfo {
 	pAuto,
 	pAuto1,
 	pAuto2,
-	pAuto3
+	pAuto3,
+	pAuto4,
+	pAuto5,
+	pAuto6,
+	pAuto7
 };
 new PlayerInfo[MAX_PLAYERS+1][pInfo];

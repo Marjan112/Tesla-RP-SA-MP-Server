@@ -195,6 +195,14 @@ stock Sacuvaj(playerid, ime[128]) {
 	INI_WriteString(File, "Zavezan", PlayerInfo[playerid][pZavezan]);
 	INI_WriteInt(File, "Skin", PlayerInfo[playerid][pSkin]);
 	INI_WriteString(File, "IP", PlayerInfo[playerid][pIP]);
+	INI_WriteInt(File, "Auto", PlayerInfo[playerid][pAuto]);
+	INI_WriteInt(File, "Auto1", PlayerInfo[playerid][pAuto1]);
+	INI_WriteInt(File, "Auto2", PlayerInfo[playerid][pAuto2]);
+	INI_WriteInt(File, "Auto3", PlayerInfo[playerid][pAuto3]);
+	INI_WriteInt(File, "Auto4", PlayerInfo[playerid][pAuto4]);
+	INI_WriteInt(File, "Auto5", PlayerInfo[playerid][pAuto5]);
+	INI_WriteInt(File, "Auto6", PlayerInfo[playerid][pAuto6]);
+	INI_WriteInt(File, "Auto7", PlayerInfo[playerid][pAuto7]);
 	INI_Close(File);
 }
 
@@ -240,6 +248,14 @@ stock SavePlayer(playerid) {
 	INI_WriteString(File, "Zavezan", PlayerInfo[playerid][pZavezan]);
 	INI_WriteInt(File, "Skin", GetPlayerSkin(playerid));
 	INI_WriteString(File, "IP", PlayerInfo[playerid][pIP]);
+	INI_WriteInt(File, "Auto", PlayerInfo[playerid][pAuto]);
+	INI_WriteInt(File, "Auto1", PlayerInfo[playerid][pAuto1]);
+	INI_WriteInt(File, "Auto2", PlayerInfo[playerid][pAuto2]);
+	INI_WriteInt(File, "Auto3", PlayerInfo[playerid][pAuto3]);
+	INI_WriteInt(File, "Auto4", PlayerInfo[playerid][pAuto4]);
+	INI_WriteInt(File, "Auto5", PlayerInfo[playerid][pAuto5]);
+	INI_WriteInt(File, "Auto6", PlayerInfo[playerid][pAuto6]);
+	INI_WriteInt(File, "Auto7", PlayerInfo[playerid][pAuto7]);
 	INI_Close(File);
 }
 

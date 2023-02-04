@@ -463,6 +463,10 @@ public OnGameModeInit() {
 
 	CreatePickup(1239, 1, 1248.8230,-800.9311,84.1406);
 	Create3DTextLabel("Da bi ste usli u garazu pretisnite H ili C", -1, 1248.8230,-800.9311,84.1406, 10, 0);
+
+	//Za auto salon
+	CreatePickup(1239, 1, 2261.4954,-1919.0536,13.5508);
+	Create3DTextLabel("Da bi ste videli listu dostupnih voizla\nukucajte /dostupnavozila", -1, 2261.4954,-1919.0536,13.5508, 5, 0, 1);
 //----------------------- Mape ----------------------------
 	ZemunciGate = CreateDynamicObject(975, 1245.65881, -766.94067, 92.77000,   0.00000, 0.00000, 0.00000);
 	//Za Zemunci
@@ -3367,7 +3371,7 @@ public OnPlayerConnect(playerid) {
 		}
 		SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
 		ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
-		PlayerInfo[playerid][pNeededRep] = PlayerInfo[playerid][pGodine] * 2 + 4;
+		PlayerInfo[playerid][pNeededRep] = 12;
 	}
 	else ShowPlayerDialog(playerid, d_reg, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Registracija na server", "{ffffff}Da bi ste se registrovali ukucajte\nvasu zelejenu sifru za vas {03adfc}nalog{ffffff}.\nSifra mora imati minimum 6 karaktera, maximum 26 karaktera.\nLozinka mora sadrzati brojeve i karaktere poput: \"@_-#\"", "{03adfc}Registruj se", "{03adfc}Odustani");
 	SetTimer("TDUpdate", 1000, true);
@@ -3433,6 +3437,28 @@ public OnPlayerSpawn(playerid) {
 		return 1;
 	}
 	SetPlayerPos(playerid, 1682.222045, -2246.613281, 13.550828);
+	return 1;
+}
+
+CMD:mojavozila(playerid, params[]) {
+	if(!IsPlayerInRangeOfPoint(playerid, 100, 2261.4954,-1919.0536,13.5508)) return SCM(playerid, SIVA, "Niste kod parkinga.");
+	new string[512], str[256];
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto1] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto2] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto3] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto4] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto5] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto6] - 400]);
+	strcat(string, str);
+	format(str, sizeof(str), "%s", ImenaVozila[PlayerInfo[playerid][pAuto7] - 400]);
+	strcat(string, str);
 	return 1;
 }
 
@@ -5396,6 +5422,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					INI_WriteString(File, "Zatvoren", fmat);
 					INI_WriteInt(File, "Skin", 6);
 					INI_WriteString(File, "IP", GETIP(playerid));
+					INI_WriteInt(File, "Auto", -1);
+					INI_WriteInt(File, "Auto1", -1);
+					INI_WriteInt(File, "Auto2", -1);
+					INI_WriteInt(File, "Auto3", -1);
+					INI_WriteInt(File, "Auto4", -1);
+					INI_WriteInt(File, "Auto5", -1);
+					INI_WriteInt(File, "Auto6", -1);
+					INI_WriteInt(File, "Auto7", -1);
 					INI_Close(File);
 					INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra = true, .extra = playerid);
 					GivePlayerMoney(playerid, 25000);
@@ -6133,6 +6167,14 @@ function LoadUser_data(playerid,name[],value[]) {
 	INI_String("Zavezan", PlayerInfo[playerid][pZavezan], 128);
 	INI_Int("Skin", PlayerInfo[playerid][pSkin]);
 	INI_String("IP", PlayerInfo[playerid][pIP], 32);
+	INI_Int("Auto", PlayerInfo[playerid][pAuto]);
+	INI_Int("Auto1", PlayerInfo[playerid][pAuto1]);
+	INI_Int("Auto2", PlayerInfo[playerid][pAuto2]);
+	INI_Int("Auto3", PlayerInfo[playerid][pAuto3]);
+	INI_Int("Auto4", PlayerInfo[playerid][pAuto4]);
+	INI_Int("Auto5", PlayerInfo[playerid][pAuto5]);
+	INI_Int("Auto6", PlayerInfo[playerid][pAuto6]);
+	INI_Int("Auto7", PlayerInfo[playerid][pAuto7]);
 	return 1;
 }
 
@@ -6499,7 +6541,7 @@ function PayDay() {
 		if(PlayerInfo[playerid][pRespekti] >= PlayerInfo[playerid][pNeededRep]) {
 			PlayerInfo[playerid][pRespekti] = 0;
 			PlayerInfo[playerid][pGodine]++;
-			PlayerInfo[playerid][pNeededRep] = PlayerInfo[playerid][pGodine] * 2 + 4;
+			PlayerInfo[playerid][pNeededRep] = 12;
 			va_SCM(playerid, PLAVA_NEBO, "Cestitamo, napunili ste %d godina!", PlayerInfo[playerid][pGodine]);
 			SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
 		}

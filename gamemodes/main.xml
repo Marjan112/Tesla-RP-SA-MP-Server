@@ -482,7 +482,7 @@
 				<tagname value="Float"/>
 			</member>
 		</member>
-		<member name="T:pInfo" value="842">
+		<member name="T:pInfo" value="846">
 			<tagname value="pInfo"/>
 			<member name="C:pLozinka" value="0">
 			</member>
@@ -587,6 +587,14 @@
 			</member>
 			<member name="C:pAuto3" value="841">
 			</member>
+			<member name="C:pAuto4" value="842">
+			</member>
+			<member name="C:pAuto5" value="843">
+			</member>
+			<member name="C:pAuto6" value="844">
+			</member>
+			<member name="C:pAuto7" value="845">
+			</member>
 		</member>
 		<member name="T:promInfo" value="130">
 			<tagname value="promInfo"/>
@@ -647,7 +655,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6639">
+		<member name="C:__line" value="6681">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -1091,6 +1099,9 @@
 		</member>
 		<member name="F:I@">
 		</member>
+		<member name="F:ImenaVozila">
+			<referrer name="cmd_mojavozila"/>
+		</member>
 		<member name="F:IsPlayerSpec">
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_napravikucu"/>
@@ -1195,6 +1206,7 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
@@ -2210,6 +2222,7 @@
 			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="UpdateBubble"/>
 			<referrer name="zcmd_OnGameModeInit"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
@@ -4809,6 +4822,7 @@
 		<member name="M:IsPlayerInRangeOfPoint" syntax="IsPlayerInRangeOfPoint(playerid, range, x, y, z)">
 			<attribute name="native"/>
 			<referrer name="IC"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
@@ -5247,6 +5261,14 @@
 			<dependency name="pAK_47"/>
 			<dependency name="pAK_47Municija"/>
 			<dependency name="pAdmin"/>
+			<dependency name="pAuto"/>
+			<dependency name="pAuto1"/>
+			<dependency name="pAuto2"/>
+			<dependency name="pAuto3"/>
+			<dependency name="pAuto4"/>
+			<dependency name="pAuto5"/>
+			<dependency name="pAuto6"/>
+			<dependency name="pAuto7"/>
 			<dependency name="pBan"/>
 			<dependency name="pBanRazlog"/>
 			<dependency name="pBanka"/>
@@ -8050,6 +8072,14 @@
 			<dependency name="format"/>
 			<dependency name="pAK_47Municija"/>
 			<dependency name="pAdmin"/>
+			<dependency name="pAuto"/>
+			<dependency name="pAuto1"/>
+			<dependency name="pAuto2"/>
+			<dependency name="pAuto3"/>
+			<dependency name="pAuto4"/>
+			<dependency name="pAuto5"/>
+			<dependency name="pAuto6"/>
+			<dependency name="pAuto7"/>
 			<dependency name="pBan"/>
 			<dependency name="pBanRazlog"/>
 			<dependency name="pBanka"/>
@@ -8280,6 +8310,14 @@
 			<dependency name="pAK_47"/>
 			<dependency name="pAK_47Municija"/>
 			<dependency name="pAdmin"/>
+			<dependency name="pAuto"/>
+			<dependency name="pAuto1"/>
+			<dependency name="pAuto2"/>
+			<dependency name="pAuto3"/>
+			<dependency name="pAuto4"/>
+			<dependency name="pAuto5"/>
+			<dependency name="pAuto6"/>
+			<dependency name="pAuto7"/>
 			<dependency name="pBan"/>
 			<dependency name="pBanRazlog"/>
 			<dependency name="pBanka"/>
@@ -8430,6 +8468,7 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
@@ -10474,6 +10513,31 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
+		<member name="M:cmd_mojavozila" syntax="cmd_mojavozila(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="774"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="ImenaVozila"/>
+			<dependency name="ImenaVozila"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="format"/>
+			<dependency name="pAuto"/>
+			<dependency name="pAuto1"/>
+			<dependency name="pAuto2"/>
+			<dependency name="pAuto3"/>
+			<dependency name="pAuto4"/>
+			<dependency name="pAuto5"/>
+			<dependency name="pAuto6"/>
+			<dependency name="pAuto7"/>
+			<dependency name="strcat"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
 		<member name="M:cmd_napravikucu" syntax="cmd_napravikucu(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="656"/>
@@ -12010,6 +12074,7 @@
 			<referrer name="UserPath"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_lisice"/>
@@ -12359,6 +12424,7 @@
 			<referrer name="INI_ParseFile"/>
 			<referrer name="INI_Open"/>
 			<referrer name="INI_AddToBuffer"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_stats"/>
 			<referrer name="cmd_promoteri"/>
 			<referrer name="cmd_admini"/>
