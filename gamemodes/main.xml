@@ -647,7 +647,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6583">
+		<member name="C:__line" value="6592">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -848,6 +848,7 @@
 			<referrer name="INI_AddToBuffer"/>
 			<referrer name="INI_WriteBuffer"/>
 			<referrer name="IsVehicleBicycle"/>
+			<referrer name="CallOnoGore"/>
 			<referrer name="UzetPromSlot"/>
 			<referrer name="ProveraRPImena"/>
 			<referrer name="UzetBanSlot"/>
@@ -974,7 +975,6 @@
 			<referrer name="Fuel"/>
 		</member>
 		<member name="F:Admins@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="cmd_makeadmin"/>
@@ -982,10 +982,10 @@
 		</member>
 		<member name="F:Admins@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="cmd_makeadmin"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:BannedInfo">
 			<referrer name="SaveBanned"/>
@@ -1025,35 +1025,35 @@
 			<referrer name="Itter_OPDCInternal"/>
 		</member>
 		<member name="F:Cops@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_pokrenipljacku"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Cops@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Crveni@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Crveni@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:FALSE">
 			<tagname value="bool"/>
 		</member>
 		<member name="F:Fibs@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Fibs@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:HouseInfo">
 			<referrer name="SaveHouse"/>
@@ -1122,6 +1122,12 @@
 		</member>
 		<member name="F:OLD_DEFAULT_NAME">
 			<library>sscanf</library>  <remarks>  The <c>OLD_DEFAULT_NAME</c> option as a constant string so you can get  compile-time spell checking on the name.  The behaviour of <c>U</c>, <c>Q</c>  and <c>R</c> have been changed to take any number as a default, instead of a  connected player.  Setting <c>OLD_DEFAULT_NAME</c> to <c>1</c> will revert to  the old version.  </remarks> 
+		</member>
+		<member name="F:Onogore">
+			<tagname value="Text"/>
+			<referrer name="CallOnoGore"/>
+			<referrer name="S@@_OnPlayerSpawn"/>
+			<referrer name="TDUpdate"/>
 		</member>
 		<member name="F:OrgInfo">
 			<referrer name="SaveOrg"/>
@@ -1262,6 +1268,7 @@
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 			<referrer name="LoadUser_data"/>
 			<referrer name="BanMessage"/>
+			<referrer name="TDUpdate"/>
 			<referrer name="PayDay"/>
 			<referrer name="CarUpdate"/>
 		</member>
@@ -1281,15 +1288,15 @@
 			<referrer name="LoadProm"/>
 		</member>
 		<member name="F:Proms@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_makeprom"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Proms@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_makeprom"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Q@">
 			<referrer name="S@"/>
@@ -1657,13 +1664,13 @@
 			<referrer name="S@@_OnGameModeInit"/>
 		</member>
 		<member name="F:Yakuza@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Yakuza@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:ZakljucanaVrata">
 			<tagname value="bool"/>
@@ -1695,14 +1702,14 @@
 			<referrer name="ZatvoriGateZemunci"/>
 		</member>
 		<member name="F:Zemunski_Klan@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="cmd_pokrenipljacku"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:Zemunski_Klan@YSII_Cg">
 			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:_@">
 			<attribute name="public"/>
@@ -3081,6 +3088,25 @@
 			<dependency name="SetPlayerMapIcon"/>
 			<param name="playerid">
 			</param>
+		</member>
+		<member name="M:CallOnoGore" syntax="CallOnoGore()">
+			<stacksize value="5"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="Onogore"/>
+			<dependency name="TextDrawAlignment"/>
+			<dependency name="TextDrawBackgroundColor"/>
+			<dependency name="TextDrawBoxColor"/>
+			<dependency name="TextDrawColor"/>
+			<dependency name="TextDrawCreate"/>
+			<dependency name="TextDrawFont"/>
+			<dependency name="TextDrawLetterSize"/>
+			<dependency name="TextDrawSetOutline"/>
+			<dependency name="TextDrawSetProportional"/>
+			<dependency name="TextDrawSetSelectable"/>
+			<dependency name="TextDrawSetShadow"/>
+			<dependency name="TextDrawTextSize"/>
+			<dependency name="TextDrawUseBox"/>
+			<dependency name="true"/>
 		</member>
 		<member name="M:CallRemoteFunction" syntax="CallRemoteFunction(function[], format[], ...)">
 			<attribute name="native"/>
@@ -4848,11 +4874,11 @@
 			<stacksize value="3"/>
 			<referrer name="S@@_OnPlayerConnect"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_napraviorg"/>
 			<referrer name="cmd_napravikucu"/>
 			<referrer name="cmd_makeprom"/>
 			<referrer name="cmd_makeadmin"/>
+			<referrer name="S@@_OnDialogResponse"/>
 			<param name="count">
 				<paraminfo> &amp; </paraminfo>
 			</param>
@@ -6775,11 +6801,18 @@
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="operator&gt;=(Float:,_:)"/>
 			<dependency name="Admins@YSII_Ag"/>
+			<dependency name="Admins@YSII_Cg"/>
+			<dependency name="Cops@YSII_Ag"/>
+			<dependency name="Cops@YSII_Cg"/>
 			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreatePickup"/>
 			<dependency name="CreateVehicle"/>
+			<dependency name="Crveni@YSII_Ag"/>
+			<dependency name="Crveni@YSII_Cg"/>
 			<dependency name="Delete3DTextLabel"/>
 			<dependency name="DestroyPickup"/>
+			<dependency name="Fibs@YSII_Ag"/>
+			<dependency name="Fibs@YSII_Cg"/>
 			<dependency name="GETIP"/>
 			<dependency name="GETIP"/>
 			<dependency name="GameTextForPlayer"/>
@@ -6802,11 +6835,14 @@
 			<dependency name="INI_WriteInt"/>
 			<dependency name="INI_WriteString"/>
 			<dependency name="IsPlayerInAnyVehicle"/>
+			<dependency name="Itter_AddInternal"/>
 			<dependency name="Kick"/>
 			<dependency name="OrgInfo"/>
 			<dependency name="OrgInfo"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
+			<dependency name="Proms@YSII_Ag"/>
+			<dependency name="Proms@YSII_Cg"/>
 			<dependency name="PutPlayerInVehicle"/>
 			<dependency name="SaveHouse"/>
 			<dependency name="SaveOrg"/>
@@ -6830,6 +6866,10 @@
 			<dependency name="UserPath"/>
 			<dependency name="VehInfo"/>
 			<dependency name="VehInfo"/>
+			<dependency name="Yakuza@YSII_Ag"/>
+			<dependency name="Yakuza@YSII_Cg"/>
+			<dependency name="Zemunski_Klan@YSII_Ag"/>
+			<dependency name="Zemunski_Klan@YSII_Cg"/>
 			<dependency name="cmd_stats"/>
 			<dependency name="d_ammu_nation"/>
 			<dependency name="d_askq"/>
@@ -6874,6 +6914,7 @@
 			<dependency name="pADuty"/>
 			<dependency name="pAK_47"/>
 			<dependency name="pAK_47Municija"/>
+			<dependency name="pAdmin"/>
 			<dependency name="pGlock19"/>
 			<dependency name="pGlock19Municija"/>
 			<dependency name="pKuca"/>
@@ -6881,7 +6922,9 @@
 			<dependency name="pM4"/>
 			<dependency name="pM4Municija"/>
 			<dependency name="pNovac"/>
+			<dependency name="pOrganizacija"/>
 			<dependency name="pPosao"/>
+			<dependency name="pPromoter"/>
 			<dependency name="pVozackaDozvola"/>
 			<dependency name="renta"/>
 			<dependency name="rented"/>
@@ -7356,6 +7399,7 @@
 			<stacksize value="7"/>
 			<dependency name="HouseInfo"/>
 			<dependency name="HouseInfo"/>
+			<dependency name="Onogore"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="SetPlayerInterior"/>
@@ -7770,27 +7814,16 @@
 			<referrer name="Itter_OnPlayerConnect"/>
 			<dependency name="AdminInfo"/>
 			<dependency name="AdminInfo"/>
-			<dependency name="Admins@YSII_Ag"/>
-			<dependency name="Admins@YSII_Cg"/>
 			<dependency name="CallMapIcons"/>
-			<dependency name="Cops@YSII_Ag"/>
-			<dependency name="Cops@YSII_Cg"/>
-			<dependency name="Crveni@YSII_Ag"/>
-			<dependency name="Crveni@YSII_Cg"/>
-			<dependency name="Fibs@YSII_Ag"/>
-			<dependency name="Fibs@YSII_Cg"/>
 			<dependency name="GETIP"/>
 			<dependency name="GetName"/>
 			<dependency name="GetName"/>
 			<dependency name="GetPlayerName"/>
 			<dependency name="INI_ParseFile"/>
-			<dependency name="Itter_AddInternal"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PromInfo"/>
 			<dependency name="PromInfo"/>
-			<dependency name="Proms@YSII_Ag"/>
-			<dependency name="Proms@YSII_Cg"/>
 			<dependency name="ProveraRPImena"/>
 			<dependency name="RemoveBuildingForPlayer"/>
 			<dependency name="SaveAdmin"/>
@@ -7802,10 +7835,6 @@
 			<dependency name="UlogovanProvera"/>
 			<dependency name="UserPath"/>
 			<dependency name="UserPath"/>
-			<dependency name="Yakuza@YSII_Ag"/>
-			<dependency name="Yakuza@YSII_Cg"/>
-			<dependency name="Zemunski_Klan@YSII_Ag"/>
-			<dependency name="Zemunski_Klan@YSII_Cg"/>
 			<dependency name="aName"/>
 			<dependency name="aNeaktivnost"/>
 			<dependency name="adminveh"/>
@@ -7817,13 +7846,10 @@
 			<dependency name="fexist"/>
 			<dependency name="format"/>
 			<dependency name="pADuty"/>
-			<dependency name="pAdmin"/>
 			<dependency name="pBan"/>
 			<dependency name="pGodine"/>
 			<dependency name="pIP"/>
 			<dependency name="pNeededRep"/>
-			<dependency name="pOrganizacija"/>
-			<dependency name="pPromoter"/>
 			<dependency name="promName"/>
 			<dependency name="promNeaktivnost"/>
 			<dependency name="renta"/>
@@ -9140,17 +9166,23 @@
 		<member name="M:TDUpdate" syntax="TDUpdate()">
 			<attribute name="public"/>
 			<stacksize value="528"/>
+			<dependency name="Onogore"/>
 			<dependency name="Player@YSII_Ag"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="PlayerInfo"/>
 			<dependency name="TextDrawSetString"/>
 			<dependency name="UpdateBubble"/>
 			<dependency name="format"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
+			<dependency name="pBanka"/>
+			<dependency name="pNovac"/>
 			<dependency name="sdtd"/>
 		</member>
 		<member name="M:TextDrawAlignment" syntax="TextDrawAlignment(text, alignment)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9160,6 +9192,16 @@
 		<member name="M:TextDrawBackgroundColor" syntax="TextDrawBackgroundColor(text, color)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+		</member>
+		<member name="M:TextDrawBoxColor" syntax="TextDrawBoxColor(text, color)">
+			<attribute name="native"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9169,6 +9211,7 @@
 		<member name="M:TextDrawColor" syntax="TextDrawColor(text, color)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9180,6 +9223,7 @@
 			<attribute name="native"/>
 			<referrer name="va_TextDrawCreate"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="x">
 				<paraminfo>Float </paraminfo>
 			</param>
@@ -9193,6 +9237,7 @@
 		<member name="M:TextDrawFont" syntax="TextDrawFont(text, font)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9202,6 +9247,7 @@
 		<member name="M:TextDrawLetterSize" syntax="TextDrawLetterSize(text, x, y)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9215,6 +9261,7 @@
 		<member name="M:TextDrawSetOutline" syntax="TextDrawSetOutline(text, size)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9224,6 +9271,16 @@
 		<member name="M:TextDrawSetProportional" syntax="TextDrawSetProportional(text, set)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="set">
+			</param>
+		</member>
+		<member name="M:TextDrawSetSelectable" syntax="TextDrawSetSelectable(text, set)">
+			<attribute name="native"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9233,6 +9290,7 @@
 		<member name="M:TextDrawSetShadow" syntax="TextDrawSetShadow(text, size)">
 			<attribute name="native"/>
 			<referrer name="CallSDTD"/>
+			<referrer name="CallOnoGore"/>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
 			</param>
@@ -9256,6 +9314,28 @@
 			</param>
 			<param name="text">
 				<paraminfo>Text </paraminfo>
+			</param>
+		</member>
+		<member name="M:TextDrawTextSize" syntax="TextDrawTextSize(text, x, y)">
+			<attribute name="native"/>
+			<referrer name="CallOnoGore"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:TextDrawUseBox" syntax="TextDrawUseBox(text, use)">
+			<attribute name="native"/>
+			<referrer name="CallOnoGore"/>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+			</param>
+			<param name="use">
 			</param>
 		</member>
 		<member name="M:Time" syntax="Time()">
@@ -12826,6 +12906,7 @@
 			<dependency name="AdminInfo"/>
 			<dependency name="BannedInfo"/>
 			<dependency name="BannedInfo"/>
+			<dependency name="CallOnoGore"/>
 			<dependency name="CallSDTD"/>
 			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateActor"/>

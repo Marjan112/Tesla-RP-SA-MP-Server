@@ -3200,6 +3200,7 @@ public OnGameModeInit() {
 	// TextDrawSetProportional(lrtd[9], 1);
 
 	CallSDTD();
+	CallOnoGore();
 
 //----------------------- [PODESAVANJA SVA VOZILA] ----------------------------
 	for(new vehicleid = 0; vehicleid < MAX_VEHICLES; vehicleid++) {
@@ -3239,6 +3240,7 @@ public OnGameModeInit() {
 	ACTOR[12] = CreateActor(57, 356.2952,163.2074,1008.3762,269.3239); //ACTOR U VLADI (SALTER)
 	ACTOR[13] = CreateActor(179, 290.1594,-104.4914,1001.5156, 175.1689); //ACTOR U AMMUNATIONU
 	ACTOR[14] = CreateActor(20, 1654.6721,-1074.5894,23.8984, 1.9153); //ACTOR KOD PARKING ONAJ KAO ZNAS ONAJ KOD BANKU
+	ACTOR[15] = CreateActor(57, 2261.3198,-1920.5042,13.5508, 2.0873); //ACTOR KOD OVO OVAJ CAR DEALERSHIP
 	return 1;
 }
 
@@ -3363,13 +3365,6 @@ public OnPlayerConnect(playerid) {
 			SetTimerEx("BanMessage", 500, false, "i", playerid);
 			return 0;
 		}
-		if(PlayerInfo[playerid][pAdmin] > 0) Itter_Add(Admins, playerid);
-		if(!strcmp(PlayerInfo[playerid][pPromoter], "Da")) Itter_Add(Proms, playerid);
-		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) Itter_Add(Cops, playerid);
-		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) Itter_Add(Fibs, playerid);
-		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza")) Itter_Add(Yakuza, playerid);
-		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni")) Itter_Add(Crveni, playerid);
-		if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) Itter_Add(Zemunski_Klan, playerid);
 		SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
 		ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
 		PlayerInfo[playerid][pNeededRep] = PlayerInfo[playerid][pGodine] * 2 + 4;
@@ -3417,6 +3412,7 @@ public OnPlayerDisconnect(playerid, reason) {
 public OnPlayerSpawn(playerid) {
 	// for(new i = 0; i < 10; i++) TextDrawHideForPlayer(playerid, lrtd[i]);
 	for(new i = 0; i < 3; i++) TextDrawShowForPlayer(playerid, sdtd[i]);
+	for(new i = 0; i < 7; i++) TextDrawShowForPlayer(playerid, Onogore[i]);
 	for(new i = 0; i < MAX_HOUSES; i++) {
 		if(PlayerInfo[playerid][pKuca] == i) {
 			SetPlayerVirtualWorld(playerid, HouseInfo[i][hVirtualWorld]);
@@ -3437,6 +3433,13 @@ public OnPlayerSpawn(playerid) {
 		return 1;
 	}
 	SetPlayerPos(playerid, 1682.222045, -2246.613281, 13.550828);
+	return 1;
+}
+
+CMD:dostupnavozila(playerid, params[]) {
+	#pragma unused params
+	if(!IsPlayerInRangeOfPoint(playerid, 3, 2261.3198,-1920.5042,13.5508)) return SCM(playerid, SIVA, "Niste kod auto salona!");
+	SPD(playerid, d_dostupna_vozila, DIALOG_STYLE_INPUT, "Dostupna Vozila", "Jeftina Vozila\nSkupa Vozila", "Izaberi", "Odustani");
 	return 1;
 }
 
@@ -5414,6 +5417,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 		            INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
 		            GivePlayerMoney(playerid, PlayerInfo[playerid][pNovac]);
 					UlogovanProvera[playerid] = 1;
+					if(PlayerInfo[playerid][pAdmin] > 0) Itter_Add(Admins, playerid);
+					if(!strcmp(PlayerInfo[playerid][pPromoter], "Da")) Itter_Add(Proms, playerid);
+					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) Itter_Add(Cops, playerid);
+					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) Itter_Add(Fibs, playerid);
+					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza")) Itter_Add(Yakuza, playerid);
+					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni")) Itter_Add(Crveni, playerid);
+					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) Itter_Add(Zemunski_Klan, playerid);
 				} else ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
 		        return 1;
 		    }
@@ -5804,13 +5814,50 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					}
 				}
 				GivePlayerMoney(playerid, -100);
+				GameTextForPlayer(playerid, "~r~-$100", 5000, 1);
 			}
 		}
-		// case d_dostupna_vozila: {
-		// 	if(response) {
-				
-		// 	}
-		// }
+		case d_dostupna_vozila: {
+			if(response) {
+				new str[256], string[512];
+				switch(listitem + 1) {
+					case 1: {
+						format(str, sizeof(str), "1. Jeep Wrangler - $200000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "2. Skoda Rapid - $200000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "3. Mercedes GLE 53 - $300000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "4. Passat CCR Line - $150000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "5. Fiat 500 - $70000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "6. Smart - $30000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "7. CF Moto 625 - $20000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "8. Peglica - $15000");
+						strcat(string, str);
+						SPD(playerid, d_dostupna_jeftina_vozila, DIALOG_STYLE_LIST, "Dostupna Jeftina Vozila", string, "Kupi", "Odustani");
+					}
+					case 2: {
+						format(str, sizeof(str), "1. Tesla Model S - $700000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "2. G-klasa - $500000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "3. Lamborghini Urus - $600000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "4. Lamborghini Huracan - $600000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "5. Audi R8 Sport - $500000\n");
+						strcat(string, str);
+						format(str, sizeof(str), "6. Range Rover Sport - $400000");
+						strcat(string, str);
+						SPD(playerid, d_dostupna_skupa_vozila, DIALOG_STLYE_LIST, "Dostupna Skupa Vozila", string, "Kupi", "Odustani");
+					}
+				}
+			}
+		}
 		//
 		case d_ban: if(response) Kick(playerid);
 		case d_nevalidno_ime: if(response) Kick(playerid);                                      
@@ -6247,7 +6294,13 @@ function TDUpdate() {
 	TextDrawSetString(sdtd[0], string);
 	format(string, sizeof(string), "%s%d:%s%d", ((sat < 10) ? ("0") : ("")), sat, ((minut < 10) ? ("0") : ("")), minut);
 	TextDrawSetString(sdtd[1], string);
-	foreach(new i : Player) UpdateBubble(i);
+	foreach(new i : Player) {
+		format(string, sizeof(string), "%d", PlayerInfo[i][pNovac]);
+		TextDrawSetString(Onogore[5], string);
+		format(string, sizeof(string), "%d", PlayerInfo[i][pBanka]);
+		TextDrawSetString(Onogore[6], string);
+		UpdateBubble(i);
+	}
 	return 1;
 }
 

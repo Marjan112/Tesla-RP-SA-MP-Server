@@ -12,6 +12,7 @@
 #include "../gamemodes/data/tags.inc"
 
 new Text: sdtd[3];
+new Text: Onogore[7];
 
 stock Void: CallSDTD() {
     sdtd[0] = TextDrawCreate(38.999980, 429.748260, "00:00");
@@ -43,4 +44,79 @@ stock Void: CallSDTD() {
 	TextDrawBackgroundColor(sdtd[2], 51);
 	TextDrawFont(sdtd[2], 2);
 	TextDrawSetProportional(sdtd[2], 1);
+}
+
+stock CallOnoGore() {
+	Onogore[0] = TextDrawCreate(551.666687, 9.125926, "Tesla RP");
+	TextDrawLetterSize(Onogore[0], 0.489998, 1.753479);
+	TextDrawAlignment(Onogore[0], 1);
+	TextDrawColor(Onogore[0], 255);
+	TextDrawSetShadow(Onogore[0], 1);
+	TextDrawSetOutline(Onogore[0], 0);
+	TextDrawBackgroundColor(Onogore[0], 51);
+	TextDrawFont(Onogore[0], 3);
+	TextDrawSetProportional(Onogore[0], 1);
+
+	Onogore[1] = TextDrawCreate(608.667358, 101.885147, "usebox");
+	TextDrawLetterSize(Onogore[1], 0.000000, 2.292793);
+	TextDrawTextSize(Onogore[1], 462.999908, 0.000000);
+	TextDrawAlignment(Onogore[1], 1);
+	TextDrawColor(Onogore[1], 0);
+	TextDrawUseBox(Onogore[1], true);
+	TextDrawBoxColor(Onogore[1], 102);
+	TextDrawSetShadow(Onogore[1], 91);
+	TextDrawSetOutline(Onogore[1], 0);
+	TextDrawFont(Onogore[1], 0);
+	TextDrawSetSelectable(Onogore[1], true);
+
+	Onogore[2] = TextDrawCreate(465.332977, 99.970268, "DZEP:");
+	TextDrawLetterSize(Onogore[2], 0.449999, 1.600000);
+	TextDrawAlignment(Onogore[2], 1);
+	TextDrawColor(Onogore[2], 16777215);
+	TextDrawSetShadow(Onogore[2], 0);
+	TextDrawSetOutline(Onogore[2], 1);
+	TextDrawBackgroundColor(Onogore[2], 255);
+	TextDrawFont(Onogore[2], 1);
+	TextDrawSetProportional(Onogore[2], 1);
+
+	Onogore[3] = TextDrawCreate(608.999938, 132.996292, "usebox");
+	TextDrawLetterSize(Onogore[3], 0.000000, 2.172223);
+	TextDrawTextSize(Onogore[3], 463.333312, 0.000000);
+	TextDrawAlignment(Onogore[3], 1);
+	TextDrawColor(Onogore[3], 0);
+	TextDrawUseBox(Onogore[3], true);
+	TextDrawBoxColor(Onogore[3], 102);
+	TextDrawSetShadow(Onogore[3], 0);
+	TextDrawSetOutline(Onogore[3], 0);
+	TextDrawFont(Onogore[3], 0);
+
+	Onogore[4] = TextDrawCreate(465.333465, 129.837097, "BANKA:");
+	TextDrawLetterSize(Onogore[4], 0.449999, 1.600000);
+	TextDrawAlignment(Onogore[4], 1);
+	TextDrawColor(Onogore[4], 16777215);
+	TextDrawSetShadow(Onogore[4], 1);
+	TextDrawSetOutline(Onogore[4], 0);
+	TextDrawBackgroundColor(Onogore[4], 255);
+	TextDrawFont(Onogore[4], 1);
+	TextDrawSetProportional(Onogore[4], 1);
+
+	Onogore[5] = TextDrawCreate(509.000061, 100.799980, "10000000");
+	TextDrawLetterSize(Onogore[5], 0.390666, 1.616592);
+	TextDrawAlignment(Onogore[5], 1);
+	TextDrawColor(Onogore[5], -1);
+	TextDrawSetShadow(Onogore[5], -3);
+	TextDrawSetOutline(Onogore[5], 0);
+	TextDrawBackgroundColor(Onogore[5], 51);
+	TextDrawFont(Onogore[5], 1);
+	TextDrawSetProportional(Onogore[5], 1);
+
+	Onogore[6] = TextDrawCreate(519.000122, 129.837036, "10000000");
+	TextDrawLetterSize(Onogore[6], 0.387665, 1.575111);
+	TextDrawAlignment(Onogore[6], 1);
+	TextDrawColor(Onogore[6], -1);
+	TextDrawSetShadow(Onogore[6], 0);
+	TextDrawSetOutline(Onogore[6], 1);
+	TextDrawBackgroundColor(Onogore[6], 51);
+	TextDrawFont(Onogore[6], 1);
+	TextDrawSetProportional(Onogore[6], 1);
 }
