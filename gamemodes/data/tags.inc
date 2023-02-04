@@ -5,5 +5,5 @@
 
 #pragma library Tags
 
-#define Bool: bool:
-#define Void: void:
+#define Bool bool
+#define Void void

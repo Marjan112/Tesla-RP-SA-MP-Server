@@ -13,6 +13,8 @@
 #include "../gamemodes/functions/save.inc"
 #include "../gamemodes/functions/textdraws.inc"
 #include "../gamemodes/functions/mapicons.inc"
+#include "../gamemodes/functions/pickups.inc"
+#include "../gamemodes/functions/snow.inc"
 ////////////////////////////////////////////////////
 #define ALL MAX_PLAYERS + MAX_PLAYERS
 #define HOUSE 1
@@ -64,7 +66,8 @@ enum {
 	d_dostupna_jeftina_vozila,
 	d_dostupna_skupa_vozila,
 	d_askq,
-	d_askq_to_admin
+	d_askq_to_admin,
+	d_moja_vozila
 };
 
 new IsPlayerSpec[MAX_PLAYERS];
@@ -98,7 +101,7 @@ new editaorg[MAX_PLAYERS];
 
 new policeDuty[MAX_PLAYERS];
 
-new ACTOR[16];
+new ACTOR[18];
 
 new Iterator: Admins<MAX_PLAYERS>;
 new Iterator: Houses<MAX_HOUSES>;
@@ -132,446 +135,137 @@ new RandomPoruke[][] = {
 	"{03adfc}[INFO]: {ffffff}Ako Vam treba neka pomoc, ukucajte /askq."
 };
 
-stock IC(Float: radius, playerid, color, const str[]) {
-	new Float:pos[3];
-	GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
-	foreach(new i : Player) if(IsPlayerInRangeOfPoint(i, radius, pos[0], pos[1], pos[2])) SCM(i, color, str);
-	return 0;
+stock CallFIB() {
+    CreateDynamicObject(17559, 1310.222534, -1323.534790, -3.336741, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.342285, -1301.865356, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.342285, -1311.484619, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.342285, -1321.224243, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.342285, -1330.774169, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.342285, -1335.364379, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1321.587890, -1340.102783, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1312.177368, -1340.152099, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1302.558105, -1340.202148, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1298.617919, -1340.222534, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1293.881958, -1335.364379, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1293.881958, -1325.844482, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1293.881958, -1316.264282, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1293.881958, -1306.732421, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1293.881958, -1300.571899, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1298.717407, -1321.101684, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1308.318359, -1321.050048, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1317.755737, -1320.992065, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1324.407348, -1320.877563, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.701416, -1332.856933, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1315.781860, -1332.913696, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19387, 1321.134155, -1332.916625, -0.059583, 0.000000, 0.000000, -90.599983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1311.051757, -1337.664672, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1326.008789, -1333.361328, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.996337, -1333.990966, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.985107, -1334.591064, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.973388, -1335.220703, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.961547, -1335.841064, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.950195, -1336.451293, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.937866, -1337.091674, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.925781, -1337.721557, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.913208, -1338.361450, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.901611, -1338.981323, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(11729, 1325.888549, -1339.641601, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1313.432495, -1337.773681, -2.702438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1313.432495, -1337.773681, 1.787560, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1313.419555, -1339.822875, 1.830486, 88.799942, -1.099999, 1.100001, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1313.419555, -1334.742919, 1.724112, 88.799942, -1.099999, 1.100001, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19387, 1305.582275, -1332.942993, -0.059583, 0.000000, 0.000000, -90.599983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1311.820556, -1332.932739, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1299.241333, -1332.999511, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1289.631469, -1333.049804, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1309.479003, -1339.615112, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1307.478881, -1339.615112, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1305.479003, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1303.479736, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1301.479858, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1299.389526, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1297.299438, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2180, 1295.319702, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1309.938842, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1307.667968, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1305.767944, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1303.747314, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1301.657104, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1299.687255, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1297.417236, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19999, 1295.827392, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1309.983520, -1339.491577, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1308.056884, -1339.609375, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1306.020629, -1339.733886, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1304.065063, -1339.853393, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1302.020141, -1339.678222, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1299.964233, -1339.803955, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1297.880126, -1339.630737, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19893, 1295.883666, -1339.752807, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19387, 1302.111938, -1331.465820, -0.059583, 0.000000, 0.000000, 179.700134, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1302.102050, -1325.844482, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2056, 1294.048583, -1331.930786, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2056, 1294.015625, -1330.211425, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2056, 1293.985839, -1328.661499, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2056, 1294.020385, -1326.776367, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2056, 1293.986572, -1324.495727, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2056, 1294.052978, -1322.754272, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1299.961059, -1325.844482, -2.602437, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1299.961059, -1328.163818, -2.602437, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19054, 1303.407470, -1322.445922, -1.143917, 0.000000, 0.000000, 75.899986, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19055, 1302.987182, -1324.006469, -1.245745, 0.000000, 0.000000, -90.000007, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19057, 1304.986572, -1322.015258, -1.115745, 0.000000, 0.000000, -32.899997, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(2964, 1311.635620, -1324.464355, -1.826891, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(1723, 1323.195190, -1327.370239, -1.796245, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(1723, 1320.075561, -1327.519165, -1.796245, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19786, 1324.097167, -1332.734619, -0.269866, 0.000000, 0.000000, 177.499984, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19054, 1325.345947, -1321.719604, -1.143917, 0.000000, 0.000000, 75.899986, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1324.679687, -1335.497680, 0.888697, 1.499999, -90.600006, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1321.340332, -1335.497314, 0.853733, 1.499999, -90.600006, 0.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1318.030883, -1335.477783, 0.819606, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1314.601074, -1335.536621, 0.783700, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1311.242309, -1335.594726, 0.748526, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1307.833251, -1335.653442, 0.712829, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1304.353759, -1335.712524, 0.676399, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1300.944580, -1335.771484, 0.640702, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1297.535766, -1335.830078, 0.605005, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1295.425170, -1335.865600, 0.582917, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1295.492431, -1326.149169, 0.837357, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1298.970703, -1326.256225, 0.921672, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1302.411621, -1326.199951, 0.909798, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1305.341430, -1326.220947, 0.940470, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1308.851928, -1326.166625, 0.979308, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1312.232055, -1326.191162, 1.014691, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1315.641235, -1326.215820, 1.050388, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1319.161499, -1326.241943, 1.087237, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1322.491943, -1326.265747, 1.122096, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1325.201904, -1326.285522, 1.150465, -1.000000, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1325.131958, -1322.195800, 1.107659, 1.900000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1317.104858, -1322.333984, 0.991389, 0.899999, -90.800064, -86.800048, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1307.959594, -1322.489868, 1.017658, 0.400000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1298.460815, -1322.652832, 0.972704, -0.099998, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1326.049926, -1326.741088, 1.057617, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
+    CreateDynamicObject(19449, 1325.135986, -1322.196533, 0.987731, 1.900000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00);
 }
 
-stock CreateTransparentObject(modelid, Float:X, Float:Y, Float:Z, Float:rX=0.0, Float:rY=0.0, Float:rZ=0.0) {
-    new obj_ID = CreateObject(modelid, X, Y, Z, rX, rY, rZ);
-    for(new i; i< 10; i++) SetObjectMaterial(obj_ID, i, 0, "none", "none", 0x00000000);
-    return obj_ID;
-}
-//19381
-
-stock ProxDetectorf(Float: _radius_, playerid, const msg[], va_args<>) {
-    new string[1024];
-    va_format(string, sizeof(string), msg, va_start<3>);
-	ProxDetector(_radius_, playerid, string);
-}
-
-stock Float:GetDistanceBetweenPoints(Float:pos1X, Float:pos1Y, Float:pos1Z, Float:pos2X, Float:pos2Y, Float:pos2Z) {
-	return floatadd(floatadd(floatsqroot(floatpower(floatsub(pos1X, pos2X), 2)), floatsqroot(floatpower(floatsub(pos1Y, pos2Y), 2))), floatsqroot(floatpower(floatsub(pos1Z, pos2Z), 2)));
-}
-
-stock WeaponName(wid) {
-	new str[128];
-	GetWeaponName(wid, str, sizeof(str));
-	return str;
+stock CallJelka() {
+    CreateDynamicObject(19076, 1432.422729, -830.832031, 56.613811, 9.999951, 0.899999, -0.199999, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19055, 1437.344848, -828.626953, 59.895458, 26.000009, -13.800000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19055, 1436.669677, -831.210510, 57.987468, 23.200008, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19055, 1435.979736, -833.851684, 56.583694, 23.200008, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19057, 1433.706054, -833.077880, 56.429080, 48.399993, -8.600000, -0.700000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19057, 1429.923950, -832.603393, 56.048843, 48.399993, -8.600000, -0.700000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19057, 1431.699462, -832.697570, 56.112976, 48.399993, -8.600000, -0.700000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19058, 1428.107910, -831.255004, 57.169391, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19058, 1430.147827, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19058, 1428.107910, -828.594726, 59.459304, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19059, 1432.155639, -832.911499, 59.495330, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19058, 1434.787719, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19058, 1432.158081, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
 }
 
-stock SnijegObjekti(modelid, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz) {
-	new object = CreateDynamicObject(modelid, x + 0.05, y + 0.075, z + 0.1, rx, ry, rz, -1, -1, -1, 300.0, 0.0);
-	for(new a = 0; a < 30; a++) SetDynamicObjectMaterial(object, a, 17944, "lngblok_lae2", "white64bumpy", 0);
-	return object;
-}
-
-stock NisteOvlasceni(playerid) {
-	SCM(playerid, CRVENA, "Niste ovlasceni da koristite ovu komandu!");
-	return 1;
-}
-
-stock NewID(tip) {
-	new id = -1, len;
-	switch(tip) {
-		case HOUSE: {
-			len = MAX_HOUSES;
-			for(new loop = (0), check = (-1), Data_[64] = "\0"; loop != len; ++loop) {
-				check = (loop + 1);
-				format(Data_, sizeof(Data_), HOUSEPATH, check);
-				if(!fexist(Data_)) {
-					id = (check);
-					break;
-				}
-			}
-		}
-		case ORG: {
-			len = MAX_ORGS;
-			for(new loop = (0), check = (-1), Data_[64] = "\0"; loop != len; ++loop) {
-				check = (loop + 1);
-				format(Data_, sizeof(Data_), ORGPATH, check);
-				if(!fexist(Data_)) {
-					id = (check);
-					break;
-				}
-			}
-		}
-		case VEH: {
-			len = MAX_VEHICLES;
-			for(new loop = (0), check = (-1), Data_[64] = "\0"; loop != len; ++loop) {
-				check = (loop + 1);
-				format(Data_, sizeof(Data_), VEHPATH, check);
-				if(!fexist(Data_)) {
-					id = (check);
-					break;
-				}
-			}
-		}
-	}
-	return (id);
-}
-
-stock UzetPromSlot(id) {
-	new str[128];
-	format(str, sizeof(str), "Niko");
-	if(!strcmp(str, PromInfo[id][promName])) return false;
-	return true;
-}
-
-stock ProveraRPImena(playerid)
-{
-    new pname[MAX_PLAYER_NAME],underline=0;
-    GetPlayerName(playerid, pname, sizeof(pname));
-    if(strfind(pname,"[",true) != (-1)) return 0;
-    else if(strfind(pname,"]",true) != (-1)) return 0;
-    else if(strfind(pname,"$",true) != (-1)) return 0;
-    else if(strfind(pname,"(",true) != (-1)) return 0;
-    else if(strfind(pname,")",true) != (-1)) return 0;
-    else if(strfind(pname,"=",true) != (-1)) return 0;
-    else if(strfind(pname,"@",true) != (-1)) return 0;
-    else if(strfind(pname,"1",true) != (-1)) return 0;
-    else if(strfind(pname,"2",true) != (-1)) return 0;
-    else if(strfind(pname,"3",true) != (-1)) return 0;
-    else if(strfind(pname,"4",true) != (-1)) return 0;
-    else if(strfind(pname,"5",true) != (-1)) return 0;
-    else if(strfind(pname,"6",true) != (-1)) return 0;
-    else if(strfind(pname,"7",true) != (-1)) return 0;
-    else if(strfind(pname,"8",true) != (-1)) return 0;
-    else if(strfind(pname,"9",true) != (-1)) return 0;
-    else if(strfind(pname,".",true) != (-1)) return 0;
-    else if(strfind(pname,",",true) != (-1)) return 0;
-    else if(strfind(pname,"-",true) != (-1)) return 0;
-	else if(strfind(pname, "YT", true) != (-1)) return 0;
-	else if(strfind(pname, "yT", true) != (-1)) return 0;
-	else if(strfind(pname, "Yt", true) != (-1)) return 0;
-	else if(strfind(pname, "Gamer", true) != (-1)) return 0;
-	else if(strfind(pname, "gAMer", true) != (-1)) return 0;
-    new maxname = strlen(pname);
-    for(new i = 0; i < maxname; i++) 
-    {
-       if(pname[i] == '_') underline ++;
-    }
-    if(underline != 1) return 0;
-    pname[0] = toupper(pname[0]);
-    for(new x = 1; x < maxname; x++)
-    {
-        if(pname[x] == '_') pname[x + 1] = toupper(pname[x + 1]);
-        else if(pname[x] != '_' && pname[x - 1] != '_') pname[x] = tolower(pname[x]);
-    }
-	return 1;
-}
-
-stock UpdateBubble(playerid) {
-	new str[128];
-	if(pADuty[playerid]) {
-		if(PlayerInfo[playerid][pAdmin] == 1) format(str, sizeof(str), "{03adfc}PROBNI ADMIN");
-		if(PlayerInfo[playerid][pAdmin] == 2) format(str, sizeof(str), "{03adfc}ADMIN");
-		if(PlayerInfo[playerid][pAdmin] == 3) format(str, sizeof(str), "{03adfc}HEAD ADMIN");
-		if(PlayerInfo[playerid][pAdmin] == 4) format(str, sizeof(str), "{03adfc}SCRIPTER");
-		if(PlayerInfo[playerid][pAdmin] == 5) format(str, sizeof(str), "{03adfc}VLASNIK");
-		SetPlayerColor(playerid, PLAVA_NEBO);
-	}
-	if(PDuty[playerid]) {
-		if(!strcmp(PlayerInfo[playerid][pPromoter], "Da")) format(str, sizeof(str), "{ffa500}PROMOTER");
-		SetPlayerColor(playerid, NARANDZASTA);
-	}
-	SetPlayerChatBubble(playerid, str, -1, 30, 1000);
-}
-
-stock GETIP(playerid) {
-	new IP[32];
-	GetPlayerIp(playerid, IP, sizeof(IP));
-	return IP;
-}
-
-stock UzetBanSlot(id) {
-	new str[128];
-	format(str, sizeof(str), "Niko");
-	if(!strcmp(BannedInfo[id][bName], str)) return false;
-	return true;
-}
-
-stock ClearChat(id = ALL, l = 500) {
-	for(new i = 0; i < l; i++) {
-		if(id == ALL) SCMTA(-1, " ");
-		else SCM(id, -1, " ");
-	}
-}
-
-stock GetPlayerID(name[]) {
-	new ime[128];
-	for(new i = 0; i <= MAX_PLAYERS; i++) {
-		GetPlayerName(i, ime, sizeof(ime));
-		if(!strcmp(name, ime)) return i;
-	}
-	return -1;
-}
-
-stock UzetSlot(id) {
-	new str[128];
-	format(str, sizeof(str), "Niko");
-	if(!strcmp(AdminInfo[id][aName], str)) return false;
-	return true;
-}
-
-stock GetName(playerid) {
-	new str[128], name[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, name, sizeof(name));
-	format(str, sizeof(str), name);
-	return str;
-}
-
-stock UserPath(playerid) {
-	new string[128],playername[MAX_PLAYER_NAME];
-	GetPlayerName(playerid,playername,sizeof(playername));
-	format(string,sizeof(string),USERPATH,playername);
-	return string;
-}
-
-stock udb_hash(buf[]) {
-	new length=strlen(buf);
-	new s1 = 1;
-	new s2 = 0;
-	new n;
-	for (n=0; n<length; n++)
-	{
-		s1 = (s1 + buf[n]) % 65521;
-		s2 = (s2 + s1)     % 65521;
-	}
-	return (s2 << 16) + s1;
-}
-
-public OnGameModeInit() {
-//-----------------------------------------------------------
-	SetGameModeText("Tesla Roleplay by Maki");
-	DisableInteriorEnterExits();
-	EnableStuntBonusForAll(0);
-	AddPlayerClass(6, 1682.4265,-2246.7871,13.5507,183.6684, 0, 0, 0, 0, 0, 0);
-	AddStaticVehicle(487, 1291.1667,-788.3718,96.4609, 146.8603, 194, 0);
-//----------------------- VOZILA ----------------------------
-	//J_BUS -> JOB_BUS
-	j_bus[0] = AddStaticVehicle(431, 1275.6406, -1796.2198, 13.5000, -89.8200, -1, -1);
-	j_bus[1] = AddStaticVehicle(431, 1275.6406, -1803.0000, 13.5000, -89.8200, -1, -1);
-	j_bus[2] = AddStaticVehicle(431, 1275.6406, -1810.0000, 13.5000, -89.8200, -1, -1);
-	j_bus[3] = AddStaticVehicle(431, 1275.6406, -1817.0000, 13.5000, -89.8200, -1, -1);
-	j_bus[4] = AddStaticVehicle(431, 1275.6406, -1824.0000, 13.5000, -89.8200, -1, -1);
-	j_bus[5] = AddStaticVehicle(431, 1275.6406, -1831.0000, 13.5000, -89.8200, -1, -1);
-	
-	//J_KOMBI -> JOB_KOMBI
-	j_kombi[0] = AddStaticVehicle(498, 1526.0002, -1012.4600, 23.9562, -130.0000, 128, -1);
-	j_kombi[1] = AddStaticVehicle(498, 1528.6698, -1009.3649, 23.9562, -130.0000, 128, -1);
-	j_kombi[2] = AddStaticVehicle(498, 1531.5457, -1006.1431, 23.9562, -130.0000, 128, -1);
-	j_kombi[3] = AddStaticVehicle(498, 1537.2740, -1005.4114, 23.9562, 180.0000, 128, -1);
-	j_kombi[4] = AddStaticVehicle(498, 1541.4963, -1005.6569, 23.9562, 180.0000, 128, -1);
-	j_kombi[5] = AddStaticVehicle(498, 1545.5612, -1005.9648, 23.9562, 180.0000, 128, -1);
-	j_kombi[6] = AddStaticVehicle(498, 1549.2892, -1006.9203, 23.9562, 180.0000, 128, -1);
-	j_kombi[7] = AddStaticVehicle(498, 1523.5182, -1025.3003, 23.9562, -90.0000, 128, -1);
-	j_kombi[8] = AddStaticVehicle(498, 1523.5408, -1021.5369, 23.9562, -90.0000, 128, -1);
-	j_kombi[9] = AddStaticVehicle(498, 1523.5670, -1017.6931, 23.9562, -90.0000, 128, -1);
-//----------------------- Timeri ----------------------------
-	SetTimer("Fuel", 60000, true);
-	SetTimer("PayDay", 3600000, true);
-	SetTimer("Time", 100, true);
-	SetTimer("CarUpdate", 1000, true);
-	SetTimer("RandomMessages", 2700000, true);
-//----------------------- Pickup i Label ----------------------------
-	CreatePickup(19133, 1, 1943.4155,-1767.3209,13.3906);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 1943.4155,-1767.3209,13.3906, 10.0, 0);
-	CreatePickup(19133, 1, 1943.2670,-1774.3669,13.3906);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 1943.2670,-1774.3669,13.3906, 10.0, 0);
-	CreatePickup(19133, 1, 605.0720,1704.5323,6.5634);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 605.0720,1704.5323,6.5634, 10.0, 0);
-	CreatePickup(19133, 1, 608.8611,1700.0101,6.5656);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 608.8611,1700.0101,6.5656, 10.0, 0);
-	CreatePickup(19133, 1, 611.7049,1694.6202,6.5492);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 611.7049,1694.6202,6.5492, 10.0, 0);
-	CreatePickup(19133, 1, 615.9272,1690.4963,6.5688);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 615.9272,1690.4963,6.5688, 10.0, 0);
-	CreatePickup(19133, 1, 619.3588,1685.4036,6.5654);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 619.3588,1685.4036,6.5654, 10.0, 0);
-	CreatePickup(19133, 1, 621.6530,1679.8074,6.5675);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 621.6530,1679.8074,6.5675, 10.0, 0);
-	CreatePickup(19133, 1, -87.4072,-1163.9280,2.3447);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, -87.4072,-1163.9280,2.3447, 10.0, 0);
-	CreatePickup(19133, 1, -92.0625,-1175.3973,2.3264);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, -92.0625,-1175.3973,2.3264, 10.0, 0);
-	CreatePickup(19133, 1,-95.7507,-1174.4496,2.4173);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, -95.7507,-1174.4496,2.4173, 10.0, 0);
-	CreatePickup(19133, 1, -91.2888,-1162.3960,2.3622);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, -91.2888,-1162.3960,2.3622, 10.0, 0);
-	CreatePickup(19133, 1, 1004.2919,-939.7656,42.2797);
-	Create3DTextLabel("{ffffff}Da bi ste napunili gorivo\n{03adfc}/toci", -1, 1004.2919,-939.7656,42.2797, 10.0, 0);
-
-	CreatePickup(1239, 1, 1561.0580,-2227.5750,13.5469);
-	Create3DTextLabel("{03adfc}[ RENT ]\n{ffffff}Da bi ste rentali vozilo {03adfc}/rent", -1, 1561.0580,-2227.5750,13.5469, 10.0, 0);
-	CreatePickup(1239, 1, 1282.4895,-1265.0306,13.6425);
-	Create3DTextLabel("{03adfc}[ RENT ]\n{ffffff}Da bi ste rentali vozilo {03adfc}/rent", -1, 1282.4895,-1265.0306,13.6425, 10.0, 0);
-
-	CreatePickup(19132, 1, 1555.5020,-1675.6063,16.1953);
-	Create3DTextLabel("{03adfc}[{ffffff}Policijska Stanica{03adfc}]\n{ffffff}Da bi ste usli u policijsku stanicu pretisnite {03adfc}F {ffffff}ili {03adfc}Enter", -1, 1555.5020,-1675.6063,16.1953, 7, 0);
-	CreatePickup(19132, 1, 2244.6240,-1664.3992,15.4766);
-	Create3DTextLabel("{fcfc09}[{ffffff}Binco{fcfc09}]\n{ffffff}Da bi ste usli u {fcfc09}Binco {ffffff}pretisnite {fcfc09}F {ffffff}ili {fcfc09}Enter", -1, 2244.6240,-1664.3992,15.4766, 7, 0);
-	CreatePickup(19132, 1, 216.9796,-100.5289,1005.2578);
-	Create3DTextLabel("Da kupite neku odecu ili obucu kliknite {fcfc09}Enter", -1, 216.9796,-100.5289,1005.2578, 7, 0);
-	CreatePickup(19132, 1, 1457.0255,-1009.9204,26.8438);
-	Create3DTextLabel("{00ff00}[ {ffffff}BANKA {00ff00}]\n{ffffff}Da bi ste usli u banku pretisnite {00ff00}Enter {ffffff}ili {00ff00}F", -1, 1457.0255,-1009.9204,26.8438, 7, 0);
-	CreatePickup(19132, 1, 1325.1090,-1709.0313,13.6395);
-	Create3DTextLabel("{00ff00}[ {ffffff}BANKA {00ff00}]\n{ffffff}Da bi ste usli u banku pretisnite {00ff00}Enter {ffffff}ili {00ff00}F", -1, 1325.1090,-1709.0313,13.6395, 7, 0);
-
-	CreatePickup(19132, 1, 1368.9985,-1279.7140,13.5469);
-	Create3DTextLabel("{696969}[ {ffffff}AMMU-NATION {696969}]\n{ffffff}Da bi ste usli u ammu-nation pretinsite {696969}Enter {ffffff}ili {696969}F", -1, 1368.9985,-1279.7140,13.5469, 5, 0);
-
-	CreatePickup(1239, 1, 2316.6213,-7.2423,26.7422);
-	Create3DTextLabel("Da bi ste napravili racun\nu banci kucajte {00ff00}/otvoriracun", -1, 2316.6213,-7.2423,26.7422, 7, 0);
-	CreatePickup(1239, 1, 2316.6208,-9.9597,26.7422);
-	Create3DTextLabel("Da bi ste uzeli kredit kucajte\n{00ff00}/kredit", -1, 2316.6208,-9.9597,26.7422, 7, 0);
-	CreatePickup(1239, 1, 2316.6211,-12.6467,26.7422);
-	Create3DTextLabel("Da bi ste stavili novac iz banke kucajte\n{00ff00}/deposit", -1, 2316.6211,-12.6467,26.7422, 5, 0);
-	CreatePickup(1239, 1, 2316.6213,-15.4728,26.7422);
-	Create3DTextLabel("Da bi ste uzeli novac u banci kucajte\n{00ff00}/withdraw", -1, 2316.6213,-15.4728,26.7422, 5, 0);
-	CreatePickup(19132, 1, 1172.0773,-1323.3525,15.4030);
-
-	CreatePickup(1239, 1, 1103.7693,1048.0475,-19.9389);
-	Create3DTextLabel("Da bi ste napravili racun\nu banci kucajte {00ff00}/otvoriracun", -1, 1103.7693,1048.0475,-19.9389, 7, 0);
-	CreatePickup(1239, 1, 1103.7697,1051.5986,-19.9389);
-	Create3DTextLabel("Da bi ste uzeli kredit kucajte\n{00ff00}/kredit", -1, 1103.7697,1051.5986,-19.9389, 7, 0);
-	CreatePickup(1239, 1, 1103.7705,1055.1908,-19.9389);
-	Create3DTextLabel("Stavljate novac pomocu {00ff00}/deposit\n{ffffff}Uzimate novac pomocu {00ff00}/withdraw", -1, 1103.7705,1055.1908,-19.9389, 5, 0);
-
-	Create3DTextLabel("{ff0000}[ {ffffff}Bolnica {ff0000}]\n{ffffff}Da bi ste usli u bolnicu pretisnite {ff0000}Enter {ffffff}ili {ff0000}F", -1, 1172.0773,-1323.3525,15.4030, 5, 0);
-	CreatePickup(19132, 1, 1402.7065,-39.0211,1000.8640);
-	Create3DTextLabel("Da bi ste pricali sa bolnicarom pretisnite {ff0000}SPACE", -1, 1402.7065,-39.0211,1000.8640, 5, 0);
-	CreatePickup(19132, 1, 1481.0361,-1772.3120,18.7958);
-	Create3DTextLabel("{ffff00}[ {ffffff}Vlada {ffff00}]\n{ffffff}Da bi ste usli u vladu pretsnite {ffff00}Enter {ffffff}ili {ffff00}F", -1, 1481.0361,-1772.3120,18.7958, 5, 0);
-	
-	CreatePickup(1239, 1, 361.8299,173.6672,1008.3828);
-	Create3DTextLabel("Da bi videli listu poslova kucajte\n{ffff00}/listaposlova", -1, 361.8299,173.6672,1008.3828, 5, 0);
-	CreatePickup(1239, 1, 358.2364,168.9949,1008.3828);
-	Create3DTextLabel("Da bi ste dali otkaz kucajte\n{ffff00}/quitjob", -1, 358.2364,168.9949,1008.3828, 5, 0);
-	CreatePickup(1239, 1, 358.2361,178.6533,1008.3828);
-	Create3DTextLabel("Da bi ste se zaposlili kucajte\n{ffff00}/getajob", -1, 358.2361,178.6533,1008.3828, 5, 0);
-	
-	CreatePickup(19132, 1, 1286.8000,-1329.2859,13.6546);
-	Create3DTextLabel("{ffff00}[ {ffffff}FIB {ffff00}]\n{ffffff}Da bi ste usli u FIB stanicu pretisnite {ffff00}Enter {ffffff}ili {ffff00}F", -1, 1286.8000,-1329.2859,13.6546, 5, 0);
-	CreatePickup(19132, 1, 1219.1619,-1811.7039,16.5938);
-	Create3DTextLabel("{03adfc}[ {ffffff}BUS STANICA {03adfc}]\n{ffffff}Da bi ste usli u bus stanicu pretisnite {03adfc}Enter {ffffff}ili {03adfc}F", -1, 1219.1619,-1811.7039,16.5938, 5, 0);
-
-	CreatePickup(1239, 1, 1101.9955,1064.0131,-22.3529);
-	Create3DTextLabel("Da bi ste zapoceli pljacku\n/pokrenipljacku", -1, 1101.9955,1064.0131,-22.3529, 6.5, 0);
-
-	CreatePickup(1239, 1, 1248.8230,-800.9311,84.1406);
-	Create3DTextLabel("Da bi ste usli u garazu pretisnite H ili C", -1, 1248.8230,-800.9311,84.1406, 10, 0);
-
-	//Za auto salon
-	CreatePickup(1239, 1, 2261.4954,-1919.0536,13.5508);
-	Create3DTextLabel("Da bi ste videli listu dostupnih voizla\nukucajte /dostupnavozila", -1, 2261.4954,-1919.0536,13.5508, 5, 0, 1);
-//----------------------- Mape ----------------------------
-	ZemunciGate = CreateDynamicObject(975, 1245.65881, -766.94067, 92.77000,   0.00000, 0.00000, 0.00000);
-	//Za Zemunci
-	CreateDynamicObject(19458, 1260.461791, -779.182739, 81.483238, 0.000000, 93.000015, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1263.654541, -779.238342, 81.359886, 0.099945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1267.153930, -779.230590, 81.354347, 1.399945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1270.604492, -779.206848, 81.210151, 1.199946, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1274.072875, -779.187011, 81.095367, 1.099946, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1277.551513, -779.165649, 81.000442, 1.299944, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1280.951782, -779.137573, 80.927986, 1.299945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1284.431884, -779.124572, 80.862510, 1.599946, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1284.377929, -769.474243, 81.006042, -0.000052, -88.400001, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1280.889404, -769.495544, 81.091247, -0.000055, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1277.440551, -769.516540, 81.175476, 0.099945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1274.181274, -769.536804, 81.245018, -0.100054, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1270.714111, -769.555847, 81.329795, -0.300054, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1267.235595, -769.578857, 81.394760, -0.400054, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1263.835937, -769.599609, 81.457778, -0.100052, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19458, 1260.398559, -769.620605, 81.591735, 0.199945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -769.330932, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -766.171020, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -772.460937, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -775.550781, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -778.491027, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -781.551208, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1285.977416, -782.301330, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1284.495483, -783.803894, 82.432983, -0.799998, 2.599994, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1281.285888, -783.787048, 82.477806, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(24, 1281.644042, -773.797668, 82.945053, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1278.135864, -783.770568, 82.521766, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1274.956420, -783.753967, 82.566162, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1271.756713, -783.737060, 82.610832, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1268.677001, -783.720947, 82.653854, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1265.606567, -783.704528, 82.696746, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1262.457153, -783.688232, 82.740737, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(353, 1262.704711, -778.164672, 82.423149, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1260.347167, -783.677368, 82.770202, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1258.902465, -781.969177, 82.838981, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1258.979370, -779.020996, 82.911010, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1259.059936, -775.922973, 82.986694, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1259.142333, -772.775207, 83.063629, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1259.223510, -769.677246, 83.139320, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19358, 1259.306274, -766.529174, 83.216232, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19786, 1273.265747, -785.108154, 1090.574462, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2028, 1275.201782, -785.604248, 1090.303710, 0.000000, 0.000000, -28.500017, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1836, 1269.821411, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1836, 1273.001220, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1836, 1276.181518, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1836, 1278.711303, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1271.073852, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1268.543090, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1269.193237, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1269.833496, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1270.443603, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1271.744018, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1272.334228, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1272.954345, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1273.644531, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1274.175048, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1274.844970, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1275.495361, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1276.155639, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1276.815917, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1277.446166, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1278.036743, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1278.716430, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1279.306396, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2350, 1279.946289, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19893, 1231.728759, -809.809509, 1083.778320, 0.000000, 0.000000, 165.599960, -1, -1, -1, 300.00, 300.00); 
-	ZatvorVrata[0] = CreateDynamicObject(19302, 1265.842651, -775.345886, 1084.255981, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	ZatvorVrata[1] = CreateDynamicObject(19302, 1261.842773, -775.345886, 1084.255981, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1723, 1264.316284, -771.831359, 1090.906250, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1723, 1274.296630, -771.781311, 1090.906250, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(1723, 1285.306396, -771.781311, 1090.906250, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(628, 1261.727294, -772.170410, 1092.856567, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(628, 1270.366088, -772.170410, 1092.856567, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(628, 1280.965576, -772.170410, 1092.856567, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(367, 1232.150268, -809.874816, 1083.827514, 0.000000, 0.000000, 103.400016, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19787, 1276.313110, -794.226989, 1084.328857, 0.000000, 0.000000, 179.799957, -1, -1, -1, 300.00, 300.00);
-	//CreateDynamicObject(19302, 1265.842651, -775.345886, 1081.783569, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);
-	//CreateDynamicObject(19302, 1261.842773, -775.345886, 1081.754028, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);
-	//Za milicajci
-	CreateDynamicObject(19521, 255.897979, 75.929763, 1004.759521, -0.999996, -90.499938, 86.100021, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2616, 229.354537, 82.517768, 1005.979431, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2356, 240.171127, 78.796409, 1004.039062, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2356, 240.171127, 81.336402, 1004.039062, 2.000000, 0.000000, 179.200027, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19908, 226.328948, 76.626838, 1004.199218, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2180, 217.235153, 66.673233, 1004.039062, 0.000000, 0.000000, 90.499908, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2356, 251.433700, 67.420555, 1002.640625, 0.000000, 0.000000, 93.700004, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19893, 250.637100, 67.537124, 1003.870727, 0.000000, 0.000000, 57.300010, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2180, 217.225662, 68.642250, 1004.017211, 0.000000, 0.199999, 89.300003, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(2180, 217.252609, 70.603401, 1004.039062, 0.000000, 0.000000, 89.899971, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(334, 216.934738, 66.636886, 1004.827026, 90.300010, 2.500004, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(11749, 217.354095, 66.440971, 1004.841491, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(18637, 217.261672, 67.409873, 1004.796691, -0.200000, -16.299997, -2.299999, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19141, 217.001449, 67.931938, 1004.912658, -39.399929, -90.800041, -89.099952, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(346, 217.377334, 69.131072, 1004.874206, -89.600036, -2.499999, 84.700004, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(356, 217.306915, 70.851745, 1004.890991, -82.700065, 12.899977, 94.100082, -1, -1, -1, 300.00, 300.00); 
-	//zatvor
-	ZatvorVrata[2] = CreateDynamicObject(19302, 266.395690, 87.476341, 1001.319213, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
-	// CreateDynamicObject(19302, 266.395690, 87.476341, 998.878662, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
-	ZatvorVrata[3] = CreateDynamicObject(19302, 266.379943, 82.966346, 1001.319213, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
-	// CreateDynamicObject(19302, 266.379943, 82.966346, 998.878601, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
-	//bolnica enterijer
-	new bolnica;
+stock CallMapBolnica() {
+    new bolnica;
 	bolnica = CreateDynamicObject(1649, 1404.309448, -27.373491, 999.864013, 270.000000, 270.000000, 360.000000, -1, -1, -1, 200.00, 200.00); 
 	SetDynamicObjectMaterial(bolnica, 0, 15055, "svlamid", "AH_flroortile3", 0xB4FFFFFF);
 	bolnica = CreateDynamicObject(1649, 1397.645385, -27.373292, 999.864013, 270.000000, 270.000000, 360.000000, -1, -1, -1, 200.00, 200.00); 
@@ -1253,134 +947,7 @@ public OnGameModeInit() {
 	bolnica = CreateDynamicObject(948, 1418.688720, -39.968872, 1000.071228, 0.000000, 0.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
 	SetDynamicObjectMaterial(bolnica, 2, 4992, "airportdetail", "bevflower1", 0x00000000);
 	SetDynamicObjectMaterial(bolnica, 3, 3881, "apsecurity_sfxrf", "lostonclad1", 0xFFFFFFFF);
-	//jelka
-	#if SNEG == 1
-	CreateDynamicObject(19076, 1432.422729, -830.832031, 56.613811, 9.999951, 0.899999, -0.199999, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19055, 1437.344848, -828.626953, 59.895458, 26.000009, -13.800000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19055, 1436.669677, -831.210510, 57.987468, 23.200008, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19055, 1435.979736, -833.851684, 56.583694, 23.200008, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19057, 1433.706054, -833.077880, 56.429080, 48.399993, -8.600000, -0.700000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19057, 1429.923950, -832.603393, 56.048843, 48.399993, -8.600000, -0.700000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19057, 1431.699462, -832.697570, 56.112976, 48.399993, -8.600000, -0.700000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19058, 1428.107910, -831.255004, 57.169391, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19058, 1430.147827, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19058, 1428.107910, -828.594726, 59.459304, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19059, 1432.155639, -832.911499, 59.495330, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19058, 1434.787719, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	CreateDynamicObject(19058, 1432.158081, -827.429626, 60.429973, 34.499992, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-	#endif
-	//fib stanica
-    CreateDynamicObject(17559, 1310.222534, -1323.534790, -3.336741, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1301.865356, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1311.484619, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1321.224243, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1330.774169, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1335.364379, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1321.587890, -1340.102783, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1312.177368, -1340.152099, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1302.558105, -1340.202148, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.617919, -1340.222534, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1335.364379, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1325.844482, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1316.264282, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1306.732421, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1300.571899, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.717407, -1321.101684, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1308.318359, -1321.050048, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1317.755737, -1320.992065, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1324.407348, -1320.877563, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.701416, -1332.856933, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1315.781860, -1332.913696, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19387, 1321.134155, -1332.916625, -0.059583, 0.000000, 0.000000, -90.599983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1311.051757, -1337.664672, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1326.008789, -1333.361328, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.996337, -1333.990966, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.985107, -1334.591064, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.973388, -1335.220703, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.961547, -1335.841064, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.950195, -1336.451293, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.937866, -1337.091674, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.925781, -1337.721557, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.913208, -1338.361450, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.901611, -1338.981323, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.888549, -1339.641601, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.432495, -1337.773681, -2.702438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.432495, -1337.773681, 1.787560, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.419555, -1339.822875, 1.830486, 88.799942, -1.099999, 1.100001, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.419555, -1334.742919, 1.724112, 88.799942, -1.099999, 1.100001, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19387, 1305.582275, -1332.942993, -0.059583, 0.000000, 0.000000, -90.599983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1311.820556, -1332.932739, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1299.241333, -1332.999511, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1289.631469, -1333.049804, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1309.479003, -1339.615112, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1307.478881, -1339.615112, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1305.479003, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1303.479736, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1301.479858, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1299.389526, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1297.299438, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1295.319702, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1309.938842, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1307.667968, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1305.767944, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1303.747314, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1301.657104, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1299.687255, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1297.417236, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1295.827392, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1309.983520, -1339.491577, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1308.056884, -1339.609375, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1306.020629, -1339.733886, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1304.065063, -1339.853393, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1302.020141, -1339.678222, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1299.964233, -1339.803955, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1297.880126, -1339.630737, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1295.883666, -1339.752807, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19387, 1302.111938, -1331.465820, -0.059583, 0.000000, 0.000000, 179.700134, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1302.102050, -1325.844482, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.048583, -1331.930786, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.015625, -1330.211425, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1293.985839, -1328.661499, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.020385, -1326.776367, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1293.986572, -1324.495727, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.052978, -1322.754272, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1299.961059, -1325.844482, -2.602437, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1299.961059, -1328.163818, -2.602437, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19054, 1303.407470, -1322.445922, -1.143917, 0.000000, 0.000000, 75.899986, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19055, 1302.987182, -1324.006469, -1.245745, 0.000000, 0.000000, -90.000007, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19057, 1304.986572, -1322.015258, -1.115745, 0.000000, 0.000000, -32.899997, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2964, 1311.635620, -1324.464355, -1.826891, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(1723, 1323.195190, -1327.370239, -1.796245, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(1723, 1320.075561, -1327.519165, -1.796245, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19786, 1324.097167, -1332.734619, -0.269866, 0.000000, 0.000000, 177.499984, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19054, 1325.345947, -1321.719604, -1.143917, 0.000000, 0.000000, 75.899986, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1324.679687, -1335.497680, 0.888697, 1.499999, -90.600006, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1321.340332, -1335.497314, 0.853733, 1.499999, -90.600006, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1318.030883, -1335.477783, 0.819606, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1314.601074, -1335.536621, 0.783700, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1311.242309, -1335.594726, 0.748526, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1307.833251, -1335.653442, 0.712829, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1304.353759, -1335.712524, 0.676399, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1300.944580, -1335.771484, 0.640702, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1297.535766, -1335.830078, 0.605005, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1295.425170, -1335.865600, 0.582917, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1295.492431, -1326.149169, 0.837357, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.970703, -1326.256225, 0.921672, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1302.411621, -1326.199951, 0.909798, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1305.341430, -1326.220947, 0.940470, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1308.851928, -1326.166625, 0.979308, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1312.232055, -1326.191162, 1.014691, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1315.641235, -1326.215820, 1.050388, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1319.161499, -1326.241943, 1.087237, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1322.491943, -1326.265747, 1.122096, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1325.201904, -1326.285522, 1.150465, -1.000000, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1325.131958, -1322.195800, 1.107659, 1.900000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1317.104858, -1322.333984, 0.991389, 0.899999, -90.800064, -86.800048, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1307.959594, -1322.489868, 1.017658, 0.400000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.460815, -1322.652832, 0.972704, -0.099998, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.049926, -1326.741088, 1.057617, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1325.135986, -1322.196533, 0.987731, 1.900000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00);
-	bolnica = CreateDynamicObject(19376, 1390.857543, -44.013446, 999.938903, 0.000000, 90.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
+    bolnica = CreateDynamicObject(19376, 1390.857543, -44.013446, 999.938903, 0.000000, 90.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
 	bolnica = CreateDynamicObject(19376, 1380.375610, -44.003425, 999.938903, 0.000000, 90.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
 	bolnica = CreateDynamicObject(19376, 1414.586914, -44.003471, 999.938903, 0.000000, 90.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
 	bolnica = CreateDynamicObject(19376, 1425.079956, -44.003486, 999.938903, 0.000000, 90.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
@@ -1454,757 +1021,375 @@ public OnGameModeInit() {
 	bolnica = CreateDynamicObject(2830, 1390.302490, -43.356319, 1000.571533, 0.000000, 0.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
 	bolnica = CreateDynamicObject(19564, 1392.163330, -43.368152, 1000.631713, 0.000000, 0.000000, 0.000000, -1, -1, -1, 200.00, 200.00); 
 	bolnica = CreateDynamicObject(19564, 1392.461669, -43.251449, 1000.631713, 0.000000, 0.000000, -28.700002, -1, -1, -1, 200.00, 200.00); 
+}
+
+stock CallMapLSPD() {
+    CreateDynamicObject(19521, 255.897979, 75.929763, 1004.759521, -0.999996, -90.499938, 86.100021, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2616, 229.354537, 82.517768, 1005.979431, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2356, 240.171127, 78.796409, 1004.039062, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2356, 240.171127, 81.336402, 1004.039062, 2.000000, 0.000000, 179.200027, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19908, 226.328948, 76.626838, 1004.199218, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2180, 217.235153, 66.673233, 1004.039062, 0.000000, 0.000000, 90.499908, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2356, 251.433700, 67.420555, 1002.640625, 0.000000, 0.000000, 93.700004, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19893, 250.637100, 67.537124, 1003.870727, 0.000000, 0.000000, 57.300010, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2180, 217.225662, 68.642250, 1004.017211, 0.000000, 0.199999, 89.300003, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2180, 217.252609, 70.603401, 1004.039062, 0.000000, 0.000000, 89.899971, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(334, 216.934738, 66.636886, 1004.827026, 90.300010, 2.500004, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(11749, 217.354095, 66.440971, 1004.841491, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(18637, 217.261672, 67.409873, 1004.796691, -0.200000, -16.299997, -2.299999, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19141, 217.001449, 67.931938, 1004.912658, -39.399929, -90.800041, -89.099952, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(346, 217.377334, 69.131072, 1004.874206, -89.600036, -2.499999, 84.700004, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(356, 217.306915, 70.851745, 1004.890991, -82.700065, 12.899977, 94.100082, -1, -1, -1, 300.00, 300.00); 
+	ZatvorVrata[2] = CreateDynamicObject(19302, 266.395690, 87.476341, 1001.319213, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00);  
+	ZatvorVrata[3] = CreateDynamicObject(19302, 266.379943, 82.966346, 1001.319213, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
+}
+
+stock CallMapZemunci() {
+    CreateDynamicObject(19458, 1260.461791, -779.182739, 81.483238, 0.000000, 93.000015, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1263.654541, -779.238342, 81.359886, 0.099945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1267.153930, -779.230590, 81.354347, 1.399945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1270.604492, -779.206848, 81.210151, 1.199946, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1274.072875, -779.187011, 81.095367, 1.099946, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1277.551513, -779.165649, 81.000442, 1.299944, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1280.951782, -779.137573, 80.927986, 1.299945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1284.431884, -779.124572, 80.862510, 1.599946, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1284.377929, -769.474243, 81.006042, -0.000052, -88.400001, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1280.889404, -769.495544, 81.091247, -0.000055, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1277.440551, -769.516540, 81.175476, 0.099945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1274.181274, -769.536804, 81.245018, -0.100054, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1270.714111, -769.555847, 81.329795, -0.300054, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1267.235595, -769.578857, 81.394760, -0.400054, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1263.835937, -769.599609, 81.457778, -0.100052, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19458, 1260.398559, -769.620605, 81.591735, 0.199945, -88.600051, 0.300000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -769.330932, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -766.171020, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -772.460937, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -775.550781, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -778.491027, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -781.551208, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1285.977416, -782.301330, 82.421730, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1284.495483, -783.803894, 82.432983, -0.799998, 2.599994, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1281.285888, -783.787048, 82.477806, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(24, 1281.644042, -773.797668, 82.945053, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1278.135864, -783.770568, 82.521766, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1274.956420, -783.753967, 82.566162, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1271.756713, -783.737060, 82.610832, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1268.677001, -783.720947, 82.653854, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1265.606567, -783.704528, 82.696746, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1262.457153, -783.688232, 82.740737, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(353, 1262.704711, -778.164672, 82.423149, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1260.347167, -783.677368, 82.770202, -0.799997, 2.599993, -90.300018, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1258.902465, -781.969177, 82.838981, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1258.979370, -779.020996, 82.911010, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1259.059936, -775.922973, 82.986694, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1259.142333, -772.775207, 83.063629, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1259.223510, -769.677246, 83.139320, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19358, 1259.306274, -766.529174, 83.216232, 1.399999, 2.499994, -1.500033, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19786, 1273.265747, -785.108154, 1090.574462, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2028, 1275.201782, -785.604248, 1090.303710, 0.000000, 0.000000, -28.500017, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1836, 1269.821411, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1836, 1273.001220, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1836, 1276.181518, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1836, 1278.711303, -786.044372, 1083.007812, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1271.073852, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1268.543090, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1269.193237, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1269.833496, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1270.443603, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1271.744018, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1272.334228, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1272.954345, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1273.644531, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1274.175048, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1274.844970, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1275.495361, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1276.155639, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1276.815917, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1277.446166, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1278.036743, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1278.716430, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1279.306396, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(2350, 1279.946289, -786.612609, 1083.014892, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19893, 1231.728759, -809.809509, 1083.778320, 0.000000, 0.000000, 165.599960, -1, -1, -1, 300.00, 300.00); 
+	ZatvorVrata[0] = CreateDynamicObject(19302, 1265.842651, -775.345886, 1084.255981, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	ZatvorVrata[1] = CreateDynamicObject(19302, 1261.842773, -775.345886, 1084.255981, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1723, 1264.316284, -771.831359, 1090.906250, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1723, 1274.296630, -771.781311, 1090.906250, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(1723, 1285.306396, -771.781311, 1090.906250, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(628, 1261.727294, -772.170410, 1092.856567, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(628, 1270.366088, -772.170410, 1092.856567, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(628, 1280.965576, -772.170410, 1092.856567, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(367, 1232.150268, -809.874816, 1083.827514, 0.000000, 0.000000, 103.400016, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(19787, 1276.313110, -794.226989, 1084.328857, 0.000000, 0.000000, 179.799957, -1, -1, -1, 300.00, 300.00);
+}
+
+stock IC(Float: radius, playerid, color, const str[]) {
+	new Float:pos[3];
+	GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
+	foreach(new i : Player) if(IsPlayerInRangeOfPoint(i, radius, pos[0], pos[1], pos[2])) SCM(i, color, str);
+	return 0;
+}
+
+stock CreateTransparentObject(modelid, Float:X, Float:Y, Float:Z, Float:rX=0.0, Float:rY=0.0, Float:rZ=0.0) {
+    new obj_ID = CreateObject(modelid, X, Y, Z, rX, rY, rZ);
+    for(new i; i< 10; i++) SetObjectMaterial(obj_ID, i, 0, "none", "none", 0x00000000);
+    return obj_ID;
+}
+//19381
+
+stock ProxDetectorf(Float: _radius_, playerid, const msg[], va_args<>) {
+    new string[1024];
+    va_format(string, sizeof(string), msg, va_start<3>);
+	ProxDetector(_radius_, playerid, string);
+}
+
+stock Float:GetDistanceBetweenPoints(Float:pos1X, Float:pos1Y, Float:pos1Z, Float:pos2X, Float:pos2Y, Float:pos2Z) {
+	return floatadd(floatadd(floatsqroot(floatpower(floatsub(pos1X, pos2X), 2)), floatsqroot(floatpower(floatsub(pos1Y, pos2Y), 2))), floatsqroot(floatpower(floatsub(pos1Z, pos2Z), 2)));
+}
+
+stock WeaponName(wid) {
+	new str[128];
+	GetWeaponName(wid, str, sizeof(str));
+	return str;
+}
+
+stock NisteOvlasceni(playerid) {
+	SCM(playerid, CRVENA, "Niste ovlasceni da koristite ovu komandu!");
+	return 1;
+}
+
+stock NewID(tip) {
+	new id = -1, len;
+	switch(tip) {
+		case HOUSE: {
+			len = MAX_HOUSES;
+			for(new loop = (0), check = (-1), Data_[64] = "\0"; loop != len; ++loop) {
+				check = (loop + 1);
+				format(Data_, sizeof(Data_), HOUSEPATH, check);
+				if(!fexist(Data_)) {
+					id = (check);
+					break;
+				}
+			}
+		}
+		case ORG: {
+			len = MAX_ORGS;
+			for(new loop = (0), check = (-1), Data_[64] = "\0"; loop != len; ++loop) {
+				check = (loop + 1);
+				format(Data_, sizeof(Data_), ORGPATH, check);
+				if(!fexist(Data_)) {
+					id = (check);
+					break;
+				}
+			}
+		}
+		case VEH: {
+			len = MAX_VEHICLES;
+			for(new loop = (0), check = (-1), Data_[64] = "\0"; loop != len; ++loop) {
+				check = (loop + 1);
+				format(Data_, sizeof(Data_), VEHPATH, check);
+				if(!fexist(Data_)) {
+					id = (check);
+					break;
+				}
+			}
+		}
+	}
+	return (id);
+}
+
+stock UzetPromSlot(id) {
+	new str[128];
+	format(str, sizeof(str), "Niko");
+	if(!strcmp(str, PromInfo[id][promName])) return false;
+	return true;
+}
+
+stock ProveraRPImena(playerid)
+{
+    new pname[MAX_PLAYER_NAME],underline=0;
+    GetPlayerName(playerid, pname, sizeof(pname));
+    if(strfind(pname,"[",true) != (-1)) return 0;
+    else if(strfind(pname,"]",true) != (-1)) return 0;
+    else if(strfind(pname,"$",true) != (-1)) return 0;
+    else if(strfind(pname,"(",true) != (-1)) return 0;
+    else if(strfind(pname,")",true) != (-1)) return 0;
+    else if(strfind(pname,"=",true) != (-1)) return 0;
+    else if(strfind(pname,"@",true) != (-1)) return 0;
+    else if(strfind(pname,"1",true) != (-1)) return 0;
+    else if(strfind(pname,"2",true) != (-1)) return 0;
+    else if(strfind(pname,"3",true) != (-1)) return 0;
+    else if(strfind(pname,"4",true) != (-1)) return 0;
+    else if(strfind(pname,"5",true) != (-1)) return 0;
+    else if(strfind(pname,"6",true) != (-1)) return 0;
+    else if(strfind(pname,"7",true) != (-1)) return 0;
+    else if(strfind(pname,"8",true) != (-1)) return 0;
+    else if(strfind(pname,"9",true) != (-1)) return 0;
+    else if(strfind(pname,".",true) != (-1)) return 0;
+    else if(strfind(pname,",",true) != (-1)) return 0;
+    else if(strfind(pname,"-",true) != (-1)) return 0;
+	else if(strfind(pname, "YT", true) != (-1)) return 0;
+	else if(strfind(pname, "yT", true) != (-1)) return 0;
+	else if(strfind(pname, "Yt", true) != (-1)) return 0;
+	else if(strfind(pname, "Gamer", true) != (-1)) return 0;
+	else if(strfind(pname, "gAMer", true) != (-1)) return 0;
+    new maxname = strlen(pname);
+    for(new i = 0; i < maxname; i++) 
+    {
+       if(pname[i] == '_') underline ++;
+    }
+    if(underline != 1) return 0;
+    pname[0] = toupper(pname[0]);
+    for(new x = 1; x < maxname; x++)
+    {
+        if(pname[x] == '_') pname[x + 1] = toupper(pname[x + 1]);
+        else if(pname[x] != '_' && pname[x - 1] != '_') pname[x] = tolower(pname[x]);
+    }
+	return 1;
+}
+
+stock UpdateBubble(playerid) {
+	new str[128];
+	if(pADuty[playerid]) {
+		if(PlayerInfo[playerid][pAdmin] == 1) format(str, sizeof(str), "{03adfc}PROBNI ADMIN");
+		if(PlayerInfo[playerid][pAdmin] == 2) format(str, sizeof(str), "{03adfc}ADMIN");
+		if(PlayerInfo[playerid][pAdmin] == 3) format(str, sizeof(str), "{03adfc}HEAD ADMIN");
+		if(PlayerInfo[playerid][pAdmin] == 4) format(str, sizeof(str), "{03adfc}SCRIPTER");
+		if(PlayerInfo[playerid][pAdmin] == 5) format(str, sizeof(str), "{03adfc}VLASNIK");
+		SetPlayerColor(playerid, PLAVA_NEBO);
+	}
+	if(PDuty[playerid]) {
+		if(!strcmp(PlayerInfo[playerid][pPromoter], "Da")) format(str, sizeof(str), "{ffa500}PROMOTER");
+		SetPlayerColor(playerid, NARANDZASTA);
+	}
+	SetPlayerChatBubble(playerid, str, -1, 30, 1000);
+}
+
+stock GETIP(playerid) {
+	new IP[32];
+	GetPlayerIp(playerid, IP, sizeof(IP));
+	return IP;
+}
+
+stock UzetBanSlot(id) {
+	new str[128];
+	format(str, sizeof(str), "Niko");
+	if(!strcmp(BannedInfo[id][bName], str)) return false;
+	return true;
+}
+
+stock ClearChat(id = ALL, l = 500) {
+	for(new i = 0; i < l; i++) {
+		if(id == ALL) SCMTA(-1, " ");
+		else SCM(id, -1, " ");
+	}
+}
+
+stock GetPlayerID(name[]) {
+	new ime[128];
+	for(new i = 0; i <= MAX_PLAYERS; i++) {
+		GetPlayerName(i, ime, sizeof(ime));
+		if(!strcmp(name, ime)) return i;
+	}
+	return -1;
+}
+
+stock UzetSlot(id) {
+	new str[128];
+	format(str, sizeof(str), "Niko");
+	if(!strcmp(AdminInfo[id][aName], str)) return false;
+	return true;
+}
+
+stock GetName(playerid) {
+	new str[128], name[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, name, sizeof(name));
+	format(str, sizeof(str), name);
+	return str;
+}
+
+stock UserPath(playerid) {
+	new string[128],playername[MAX_PLAYER_NAME];
+	GetPlayerName(playerid,playername,sizeof(playername));
+	format(string,sizeof(string),USERPATH,playername);
+	return string;
+}
+
+stock udb_hash(buf[]) {
+	new length=strlen(buf);
+	new s1 = 1;
+	new s2 = 0;
+	new n;
+	for (n=0; n<length; n++)
+	{
+		s1 = (s1 + buf[n]) % 65521;
+		s2 = (s2 + s1)     % 65521;
+	}
+	return (s2 << 16) + s1;
+}
+
+public OnGameModeInit() {
+//-----------------------------------------------------------
+	SetGameModeText("Tesla Roleplay by Maki");
+	DisableInteriorEnterExits();
+	EnableStuntBonusForAll(0);
+	AddPlayerClass(6, 1682.4265,-2246.7871,13.5507,183.6684, 0, 0, 0, 0, 0, 0);
+	AddStaticVehicle(487, 1291.1667,-788.3718,96.4609, 146.8603, 194, 0);
+//----------------------- VOZILA ----------------------------
+	//J_BUS -> JOB_BUS
+	j_bus[0] = AddStaticVehicle(431, 1275.6406, -1796.2198, 13.5000, -89.8200, -1, -1);
+	j_bus[1] = AddStaticVehicle(431, 1275.6406, -1803.0000, 13.5000, -89.8200, -1, -1);
+	j_bus[2] = AddStaticVehicle(431, 1275.6406, -1810.0000, 13.5000, -89.8200, -1, -1);
+	j_bus[3] = AddStaticVehicle(431, 1275.6406, -1817.0000, 13.5000, -89.8200, -1, -1);
+	j_bus[4] = AddStaticVehicle(431, 1275.6406, -1824.0000, 13.5000, -89.8200, -1, -1);
+	j_bus[5] = AddStaticVehicle(431, 1275.6406, -1831.0000, 13.5000, -89.8200, -1, -1);
+	
+	//J_KOMBI -> JOB_KOMBI
+	j_kombi[0] = AddStaticVehicle(498, 1526.0002, -1012.4600, 23.9562, -130.0000, 128, -1);
+	j_kombi[1] = AddStaticVehicle(498, 1528.6698, -1009.3649, 23.9562, -130.0000, 128, -1);
+	j_kombi[2] = AddStaticVehicle(498, 1531.5457, -1006.1431, 23.9562, -130.0000, 128, -1);
+	j_kombi[3] = AddStaticVehicle(498, 1537.2740, -1005.4114, 23.9562, 180.0000, 128, -1);
+	j_kombi[4] = AddStaticVehicle(498, 1541.4963, -1005.6569, 23.9562, 180.0000, 128, -1);
+	j_kombi[5] = AddStaticVehicle(498, 1545.5612, -1005.9648, 23.9562, 180.0000, 128, -1);
+	j_kombi[6] = AddStaticVehicle(498, 1549.2892, -1006.9203, 23.9562, 180.0000, 128, -1);
+	j_kombi[7] = AddStaticVehicle(498, 1523.5182, -1025.3003, 23.9562, -90.0000, 128, -1);
+	j_kombi[8] = AddStaticVehicle(498, 1523.5408, -1021.5369, 23.9562, -90.0000, 128, -1);
+	j_kombi[9] = AddStaticVehicle(498, 1523.5670, -1017.6931, 23.9562, -90.0000, 128, -1);
+//----------------------- Timeri ----------------------------
+	SetTimer("Fuel", 60000, true);
+	SetTimer("PayDay", 3600000, true);
+	SetTimer("Time", 100, true);
+	SetTimer("CarUpdate", 1000, true);
+	SetTimer("RandomMessages", 2700000, true);
+//----------------------- Pickup i Label ----------------------------
+	CallPickups();
+//----------------------- Mape ----------------------------
+	ZemunciGate = CreateDynamicObject(975, 1245.65881, -766.94067, 92.77000,   0.00000, 0.00000, 0.00000);
+	//Za Zemunci
+	CallMapZemunci();
+	//CreateDynamicObject(19302, 1265.842651, -775.345886, 1081.783569, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);
+	//CreateDynamicObject(19302, 1261.842773, -775.345886, 1081.754028, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);
+	//Za milicajci
+	CallMapLSPD();
+	//zatvor
+	// CreateDynamicObject(19302, 266.395690, 87.476341, 998.878662, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
+	// CreateDynamicObject(19302, 266.379943, 82.966346, 998.878601, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
+	//bolnica enterijer
+	CallMapBolnica();
+	//jelka
+	#if SNEG == 1
+	CallJelka();
+	#endif
+	//fib stanica
+	CallFIB();
 	//Sneg
 	#if SNEG == 1
-	SnijegObjekti(5145, 2716.79687, -2447.87500, 2.15625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5146, 2498.19531, -2408.00781, 1.80468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5147, 2533.76562, -2330.82812, 22.19531, 0.00000, 0.00000, 315.00000);
-	SnijegObjekti(3753, 2702.39843, -2324.25781, 3.03906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5333, 2374.38281, -2171.46875, 21.17968, 0.00000, 0.00000, 135.00000);
-	SnijegObjekti(5191, 2381.44531, -2397.43750, 6.67187, 0.00000, 0.00000, 45.00000);
-	SnijegObjekti(5176, 2521.53906, -2606.95312, 17.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3753, 2615.10937, -2464.61718, 3.03906, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(3753, 2748.01562, -2571.59375, 3.03906, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(5115, 2523.40625, -2217.46093, 12.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3753, 2511.47656, -2256.03125, 3.03906, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(5108, 2333.55468, -2308.71093, 3.27343, 0.00000, 0.00000, 45.00000);
-	SnijegObjekti(5353, 2543.75000, -2163.78906, 14.20312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5250, 2743.43750, -2120.64062, 15.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5184, 2699.03125, -2227.74218, 31.42968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5125, 2397.82031, -2183.05468, 15.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5124, 2278.89843, -2286.31250, 15.33593, 0.00000, 0.00000, 45.00000);
-	SnijegObjekti(3753, 2299.18750, -2405.39843, 3.03906, 0.00000, 0.00000, 225.00000);
-	SnijegObjekti(3753, 2368.16406, -2523.86718, 3.03906, 0.00000, 0.00000, 90.00000);
-	SnijegObjekti(3753, 2454.82812, -2702.91406, 3.03906, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(5109, 2219.33593, -2558.80468, 4.98437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4841, 2123.78906, -2576.32812, 15.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5003, 2018.43750, -2585.50000, 18.78125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4864, 1996.06250, -2677.55468, 14.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4822, 2179.89843, -2407.41406, 15.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5004, 2030.14062, -2417.69531, 12.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4867, 1780.80468, -2604.14062, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4842, 1383.79687, -2707.74218, 3.27343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4863, 1533.08593, -2677.43750, 11.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4865, 1515.40625, -2602.50781, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4843, 1274.56250, -2551.86718, 3.27343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4839, 1383.60937, -2633.05468, 15.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4883, 1339.23437, -2456.69531, 15.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4866, 1517.15625, -2449.64843, 12.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4816, 1210.71093, -2467.78906, 1.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4840, 1233.50000, -2438.00000, 8.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4845, 1222.82812, -2291.23437, 7.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4835, 1466.76562, -2286.43750, 16.58593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4838, 1411.57812, -2265.07031, 12.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4834, 1315.84375, -2286.33593, 13.43750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4833, 1528.74218, -2252.64062, 12.68750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4871, 1569.93750, -2378.24218, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4831, 1756.08593, -2286.50000, 16.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4830, 1687.78125, -2286.53906, 10.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4869, 1893.39062, -2269.60156, 14.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5002, 1780.35937, -2437.60156, 12.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5009, 2065.13281, -2269.60156, 15.32031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4868, 2139.60937, -2292.42187, 15.32031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5123, 2195.08593, -2266.61718, 12.56250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5276, 2219.60156, -2200.49218, 12.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4827, 2056.88281, -2187.35156, 6.27343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5314, 2085.17968, -2132.70312, 12.41406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5271, 2275.40625, -2095.26562, 12.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5274, 2317.71875, -2210.57812, 8.80468, 0.00000, 0.00000, 315.00000);
-	SnijegObjekti(5277, 2235.91406, -2282.46093, 13.18750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5275, 2293.80468, -2172.77343, 11.71093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5106, 2390.24218, -2013.87500, 16.04687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5112, 2521.09375, -2049.24218, 18.73437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5297, 2393.06250, -2049.24218, 18.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5330, 2303.75000, -1982.78125, 12.42968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5311, 2287.34375, -2024.38281, 12.53906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5174, 2371.25781, -2024.32031, 16.58593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5149, 2479.82812, -2009.00000, 15.18750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5105, 2543.46093, -2142.28125, 10.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5120, 2243.64843, -2021.01562, 12.41406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5270, 2112.30468, -2001.79687, 9.76562, 0.00000, 0.00000, 45.00000);
-	SnijegObjekti(5273, 2153.40625, -2051.42968, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5272, 2213.17187, -2033.06250, 12.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5343, 2136.50781, -1992.89062, 12.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5347, 2130.63281, -1987.89843, 13.14843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5122, 2184.43750, -1932.95312, 14.38281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5119, 2176.06250, -1911.87500, 12.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5329, 2216.18750, -1912.33593, 13.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5111, 2271.35937, -1912.38281, 14.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5513, 2200.72656, -1811.33593, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17595, 2217.48437, -1810.83593, 12.36718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5141, 2271.19531, -1928.39062, 12.49218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5349, 2143.67187, -1894.47656, 12.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5118, 2107.77343, -1958.81250, 12.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5182, 2115.00000, -1921.52343, 15.39062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5117, 2031.25000, -1962.31250, 13.28906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5121, 2041.65625, -1904.81250, 12.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5116, 2361.27343, -1918.74218, 16.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5168, 2385.18750, -1906.51562, 18.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5178, 2479.85156, -1930.21093, 12.41406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5187, 2439.28125, -1979.96093, 15.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5142, 2489.23437, -1962.01562, 19.03906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5355, 2582.42968, -1979.37500, 9.14843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5296, 2652.92968, -2049.24218, 18.12500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5143, 2639.40625, -2102.39843, 36.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5113, 2758.53906, -2104.89843, 18.28125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5188, 2718.44531, -1977.50000, 11.21875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5133, 2845.64843, -1969.99218, 9.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5173, 2768.44531, -2012.09375, 14.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5144, 2768.56250, -1942.69531, 11.30468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17582, 2739.21875, -1770.08593, 17.55468, 0.00000, 0.00000, 175.00000);
-	SnijegObjekti(17927, 2771.17187, -1901.49218, 11.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17602, 2678.68750, -1849.80468, 9.90625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17606, 2848.87500, -1799.57031, 10.32031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17675, 2893.58593, -1586.53125, 10.22656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17605, 2798.70312, -1657.29687, 10.98437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17607, 2854.89843, -1525.40625, 9.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17541, 2803.39843, -1573.80468, 20.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17604, 2690.29687, -1657.30468, 10.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17609, 2730.14062, -1572.89843, 20.63281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17682, 2674.94531, -1622.54687, 14.17968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17680, 2642.69531, -1540.80468, 19.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17538, 2682.80468, -1507.41406, 44.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17603, 2642.79687, -1733.10156, 9.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17600, 2585.25781, -1732.34375, 11.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17601, 2674.18750, -1860.69531, 11.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5151, 2674.10156, -1990.78906, 15.18750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17500, 2478.60156, -1851.48437, 6.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5128, 2516.59375, -1875.55468, 11.67968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5110, 2443.63281, -1901.32031, 18.00781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5267, 2485.76562, -1900.43750, 18.53125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17599, 2522.19531, -1773.00000, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17548, 2482.32812, -1783.14843, 14.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17596, 2413.75000, -1820.83593, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17598, 2469.38281, -1732.21093, 12.57812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17613, 2489.29687, -1668.50000, 12.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17617, 2502.32031, -1649.58593, 15.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17616, 2521.68750, -1692.85937, 14.86718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17574, 2459.80468, -1714.88281, 12.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17612, 2408.09375, -1658.90625, 12.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17881, 2429.78906, -1681.84375, 12.64062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17615, 2459.59375, -1695.60156, 13.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17654, 2556.35156, -1612.91406, 15.90625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17655, 2433.07031, -1611.55468, 12.03125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17829, 2413.68750, -1576.64062, 16.20312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17657, 2431.03906, -1603.49218, 20.20312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17656, 2431.05468, -1677.42968, 20.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17597, 2314.95312, -1741.32812, 12.48437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17614, 2387.80468, -1695.64843, 13.74218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17621, 2342.59375, -1682.70312, 12.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17620, 2281.21093, -1695.64843, 13.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17611, 2284.66406, -1656.71093, 13.42968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17619, 2303.41406, -1622.42187, 9.05468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17622, 2342.60937, -1608.81250, 16.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17867, 2308.45312, -1599.38281, 4.63281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17866, 2339.78906, -1583.99218, 14.96093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17638, 2431.69531, -1514.35156, 22.90625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17624, 2386.78906, -1524.35937, 22.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17862, 2458.38281, -1532.43750, 22.99218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17623, 2342.50000, -1534.00000, 22.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17639, 2490.90625, -1504.32812, 22.92187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17921, 2560.86718, -1474.34375, 22.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17687, 2577.24218, -1447.23437, 30.77343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17640, 2461.39062, -1445.78125, 25.82031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17852, 2490.90625, -1474.34375, 27.34375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17920, 2295.01562, -1564.46875, 12.32031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5511, 2193.25000, -1543.54687, 9.70312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5478, 2269.08593, -1487.55468, 20.73437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5479, 2234.16406, -1590.25781, 16.66406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17513, 2288.89843, -1525.50000, 17.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17610, 2224.03906, -1680.64062, 13.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5480, 2208.37500, -1698.24218, 13.39062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5510, 2192.79687, -1665.03906, 13.73437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5440, 2207.67968, -1588.39062, 19.34375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5509, 2150.39062, -1741.82812, 12.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5419, 2078.15625, -1847.70312, 7.76562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5183, 2111.65625, -1873.36718, 16.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5180, 2163.67187, -1873.61718, 15.82031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5508, 2085.85937, -1812.77343, 13.17968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5528, 2101.29687, -1688.77343, 18.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5506, 2079.83593, -1699.94531, 12.46093, 0.00000, 0.00000, 275.57501);
-	SnijegObjekti(5411, 2021.65625, -1810.72656, 18.60156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5139, 2021.15625, -1893.27343, 15.17968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5404, 1952.71875, -1856.78125, 7.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4895, 1899.15625, -1936.33593, 14.26562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5052, 1961.65625, -1863.11718, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5013, 1961.66406, -2001.89843, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5186, 2014.81250, -2041.14062, 12.53906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4807, 1964.64062, -2109.42187, 14.10937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4808, 1892.33593, -2037.64843, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4806, 1880.33593, -2001.92187, 12.57031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4859, 1868.95312, -2003.65625, 13.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5064, 1855.45312, -1958.46093, 12.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4858, 1891.74218, -1872.28125, 14.85937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5420, 1835.82031, -1815.14062, 7.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5489, 1932.59375, -1782.10156, 12.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5026, 1821.66406, -1872.31250, 12.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4819, 1815.45312, -1958.46093, 12.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4817, 1739.30468, -1951.95312, 12.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4837, 1823.00781, -2087.17187, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4849, 1892.33593, -2109.50781, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4861, 1873.01562, -2101.83593, 15.89062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4846, 1827.13281, -2158.85937, 14.51562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5036, 1694.60156, -2131.11718, 12.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5034, 1742.81250, -2292.75781, 3.92968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4829, 1645.38281, -2292.75781, 3.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4870, 1569.98437, -2194.72656, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4836, 1441.90625, -2166.64843, 13.27343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4872, 1610.92968, -2010.62500, 23.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5028, 1624.00000, -2113.61718, 23.10937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4820, 1738.39062, -2117.02343, 13.93750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4876, 1582.29687, -2002.23437, 26.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4878, 1530.82812, -1969.13281, 26.39062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4852, 1401.46093, -1994.58593, 35.43750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4823, 1338.32812, -1976.65625, 36.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4875, 1270.68750, -2196.78906, 42.56250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4824, 1224.42968, -2037.00781, 62.92968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4851, 1182.00781, -1987.63281, 39.99218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4810, 1095.06250, -2214.21875, 41.72656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5046, 1105.50000, -2355.95312, 16.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4809, 1036.52343, -2204.43750, 14.16406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4815, 1074.58593, -2321.74218, 10.85156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4898, 992.85937, -2126.61718, 12.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4896, 981.70312, -2155.85156, 1.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4814, 1071.03125, -2354.00781, 1.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4812, 1023.39843, -2166.10156, 23.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5023, 1046.05468, -2251.50781, 33.64062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4811, 1069.67187, -2270.89843, 23.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4897, 985.72656, -2050.53125, 3.04687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5021, 1044.91406, -2023.39062, 17.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4813, 1042.27343, -2029.80468, 23.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6065, 887.46093, -1878.39062, 3.12500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6118, 1050.07812, -1864.31250, 12.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6117, 1109.32031, -1852.37500, 12.56250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4168, 1217.45312, -1852.26562, 12.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4108, 1177.46093, -1782.25000, 12.66406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4182, 1304.98437, -1792.28125, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4107, 1360.75781, -1802.25000, 12.49218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4010, 1350.75781, -1802.28125, 12.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4165, 1469.52343, -1872.37500, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4207, 1603.81250, -1863.34375, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4133, 1625.09375, -1834.20312, 24.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4209, 1569.93750, -1802.28906, 12.32031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4122, 1629.46093, -1812.28906, 13.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4160, 1686.62500, -1806.42968, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3991, 1608.19531, -1721.80468, 26.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6116, 997.56250, -1798.51562, 12.95312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6054, 1036.41406, -1689.17968, 12.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6042, 952.34375, -1822.82031, 15.17968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6122, 798.09375, -1763.10156, 12.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6123, 917.39843, -1672.90625, 12.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6203, 956.19531, -1689.60156, 12.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6115, 1087.46093, -1712.26562, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6128, 1207.46093, -1712.19531, 12.66406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6126, 1149.89843, -1642.14843, 12.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3978, 1380.26562, -1655.53906, 10.80468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4197, 1380.26562, -1655.53906, 10.80468, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(4198, 1380.26562, -1655.53906, 10.80468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6127, 1306.51562, -1630.35937, 12.46875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4163, 1469.33593, -1732.28906, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4148, 1427.05468, -1662.28906, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4186, 1479.55468, -1693.14062, 19.57812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4158, 1609.55468, -1732.32812, 12.46875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4150, 1532.05468, -1662.28906, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4029, 1629.54687, -1756.08593, 8.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3985, 1479.56250, -1631.45312, 12.07812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4129, 1595.00000, -1603.02343, 27.03906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3989, 1646.00781, -1662.71875, 8.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3993, 1719.93750, -1662.28906, 12.46875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4013, 1654.59375, -1637.74218, 28.64062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3987, 1722.05468, -1702.28906, 12.81250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3992, 1755.60156, -1782.30468, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3983, 1722.50000, -1775.39843, 14.51562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3977, 1384.36718, -1511.43750, 10.10937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4146, 1371.00000, -1582.34375, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4144, 1442.15625, -1517.53125, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3994, 1479.55468, -1592.28906, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4020, 1544.83593, -1516.85156, 32.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4142, 1494.75781, -1410.87500, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4139, 1406.17187, -1418.10156, 12.78906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4712, 1546.98437, -1356.61718, 14.95312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3990, 1593.95312, -1416.35156, 26.66406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3996, 1596.35937, -1440.87500, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4131, 1588.44531, -1509.14062, 27.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4128, 1666.91406, -1456.75000, 26.04687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4127, 1664.12500, -1560.85156, 23.35156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4152, 1658.10937, -1516.69531, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4233, 1603.90625, -1592.29687, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4156, 1739.81250, -1602.19531, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4001, 1700.47656, -1517.69531, 17.93750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4125, 1769.51562, -1509.48437, 12.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4154, 1706.21093, -1432.35156, 12.44531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4645, 1605.72656, -1370.82812, 15.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4557, 1714.74218, -1350.87500, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5498, 1849.32812, -1373.39843, 12.48437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3995, 1797.16406, -1464.39062, 7.99218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5439, 1887.79687, -1536.60156, 7.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5501, 1884.66406, -1613.42187, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5502, 1822.89062, -1725.25781, 12.46875, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(5503, 1927.70312, -1754.31250, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5441, 1941.65625, -1682.57031, 12.47656, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(5505, 2002.48437, -1700.98437, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5507, 2041.66406, -1672.31250, 12.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5442, 2041.72656, -1752.31250, 12.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5518, 2137.98437, -1672.55468, 12.77343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5504, 2046.00000, -1613.00000, 12.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5512, 2069.92187, -1535.78125, 10.49218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5471, 2088.10937, -1568.11718, 11.05468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5472, 2117.29687, -1541.57812, 23.53906, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(5391, 2148.80468, -1627.12500, 13.42968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5519, 2159.81250, -1595.92187, 12.89062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5438, 2222.67187, -1462.91406, 22.78906, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(17509, 2511.75781, -1544.31250, 18.51562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17505, 2339.78906, -1583.99218, 12.76562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17877, 2374.30468, -1640.43750, 12.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5429, 2244.69531, -1518.75000, 22.23437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17625, 2315.35937, -1444.20312, 22.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17637, 2391.17968, -1414.32812, 22.92968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17636, 2411.16406, -1402.88281, 28.01562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17645, 2481.21875, -1350.49218, 27.77343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17644, 2511.76562, -1349.52343, 30.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17634, 2411.02343, -1301.75000, 25.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17642, 2411.08593, -1235.32812, 27.80468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17635, 2411.02343, -1352.10156, 23.70312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17630, 2371.07812, -1216.36718, 24.71093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17628, 2371.08593, -1320.45312, 22.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17976, 2414.39843, -1362.20312, 32.60156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17643, 2451.01562, -1230.28906, 29.18750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17646, 2511.00000, -1256.60156, 33.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17641, 2454.60156, -1350.46093, 22.82812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17627, 2347.67187, -1384.31250, 22.92968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17545, 2337.17968, -1342.62500, 23.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17626, 2303.43750, -1338.03906, 22.98437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5674, 2286.37500, -1371.27343, 22.95312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5428, 2252.00000, -1434.14062, 23.25781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5494, 2263.21093, -1368.70312, 22.92968, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(5437, 2155.00000, -1382.00000, 23.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5427, 2170.97656, -1461.12500, 25.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5496, 2120.00000, -1440.00000, 23.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5497, 2060.19531, -1463.40625, 18.94531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5495, 2066.00000, -1358.00000, 23.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5492, 2168.21093, -1300.80468, 22.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5477, 2287.09375, -1217.65625, 24.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17632, 2307.52343, -1225.10156, 23.80468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5490, 2269.78125, -1224.53125, 24.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5491, 2171.39062, -1220.82031, 22.88281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5424, 2218.89062, -1260.81250, 24.28906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5493, 2169.97656, -1260.46093, 22.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5482, 2172.57031, -1171.20312, 23.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5459, 2123.93750, -1159.00000, 24.16406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5650, 2213.50000, -1124.90625, 24.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5423, 2121.10156, -1260.87500, 26.15625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5435, 2069.36718, -1260.99218, 22.89843, 0.00000, 0.00000, 90.00000);
-	SnijegObjekti(5434, 1946.82812, -1260.90625, 17.67968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5499, 1944.00000, -1341.00000, 18.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5487, 1972.60937, -1198.31250, 23.97656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5458, 1995.01562, -1198.35156, 21.10937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5483, 2069.29687, -1149.20312, 22.94531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5432, 2110.09375, -1098.80468, 23.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5485, 1950.59375, -1135.88281, 24.02343, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(5486, 2005.50000, -1081.30468, 24.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5443, 2019.40625, -1107.13281, 24.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5481, 2023.25781, -1034.48437, 29.12500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5445, 2105.96093, -1038.55468, 40.41406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5444, 2143.05468, -1048.40625, 48.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5446, 2086.29687, -1077.07812, 29.05468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5484, 2190.58593, -1063.07031, 45.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5456, 2185.09375, -1013.21093, 59.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13706, 2372.03125, -1056.34375, 57.03906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13823, 2284.00781, -929.46875, 88.18750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5451, 2256.03125, -1019.92187, 59.38281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13795, 2422.11718, -1093.34375, 48.15625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17631, 2336.93750, -1153.14062, 26.62500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17669, 2378.03125, -1110.17187, 33.61718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17906, 2440.30468, -1120.25000, 43.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17670, 2463.75000, -1151.64843, 34.96875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17647, 2420.95312, -1179.13281, 31.01562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17678, 2506.88281, -1167.06250, 46.24218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17648, 2511.03906, -1184.53906, 48.20312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17892, 2511.02343, -1220.26562, 42.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17893, 2553.97656, -1205.13281, 60.65625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17894, 2524.44531, -1205.61718, 56.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17651, 2636.89062, -1184.08593, 64.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17650, 2570.89843, -1230.30468, 52.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17652, 2646.79687, -1257.00000, 51.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17649, 2571.00000, -1350.40625, 33.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17679, 2540.82812, -1350.58593, 40.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17681, 2682.64843, -1456.39843, 29.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17653, 2642.78906, -1350.25781, 39.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17666, 2642.67187, -1217.78125, 58.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17658, 2730.13281, -1445.92187, 32.68750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17608, 2806.30468, -1488.45312, 19.58593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17556, 2804.71093, -1451.60937, 19.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17561, 2769.53125, -1446.67187, 22.06250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17683, 2866.69531, -1355.90625, 15.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17674, 2903.42968, -1336.88281, 9.97656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17676, 2928.05468, -1298.13281, 8.16406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17660, 2825.99218, -1386.36718, 15.17187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17685, 2810.67187, -1263.75000, 39.12500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17589, 2801.78125, -1392.64062, 20.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17661, 2796.89062, -1323.23437, 32.82812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17673, 2882.54687, -1146.64062, 10.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17684, 2847.09375, -1148.80468, 16.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17659, 2729.00000, -1330.70312, 47.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17663, 2730.19531, -1220.90625, 63.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17662, 2777.29687, -1259.00000, 52.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17664, 2685.25781, -1220.95312, 59.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17671, 2633.64843, -1152.68750, 47.90625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17696, 2690.39062, -1154.14062, 56.71093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17677, 2587.65625, -1101.25781, 56.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17849, 2642.73437, -1086.32031, 66.02343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17667, 2642.71875, -1164.50000, 59.16406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17693, 2730.23437, -1117.64843, 64.17187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17691, 2778.79687, -1099.79687, 41.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17672, 2789.42187, -1144.94531, 29.95312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13810, 2948.41406, -951.76562, -28.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13708, 2778.64843, -930.35156, 39.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13709, 2856.43750, -930.17968, 16.14843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13809, 2734.87500, -917.96093, 47.82031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13497, 2870.02343, -662.57812, 26.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13121, 2870.02343, -662.57812, 26.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12877, 2870.77343, -677.79687, 10.67968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13120, 2629.58593, -662.28906, 89.49218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13156, 2379.60156, -670.41406, 112.02343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13123, 2631.27343, -415.71875, 54.14843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13134, 2372.07031, -407.32812, 73.57031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13710, 2523.76562, -915.31250, 85.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13707, 2563.92187, -1047.17187, 68.17187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17692, 2681.78125, -1078.75000, 68.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17694, 2704.28906, -1095.78906, 62.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17668, 2506.70312, -1079.83593, 54.94531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13122, 2862.23437, -413.64062, -4.21875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12878, 2807.10937, -480.72656, 16.26562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12974, 2793.53125, -447.35937, 18.17968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12876, 2815.46875, -278.23437, 10.93750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12879, 2732.03906, -231.38281, 29.75781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13824, 2039.82031, -904.82031, 79.06250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13157, 2148.91406, -662.00000, 90.57031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13158, 1941.59375, -686.10156, 75.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13825, 1826.08593, -882.76562, 75.32031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5433, 2044.59375, -1007.20312, 38.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5448, 2068.20312, -965.95312, 47.88281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5656, 2046.64843, -1009.96875, 40.89062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4695, 1898.47656, -1016.67968, 29.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5431, 1914.17968, -1073.31250, 23.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5668, 1928.90625, -1026.75781, 28.71875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5457, 1923.60937, -1088.34375, 24.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5640, 1914.03125, -1198.32812, 19.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5488, 1852.26562, -1196.06250, 20.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4700, 1807.28125, -1049.87500, 23.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4604, 1757.00781, -1127.25781, 23.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4658, 1810.93750, -1001.45312, 34.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4692, 1702.95312, -1031.42968, 39.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4701, 1722.28906, -1043.25000, 23.01562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4595, 1634.42968, -1115.53125, 23.03125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4702, 1647.33593, -1033.16406, 22.99218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4666, 1614.67968, -1024.67968, 42.78125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4653, 1661.97656, -910.81250, 46.05468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4664, 1643.16406, -1128.23437, 41.56250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4662, 1624.82031, -1229.85937, 34.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4656, 1693.95312, -766.04687, 50.00781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13826, 1805.02343, -699.98437, 69.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13672, 1700.89062, -556.53906, 38.35937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13723, 1496.91406, -790.91406, 48.67968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13821, 1530.92187, -532.64062, 62.98437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13751, 1650.02343, -559.67187, 42.35156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13820, 1701.62500, -489.19531, 59.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13502, 1935.17968, -526.87500, 51.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13146, 1935.17968, -526.87500, 51.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13719, 1437.55468, -669.28906, 86.81250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13673, 1284.30468, -677.42187, 81.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13674, 1411.90625, -562.96875, 67.58593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13818, 1317.85937, -474.10156, 52.21875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13323, 1245.20312, -430.53906, 22.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13237, 1148.69531, -528.16406, 57.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13752, 1210.70312, -625.61718, 78.71093, 0.00000, 0.00000, 10.44999);
-	SnijegObjekti(13720, 1192.34375, -669.16406, 52.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4660, 1507.78125, -966.94531, 33.83593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4703, 1569.92187, -1041.07812, 22.97656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13882, 1376.50000, -788.78906, 67.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4694, 1425.03906, -947.82812, 34.28125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5803, 1376.42968, -912.18750, 36.17968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13756, 1349.29687, -809.14062, 68.88281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13801, 1341.02343, -839.93750, 58.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13757, 1250.80468, -833.01562, 63.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5845, 1323.66406, -884.63281, 36.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5851, 1323.66406, -884.63281, 36.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5744, 1268.44531, -935.32031, 37.70312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13715, 1041.32031, -707.45312, 90.02343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13718, 1063.58593, -626.98437, 112.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13528, 1138.66406, -311.89062, 38.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13212, 1138.66406, -311.89062, 38.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13324, 979.50781, -500.17968, 33.12500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13213, 896.94531, -285.84375, 22.55468, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13214, 871.25781, -411.43750, 38.10156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13236, 953.02343, -569.69531, 68.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13211, 594.83593, -299.83593, 6.28125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13129, 786.71093, -539.52343, 15.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12999, 681.71093, -574.88281, 15.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3316, 769.21875, -558.86718, 18.67187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3353, 798.24218, -500.96875, 16.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(3314, 815.15625, -500.96875, 16.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12998, 811.71875, -580.96875, 15.25781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12981, 857.21093, -609.96875, 17.41406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13531, 797.70312, -707.14062, 64.24218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13235, 797.70312, -707.14062, 64.24218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13845, 667.54687, -853.20312, 52.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13704, 653.58593, -841.35156, 39.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13730, 767.57031, -927.32812, 48.36718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13702, 696.50781, -849.16406, 54.88281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13726, 809.36718, -778.78125, 80.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12976, 681.47656, -459.00000, 15.53125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13001, 701.06250, -507.64062, 15.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13127, 631.71093, -507.64062, 15.25000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13000, 563.56250, -438.88281, 36.09375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12989, 536.89062, -578.04687, 32.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13128, 640.57031, -660.17968, 12.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12971, 548.76562, -626.98437, 26.17187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13370, 543.13281, -807.58593, 52.84375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13371, 422.06250, -782.47656, 42.61718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13021, 387.11718, -941.69531, 51.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12864, 183.82812, -697.42968, 24.14843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13019, 141.58593, -858.93750, 5.67968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12973, 421.21093, -570.23437, 37.92187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13020, 317.19531, -869.16406, 33.00781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13342, 133.44531, -655.82812, 14.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12970, 310.78906, -591.55468, 33.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13017, 155.79687, -1140.15625, 6.23437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13683, 339.72656, -1086.42968, 73.91406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13871, 415.52343, -1080.00000, 76.90625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13789, 191.51562, -1207.74218, 52.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13692, 252.23437, -1211.92968, 64.96093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13685, 428.91406, -1103.67187, 77.15625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13735, 313.93750, -1203.23437, 74.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13678, 223.12500, -1150.96875, 64.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13736, 239.78906, -1283.89843, 61.64062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13733, 329.53906, -1237.81250, 62.83593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13738, 319.97656, -1289.57031, 52.48437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13734, 366.11718, -1226.23437, 58.15625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13732, 449.83593, -1233.48437, 33.21875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13684, 495.02343, -1153.19531, 62.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13742, 508.64062, -1244.42968, 40.16406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6509, 529.00781, -1268.35937, 15.51562, 0.00000, 0.00000, 39.00000);
-	SnijegObjekti(6327, 377.28909, -1362.66406, 13.58593, 0.00000, 0.00000, 30.10199);
-	SnijegObjekti(6330, 525.21093, -1443.21875, 14.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13741, 332.99218, -1331.38281, 32.97656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6356, 381.28125, -1323.17187, 24.49218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6328, 294.97656, -1366.74218, 18.92968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13740, 179.30468, -1448.42968, 28.01562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6326, 207.59375, -1484.50781, 11.90625, 0.00000, 0.00000, 207.04595);
-	SnijegObjekti(6497, 227.78906, -1423.03125, 18.60937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13737, 252.86718, -1288.48437, 64.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13739, 216.09375, -1361.97656, 49.17187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13690, 135.64062, -1455.68750, 25.62500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13675, 116.01563, -1393.33593, 24.90625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6325, 128.12500, -1551.03125, 8.20312, 0.00000, 0.00000, 352.20999);
-	SnijegObjekti(17281, -42.50780, -1476.89062, 4.31250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17121, -65.05467, -1572.94531, -3.89843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17118, -52.24219, -1395.50781, 4.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17186, -39.32030, -1566.71875, 1.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17279, -111.00781, -1362.33593, 5.23437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13676, 78.41406, -1270.49218, 13.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13677, 92.21875, -1291.65625, 14.11718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17301, -49.39062, -1140.86718, 5.20312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17297, -28.64842, -1020.34375, 16.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6292, 137.72656, -1026.68750, 24.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17117, 5.04687, -1000.33593, 17.08593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17305, -153.19531, -971.96093, 34.26562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(12851, -51.97655, -842.67187, 19.74218, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17115, -283.96875, -960.07031, 33.62500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17302, -160.82812, -1100.76562, 6.42968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17296, -178.11718, -1049.76562, 14.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17303, -114.95313, -1179.69531, 3.14843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17119, -226.96093, -1253.90625, 7.86718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6428, 245.19531, -1736.70312, 3.63281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6315, 205.46093, -1656.82031, 8.96875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6416, 95.64842, -1593.14843, -19.21093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6314, 127.64842, -1659.70312, 7.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6293, 125.69531, -1768.54687, -10.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6280, 260.02343, -1839.91406, -1.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6417, 156.53906, -1908.78125, -13.68750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6427, 293.21875, -1691.21875, 7.84375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6448, 335.30468, -1711.90625, 25.62500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6449, 387.76562, -1823.63281, 12.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6311, 400.69531, -1755.70312, 6.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6297, 432.81250, -1856.28906, 1.22656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6450, 379.72656, -1945.95312, -1.21875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6300, 379.53906, -2050.86718, -1.21875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6310, 437.89843, -1715.10156, 8.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6281, 570.74218, -1868.34375, 1.67968, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6443, 301.93750, -1657.81250, 19.64843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6313, 437.19531, -1679.44531, 19.22656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6316, 199.40629, -1626.73437, 12.37500, 0.00000, 0.00000, 133.05000);
-	SnijegObjekti(6312, 202.71093, -1580.11718, 22.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6317, 270.29687, -1613.60156, 32.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6305, 328.57031, -1612.57812, 31.93750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6320, 297.50000, -1490.30468, 32.09375, 0.00000, 0.00000, 31.96500);
-	SnijegObjekti(6345, 236.54690, -1498.31250, 21.75000, 0.00000, 0.00000, 337.82998);
-	SnijegObjekti(6347, 238.17968, -1509.85156, 22.11718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6321, 270.69531, -1576.20312, 31.89843, 0.00000, 0.00000, 345.65499);
-	SnijegObjekti(6341, 332.89062, -1500.06250, 29.87500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6323, 416.46881, -1446.08593, 30.79687, 0.00000, 0.00000, 36.04999);
-	SnijegObjekti(6319, 444.21881, -1376.51562, 24.67187, 0.00000, 0.00000, 28.30500);
-	SnijegObjekti(6318, 572.95312, -1328.72656, 13.07031, 0.00000, 0.00000, 14.27000);
-	SnijegObjekti(6324, 632.57812, -1443.09375, 13.68750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6508, 624.70312, -1252.11718, 14.87500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6331, 473.82031, -1437.41406, 21.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6302, 576.14062, -1406.25781, 13.76562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6322, 496.27343, -1500.14062, 16.66406, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6304, 444.00000, -1521.40625, 27.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6303, 359.21090, -1523.76562, 31.59375, 0.00000, 0.00000, 38.40999);
-	SnijegObjekti(6343, 389.48437, -1528.78906, 28.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6333, 422.00000, -1583.10156, 23.69531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6329, 557.53906, -1577.91406, 15.03125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6307, 491.46875, -1630.75000, 20.07812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6306, 428.05468, -1654.95312, 24.92187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6308, 565.81250, -1671.28125, 16.36718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6398, 552.53125, -1695.57812, 15.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6064, 688.53125, -1877.96093, 2.01562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6309, 576.64062, -1730.42187, 11.88281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6291, 631.66406, -1647.45312, 14.38281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6225, 724.81250, -1673.65625, 11.62500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6227, 676.61718, -1668.96093, 3.85156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6231, 753.04687, -1676.26562, 8.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6119, 810.87500, -1703.42968, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6229, 773.20312, -1667.99218, 2.93750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6188, 836.31250, -1866.75781, -0.53906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6120, 845.66406, -1607.29687, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6189, 836.44531, -2003.52343, -2.64062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6114, 1044.78906, -1572.26562, 12.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6121, 926.75000, -1572.27343, 12.51562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6124, 742.40625, -1595.16406, 13.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6111, 784.50000, -1496.20312, 12.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6135, 764.32031, -1509.04687, 16.82812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6094, 731.15625, -1506.53125, 3.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6301, 717.48437, -1362.77343, 12.51562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6487, 713.56250, -1236.21875, 17.82031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13703, 495.41406, -957.49218, 79.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13872, 587.67187, -958.76562, 65.35156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13689, 567.82812, -1031.39843, 71.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13688, 689.69531, -1023.00000, 50.46875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13698, 650.87500, -1076.07812, 38.83593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5765, 819.57812, -986.02337, 35.93750, 0.00000, 0.00000, 116.42299);
-	SnijegObjekti(5753, 850.82812, -1013.78125, 30.25781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5755, 796.46093, -1111.12500, 23.18750, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6507, 696.89837, -1138.50000, 18.19531, 0.00000, 0.00000, 191.77600);
-	SnijegObjekti(5756, 797.91406, -1234.44531, 17.71875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5805, 869.92187, -1144.73437, 22.75781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5871, 879.57031, -1092.87500, 26.15625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5864, 849.91406, -1196.68750, 19.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5865, 892.79687, -1268.61718, 19.72656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5863, 912.88281, -1194.32812, 20.73437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5705, 830.86718, -1269.12500, 20.85937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5796, 859.89062, -1323.78906, 12.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5798, 797.35156, -1357.64062, 12.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5862, 847.35156, -1400.48437, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13693, 560.28125, -1184.89843, 44.22656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13686, 553.59375, -1164.53125, 51.34375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5754, 962.60156, -1056.30468, 30.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5807, 1041.99218, -1039.29687, 30.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5875, 1022.64062, -1080.32812, 27.25781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5758, 1012.59375, -1145.08593, 22.75781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5757, 943.43750, -1220.53125, 17.61718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5759, 1058.11718, -1234.76562, 17.60156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5747, 1084.46875, -1048.88281, 32.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5748, 1133.00781, -1145.96875, 22.77343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5878, 1122.65625, -1080.45312, 26.73437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5752, 989.11718, -966.10156, 39.50781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5866, 916.57812, -952.71093, 43.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5718, 901.23437, -967.47662, 47.65625, 0.00000, 0.00000, 10.00000);
-	SnijegObjekti(5987, 913.71875, -918.58593, 49.34375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5853, 1018.16412, -908.97662, 43.64843, 0.00000, 0.00000, 7.71999);
-	SnijegObjekti(13711, 994.05468, -841.23437, 75.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5802, 1124.57031, -950.24218, 41.75781, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13814, 850.87500, -912.80468, 58.14062, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13813, 817.73437, -917.84375, 54.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13716, 849.37500, -828.64843, 73.56250, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13713, 970.15625, -818.52343, 90.96093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13887, 967.20312, -715.27343, 107.97656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(13804, 1077.60937, -651.60937, 114.28906, 0.00000, 0.00000, 144.86500);
-	SnijegObjekti(13717, 1161.32031, -755.01562, 84.80468, 0.00000, 0.00000, 8.92500);
-	SnijegObjekti(13784, 1156.85937, -852.75781, 49.35937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5743, 1265.29687, -889.95312, 40.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5746, 1163.17187, -1046.42968, 32.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5745, 1262.95312, -1037.64843, 32.07031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5801, 1266.13281, -1037.72656, 28.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5806, 1149.63281, -1039.24218, 30.94531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5793, 1365.47656, -998.26562, 30.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5887, 1212.76562, -1090.07812, 26.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5823, 1140.17968, -1207.25781, 18.82031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4649, 1425.16406, -1035.25781, 24.19531, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4650, 1482.25000, -1097.30468, 22.85937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5800, 1355.72656, -1089.84375, 24.33593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5799, 1350.15625, -1170.82031, 19.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6007, 1308.24218, -1088.84375, 26.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4651, 1539.85937, -1087.31250, 22.72656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4568, 1529.90625, -1096.78125, 22.40625, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4652, 1539.84375, -1161.74218, 23.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4567, 1646.46093, -1161.70312, 22.86718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4710, 1762.11718, -1170.89062, 22.76562, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(4591, 1753.75781, -1231.39843, 12.44531, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(4654, 1715.46093, -1230.87500, 18.26562, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4643, 1654.76562, -1246.28906, 16.17187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5436, 1987.00000, -1408.00000, 17.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5500, 1948.95312, -1461.20312, 12.46875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4589, 1780.00000, -1281.00000, 13.00000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4592, 1798.46093, -1223.46093, 17.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4556, 1660.04687, -1340.72656, 15.63281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4646, 1650.83593, -1300.85937, 15.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4684, 1661.54687, -1216.45312, 16.27343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4562, 1574.59375, -1248.10156, 15.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4685, 1572.59375, -1216.50000, 17.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4565, 1513.69531, -1204.80468, 18.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4648, 1419.67968, -1150.12500, 22.86718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4679, 1607.88281, -1324.62500, 32.72656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4553, 1530.83593, -1300.85156, 15.54687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4647, 1454.75781, -1309.12500, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4551, 1410.16406, -1333.39062, 9.92187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(4644, 1416.19531, -1210.87500, 17.59375, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5750, 1350.15625, -1250.83593, 14.13281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5859, 1350.14843, -1353.36718, 12.47656, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5751, 1283.73437, -1145.08593, 22.61718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5804, 1213.76562, -1177.09375, 19.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5707, 1269.39843, -1256.96093, 14.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6006, 1183.69531, -1241.35937, 16.27343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5857, 1259.43750, -1246.81250, 17.10937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5749, 1144.40625, -1251.48437, 15.10937, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5703, 998.15625, -1220.82031, 15.83593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5812, 1230.89062, -1337.98437, 12.53906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5794, 1200.90625, -1337.99218, 12.39843, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5810, 1114.31250, -1348.10156, 17.98437, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5994, 1259.22656, -1400.40625, 10.78125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5995, 1130.05468, -1400.70312, 12.52343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5860, 1058.14843, -1363.26562, 12.61718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5795, 985.72656, -1324.79687, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5732, 1014.02343, -1361.46093, 20.35156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5808, 1255.24218, -1337.96093, 12.32812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5809, 1281.43750, -1337.95312, 12.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6035, 1329.03125, -1479.07812, 12.46093, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6101, 1268.24218, -1467.84375, 11.82031, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6129, 1205.11718, -1572.27343, 12.42187, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6125, 1196.03906, -1489.07031, 12.37500, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6130, 1117.58593, -1490.00781, 32.71875, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5861, 979.94531, -1400.49218, 12.36718, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6055, 1050.08593, -1489.03906, 12.53906, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6113, 984.29687, -1491.40625, 12.50000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6152, 990.08593, -1450.08593, 12.77343, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6160, 982.61718, -1530.82812, 12.83593, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6112, 917.50000, -1489.10156, 12.29687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6217, 846.45312, -1523.52343, 12.35156, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(6059, 855.09375, -1461.80468, 12.79687, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5815, 877.16406, -1361.20312, 12.45312, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5797, 917.35937, -1361.24218, 12.38281, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5784, 988.27337, -1289.63281, 15.37500, 0.00000, 0.00000, 180.00000);
-	SnijegObjekti(5760, 1016.92968, -1249.92968, 18.50000, 0.00000, 0.00000, 270.00000);
-	SnijegObjekti(4879, 1374.25781, -2184.03906, 21.07812, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17665, 2604.34375, -1220.23437, 54.75000, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(17629, 2338.92968, -1299.60156, 23.03125, 0.00000, 0.00000, 0.00000);
-	SnijegObjekti(5624, 2136.72656, -975.82812, 58.10937, 0.00000, 0.00000, 345.00500);
+	Snow();
 	#endif
 	Create3DTextLabel("Pretisnite {03adfc}H {ffffff}da bi ste otvorili kapiju", -1, 1245.65881, -766.94067, 92.77000, 25.0, 0);
 	CreatePickup(19132, 1, 1258.7070,-785.2449,92.0302);
 	Create3DTextLabel("Pretisnite {03adfc}Enter {ffffff}ili {03adfc}F{ffffff}\nDa bi ste usli u kucu", -1, 1258.7070,-785.2449,92.0302, 5.0, 0);
-	
+
 	CreateDynamicObject(19370, 1235.281494, -1789.478271, -23.480491, 0.000000, -89.699981, 0.000000, -1, -1, -1, 300.00, 300.00); 
     CreateDynamicObject(19370, 1235.281494, -1786.269165, -23.480491, 0.000000, -89.699981, 0.000000, -1, -1, -1, 300.00, 300.00); 
     CreateDynamicObject(19370, 1235.281494, -1783.088989, -23.480491, 0.000000, -89.699981, 0.000000, -1, -1, -1, 300.00, 300.00); 
@@ -3243,8 +2428,10 @@ public OnGameModeInit() {
 	ACTOR[11] = CreateActor(57, 356.2959,166.3219,1008.3762,269.0106); //ACTOR U VLADI (SALTER)
 	ACTOR[12] = CreateActor(57, 356.2952,163.2074,1008.3762,269.3239); //ACTOR U VLADI (SALTER)
 	ACTOR[13] = CreateActor(179, 290.1594,-104.4914,1001.5156, 175.1689); //ACTOR U AMMUNATIONU
-	ACTOR[14] = CreateActor(20, 1654.6721,-1074.5894,23.8984, 1.9153); //ACTOR KOD PARKING ONAJ KAO ZNAS ONAJ KOD BANKU
-	ACTOR[15] = CreateActor(57, 2261.3198,-1920.5042,13.5508, 2.0873); //ACTOR KOD OVO OVAJ CAR DEALERSHIP
+	ACTOR[14] = CreateActor(20, 1654.5542,-1074.7708,23.8984, 356.9136); //ACTOR KOD PARKING ONAJ KAO ZNAS ONAJ KOD BANKU
+	ACTOR[15] = CreateActor(20, 1621.6886,-1041.4026,23.8984,87.7811); //ISTO SAMO NA DRUGI ONAJ ZUTI DJAVO
+	ACTOR[16] = CreateActor(20, 1626.1387,-1137.2966,23.9063,359.1069); //ISTO SAMO NA DRUGI ONAJ ZUTI DJAVO
+	ACTOR[17] = CreateActor(57, 2261.3198,-1920.5042,13.5508, 2.0873); //ACTOR KOD OVO OVAJ CAR DEALERSHIP
 	return 1;
 }
 
@@ -3440,25 +2627,35 @@ public OnPlayerSpawn(playerid) {
 	return 1;
 }
 
+CMD:curpos(playerid, params[]) {
+	#pragma unused params
+	new Float: pos[3];
+	GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
+	va_SCM(playerid, -1, "%f, %f, %f", pos[0], pos[1], pos[2]);
+	return 1;
+}
+
 CMD:mojavozila(playerid, params[]) {
-	if(!IsPlayerInRangeOfPoint(playerid, 100, 2261.4954,-1919.0536,13.5508)) return SCM(playerid, SIVA, "Niste kod parkinga.");
+	#pragma unused params
+	if(!IsPlayerInRangeOfPoint(playerid, 100, 1654.5542,-1074.7708,23.8984)) return SCM(playerid, SIVA, "Niste kod parkinga.");
 	new string[512], str[256];
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto] - 400]);
+	format(str, sizeof(str), "1. %s\n", PlayerInfo[playerid][pAuto] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto1] - 400]);
+	format(str, sizeof(str), "2. %s\n", PlayerInfo[playerid][pAuto1] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto1] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto2] - 400]);
+	format(str, sizeof(str), "3. %s\n", PlayerInfo[playerid][pAuto2] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto2] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto3] - 400]);
+	format(str, sizeof(str), "4. %s\n", PlayerInfo[playerid][pAuto3] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto3] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto4] - 400]);
+	format(str, sizeof(str), "5. %s\n", PlayerInfo[playerid][pAuto4] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto4] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto5] - 400]);
+	format(str, sizeof(str), "6. %s\n", PlayerInfo[playerid][pAuto5] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto5] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s\n", ImenaVozila[PlayerInfo[playerid][pAuto6] - 400]);
+	format(str, sizeof(str), "7. %s\n", PlayerInfo[playerid][pAuto6] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto6] - 400]);
 	strcat(string, str);
-	format(str, sizeof(str), "%s", ImenaVozila[PlayerInfo[playerid][pAuto7] - 400]);
+	format(str, sizeof(str), "8. %s", PlayerInfo[playerid][pAuto7] == -1 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto7] - 400]);
 	strcat(string, str);
+	SPD(playerid, d_moja_vozila, DIALOG_STYLE_LIST, "Lista Vozila", string, "Izaberi", "Odustani");
 	return 1;
 }
 
@@ -3610,7 +2807,7 @@ CMD:pokrenipljacku(playerid, params[]) {
 		SCM(playerid, -1, "Uspesno ste zapoceli pljacku centralne banke!");
 		GivePlayerMoney(playerid, 200000);
 		foreach(new Cop : Cops) SCM(Cop, PLAVA, "Pljacka centralne banke je upravo zapoceta!");
-		foreach(new Z : Zemunski_Klan) GameTextForPlayer(Z, "Sacekajte 10 minuta...", 5000, 3);
+		foreach(new Z : Zemunski_Klan) GameTextForPlayer(Z, "Sacekajte da policija dodje...", 5000, 3);
 	} else SCM(playerid, SIVA, "Vi niste u ilegalnoj organizaciji.");
 	return 1;
 }

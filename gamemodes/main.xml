@@ -606,7 +606,7 @@
 			<member name="C:promNeaktivnost" value="129">
 			</member>
 		</member>
-		<member name="T:vInfo" value="143">
+		<member name="T:vInfo" value="144">
 			<tagname value="vInfo"/>
 			<member name="C:vEngine" value="0">
 			</member>
@@ -647,6 +647,8 @@
 			<member name="C:vRZ" value="142">
 				<tagname value="Float"/>
 			</member>
+			<member name="C:vID" value="143">
+			</member>
 		</member>
 
 		<!-- constants -->
@@ -655,7 +657,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6681">
+		<member name="C:__line" value="5878">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -783,6 +785,9 @@
 		<member name="C:d_log" value="1">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_vozila" value="34">
+			<referrer name="cmd_mojavozila"/>
 		</member>
 		<member name="C:d_nevalidno_ime" value="8">
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -1701,6 +1706,8 @@
 			<referrer name="LoadVr"/>
 		</member>
 		<member name="F:ZatvorVrata">
+			<referrer name="CallMapLSPD"/>
+			<referrer name="CallMapZemunci"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_otkljucaj"/>
 			<referrer name="cmd_zakljucaj"/>
@@ -1735,6 +1742,10 @@
 			<referrer name="Y@"/>
 		</member>
 		<member name="F:__date">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
 		</member>
 		<member name="F:__file">
 		</member>
@@ -2219,9 +2230,9 @@
 		<member name="M:Float:operator=(_:)" syntax="Float:operator=(_:)(oper)">
 			<tagname value="Float"/>
 			<attribute name="native"/>
+			<referrer name="CallPickups"/>
 			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="UpdateBubble"/>
-			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
@@ -3086,6 +3097,15 @@
 			<param name="playerid">
 			</param>
 		</member>
+		<member name="M:CallFIB" syntax="CallFIB()">
+			<stacksize value="16"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="CreateDynamicObject"/>
+		</member>
+		<member name="M:CallJelka" syntax="CallJelka()">
+			<stacksize value="16"/>
+			<dependency name="CreateDynamicObject"/>
+		</member>
 		<member name="M:CallLocalFunction" syntax="CallLocalFunction(function[], format[], ...)">
 			<attribute name="native"/>
 			<referrer name="_@_y_funcinc_@_"/>
@@ -3103,12 +3123,31 @@
 				<paraminfo> {Float,_} </paraminfo>
 			</param>
 		</member>
+		<member name="M:CallMapBolnica" syntax="CallMapBolnica()">
+			<stacksize value="17"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="CreateDynamicObject"/>
+			<dependency name="SetDynamicObjectMaterial"/>
+			<dependency name="SetDynamicObjectMaterialText"/>
+		</member>
 		<member name="M:CallMapIcons" syntax="CallMapIcons(playerid)">
 			<stacksize value="10"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<dependency name="SetPlayerMapIcon"/>
 			<param name="playerid">
 			</param>
+		</member>
+		<member name="M:CallMapLSPD" syntax="CallMapLSPD()">
+			<stacksize value="16"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="CreateDynamicObject"/>
+			<dependency name="ZatvorVrata"/>
+		</member>
+		<member name="M:CallMapZemunci" syntax="CallMapZemunci()">
+			<stacksize value="16"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="CreateDynamicObject"/>
+			<dependency name="ZatvorVrata"/>
 		</member>
 		<member name="M:CallOnoGore" syntax="CallOnoGore()">
 			<stacksize value="5"/>
@@ -3128,6 +3167,13 @@
 			<dependency name="TextDrawTextSize"/>
 			<dependency name="TextDrawUseBox"/>
 			<dependency name="true"/>
+		</member>
+		<member name="M:CallPickups" syntax="CallPickups()">
+			<stacksize value="10"/>
+			<referrer name="zcmd_OnGameModeInit"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="Create3DTextLabel"/>
+			<dependency name="CreatePickup"/>
 		</member>
 		<member name="M:CallRemoteFunction" syntax="CallRemoteFunction(function[], format[], ...)">
 			<attribute name="native"/>
@@ -3354,6 +3400,7 @@
 		<member name="M:Create3DTextLabel" syntax="Create3DTextLabel(text[], color, X, Y, Z, DrawDistance, virtualworld, testLOS)">
 			<tagname value="Text3D"/>
 			<attribute name="native"/>
+			<referrer name="CallPickups"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_skinihrent"/>
 			<referrer name="cmd_makeleader"/>
@@ -3405,6 +3452,11 @@
 		<member name="M:CreateDynamicObject" syntax="CreateDynamicObject(modelid, x, y, z, rx, ry, rz, worldid, interiorid, playerid, streamdistance, drawdistance, areaid, priority)">
 			<attribute name="native"/>
 			<referrer name="SnijegObjekti"/>
+			<referrer name="CallFIB"/>
+			<referrer name="CallJelka"/>
+			<referrer name="CallMapBolnica"/>
+			<referrer name="CallMapLSPD"/>
+			<referrer name="CallMapZemunci"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
@@ -3475,6 +3527,7 @@
 		</member>
 		<member name="M:CreatePickup" syntax="CreatePickup(model, type, X, Y, Z, virtualworld)">
 			<attribute name="native"/>
+			<referrer name="CallPickups"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_skinihrent"/>
 			<referrer name="cmd_napraviorg"/>
@@ -3976,6 +4029,7 @@
 		<member name="M:GetPlayerPos" syntax="GetPlayerPos(playerid, &amp;x, &amp;y, &amp;z)">
 			<attribute name="native"/>
 			<referrer name="IC"/>
+			<referrer name="cmd_curpos"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_f_tesla"/>
@@ -8604,6 +8658,7 @@
 		<member name="M:SetDynamicObjectMaterial" syntax="SetDynamicObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor)">
 			<attribute name="native"/>
 			<referrer name="SnijegObjekti"/>
+			<referrer name="CallMapBolnica"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<param name="objectid">
 			</param>
@@ -8622,6 +8677,7 @@
 		</member>
 		<member name="M:SetDynamicObjectMaterialText" syntax="SetDynamicObjectMaterialText(objectid, materialindex, text[], materialsize, fontface[], fontsize, bold, fontcolor, backcolor, textalignment)">
 			<attribute name="native"/>
+			<referrer name="CallMapBolnica"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<param name="objectid">
 			</param>
@@ -9056,6 +9112,7 @@
 		<member name="M:ShowPlayerDialog" syntax="ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])">
 			<attribute name="native"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_askq"/>
 			<referrer name="cmd_akomande"/>
@@ -9098,6 +9155,7 @@
 		</member>
 		<member name="M:SnijegObjekti" syntax="SnijegObjekti(modelid, x, y, z, rx, ry, rz)">
 			<stacksize value="17"/>
+			<referrer name="Snow"/>
 			<dependency name="operator+(Float:,Float:)"/>
 			<dependency name="CreateDynamicObject"/>
 			<dependency name="SetDynamicObjectMaterial"/>
@@ -9121,6 +9179,10 @@
 			<param name="rz">
 				<paraminfo>Float </paraminfo>
 			</param>
+		</member>
+		<member name="M:Snow" syntax="Snow()">
+			<stacksize value="10"/>
+			<dependency name="SnijegObjekti"/>
 		</member>
 		<member name="M:SpecTimer" syntax="SpecTimer(playerid, target)">
 			<attribute name="public"/>
@@ -9810,6 +9872,17 @@
 			<dependency name="PlayerInfo"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="pAdmin"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_curpos" syntax="cmd_curpos(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="va_SendClientMessage"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
@@ -10515,13 +10588,14 @@
 		</member>
 		<member name="M:cmd_mojavozila" syntax="cmd_mojavozila(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="774"/>
+			<stacksize value="777"/>
 			<dependency name="Float:operator=(_:)"/>
-			<dependency name="ImenaVozila"/>
 			<dependency name="ImenaVozila"/>
 			<dependency name="IsPlayerInRangeOfPoint"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="SendClientMessage"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="d_moja_vozila"/>
 			<dependency name="format"/>
 			<dependency name="pAuto"/>
 			<dependency name="pAuto1"/>
@@ -12760,6 +12834,7 @@
 		<member name="M:va_SendClientMessage" syntax="va_SendClientMessage(playerid, colour, fmat[], ...)">
 			<stacksize value="1048"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_curpos"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_heal"/>
 			<referrer name="cmd_pduty"/>
@@ -12981,8 +13056,7 @@
 		</member>
 		<member name="M:zcmd_OnGameModeInit" syntax="zcmd_OnGameModeInit()">
 			<attribute name="public"/>
-			<stacksize value="593"/>
-			<dependency name="Float:operator=(_:)"/>
+			<stacksize value="592"/>
 			<dependency name="ACTOR"/>
 			<dependency name="AddPlayerClass"/>
 			<dependency name="AddStaticVehicle"/>
@@ -12990,7 +13064,12 @@
 			<dependency name="AdminInfo"/>
 			<dependency name="BannedInfo"/>
 			<dependency name="BannedInfo"/>
+			<dependency name="CallFIB"/>
+			<dependency name="CallMapBolnica"/>
+			<dependency name="CallMapLSPD"/>
+			<dependency name="CallMapZemunci"/>
 			<dependency name="CallOnoGore"/>
+			<dependency name="CallPickups"/>
 			<dependency name="CallSDTD"/>
 			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateActor"/>

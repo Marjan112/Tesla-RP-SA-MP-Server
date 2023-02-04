@@ -8,7 +8,7 @@
 new ZatvorVrata[4];
 
 #if !defined _samp_included
-    #tryinclude <a_samp>
+    #define MAX_OBJECTS 1000
 #endif
 
 new Bool: ZakljucanaVrata[MAX_OBJECTS];
@@ -100,8 +100,8 @@ new ImenaVozila[212][] = {
     {"Burrito"},
     {"Camper"},
     {"Marquis"},
-    {"Baggage"}
-    ,{"Dozer"},
+    {"Baggage"},
+    {"Dozer"},
     {"Maverick"},
     {"News Chopper"},
     {"Gclass G500"},
@@ -126,7 +126,8 @@ new ImenaVozila[212][] = {
     {"Journey"},
     {"Bike"},
     {"Mountain Bike"},
-    {"Beagle"},{"Cropdust"},
+    {"Beagle"},
+    {"Cropdust"},
     {"Stunt"},
     {"Tanker"},
     {"Roadtrain"},

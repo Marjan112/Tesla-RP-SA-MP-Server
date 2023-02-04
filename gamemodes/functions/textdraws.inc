@@ -6,7 +6,16 @@
 #pragma library Textdraws
 
 #if !defined _samp_included
-    #tryinclude <a_samp>
+    #include <float>
+	native Text: TextDrawCreate(Float: x, Float: y, text[]);
+	native TextDrawLetterSize(Text:text, Float:x, Float:y);
+	native TextDrawAlignment(Text:text, alignment);
+	native TextDrawColor(Text:text, color);
+	native TextDrawSetShadow(Text:text, size);
+	native TextDrawSetOutline(Text:text, size);
+	native TextDrawBackgroundColor(Text:text, color);
+	native TextDrawFont(Text:text, font);
+	native TextDrawSetProportional(Text:text, set);
 #endif
 
 #include "../gamemodes/data/tags.inc"

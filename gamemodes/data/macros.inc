@@ -59,5 +59,5 @@
 #define KUCA_NA_PRODAJU 31
 #define KUCA_KUPLJENA 32
 #define AUTO_SALON 55
-//FUNCTION
+////////////////////////////////////////////////////
 #define function%1(%2) forward %1(%2); public %1(%2)
