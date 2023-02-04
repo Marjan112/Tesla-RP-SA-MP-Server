@@ -71,6 +71,7 @@ enum {
 };
 
 new IsPlayerSpec[MAX_PLAYERS];
+new sTarget[MAX_PLAYERS] = -1;
 
 // new Text: lrtd[10];
 // new PlayerText: Fuel_t[MAX_PLAYERS][2];
@@ -3641,24 +3642,25 @@ CMD:specoff(playerid, params[]) {
 	SetPlayerPos(playerid, pX[playerid], pY[playerid], pZ[playerid]);
 	SetPlayerInterior(playerid, pI[playerid]);
 	SetPlayerVirtualWorld(playerid, pW[playerid]);
+	sTarget[playerid] = -1;
 	return 1;
 }
 
 CMD:spec(playerid, params[]) {
 	if(!pADuty[playerid]) return SCM(playerid, SIVA, "Morate biti na duznosti! (/aduty)");
 	if(PlayerInfo[playerid][pAdmin] < 1) return SCM(playerid, CRVENA, "Niste ovlasceni da koristite ovu komandu!");
-	new target, Float:X, Float:Y, Float:Z;
-	if(sscanf(params, "u", target)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/spec [id igraca]");
-	if(!IsPlayerConnected(target)) return SCM(playerid, CRVENA, "[GRESKA]: {ffffff}Igrac nije online!");
-	if(target == playerid) return SCM(playerid, CRVENA, "[GRESKA]: {ffffff}ID nije validan!");
+	new Float:X, Float:Y, Float:Z;
+	if(sscanf(params, "u", sTarget[playerid])) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/spec [id igraca]");
+	if(!IsPlayerConnected(sTarget[playerid])) return SCM(playerid, CRVENA, "[GRESKA]: {ffffff}Igrac nije online!");
+	if(sTarget[playerid] == playerid) return SCM(playerid, CRVENA, "[GRESKA]: {ffffff}ID nije validan!");
 	IsPlayerSpec[playerid] = 1;
 	GetPlayerPos(playerid, X, Y, Z);
-	pX[playerid] = X;
-	pY[playerid] = Y;
-	pZ[playerid] = Z;
+	pX[playerid] = Float:X;
+	pY[playerid] = Float:Y;
+	pZ[playerid] = Float:Z;
 	pI[playerid] = GetPlayerInterior(playerid);
 	pW[playerid] = GetPlayerVirtualWorld(playerid);
-	SetTimerEx("SpecTimer", 1000, true, "ii", playerid, target);
+	SetTimerEx("SpecTimer", 1000, true, "i", playerid);
 	return 1;
 }
 
@@ -5564,14 +5566,17 @@ function LoadVr(id, name[], value[]) {
 	return 1;
 }
 
-function SpecTimer(playerid, target) {
-	if(IsPlayerSpec[playerid] == 0) return IsPlayerSpec[playerid];
+function SpecTimer(playerid) {
+	if(IsPlayerSpec[playerid] == 0) {
+		sTarget[playerid] = -1;
+		return IsPlayerSpec[playerid];
+	}
 	new interid, vwid;
 	TogglePlayerSpectating(playerid, IsPlayerSpec[playerid]);
-	interid = GetPlayerInterior(target);
-	vwid = GetPlayerVirtualWorld(target);
-	if(IsPlayerInAnyVehicle(target)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(target));
-	else PlayerSpectatePlayer(playerid, target);
+	interid = GetPlayerInterior(sTarget[playerid]);
+	vwid = GetPlayerVirtualWorld(sTarget[playerid]);
+	if(IsPlayerInAnyVehicle(sTarget[playerid])) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(sTarget[playerid]));
+	else PlayerSpectatePlayer(playerid, sTarget[playerid]);
 	SetPlayerInterior(playerid, interid);
 	SetPlayerVirtualWorld(playerid, vwid);
 	return 1;

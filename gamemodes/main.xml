@@ -657,7 +657,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="5878">
+		<member name="C:__line" value="5883">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -2021,6 +2021,11 @@
 		<member name="F:rentvreme">
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="Fuel"/>
+		</member>
+		<member name="F:sTarget">
+			<referrer name="cmd_specoff"/>
+			<referrer name="cmd_spec"/>
+			<referrer name="SpecTimer"/>
 		</member>
 		<member name="F:sdtd">
 			<tagname value="Text"/>
@@ -9184,7 +9189,7 @@
 			<stacksize value="10"/>
 			<dependency name="SnijegObjekti"/>
 		</member>
-		<member name="M:SpecTimer" syntax="SpecTimer(playerid, target)">
+		<member name="M:SpecTimer" syntax="SpecTimer(playerid)">
 			<attribute name="public"/>
 			<stacksize value="7"/>
 			<dependency name="GetPlayerInterior"/>
@@ -9197,9 +9202,8 @@
 			<dependency name="SetPlayerInterior"/>
 			<dependency name="SetPlayerVirtualWorld"/>
 			<dependency name="TogglePlayerSpectating"/>
+			<dependency name="sTarget"/>
 			<param name="playerid">
-			</param>
-			<param name="target">
 			</param>
 		</member>
 		<member name="M:SpeedVehicle" syntax="SpeedVehicle(playerid)">
@@ -11428,7 +11432,7 @@
 		</member>
 		<member name="M:cmd_spec" syntax="cmd_spec(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="12"/>
+			<stacksize value="10"/>
 			<dependency name="GetPlayerInterior"/>
 			<dependency name="GetPlayerPos"/>
 			<dependency name="GetPlayerVirtualWorld"/>
@@ -11447,6 +11451,7 @@
 			<dependency name="pX"/>
 			<dependency name="pY"/>
 			<dependency name="pZ"/>
+			<dependency name="sTarget"/>
 			<dependency name="true"/>
 			<param name="playerid">
 			</param>
@@ -11470,6 +11475,7 @@
 			<dependency name="pX"/>
 			<dependency name="pY"/>
 			<dependency name="pZ"/>
+			<dependency name="sTarget"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
