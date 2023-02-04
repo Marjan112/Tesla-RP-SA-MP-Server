@@ -3611,21 +3611,6 @@ CMD:f_tesla(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{696969}[ FIB ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
 	} else SCM(playerid, SIVA, "Niste blizu FIB stanice!");
 	return 1;
 }
@@ -3656,21 +3641,6 @@ CMD:f_gklasa(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{696969}[ FIB ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
 	} else SCM(playerid, SIVA, "Niste blizu FIB stanice!");
 	return 1;
 }
@@ -3700,21 +3670,6 @@ CMD:f_urus(playerid, params[]) {
 			VehInfo[vehid][vBonnet],
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
-		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{696969}[ FIB ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
 		);
 	} else SCM(playerid, SIVA, "Niste blizu FIB stanice!");
 	return 1;
@@ -4729,21 +4684,6 @@ CMD:p_teslas(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{0000ff}[ LSPD ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
 	} else SCM(playerid, SIVA, "Niste kod policijske stanice ili niste blizu kod parkinga.");
 	return 1;
 }
@@ -4773,21 +4713,6 @@ CMD:p_skodarapid(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{0000ff}[ LSPD ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
-		);
 	} else SCM(playerid, SIVA, "Niste kod policijske stanice ili niste blizu kod parkinga.");
 	return 1;
 }
@@ -4815,21 +4740,6 @@ CMD:p_gklasa(playerid, params[]) {
 			VehInfo[vehid][vBonnet],
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
-		);
-		Attach3DTextLabelToVehicle(
-			Create3DTextLabel(
-				"{0000ff}[ LSPD ]",
-				-1,
-				X,
-				Y,
-				Z,
-				10,
-				0
-			),
-			vehid,
-			0,
-			0,
-			0
 		);
 	} else SCM(playerid, SIVA, "Niste kod policijske stanice ili niste blizu kod parkinga.");
 	return 1;
@@ -6506,12 +6416,6 @@ function Time() {
 }
 
 function PayDay() {
-	new h, m;
-	gettime(h);
-	if(h == 23 && m == 30) {
-		SCMTA(PLAVA_NEBO, "Tesla Bot: {ffffff}Izvinjavam se, moram ugasiti server za 5 sekundi, vidimo se sutra!");
-		SetTimer("ServerOff", 5000, false);
-	}
 	foreach(new playerid : Player) {
 		new str[128];
 		PlayerInfo[playerid][pRespekti]++;
@@ -6662,11 +6566,6 @@ function LoadVehs(id, name[], value[]) {
 	INI_Float("RX", VehInfo[id][vRX]);
 	INI_Float("RY", VehInfo[id][vRY]);
 	INI_Float("RZ", VehInfo[id][vRZ]);
-	return 1;
-}
-
-function ServerOff() {
-	SendRconCommand("exit");
 	return 1;
 }
 

@@ -647,7 +647,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6684">
+		<member name="C:__line" value="6583">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_oc"/>
 			<referrer name="cmd_do"/>
@@ -835,7 +835,6 @@
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 			<referrer name="BanMessage"/>
-			<referrer name="PayDay"/>
 		</member>
 		<member name="C:true" value="1">
 			<tagname value="bool"/>
@@ -2202,9 +2201,6 @@
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_pokrenipljacku"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_heal"/>
 			<referrer name="cmd_pduty"/>
 			<referrer name="cmd_lisice"/>
@@ -2213,9 +2209,6 @@
 			<referrer name="cmd_prevozputnika"/>
 			<referrer name="cmd_getajob"/>
 			<referrer name="cmd_quitjob"/>
-			<referrer name="cmd_p_teslas"/>
-			<referrer name="cmd_p_skodarapid"/>
-			<referrer name="cmd_p_gklasa"/>
 			<referrer name="cmd_zatvori"/>
 			<referrer name="cmd_otvori"/>
 			<referrer name="cmd_promduty"/>
@@ -2902,12 +2895,6 @@
 		</member>
 		<member name="M:Attach3DTextLabelToVehicle" syntax="Attach3DTextLabelToVehicle(id, vehicleid, OffsetX, OffsetY, OffsetZ)">
 			<attribute name="native"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
-			<referrer name="cmd_p_teslas"/>
-			<referrer name="cmd_p_skodarapid"/>
-			<referrer name="cmd_p_gklasa"/>
 			<referrer name="cmd_v"/>
 			<param name="id">
 				<paraminfo>Text3D </paraminfo>
@@ -3321,16 +3308,10 @@
 			<tagname value="Text3D"/>
 			<attribute name="native"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_skinihrent"/>
 			<referrer name="cmd_makeleader"/>
 			<referrer name="cmd_kupikucu"/>
 			<referrer name="cmd_napravikucu"/>
-			<referrer name="cmd_p_teslas"/>
-			<referrer name="cmd_p_skodarapid"/>
-			<referrer name="cmd_p_gklasa"/>
 			<referrer name="cmd_v"/>
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="RefreshPickupLabel"/>
@@ -6559,19 +6540,15 @@
 		</member>
 		<member name="M:PayDay" syntax="PayDay()">
 			<attribute name="public"/>
-			<stacksize value="140"/>
+			<stacksize value="138"/>
 			<dependency name="Player@YSII_Ag"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="SavePlayer"/>
-			<dependency name="SendClientMessageToAll"/>
 			<dependency name="SetPlayerScore"/>
-			<dependency name="SetTimer"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="d_payday"/>
-			<dependency name="false"/>
 			<dependency name="format"/>
-			<dependency name="gettime"/>
 			<dependency name="pBanka"/>
 			<dependency name="pGodine"/>
 			<dependency name="pKredit"/>
@@ -8511,7 +8488,6 @@
 			<referrer name="va_SendClientMessageToAll"/>
 			<referrer name="ClearChat"/>
 			<referrer name="cmd_promovisi"/>
-			<referrer name="PayDay"/>
 			<referrer name="RandomMessages"/>
 			<param name="color">
 			</param>
@@ -8538,18 +8514,6 @@
 			<param name="message">
 				<paraminfo> [] </paraminfo>
 			</param>
-		</member>
-		<member name="M:SendRconCommand" syntax="SendRconCommand(command[])">
-			<attribute name="native"/>
-			<referrer name="ServerOff"/>
-			<param name="command">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:ServerOff" syntax="ServerOff()">
-			<attribute name="public"/>
-			<stacksize value="3"/>
-			<dependency name="SendRconCommand"/>
 		</member>
 		<member name="M:SetCameraBehindPlayer" syntax="SetCameraBehindPlayer(playerid)">
 			<attribute name="native"/>
@@ -8898,7 +8862,6 @@
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
-			<referrer name="PayDay"/>
 			<param name="funcname">
 				<paraminfo> [] </paraminfo>
 			</param>
@@ -9867,10 +9830,7 @@
 		<member name="M:cmd_f_gklasa" syntax="cmd_f_gklasa(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -9902,10 +9862,7 @@
 		<member name="M:cmd_f_tesla" syntax="cmd_f_tesla(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -9937,10 +9894,7 @@
 		<member name="M:cmd_f_urus" syntax="cmd_f_urus(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
 			<dependency name="GetPlayerPos"/>
@@ -10694,10 +10648,7 @@
 		<member name="M:cmd_p_gklasa" syntax="cmd_p_gklasa(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="23"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="AttachDynamicObjectToVehicle"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateDynamicObject"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
@@ -10730,11 +10681,8 @@
 		<member name="M:cmd_p_skodarapid" syntax="cmd_p_skodarapid(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="23"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="AttachDynamicObjectToVehicle"/>
 			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateDynamicObject"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
@@ -10767,11 +10715,8 @@
 		<member name="M:cmd_p_teslas" syntax="cmd_p_teslas(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="23"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="AttachDynamicObjectToVehicle"/>
 			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateDynamicObject"/>
 			<dependency name="CreateVehicle"/>
 			<dependency name="GetPlayerFacingAngle"/>
@@ -12134,7 +12079,6 @@
 			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="TDUpdate"/>
 			<referrer name="Time"/>
-			<referrer name="PayDay"/>
 			<param name="hour">
 				<paraminfo> &amp; </paraminfo>
 			</param>
