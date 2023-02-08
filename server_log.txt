@@ -1870,3 +1870,65 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [18:01:03] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
 [18:01:03] GetName
 [18:01:03] OnPlayerConnect
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:32:57] weburl = "www.sa-mp.com"  (string)
+[19:32:57] 
+[19:32:57] Server Plugins
+[19:32:57] --------------
+[19:32:57]  Loading plugin: trp
+[19:32:57]   Loaded.
+[19:32:57]  Loaded 1 plugins.
+
+[19:32:57] 
+[19:32:57] Ban list
+[19:32:57] --------
+[19:32:57]  Loaded: samp.ban
+[19:32:57] 
+[19:32:57] I couldn't load any gamemode scripts. Please verify your server.cfg
+[19:32:57] It needs a gamemode0 line at the very least.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:33:07] weburl = "www.sa-mp.com"  (string)
+[19:33:07] 
+[19:33:07] Server Plugins
+[19:33:07] --------------
+[19:33:07]  Loading plugin: trp
+[19:33:07]   Loaded.
+[19:33:07]  Loaded 1 plugins.
+
+[19:33:07] 
+[19:33:07] Ban list
+[19:33:07] --------
+[19:33:07]  Loaded: samp.ban
+[19:33:07] 
+[19:33:07] 
+[19:33:07] Filterscripts
+[19:33:07] ---------------
+[19:33:07]   Loading filterscript 'animacije.amx'...
+[19:33:07]   Loading filterscript 'JVVC.amx'...
+[19:33:07]   Loading filterscript 'cardealership.amx'...
+[19:33:07]   Loading filterscript 'flymode.amx'...
+[19:33:07]   Loaded 4 filterscripts.
+
+[19:33:07] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[19:33:07] Number of vehicle models: 4
+[19:34:15] [connection] 127.0.0.1:53996 requests connection cookie.
+[19:34:16] [connection] incoming connection: 127.0.0.1:53996 id: 0
+[19:34:16] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[19:34:16] GetName
+[19:34:16] OnPlayerConnect
