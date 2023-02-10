@@ -1888,10 +1888,6 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_v"/>
 		</member>
-		<member name="F:antiSpam">
-			<referrer name="S@@_OnPlayerText"/>
-			<referrer name="OnPlayerCommandReceived"/>
-		</member>
 		<member name="F:editaorg">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
@@ -5794,11 +5790,9 @@
 		</member>
 		<member name="M:OnPlayerCommandReceived" syntax="OnPlayerCommandReceived(playerid, cmdtext[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="5"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="UlogovanProvera"/>
-			<dependency name="antiSpam"/>
-			<dependency name="gettime"/>
 			<param name="playerid">
 			</param>
 			<param name="cmdtext">
@@ -7576,10 +7570,7 @@
 			<dependency name="GetName"/>
 			<dependency name="GetName"/>
 			<dependency name="IC"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="antiSpam"/>
 			<dependency name="format"/>
-			<dependency name="gettime"/>
 			<param name="playerid">
 			</param>
 			<param name="text">
@@ -8605,7 +8596,6 @@
 			<referrer name="cmd_v"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="cmd_makeadmin"/>
-			<referrer name="S@@_OnPlayerText"/>
 			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="S@@_OnPlayerDeath"/>
 			<referrer name="S@@_OnVehicleDeath"/>
@@ -12317,8 +12307,6 @@
 		</member>
 		<member name="M:gettime" syntax="gettime(&amp;hour, &amp;minute, &amp;second)">
 			<attribute name="native"/>
-			<referrer name="S@@_OnPlayerText"/>
-			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="TDUpdate"/>
 			<referrer name="Time"/>
 			<param name="hour">

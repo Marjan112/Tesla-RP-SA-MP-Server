@@ -1932,3 +1932,933 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [19:34:16] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
 [19:34:16] GetName
 [19:34:16] OnPlayerConnect
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:13:45] weburl = "www.sa-mp.com"  (string)
+[20:13:45] 
+[20:13:45] Server Plugins
+[20:13:45] --------------
+[20:13:45]  Loading plugin: trp
+[20:13:45]   Loaded.
+[20:13:45]  Loaded 1 plugins.
+
+[20:13:45] 
+[20:13:45] Ban list
+[20:13:45] --------
+[20:13:45]  Loaded: samp.ban
+[20:13:45] 
+[20:13:45] 
+[20:13:45] Filterscripts
+[20:13:45] ---------------
+[20:13:45]   Loading filterscript 'animacije.amx'...
+[20:13:45]   Loading filterscript 'JVVC.amx'...
+[20:13:45]   Loading filterscript 'cardealership.amx'...
+[20:13:45]   Loading filterscript 'flymode.amx'...
+[20:13:45]   Loaded 4 filterscripts.
+
+[20:13:45] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[20:13:45] Number of vehicle models: 4
+[20:14:17] [connection] 127.0.0.1:55291 requests connection cookie.
+[20:14:18] [connection] incoming connection: 127.0.0.1:55291 id: 0
+[20:14:18] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[20:14:18] GetName
+[20:14:18] OnPlayerConnect
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:17:37] weburl = "www.sa-mp.com"  (string)
+[20:17:37] 
+[20:17:37] Server Plugins
+[20:17:37] --------------
+[20:17:37]  Loading plugin: trp
+[20:17:37]   Loaded.
+[20:17:37]  Loaded 1 plugins.
+
+[20:17:37] 
+[20:17:37] Ban list
+[20:17:37] --------
+[20:17:37]  Loaded: samp.ban
+[20:17:37] 
+[20:17:37] 
+[20:17:37] Filterscripts
+[20:17:37] ---------------
+[20:17:37]   Loading filterscript 'animacije.amx'...
+[20:17:37]   Loading filterscript 'JVVC.amx'...
+[20:17:37]   Loading filterscript 'cardealership.amx'...
+[20:17:37]   Loading filterscript 'flymode.amx'...
+[20:17:37]   Loaded 4 filterscripts.
+
+[20:17:37] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[20:17:37] Number of vehicle models: 4
+[20:18:21] [connection] 127.0.0.1:51294 requests connection cookie.
+[20:18:22] [connection] incoming connection: 127.0.0.1:51294 id: 0
+[20:18:22] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[20:18:22] GetName
+[20:18:22] OnPlayerConnect
+[20:18:25] [chat] [Maki_Zemunac]: tr
+[20:18:27] OnPlayerSpawn
+[20:18:28] [chat] [Maki_Zemunac]: et
+[20:18:29] [chat] [Maki_Zemunac]: rte
+[20:18:30] [chat] [Maki_Zemunac]: retret
+[20:18:30] [chat] [Maki_Zemunac]: er
+[20:18:34] [chat] [Maki_Zemunac]: eterter
+[20:18:37] [chat] [Maki_Zemunac]: tretret
+[20:18:47] [chat] [Maki_Zemunac]: erwe
+[20:18:49] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:22:26] weburl = "www.sa-mp.com"  (string)
+[20:22:26] 
+[20:22:26] Server Plugins
+[20:22:26] --------------
+[20:22:26]  Loading plugin: trp
+[20:22:26]   Loaded.
+[20:22:26]  Loaded 1 plugins.
+
+[20:22:26] 
+[20:22:26] Ban list
+[20:22:26] --------
+[20:22:26]  Loaded: samp.ban
+[20:22:26] 
+[20:22:26] 
+[20:22:26] Filterscripts
+[20:22:26] ---------------
+[20:22:26]   Loading filterscript 'animacije.amx'...
+[20:22:26]   Loading filterscript 'JVVC.amx'...
+[20:22:26]   Loading filterscript 'cardealership.amx'...
+[20:22:26]   Loading filterscript 'flymode.amx'...
+[20:22:26]   Loaded 4 filterscripts.
+
+[20:22:26] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[20:22:26] Number of vehicle models: 5
+[20:22:54] [connection] 127.0.0.1:61635 requests connection cookie.
+[20:22:55] [connection] incoming connection: 127.0.0.1:61635 id: 0
+[20:22:55] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[20:22:55] GetName
+[20:22:55] OnPlayerConnect
+[20:22:57] OnPlayerSpawn
+[20:23:02] [chat] [Maki_Zemunac]: rtre
+[20:23:03] [chat] [Maki_Zemunac]: ertre
+[20:23:04] [chat] [Maki_Zemunac]: ertret
+[20:23:05] [chat] [Maki_Zemunac]: er
+[20:23:09] [chat] [Maki_Zemunac]: retert
+[20:24:24] [chat] [Maki_Zemunac]: idemo bree
+[20:24:46] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:35:42] weburl = "www.sa-mp.com"  (string)
+[20:35:42] 
+[20:35:42] Server Plugins
+[20:35:42] --------------
+[20:35:42]  Loading plugin: trp
+[20:35:42]   Loaded.
+[20:35:42]  Loaded 1 plugins.
+
+[20:35:42] 
+[20:35:42] Ban list
+[20:35:42] --------
+[20:35:42]  Loaded: samp.ban
+[20:35:42] 
+[20:35:42] 
+[20:35:42] Filterscripts
+[20:35:42] ---------------
+[20:35:42]   Loading filterscript 'animacije.amx'...
+[20:35:42]   Loading filterscript 'JVVC.amx'...
+[20:35:42]   Loading filterscript 'cardealership.amx'...
+[20:35:42]   Loading filterscript 'flymode.amx'...
+[20:35:42]   Loaded 4 filterscripts.
+
+[20:35:42] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[20:35:42] Number of vehicle models: 5
+[20:36:02] [connection] 127.0.0.1:49173 requests connection cookie.
+[20:36:03] [connection] incoming connection: 127.0.0.1:49173 id: 0
+[20:36:03] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[20:36:03] GetName
+[20:36:03] OnPlayerConnect
+[20:36:05] OnPlayerSpawn
+[20:36:07] [chat] [Maki_Zemunac]: rere
+[20:36:08] [chat] [Maki_Zemunac]: retr
+[20:36:12] [chat] [Maki_Zemunac]: rre
+[20:36:16] [chat] [Maki_Zemunac]: retr
+[20:36:23] [chat] [Maki_Zemunac]: rter
+[20:36:24] [chat] [Maki_Zemunac]: rter
+[20:36:40] [chat] [Maki_Zemunac]: rt
+[20:37:04] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:42:24] weburl = "www.sa-mp.com"  (string)
+[20:42:24] 
+[20:42:24] Server Plugins
+[20:42:24] --------------
+[20:42:24]  Loading plugin: trp
+[20:42:24]   Loaded.
+[20:42:24]  Loaded 1 plugins.
+
+[20:42:24] 
+[20:42:24] Ban list
+[20:42:24] --------
+[20:42:24]  Loaded: samp.ban
+[20:42:24] 
+[20:42:24] 
+[20:42:24] Filterscripts
+[20:42:24] ---------------
+[20:42:24]   Loading filterscript 'animacije.amx'...
+[20:42:24]   Loading filterscript 'JVVC.amx'...
+[20:42:24]   Loading filterscript 'cardealership.amx'...
+[20:42:24]   Loading filterscript 'flymode.amx'...
+[20:42:24]   Loaded 4 filterscripts.
+
+[20:42:24] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[20:42:24] Number of vehicle models: 5
+[20:42:46] [connection] 127.0.0.1:54189 requests connection cookie.
+[20:42:47] [connection] incoming connection: 127.0.0.1:54189 id: 0
+[20:42:47] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[20:42:47] GetName
+[20:42:47] OnPlayerConnect
+[20:42:49] OnPlayerSpawn
+[20:43:00] [chat] [Maki_Zemunac]: rt
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:31:36] weburl = "www.sa-mp.com"  (string)
+[21:31:36] 
+[21:31:36] Server Plugins
+[21:31:36] --------------
+[21:31:36]  Loading plugin: trp
+[21:31:36]   Loaded.
+[21:31:36]  Loaded 1 plugins.
+
+[21:31:36] 
+[21:31:36] Ban list
+[21:31:36] --------
+[21:31:36]  Loaded: samp.ban
+[21:31:36] 
+[21:31:36] 
+[21:31:36] Filterscripts
+[21:31:36] ---------------
+[21:31:36]   Loading filterscript 'animacije.amx'...
+[21:31:36]   Loading filterscript 'JVVC.amx'...
+[21:31:36]   Loading filterscript 'cardealership.amx'...
+[21:31:36]   Loading filterscript 'flymode.amx'...
+[21:31:36]   Loaded 4 filterscripts.
+
+[21:31:36] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[21:31:36] Number of vehicle models: 5
+[21:31:55] [connection] 127.0.0.1:59787 requests connection cookie.
+[21:31:56] [connection] incoming connection: 127.0.0.1:59787 id: 0
+[21:31:56] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[21:31:56] GetName
+[21:31:56] OnPlayerConnect
+[21:31:58] OnPlayerSpawn
+[21:32:08] [chat] [Maki_Zemunac]: e
+[21:32:14] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:33:27] weburl = "www.sa-mp.com"  (string)
+[21:33:27] 
+[21:33:27] Server Plugins
+[21:33:27] --------------
+[21:33:27]  Loading plugin: trp
+[21:33:27]   Loaded.
+[21:33:27]  Loaded 1 plugins.
+
+[21:33:27] 
+[21:33:27] Ban list
+[21:33:27] --------
+[21:33:27]  Loaded: samp.ban
+[21:33:27] 
+[21:33:27] 
+[21:33:27] Filterscripts
+[21:33:27] ---------------
+[21:33:27]   Loading filterscript 'animacije.amx'...
+[21:33:27]   Loading filterscript 'JVVC.amx'...
+[21:33:27]   Loading filterscript 'cardealership.amx'...
+[21:33:27]   Loading filterscript 'flymode.amx'...
+[21:33:27]   Loaded 4 filterscripts.
+
+[21:33:27] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[21:33:27] Number of vehicle models: 5
+[21:33:46] [connection] 127.0.0.1:51781 requests connection cookie.
+[21:33:47] [connection] incoming connection: 127.0.0.1:51781 id: 0
+[21:33:48] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[21:33:48] GetName
+[21:33:48] OnPlayerConnect
+[21:33:50] OnPlayerSpawn
+[21:33:58] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:56:47] weburl = "www.sa-mp.com"  (string)
+[21:56:47] 
+[21:56:47] Server Plugins
+[21:56:47] --------------
+[21:56:47]  Loading plugin: main
+[21:56:47]   Loaded.
+[21:56:47]  Loaded 1 plugins.
+
+[21:56:47] 
+[21:56:47] Ban list
+[21:56:47] --------
+[21:56:47]  Loaded: samp.ban
+[21:56:47] 
+[21:56:47] 
+[21:56:47] Filterscripts
+[21:56:47] ---------------
+[21:56:47]   Loading filterscript 'animacije.amx'...
+[21:56:47]   Loading filterscript 'JVVC.amx'...
+[21:56:47]   Loading filterscript 'cardealership.amx'...
+[21:56:47]   Loading filterscript 'flymode.amx'...
+[21:56:47]   Loaded 4 filterscripts.
+
+[21:56:47] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[21:56:47] Number of vehicle models: 5
+[21:57:09] [connection] 127.0.0.1:55228 requests connection cookie.
+[21:57:10] [connection] incoming connection: 127.0.0.1:55228 id: 0
+[21:57:10] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[21:57:10] GetName
+[21:57:10] OnPlayerConnect
+[21:57:12] OnPlayerSpawn
+[21:57:21] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:57:49] weburl = "www.sa-mp.com"  (string)
+[21:57:49] 
+[21:57:49] Server Plugins
+[21:57:49] --------------
+[21:57:49]  Loading plugin: main
+[21:57:49]   Loaded.
+[21:57:49]  Loaded 1 plugins.
+
+[21:57:49] 
+[21:57:49] Ban list
+[21:57:49] --------
+[21:57:49]  Loaded: samp.ban
+[21:57:49] 
+[21:57:49] 
+[21:57:49] Filterscripts
+[21:57:49] ---------------
+[21:57:49]   Loading filterscript 'animacije.amx'...
+[21:57:49]   Loading filterscript 'JVVC.amx'...
+[21:57:49]   Loading filterscript 'cardealership.amx'...
+[21:57:49]   Loading filterscript 'flymode.amx'...
+[21:57:49]   Loaded 4 filterscripts.
+
+[21:57:49] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[21:57:49] Number of vehicle models: 5
+[21:58:06] [connection] 127.0.0.1:55309 requests connection cookie.
+[21:58:07] [connection] incoming connection: 127.0.0.1:55309 id: 0
+[21:58:07] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[21:58:07] GetName
+[21:58:07] OnPlayerConnect
+[21:58:09] OnPlayerSpawn
+[21:58:15] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[22:03:26] weburl = "www.sa-mp.com"  (string)
+[22:03:26] 
+[22:03:26] Server Plugins
+[22:03:26] --------------
+[22:03:26]  Loading plugin: main
+[22:03:26]   Loaded.
+[22:03:26]  Loaded 1 plugins.
+
+[22:03:26] 
+[22:03:26] Ban list
+[22:03:26] --------
+[22:03:26]  Loaded: samp.ban
+[22:03:26] 
+[22:03:26] 
+[22:03:26] Filterscripts
+[22:03:26] ---------------
+[22:03:26]   Loading filterscript 'animacije.amx'...
+[22:03:26]   Loading filterscript 'JVVC.amx'...
+[22:03:26]   Loading filterscript 'cardealership.amx'...
+[22:03:26]   Loading filterscript 'flymode.amx'...
+[22:03:26]   Loaded 4 filterscripts.
+
+[22:03:26] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[22:03:26] Number of vehicle models: 5
+[22:03:53] [connection] 127.0.0.1:58639 requests connection cookie.
+[22:03:54] [connection] incoming connection: 127.0.0.1:58639 id: 0
+[22:03:54] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[22:03:54] GetName
+[22:03:54] OnPlayerConnect
+[22:03:56] OnPlayerSpawn
+[22:04:02] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[22:12:50] weburl = "www.sa-mp.com"  (string)
+[22:12:50] 
+[22:12:50] Server Plugins
+[22:12:50] --------------
+[22:12:50]  Loading plugin: main
+[22:12:50]   Loaded.
+[22:12:50]  Loaded 1 plugins.
+
+[22:12:50] 
+[22:12:50] Ban list
+[22:12:50] --------
+[22:12:50]  Loaded: samp.ban
+[22:12:50] 
+[22:12:50] 
+[22:12:50] Filterscripts
+[22:12:50] ---------------
+[22:12:50]   Loading filterscript 'animacije.amx'...
+[22:12:50]   Loading filterscript 'JVVC.amx'...
+[22:12:50]   Loading filterscript 'cardealership.amx'...
+[22:12:50]   Loading filterscript 'flymode.amx'...
+[22:12:50]   Loaded 4 filterscripts.
+
+[22:12:50] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[22:12:50] Number of vehicle models: 5
+[22:13:14] [connection] 127.0.0.1:57591 requests connection cookie.
+[22:13:15] [connection] incoming connection: 127.0.0.1:57591 id: 0
+[22:13:15] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[22:13:15] GetName
+[22:13:15] OnPlayerConnect
+[22:13:17] OnPlayerSpawn
+[22:13:24] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:02:51] weburl = "www.sa-mp.com"  (string)
+[18:02:51] 
+[18:02:51] Server Plugins
+[18:02:51] --------------
+[18:02:51]  Loading plugin: main
+[18:02:51]   Loaded.
+[18:02:51]  Loaded 1 plugins.
+
+[18:02:51] 
+[18:02:51] Ban list
+[18:02:51] --------
+[18:02:51]  Loaded: samp.ban
+[18:02:51] 
+[18:02:51] 
+[18:02:51] Filterscripts
+[18:02:51] ---------------
+[18:02:51]   Loading filterscript 'animacije.amx'...
+[18:02:51]   Loading filterscript 'JVVC.amx'...
+[18:02:51]   Loading filterscript 'cardealership.amx'...
+[18:02:51]   Loading filterscript 'flymode.amx'...
+[18:02:51]   Loaded 4 filterscripts.
+
+[18:02:51] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:02:51] Number of vehicle models: 5
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:04:33] weburl = "www.sa-mp.com"  (string)
+[18:04:33] 
+[18:04:33] Server Plugins
+[18:04:33] --------------
+[18:04:33]  Loading plugin: main
+[18:04:33]   Loaded.
+[18:04:33]  Loaded 1 plugins.
+
+[18:04:33] 
+[18:04:33] Ban list
+[18:04:33] --------
+[18:04:33]  Loaded: samp.ban
+[18:04:33] 
+[18:04:33] 
+[18:04:33] Filterscripts
+[18:04:33] ---------------
+[18:04:33]   Loading filterscript 'animacije.amx'...
+[18:04:33]   Loading filterscript 'JVVC.amx'...
+[18:04:33]   Loading filterscript 'cardealership.amx'...
+[18:04:33]   Loading filterscript 'flymode.amx'...
+[18:04:33]   Loaded 4 filterscripts.
+
+[18:04:33] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:04:33] Number of vehicle models: 5
+[18:04:58] [connection] 127.0.0.1:54173 requests connection cookie.
+[18:04:59] [connection] incoming connection: 127.0.0.1:54173 id: 0
+[18:05:00] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[18:05:00] GetName
+[18:05:00] OnPlayerConnect
+[18:05:09] OnPlayerSpawn
+[18:05:27] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:12:13] weburl = "www.sa-mp.com"  (string)
+[18:12:13] 
+[18:12:13] Server Plugins
+[18:12:13] --------------
+[18:12:13]  Loading plugin: main
+[18:12:13]   Loaded.
+[18:12:13]  Loaded 1 plugins.
+
+[18:12:13] 
+[18:12:13] Ban list
+[18:12:13] --------
+[18:12:13]  Loaded: samp.ban
+[18:12:13] 
+[18:12:13] 
+[18:12:13] Filterscripts
+[18:12:13] ---------------
+[18:12:13]   Loading filterscript 'animacije.amx'...
+[18:12:13]   Loading filterscript 'JVVC.amx'...
+[18:12:13]   Loading filterscript 'cardealership.amx'...
+[18:12:13]   Loading filterscript 'flymode.amx'...
+[18:12:13]   Loaded 4 filterscripts.
+
+[18:12:13] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:12:13] Number of vehicle models: 5
+[18:12:30] [connection] 127.0.0.1:62237 requests connection cookie.
+[18:12:31] [connection] incoming connection: 127.0.0.1:62237 id: 0
+[18:12:31] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[18:12:31] GetName
+[18:12:31] OnPlayerConnect
+[18:12:33] OnPlayerSpawn
+[18:12:38] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:14:25] weburl = "www.sa-mp.com"  (string)
+[18:14:25] 
+[18:14:25] Server Plugins
+[18:14:25] --------------
+[18:14:25]  Loading plugin: main
+[18:14:25]   Loaded.
+[18:14:25]  Loaded 1 plugins.
+
+[18:14:25] 
+[18:14:25] Ban list
+[18:14:25] --------
+[18:14:25]  Loaded: samp.ban
+[18:14:25] 
+[18:14:25] 
+[18:14:25] Filterscripts
+[18:14:25] ---------------
+[18:14:25]   Loading filterscript 'animacije.amx'...
+[18:14:25]   Loading filterscript 'JVVC.amx'...
+[18:14:25]   Loading filterscript 'cardealership.amx'...
+[18:14:25]   Loading filterscript 'flymode.amx'...
+[18:14:25]   Loaded 4 filterscripts.
+
+[18:14:25] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:14:25] Number of vehicle models: 5
+[18:14:46] [connection] 127.0.0.1:50522 requests connection cookie.
+[18:14:47] [connection] incoming connection: 127.0.0.1:50522 id: 0
+[18:14:47] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[18:14:47] GetName
+[18:14:47] OnPlayerConnect
+[18:14:49] OnPlayerSpawn
+[18:15:05] 281465879439408711598080.000000, 281465879439408711598080.000000, 281465879439408711598080.000000, 281465879439408711598080.000000
+[18:15:07] 281465879439408711598080.000000, 281465879439408711598080.000000, 281465879439408711598080.000000, 281465879439408711598080.000000
+[18:15:08] 281465879439408711598080.000000, 281465879439408711598080.000000, 281465879439408711598080.000000, 281465879439408711598080.000000
+[18:15:09] [chat] [Maki_Zemunac]: etret
+[18:15:10] [chat] [Maki_Zemunac]: reter
+[18:27:31] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:43:04] weburl = "www.sa-mp.com"  (string)
+[18:43:04] 
+[18:43:04] Server Plugins
+[18:43:04] --------------
+[18:43:04]  Loading plugin: main
+[18:43:04]   Loaded.
+[18:43:04]  Loaded 1 plugins.
+
+[18:43:04] 
+[18:43:04] Ban list
+[18:43:04] --------
+[18:43:04]  Loaded: samp.ban
+[18:43:04] 
+[18:43:04] 
+[18:43:04] Filterscripts
+[18:43:04] ---------------
+[18:43:04]   Loading filterscript 'animacije.amx'...
+[18:43:04]   Loading filterscript 'JVVC.amx'...
+[18:43:04]   Loading filterscript 'cardealership.amx'...
+[18:43:04]   Loading filterscript 'flymode.amx'...
+[18:43:04]   Loaded 4 filterscripts.
+
+[18:43:04] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:43:04] Number of vehicle models: 5
+[18:43:25] [connection] 127.0.0.1:53253 requests connection cookie.
+[18:43:26] [connection] incoming connection: 127.0.0.1:53253 id: 0
+[18:43:27] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[18:43:27] GetName
+[18:43:27] OnPlayerConnect
+[18:43:29] OnPlayerSpawn
+[18:43:36] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:45:01] weburl = "www.sa-mp.com"  (string)
+[18:45:01] 
+[18:45:01] Server Plugins
+[18:45:01] --------------
+[18:45:01]  Loading plugin: main
+[18:45:01]   Loaded.
+[18:45:01]  Loaded 1 plugins.
+
+[18:45:01] 
+[18:45:01] Ban list
+[18:45:01] --------
+[18:45:01]  Loaded: samp.ban
+[18:45:01] 
+[18:45:01] 
+[18:45:01] Filterscripts
+[18:45:01] ---------------
+[18:45:01]   Loading filterscript 'animacije.amx'...
+[18:45:01]   Loading filterscript 'JVVC.amx'...
+[18:45:01]   Loading filterscript 'cardealership.amx'...
+[18:45:01]   Loading filterscript 'flymode.amx'...
+[18:45:01]   Loaded 4 filterscripts.
+
+[18:45:01] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:45:01] Number of vehicle models: 5
+[18:45:27] [connection] 127.0.0.1:51949 requests connection cookie.
+[18:45:28] [connection] incoming connection: 127.0.0.1:51949 id: 0
+[18:45:28] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[18:45:28] GetName
+[18:45:28] OnPlayerConnect
+[18:45:30] OnPlayerSpawn
+[18:45:37] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:55:29] weburl = "www.sa-mp.com"  (string)
+[18:55:29] 
+[18:55:29] Server Plugins
+[18:55:29] --------------
+[18:55:29]  Loading plugin: main
+[18:55:29]   Loaded.
+[18:55:29]  Loaded 1 plugins.
+
+[18:55:29] 
+[18:55:29] Ban list
+[18:55:29] --------
+[18:55:29]  Loaded: samp.ban
+[18:55:29] 
+[18:55:29] 
+[18:55:29] Filterscripts
+[18:55:29] ---------------
+[18:55:29]   Loading filterscript 'animacije.amx'...
+[18:55:29]   Loading filterscript 'JVVC.amx'...
+[18:55:29]   Loading filterscript 'cardealership.amx'...
+[18:55:29]   Loading filterscript 'flymode.amx'...
+[18:55:29]   Loaded 4 filterscripts.
+
+[18:55:29] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[18:55:29] Number of vehicle models: 5
+[18:55:48] [connection] 127.0.0.1:57221 requests connection cookie.
+[18:55:49] [connection] incoming connection: 127.0.0.1:57221 id: 0
+[18:55:49] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[18:55:49] GetName
+[18:55:49] OnPlayerConnect
+[18:55:51] OnPlayerSpawn
+[18:55:57] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:01:37] weburl = "www.sa-mp.com"  (string)
+[19:01:37] 
+[19:01:37] Server Plugins
+[19:01:37] --------------
+[19:01:37]  Loading plugin: main
+[19:01:37]   Loaded.
+[19:01:37]  Loaded 1 plugins.
+
+[19:01:37] 
+[19:01:37] Ban list
+[19:01:37] --------
+[19:01:37]  Loaded: samp.ban
+[19:01:37] 
+[19:01:37] 
+[19:01:37] Filterscripts
+[19:01:37] ---------------
+[19:01:37]   Loading filterscript 'animacije.amx'...
+[19:01:37]   Loading filterscript 'JVVC.amx'...
+[19:01:37]   Loading filterscript 'cardealership.amx'...
+[19:01:37]   Loading filterscript 'flymode.amx'...
+[19:01:37]   Loaded 4 filterscripts.
+
+[19:01:37] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[19:01:37] Number of vehicle models: 5
+[19:01:56] [connection] 127.0.0.1:50618 requests connection cookie.
+[19:01:57] [connection] incoming connection: 127.0.0.1:50618 id: 0
+[19:01:57] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[19:01:57] GetName
+[19:01:57] OnPlayerConnect
+[19:01:59] OnPlayerSpawn
+[19:02:03] GetName
+[19:02:03] Igrac Maki_Zemunac je spawnovao vozilo modela infernus.
+[19:02:10] [chat] [Maki_Zemunac]: rt
+[19:02:39] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:14:47] weburl = "www.sa-mp.com"  (string)
+[19:14:47] 
+[19:14:47] Server Plugins
+[19:14:47] --------------
+[19:14:47]  Loading plugin: main
+[19:14:47]   Loaded.
+[19:14:47]  Loaded 1 plugins.
+
+[19:14:47] 
+[19:14:47] Ban list
+[19:14:47] --------
+[19:14:47]  Loaded: samp.ban
+[19:14:47] 
+[19:14:47] 
+[19:14:47] Filterscripts
+[19:14:47] ---------------
+[19:14:47]   Loading filterscript 'animacije.amx'...
+[19:14:47]   Loading filterscript 'JVVC.amx'...
+[19:14:47]   Loading filterscript 'cardealership.amx'...
+[19:14:47]   Loading filterscript 'flymode.amx'...
+[19:14:47]   Loaded 4 filterscripts.
+
+[19:14:47] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[19:14:47] Number of vehicle models: 5
+[19:15:07] [connection] 127.0.0.1:51721 requests connection cookie.
+[19:15:08] [connection] incoming connection: 127.0.0.1:51721 id: 0
+[19:15:08] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[19:15:08] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:15:40] weburl = "www.sa-mp.com"  (string)
+[19:15:40] 
+[19:15:40] Server Plugins
+[19:15:40] --------------
+[19:15:40]  Loading plugin: main
+[19:15:40]   Loaded.
+[19:15:40]  Loaded 1 plugins.
+
+[19:15:40] 
+[19:15:40] Ban list
+[19:15:40] --------
+[19:15:40]  Loaded: samp.ban
+[19:15:40] 
+[19:15:40] 
+[19:15:40] Filterscripts
+[19:15:40] ---------------
+[19:15:40]   Loading filterscript 'animacije.amx'...
+[19:15:40]   Loading filterscript 'JVVC.amx'...
+[19:15:40]   Loading filterscript 'cardealership.amx'...
+[19:15:40]   Loading filterscript 'flymode.amx'...
+[19:15:40]   Loaded 4 filterscripts.
+
+[19:15:40] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[19:15:40] Number of vehicle models: 5
+[19:15:58] [connection] 127.0.0.1:58677 requests connection cookie.
+[19:15:59] [connection] incoming connection: 127.0.0.1:58677 id: 0
+[19:15:59] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[19:15:59] GetName
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:17:42] weburl = "www.sa-mp.com"  (string)
+[19:17:42] 
+[19:17:42] Server Plugins
+[19:17:42] --------------
+[19:17:42]  Loading plugin: main
+[19:17:42]   Loaded.
+[19:17:42]  Loaded 1 plugins.
+
+[19:17:42] 
+[19:17:42] Ban list
+[19:17:42] --------
+[19:17:42]  Loaded: samp.ban
+[19:17:42] 
+[19:17:42] 
+[19:17:42] Filterscripts
+[19:17:42] ---------------
+[19:17:42]   Loading filterscript 'animacije.amx'...
+[19:17:42]   Loading filterscript 'JVVC.amx'...
+[19:17:42]   Loading filterscript 'cardealership.amx'...
+[19:17:42]   Loading filterscript 'flymode.amx'...
+[19:17:42]   Loaded 4 filterscripts.
+
+[19:17:42] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[19:17:42] Number of vehicle models: 5
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:25:57] weburl = "www.sa-mp.com"  (string)
+[19:25:57] 
+[19:25:57] Server Plugins
+[19:25:57] --------------
+[19:25:57]  Loading plugin: main
+[19:25:57]   Loaded.
+[19:25:57]  Loaded 1 plugins.
+
+[19:25:57] 
+[19:25:57] Ban list
+[19:25:57] --------
+[19:25:57]  Loaded: samp.ban
+[19:25:57] 
+[19:25:57] 
+[19:25:57] Filterscripts
+[19:25:57] ---------------
+[19:25:57]   Loading filterscript 'animacije.amx'...
+[19:25:57]   Loading filterscript 'JVVC.amx'...
+[19:25:57]   Loading filterscript 'cardealership.amx'...
+[19:25:57]   Loading filterscript 'flymode.amx'...
+[19:25:57]   Loaded 4 filterscripts.
+
+[19:25:57] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[19:25:57] Number of vehicle models: 5
+[19:26:16] [connection] 127.0.0.1:56739 requests connection cookie.
+[19:26:17] [connection] incoming connection: 127.0.0.1:56739 id: 0
+[19:26:17] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[19:26:17] GetName
+[19:26:17] OnPlayerConnect
+[19:26:19] OnPlayerSpawn
+[19:26:28] GetName
+[19:26:28] Igrac Maki_Zemunac je spawnovao vozilo modela infernus.
+[19:27:58] [part] Maki_Zemunac has left the server (0:1)
