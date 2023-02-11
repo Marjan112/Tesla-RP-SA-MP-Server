@@ -203,6 +203,8 @@ stock Sacuvaj(playerid, ime[128]) {
 	INI_WriteInt(File, "Auto5", PlayerInfo[playerid][pAuto5]);
 	INI_WriteInt(File, "Auto6", PlayerInfo[playerid][pAuto6]);
 	INI_WriteInt(File, "Auto7", PlayerInfo[playerid][pAuto7]);
+	INI_WriteInt(File, "Sniper", PlayerInfo[playerid][pSniper]);
+	INI_WriteInt(File, "SniperMunicija", PlayerInfo[playerid][pSniperMunicija]);
 	INI_Close(File);
 }
 
@@ -256,6 +258,8 @@ stock SavePlayer(playerid) {
 	INI_WriteInt(File, "Auto5", PlayerInfo[playerid][pAuto5]);
 	INI_WriteInt(File, "Auto6", PlayerInfo[playerid][pAuto6]);
 	INI_WriteInt(File, "Auto7", PlayerInfo[playerid][pAuto7]);
+	INI_WriteInt(File, "Sniper", PlayerInfo[playerid][pSniper]);
+	INI_WriteInt(File, "SniperMunicija", PlayerInfo[playerid][pSniperMunicija]);
 	INI_Close(File);
 }
 

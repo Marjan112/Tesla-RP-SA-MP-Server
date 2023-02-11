@@ -68,14 +68,14 @@ enum {
 	d_askq,
 	d_askq_to_admin,
 	d_moja_vozila,
-	d_moja_jefitna_vozila_slotovi1,
-	d_moja_jefitna_voizla_slotovi2
-	d_moja_jefitna_voizla_slotovi3
-	d_moja_jefitna_voizla_slotovi4
-	d_moja_jefitna_voizla_slotovi5
-	d_moja_jefitna_voizla_slotovi6
-	d_moja_jefitna_voizla_slotovi7
-	d_moja_jefitna_voizla_slotovi8
+	d_moja_jeftina_vozila_slotovi1,
+	d_moja_jeftina_vozila_slotovi2,
+	d_moja_jeftina_vozila_slotovi3,
+	d_moja_jeftina_vozila_slotovi4,
+	d_moja_jeftina_vozila_slotovi5,
+	d_moja_jeftina_vozila_slotovi6,
+	d_moja_jeftina_vozila_slotovi7,
+	d_moja_jeftina_vozila_slotovi8
 };
 
 new IsPlayerSpec[MAX_PLAYERS];
@@ -2531,6 +2531,7 @@ public OnPlayerConnect(playerid) {
 	// snegobj[playerid] = CreatePlayerObject(playerid, 18864, X, Y, Z - 5, 0, 0, 0, 300);
 
 	CallMapIcons(playerid);
+	CallNovac(playerid);
 
 	RemoveBuildingForPlayer(playerid, 13759, 1413.4141, -804.7422, 83.4375, 0.25);
 	RemoveBuildingForPlayer(playerid, 13722, 1413.4141, -804.7422, 83.4375, 0.25);
@@ -2633,6 +2634,16 @@ public OnPlayerSpawn(playerid) {
 		return 1;
 	}
 	SetPlayerPos(playerid, 1682.222045, -2246.613281, 13.550828);
+	return 1;
+}
+
+CMD:popraviauto(playerid, params[]) {
+	#pragma unused params
+	if(!IsPlayerInAnyVehicle(playerid)) return SCM(playerid, SIVA, "Niste u vozilu.");
+	new vehid = GetPlayerVehicleID(playerid);
+	RepairVehicle(vehid);
+	SCM(playerid, SIVA, "Vozilo Vam je uspesno popravljeno!");
+	GivePlayerMoney(playerid, -1000);
 	return 1;
 }
 
@@ -4914,7 +4925,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 		case d_inventar: {
 			if(response) {
 				switch(listitem + 1) {
-					case 1: SPD(playerid, d_inv_oruzje, DIALOG_STYLE_LIST, "Oruzje", "Glock 19\nAK-47\nM4", "Izaberi", "Nazad");
+					case 1: SPD(playerid, d_inv_oruzje, DIALOG_STYLE_LIST, "Oruzje", "Glock 19\nAK-47\nM4\nSniper", "Izaberi", "Nazad");
 					case 2: if(strcmp(PlayerInfo[playerid][pVozackaDozvola], "Nema")) return SCM(playerid, SIVA, "Nemate vozacku dozvolu, da bi ste dobili vozacku dozvolu morate polagati ispit u auto skoli! (/gps)");
 					case 3: cmd_stats(playerid, "\0");
 				}
@@ -4924,19 +4935,24 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pGlock19] == -1) return SCM(playerid, SIVA, "Nemate Glock 19, ali mozete ga kupiti u Gun Shop-u! (/gps)");
+						if(PlayerInfo[playerid][pGlock19] == -1) return SCM(playerid, SIVA, "Nemate Glock 19, ali mozete ga kupiti u Ammu-nation-u (/gps)");
 						GivePlayerWeapon(playerid, PlayerInfo[playerid][pGlock19], PlayerInfo[playerid][pGlock19Municija]);
 						SetPlayerAmmo(playerid, PlayerInfo[playerid][pGlock19], PlayerInfo[playerid][pGlock19Municija]);
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAK_47] == -1) return SCM(playerid, SIVA, "Nemate AK_47, ali mozete ga kupiti u Gun Shop-u! (/gps)");
+						if(PlayerInfo[playerid][pAK_47] == -1) return SCM(playerid, SIVA, "Nemate AK_47, ali mozete ga kupiti u Ammu-nation-u (/gps)");
 						GivePlayerWeapon(playerid, PlayerInfo[playerid][pAK_47], PlayerInfo[playerid][pAK_47Municija]);
 						SetPlayerAmmo(playerid, PlayerInfo[playerid][pAK_47], PlayerInfo[playerid][pAK_47Municija]);
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pM4] == -1) return SCM(playerid, SIVA, "Nemate M4, ali mozete ga kupiti u Gun Shop-u! (/gps)");
+						if(PlayerInfo[playerid][pM4] == -1) return SCM(playerid, SIVA, "Nemate M4, ali mozete ga kupiti u Ammu-nation-u (/gps)");
 						GivePlayerWeapon(playerid, PlayerInfo[playerid][pM4], PlayerInfo[playerid][pM4Municija]);
 						SetPlayerAmmo(playerid, PlayerInfo[playerid][pM4], PlayerInfo[playerid][pM4Municija]);
+					}
+					case 4: {
+						if(PlayerInfo[playerid][pSniper] == -1) return SCM(playerid, SIVA, "Nemate Sniper, ali ga mozete kupiti u Ammu-nation-u (/gps)");
+						GivePlayerWeapon(playerid, PlayerInfo[playerid][pSniper], PlayerInfo[playerid][pSniperMunicija]);
+						SetPlayerAmmo(playerid, PlayerInfo[playerid][pSniper], PlayerInfo[playerid][pSniperMunicija]);
 					}
 				}
 			} else SPD(playerid, d_inventar, DIALOG_STYLE_LIST, "Inventar", "Oruzje\nVozacka Dozvola\nLicna Karta", "Izaberi", "Odustani");
@@ -5013,6 +5029,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						GivePlayerMoney(playerid, -4000);
 						GameTextForPlayer(playerid, "~r~-$4000", 5000, 1);
 						SCM(playerid, -1, "Uspesno ste kupili pistolj marke Glock19!");
+					}
+					case 4: {
+						if(GetPlayerMoney(playerid) < 9000) return SCM(playerid, SIVA, "Nemate dovoljno novca!");
+						PlayerInfo[playerid][pSniper] = WEAPON_SNIPER;
+						PlayerInfo[playerid][pSniperMunicija] = 100;
+						GivePlayerWeapon(playerid, PlayerInfo[playerid][pSniper], PlayerInfo[playerid][pSniperMunicija]);
+						SavePlayer(playerid);
+						GivePlayerMoney(playerid, -9000);
+						GameTextForPlayer(playerid, "~r~-$9000", 5000, 1);
+						SCM(playerid, -1, "Uspesno ste kupili Sniper!");
 					}
 				}
 			}
@@ -5160,219 +5186,219 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 				}
 			}
 		}
-		case d_moja_jeftina_vozila_slotovi1: {
-			if(response) {
-				switch(listitem + 1) {
-					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto1] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto2] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto3] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto4] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto5] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto6] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-							return 1;
-						} else {
-							PlayerInfo[playerid][pAuto7] == 470;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-				}
-			} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
-		}
-		case d_moja_jefitna_vozila_slotovi2: {
-			if(response) {
-				switch(listitem + 1) {
-					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto1] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto2] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto3] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto4] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto5] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto6] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto7] = 421;
-							GivePlayerMoney(playerid, -200000);
-							GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-				}
-			} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
-		}
-		case d_moja_jeftina_vozila_slotovi3: {
-			if(response) {
-				switch(listitem + 1) {
-					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) {
-							SCM(playerid, SIVA, "Taj slot je zauzet!");
-							SPD(playerid, d_moja_jeftina_vozila_slotovi3, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-						} else {
-							PlayerInfo[playerid][pAuto] == 579;
-							GivePlayerMoney(playerid, -300000);
-							GameTextForPlayer(playerid, "~r~-$300000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Mercedes GLE 53 za $300000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-				}
-			} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
-		}
+		// case d_moja_jeftina_vozila_slotovi1: {
+		// 	if(response) {
+		// 		switch(listitem + 1) {
+		// 			case 1: {
+		// 				if(PlayerInfo[playerid][pAuto] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 2: {
+		// 				if(PlayerInfo[playerid][pAuto1] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto1] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 3: {
+		// 				if(PlayerInfo[playerid][pAuto2] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto2] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 4: {
+		// 				if(PlayerInfo[playerid][pAuto3] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto3] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 5: {
+		// 				if(PlayerInfo[playerid][pAuto4] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto4] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 6: {
+		// 				if(PlayerInfo[playerid][pAuto5] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto5] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 7: {
+		// 				if(PlayerInfo[playerid][pAuto6] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto6] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 8: {
+		// 				if(PlayerInfo[playerid][pAuto7] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 					return 1;
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto7] == 470;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Jeep Wrangler za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 		}
+		// 	} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
+		// }
+		// case d_moja_jeftina_vozila_slotovi2: {
+		// 	if(response) {
+		// 		switch(listitem + 1) {
+		// 			case 1: {
+		// 				if(PlayerInfo[playerid][pAuto] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 2: {
+		// 				if(PlayerInfo[playerid][pAuto1] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto1] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 3: {
+		// 				if(PlayerInfo[playerid][pAuto2] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto2] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 4: {
+		// 				if(PlayerInfo[playerid][pAuto3] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto3] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 5: {
+		// 				if(PlayerInfo[playerid][pAuto4] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto4] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 6: {
+		// 				if(PlayerInfo[playerid][pAuto5] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto5] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 7: {
+		// 				if(PlayerInfo[playerid][pAuto6] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto6] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 			case 8: {
+		// 				if(PlayerInfo[playerid][pAuto7] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto7] = 421;
+		// 					GivePlayerMoney(playerid, -200000);
+		// 					GameTextForPlayer(playerid, "~r~-$200000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Skoda Rapid za $200000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 		}
+		// 	} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
+		// }
+		// case d_moja_jeftina_vozila_slotovi3: {
+		// 	if(response) {
+		// 		switch(listitem + 1) {
+		// 			case 1: {
+		// 				if(PlayerInfo[playerid][pAuto] != -1) {
+		// 					SCM(playerid, SIVA, "Taj slot je zauzet!");
+		// 					SPD(playerid, d_moja_jeftina_vozila_slotovi3, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
+		// 				} else {
+		// 					PlayerInfo[playerid][pAuto] == 579;
+		// 					GivePlayerMoney(playerid, -300000);
+		// 					GameTextForPlayer(playerid, "~r~-$300000", 5000, 1);
+		// 					SCM(playerid, SIVA, "Kupili ste auto marke Mercedes GLE 53 za $300000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+		// 				}
+		// 			}
+		// 		}
+		// 	} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
+		// }
 		//
 		case d_ban: if(response) Kick(playerid);
 		case d_nevalidno_ime: if(response) Kick(playerid);                                      
@@ -5445,7 +5471,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
 			SPD(playerid, d_bolnica, DIALOG_STYLE_LIST, "{ff0000}Bolnica", "1. Potrebna mi je medicinska pomoc.\n2. Dovidjenja", "{ff0000}Izaberi", "{ff0000}Odustani");
 		}
 		if(IsPlayerInRangeOfPoint(playerid, 3, 291.3272,-106.2224,1001.5156)) {
-			SPD(playerid, d_ammu_nation, DIALOG_STYLE_LIST, "{696969}AMMU-NATION", "AK-47 - $7000\nM4 - $6000\nGLOCK19 - $4000", "{696969}Kupi", "{696969}Odustani");
+			SPD(playerid, d_ammu_nation, DIALOG_STYLE_LIST, "{696969}AMMU-NATION", "AK-47 - $7000\nM4 - $6000\nGLOCK19 - $4000\nSNIPER - $9000", "{696969}Kupi", "{696969}Odustani");
 		}
 	}
 	if(newkeys & KEY_SECONDARY_ATTACK) {
@@ -5593,7 +5619,10 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
 			}
 		}
 	}
-	// if(newkeys & KEY_FIRE) if(IsPlayerInAnyVehicle(playerid)) AddVehicleComponent(vehid, 1010);
+	if(newkeys & KEY_FIRE) {
+		if(PlayerInfo[playerid][pZavezan]) return 0;
+		if(IsPlayerInAnyVehicle(playerid)) AddVehicleComponent(vehid, 1010);
+	}
 	return 1;
 }
 
@@ -5653,6 +5682,8 @@ function LoadUser_data(playerid,name[],value[]) {
 	INI_Int("Auto5", PlayerInfo[playerid][pAuto5]);
 	INI_Int("Auto6", PlayerInfo[playerid][pAuto6]);
 	INI_Int("Auto7", PlayerInfo[playerid][pAuto7]);
+	INI_Int("Sniper", PlayerInfo[playerid][pSniper]);
+	INI_Int("SniperMuncija", PlayerInfo[playerid][pSniperMunicija]);
 	return 1;
 }
 

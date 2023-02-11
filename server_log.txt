@@ -2862,3 +2862,51 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [19:26:28] GetName
 [19:26:28] Igrac Maki_Zemunac je spawnovao vozilo modela infernus.
 [19:27:58] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:03:18] weburl = "www.sa-mp.com"  (string)
+[20:03:18] 
+[20:03:18] Server Plugins
+[20:03:18] --------------
+[20:03:18]  Loading plugin: main
+[20:03:18]   Loaded.
+[20:03:18]  Loaded 1 plugins.
+
+[20:03:18] 
+[20:03:18] Ban list
+[20:03:18] --------
+[20:03:18]  Loaded: samp.ban
+[20:03:18] 
+[20:03:18] 
+[20:03:18] Filterscripts
+[20:03:18] ---------------
+[20:03:18]   Loading filterscript 'animacije.amx'...
+[20:03:18]   Loading filterscript 'JVVC.amx'...
+[20:03:18]   Loading filterscript 'cardealership.amx'...
+[20:03:18]   Loading filterscript 'flymode.amx'...
+[20:03:18]   Loaded 4 filterscripts.
+
+[20:03:18] Iz OnGameModeInit-a: Mod uspesno ucitan!
+[20:03:18] Number of vehicle models: 5
+[20:03:41] [connection] 127.0.0.1:60728 requests connection cookie.
+[20:03:42] [connection] incoming connection: 127.0.0.1:60728 id: 0
+[20:03:42] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
+[20:03:42] GetName
+[20:03:42] OnPlayerConnect
+[20:03:45] OnPlayerSpawn
+[20:03:55] GetName
+[20:03:55] Igrac Maki_Zemunac je spawnovao vozilo modela infernus.
+[20:03:57] [part] Maki_Zemunac has left the server (0:1)
+Console input: exit
+[20:04:10] --- Server Shutting Down.
+[20:04:10] Iz OnGameModeExit-a: Mod uspesno odcitan!
+[20:04:10] 
+
+* Test plugin je odcitan

@@ -185,6 +185,8 @@ enum pInfo {
 	pAuto4,
 	pAuto5,
 	pAuto6,
-	pAuto7
+	pAuto7,
+	pSniper,
+	pSniperMunicija
 };
 new PlayerInfo[MAX_PLAYERS+1][pInfo];

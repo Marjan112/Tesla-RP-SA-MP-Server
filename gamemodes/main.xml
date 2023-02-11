@@ -482,7 +482,7 @@
 				<tagname value="Float"/>
 			</member>
 		</member>
-		<member name="T:pInfo" value="846">
+		<member name="T:pInfo" value="848">
 			<tagname value="pInfo"/>
 			<member name="C:pLozinka" value="0">
 			</member>
@@ -595,6 +595,10 @@
 			</member>
 			<member name="C:pAuto7" value="845">
 			</member>
+			<member name="C:pSniper" value="846">
+			</member>
+			<member name="C:pSniperMunicija" value="847">
+			</member>
 		</member>
 		<member name="T:promInfo" value="130">
 			<tagname value="promInfo"/>
@@ -657,7 +661,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="5883">
+		<member name="C:__line" value="6193">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -784,6 +788,15 @@
 		</member>
 		<member name="C:d_log" value="1">
 			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi1" value="35">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi2" value="36">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi3" value="37">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_moja_vozila" value="34">
@@ -1895,6 +1908,10 @@
 			<referrer name="S@@_OnPlayerDeath"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
+		<member name="F:gNovac">
+			<tagname value="PlayerText"/>
+			<referrer name="CallNovac"/>
+		</member>
 		<member name="F:hLabel">
 			<tagname value="Text3D"/>
 			<referrer name="zcmd_OnGameModeInit"/>
@@ -2933,6 +2950,14 @@
 			<param name="color2">
 			</param>
 		</member>
+		<member name="M:AddVehicleComponent" syntax="AddVehicleComponent(vehicleid, componentid)">
+			<attribute name="native"/>
+			<referrer name="S@@_OnPlayerKeyStateChange"/>
+			<param name="vehicleid">
+			</param>
+			<param name="componentid">
+			</param>
+		</member>
 		<member name="M:Attach3DTextLabelToVehicle" syntax="Attach3DTextLabelToVehicle(id, vehicleid, OffsetX, OffsetY, OffsetZ)">
 			<attribute name="native"/>
 			<referrer name="cmd_v"/>
@@ -3149,6 +3174,23 @@
 			<referrer name="zcmd_OnGameModeInit"/>
 			<dependency name="CreateDynamicObject"/>
 			<dependency name="ZatvorVrata"/>
+		</member>
+		<member name="M:CallNovac" syntax="CallNovac(playerid)">
+			<stacksize value="6"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
+			<dependency name="CreatePlayerTextDraw"/>
+			<dependency name="PlayerTextDrawAlignment"/>
+			<dependency name="PlayerTextDrawBackgroundColor"/>
+			<dependency name="PlayerTextDrawColor"/>
+			<dependency name="PlayerTextDrawFont"/>
+			<dependency name="PlayerTextDrawLetterSize"/>
+			<dependency name="PlayerTextDrawSetOutline"/>
+			<dependency name="PlayerTextDrawSetProportional"/>
+			<dependency name="PlayerTextDrawSetShadow"/>
+			<dependency name="gNovac"/>
+			<dependency name="gNovac"/>
+			<param name="playerid">
+			</param>
 		</member>
 		<member name="M:CallOnoGore" syntax="CallOnoGore()">
 			<stacksize value="5"/>
@@ -3556,6 +3598,7 @@
 			<tagname value="PlayerText"/>
 			<attribute name="native"/>
 			<referrer name="va_CreatePlayerTextDraw"/>
+			<referrer name="CallNovac"/>
 			<param name="playerid">
 			</param>
 			<param name="x">
@@ -4090,6 +4133,7 @@
 		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID(playerid)">
 			<attribute name="native"/>
 			<referrer name="SpeedVehicle"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_f_tesla"/>
@@ -4189,6 +4233,7 @@
 		</member>
 		<member name="M:GivePlayerMoney" syntax="GivePlayerMoney(playerid, money)">
 			<attribute name="native"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_kredit"/>
 			<referrer name="cmd_withdraw"/>
@@ -4862,6 +4907,7 @@
 		<member name="M:IsPlayerInAnyVehicle" syntax="IsPlayerInAnyVehicle(playerid)">
 			<attribute name="native"/>
 			<referrer name="SpeedVehicle"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_lisice"/>
 			<referrer name="cmd_toci"/>
 			<referrer name="cmd_tp"/>
@@ -5352,6 +5398,8 @@
 			<dependency name="pRentHouse"/>
 			<dependency name="pRespekti"/>
 			<dependency name="pSkin"/>
+			<dependency name="pSniper"/>
+			<dependency name="pSniperMunicija"/>
 			<dependency name="pSpawnAng"/>
 			<dependency name="pSpawnInter"/>
 			<dependency name="pSpawnX"/>
@@ -6690,6 +6738,98 @@
 			<param name="mode">
 			</param>
 		</member>
+		<member name="M:PlayerTextDrawAlignment" syntax="PlayerTextDrawAlignment(playerid, text, alignment)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="alignment">
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawBackgroundColor" syntax="PlayerTextDrawBackgroundColor(playerid, text, color)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawColor" syntax="PlayerTextDrawColor(playerid, text, color)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawFont" syntax="PlayerTextDrawFont(playerid, text, font)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="font">
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawLetterSize" syntax="PlayerTextDrawLetterSize(playerid, text, x, y)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawSetOutline" syntax="PlayerTextDrawSetOutline(playerid, text, size)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawSetProportional" syntax="PlayerTextDrawSetProportional(playerid, text, set)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="set">
+			</param>
+		</member>
+		<member name="M:PlayerTextDrawSetShadow" syntax="PlayerTextDrawSetShadow(playerid, text, size)">
+			<attribute name="native"/>
+			<referrer name="CallNovac"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
 		<member name="M:ProveraRPImena" syntax="ProveraRPImena(playerid)">
 			<stacksize value="31"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -6856,6 +6996,7 @@
 		</member>
 		<member name="M:RepairVehicle" syntax="RepairVehicle(vehicleid)">
 			<attribute name="native"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_afv"/>
 			<param name="vehicleid">
 			</param>
@@ -6969,6 +7110,9 @@
 			<dependency name="d_inventar"/>
 			<dependency name="d_joblist"/>
 			<dependency name="d_log"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi1"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi2"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi3"/>
 			<dependency name="d_nevalidno_ime"/>
 			<dependency name="d_orgdrzavna"/>
 			<dependency name="d_orgime"/>
@@ -7002,6 +7146,14 @@
 			<dependency name="pAK_47"/>
 			<dependency name="pAK_47Municija"/>
 			<dependency name="pAdmin"/>
+			<dependency name="pAuto"/>
+			<dependency name="pAuto1"/>
+			<dependency name="pAuto2"/>
+			<dependency name="pAuto3"/>
+			<dependency name="pAuto4"/>
+			<dependency name="pAuto5"/>
+			<dependency name="pAuto6"/>
+			<dependency name="pAuto7"/>
 			<dependency name="pGlock19"/>
 			<dependency name="pGlock19Municija"/>
 			<dependency name="pKuca"/>
@@ -7012,6 +7164,8 @@
 			<dependency name="pOrganizacija"/>
 			<dependency name="pPosao"/>
 			<dependency name="pPromoter"/>
+			<dependency name="pSniper"/>
+			<dependency name="pSniperMunicija"/>
 			<dependency name="pVozackaDozvola"/>
 			<dependency name="renta"/>
 			<dependency name="rented"/>
@@ -7361,6 +7515,7 @@
 			<attribute name="public"/>
 			<stacksize value="265"/>
 			<dependency name="Float:operator=(_:)"/>
+			<dependency name="AddVehicleComponent"/>
 			<dependency name="GetName"/>
 			<dependency name="GetName"/>
 			<dependency name="GetPlayerVehicleID"/>
@@ -7385,6 +7540,7 @@
 			<dependency name="false"/>
 			<dependency name="format"/>
 			<dependency name="pOrganizacija"/>
+			<dependency name="pZavezan"/>
 			<dependency name="strcmp"/>
 			<dependency name="vEngine"/>
 			<param name="playerid">
@@ -7900,6 +8056,7 @@
 			<dependency name="AdminInfo"/>
 			<dependency name="AdminInfo"/>
 			<dependency name="CallMapIcons"/>
+			<dependency name="CallNovac"/>
 			<dependency name="GETIP"/>
 			<dependency name="GetName"/>
 			<dependency name="GetName"/>
@@ -8155,6 +8312,8 @@
 			<dependency name="pRentHouse"/>
 			<dependency name="pRespekti"/>
 			<dependency name="pSkin"/>
+			<dependency name="pSniper"/>
+			<dependency name="pSniperMunicija"/>
 			<dependency name="pSpawnAng"/>
 			<dependency name="pSpawnInter"/>
 			<dependency name="pSpawnX"/>
@@ -8392,6 +8551,8 @@
 			<dependency name="pRate"/>
 			<dependency name="pRentHouse"/>
 			<dependency name="pRespekti"/>
+			<dependency name="pSniper"/>
+			<dependency name="pSniperMunicija"/>
 			<dependency name="pSpawnAng"/>
 			<dependency name="pSpawnX"/>
 			<dependency name="pSpawnY"/>
@@ -8518,6 +8679,7 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
@@ -11015,6 +11177,20 @@
 			<dependency name="Zemunski_Klan@YSII_Ag"/>
 			<dependency name="pOrganizacija"/>
 			<dependency name="strcmp"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_popraviauto" syntax="cmd_popraviauto(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GivePlayerMoney"/>
+			<dependency name="IsPlayerInAnyVehicle"/>
+			<dependency name="RepairVehicle"/>
+			<dependency name="SendClientMessage"/>
 			<param name="playerid">
 			</param>
 			<param name="params">

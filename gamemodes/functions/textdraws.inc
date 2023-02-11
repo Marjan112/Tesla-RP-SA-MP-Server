@@ -22,6 +22,7 @@
 
 new Text: sdtd[3];
 new Text: Onogore[7];
+new PlayerText:gNovac[MAX_PLAYERS][2];
 
 stock Void: CallSDTD() {
     sdtd[0] = TextDrawCreate(38.999980, 429.748260, "00:00");
@@ -128,4 +129,26 @@ stock CallOnoGore() {
 	TextDrawBackgroundColor(Onogore[6], 51);
 	TextDrawFont(Onogore[6], 1);
 	TextDrawSetProportional(Onogore[6], 1);
+}
+
+stock CallNovac(playerid) {
+	gNovac[playerid][0] = CreatePlayerTextDraw(playerid, 509.000061, 100.799980, "10000000");
+	PlayerTextDrawLetterSize(playerid, gNovac[playerid][0], 0.390666, 1.616592);
+	PlayerTextDrawAlignment(playerid, gNovac[playerid][0], 1);
+	PlayerTextDrawColor(playerid, gNovac[playerid][0], -1);
+	PlayerTextDrawSetShadow(playerid, gNovac[playerid][0], -3);
+	PlayerTextDrawSetOutline(playerid, gNovac[playerid][0], 0);
+	PlayerTextDrawBackgroundColor(playerid, gNovac[playerid][0], 51);
+	PlayerTextDrawFont(playerid, gNovac[playerid][0], 1);
+	PlayerTextDrawSetProportional(playerid, gNovac[playerid][0], 1);
+
+	gNovac[playerid][1] = CreatePlayerTextDraw(playerid, 519.000122, 129.837036, "10000000");
+	PlayerTextDrawLetterSize(playerid, gNovac[playerid][1], 0.387665, 1.575111);
+	PlayerTextDrawAlignment(playerid, gNovac[playerid][1], 1);
+	PlayerTextDrawColor(playerid, gNovac[playerid][1], -1);
+	PlayerTextDrawSetShadow(playerid, gNovac[playerid][1], 0);
+	PlayerTextDrawSetOutline(playerid, gNovac[playerid][1], 1);
+	PlayerTextDrawBackgroundColor(playerid, gNovac[playerid][1], 51);
+	PlayerTextDrawFont(playerid, gNovac[playerid][1], 1);
+	PlayerTextDrawSetProportional(playerid, gNovac[playerid][1], 1);
 }

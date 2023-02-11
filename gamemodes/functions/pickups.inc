@@ -102,4 +102,8 @@ stock CallPickups() {
 	//Za auto salon
 	CreatePickup(1239, 1, 2261.4954,-1919.0536,13.5508);
 	Create3DTextLabel("Da bi ste videli listu dostupnih voizla\nukucajte /dostupnavozila", -1, 2261.4954,-1919.0536,13.5508, 5, 0, 1);
+
+	//Za ammu-nation
+	CreatePickup(1239, 1, 291.3272,-106.2224,1001.5156);
+	Create3DTextLabel("Da bi ste kupili neko oruzje pretisnite {696969}SPACE", -1, 291.3272,-106.2224,1001.5156, 5.0, 0, 0);
 }
