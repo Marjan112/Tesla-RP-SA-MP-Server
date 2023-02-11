@@ -1163,7 +1163,6 @@
 			<tagname value="Text"/>
 			<referrer name="CallOnoGore"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
-			<referrer name="TDUpdate"/>
 		</member>
 		<member name="F:OrgInfo">
 			<referrer name="SaveOrg"/>
@@ -1911,6 +1910,7 @@
 		<member name="F:gNovac">
 			<tagname value="PlayerText"/>
 			<referrer name="CallNovac"/>
+			<referrer name="TDUpdate"/>
 		</member>
 		<member name="F:hLabel">
 			<tagname value="Text3D"/>
@@ -6830,6 +6830,18 @@
 			<param name="size">
 			</param>
 		</member>
+		<member name="M:PlayerTextDrawSetString" syntax="PlayerTextDrawSetString(playerid, text, string[])">
+			<attribute name="native"/>
+			<referrer name="TDUpdate"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
 		<member name="M:ProveraRPImena" syntax="ProveraRPImena(playerid)">
 			<stacksize value="31"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -9437,13 +9449,15 @@
 		<member name="M:TDUpdate" syntax="TDUpdate()">
 			<attribute name="public"/>
 			<stacksize value="528"/>
-			<dependency name="Onogore"/>
 			<dependency name="Player@YSII_Ag"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
+			<dependency name="PlayerTextDrawSetString"/>
 			<dependency name="TextDrawSetString"/>
 			<dependency name="UpdateBubble"/>
 			<dependency name="format"/>
+			<dependency name="gNovac"/>
+			<dependency name="gNovac"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="pBanka"/>

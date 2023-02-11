@@ -2571,7 +2571,7 @@ public OnPlayerConnect(playerid) {
 		PlayerInfo[playerid][pNeededRep] = 12;
 	}
 	else ShowPlayerDialog(playerid, d_reg, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Registracija na server", "{ffffff}Da bi ste se registrovali ukucajte\nvasu zelejenu sifru za vas {03adfc}nalog{ffffff}.\nSifra mora imati minimum 6 karaktera, maximum 26 karaktera.\nLozinka mora sadrzati brojeve i karaktere poput: \"@_-#\"", "{03adfc}Registruj se", "{03adfc}Odustani");
-	SetTimer("TDUpdate", 1000, true);
+	SetTimerEx("TDUpdate", 1000, true, "i", playerid);
 	return 1;
 }
 
@@ -5841,20 +5841,15 @@ function StartEngine(playerid) {
 	return 1;
 }
 
-function TDUpdate() {
+function TDUpdate(playerid) {
 	new string[512], godina, mesec, dan, sat, minut;
 	getdate(godina, mesec, dan), gettime(sat, minut);
 	format(string, sizeof(string), "%s%d/%s%d/%s%d", ((dan < 10) ? ("0") : ("")), dan, ((mesec < 10) ? ("0") : ("")), mesec, ((godina < 10) ? ("0") : ("")), godina);
 	TextDrawSetString(sdtd[0], string);
 	format(string, sizeof(string), "%s%d:%s%d", ((sat < 10) ? ("0") : ("")), sat, ((minut < 10) ? ("0") : ("")), minut);
 	TextDrawSetString(sdtd[1], string);
-	foreach(new i : Player) {
-		format(string, sizeof(string), "%d", PlayerInfo[i][pNovac]);
-		TextDrawSetString(Onogore[5], string);
-		format(string, sizeof(string), "%d", PlayerInfo[i][pBanka]);
-		TextDrawSetString(Onogore[6], string);
-		UpdateBubble(i);
-	}
+	
+	foreach(new i : Player) UpdateBubble(i);
 	return 1;
 }
 
