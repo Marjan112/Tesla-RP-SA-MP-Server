@@ -2613,7 +2613,9 @@ public OnPlayerDisconnect(playerid, reason) {
 public OnPlayerSpawn(playerid) {
 	// for(new i = 0; i < 10; i++) TextDrawHideForPlayer(playerid, lrtd[i]);
 	for(new i = 0; i < 3; i++) TextDrawShowForPlayer(playerid, sdtd[i]);
-	for(new i = 0; i < 7; i++) TextDrawShowForPlayer(playerid, Onogore[i]);
+	for(new i = 0; i < 5; i++) TextDrawShowForPlayer(playerid, Onogore[i]);
+	PlayerTextDrawShow(playerid, gNovac1[playerid]);
+	PlayerTextDrawShow(playerid, gNovac2[playerid]);
 	for(new i = 0; i < MAX_HOUSES; i++) {
 		if(PlayerInfo[playerid][pKuca] == i) {
 			SetPlayerVirtualWorld(playerid, HouseInfo[i][hVirtualWorld]);
@@ -2640,9 +2642,11 @@ public OnPlayerSpawn(playerid) {
 CMD:popraviauto(playerid, params[]) {
 	#pragma unused params
 	if(!IsPlayerInAnyVehicle(playerid)) return SCM(playerid, SIVA, "Niste u vozilu.");
+	if(!IsPlayerInRangeOfPoint(playerid, 3, 488.8923,-1732.2811,11.2193)) return SCM(playerid, SIVA, "Niste kod mehanicarske radnje.");
 	new vehid = GetPlayerVehicleID(playerid);
 	RepairVehicle(vehid);
 	SCM(playerid, SIVA, "Vozilo Vam je uspesno popravljeno!");
+	GameTextForPlayer(playerid, "~r~-$1000", 5000, 1);
 	GivePlayerMoney(playerid, -1000);
 	return 1;
 }
@@ -5848,7 +5852,11 @@ function TDUpdate(playerid) {
 	TextDrawSetString(sdtd[0], string);
 	format(string, sizeof(string), "%s%d:%s%d", ((sat < 10) ? ("0") : ("")), sat, ((minut < 10) ? ("0") : ("")), minut);
 	TextDrawSetString(sdtd[1], string);
-	
+	new bankastr[128];
+	format(bankastr, sizeof(bankastr), "%d", PlayerInfo[playerid][pNovac]);
+	PlayerTextDrawSetString(playerid, gNovac1[playerid], bankastr);
+	format(bankastr, sizeof(bankastr), "%d", PlayerInfo[playerid][pBanka]);
+	PlayerTextDrawSetString(playerid, gNovac2[playerid], bankastr);
 	foreach(new i : Player) UpdateBubble(i);
 	return 1;
 }

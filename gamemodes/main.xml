@@ -661,7 +661,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6193">
+		<member name="C:__line" value="6196">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -1907,9 +1907,16 @@
 			<referrer name="S@@_OnPlayerDeath"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="F:gNovac">
+		<member name="F:gNovac1">
 			<tagname value="PlayerText"/>
 			<referrer name="CallNovac"/>
+			<referrer name="S@@_OnPlayerSpawn"/>
+			<referrer name="TDUpdate"/>
+		</member>
+		<member name="F:gNovac2">
+			<tagname value="PlayerText"/>
+			<referrer name="CallNovac"/>
+			<referrer name="S@@_OnPlayerSpawn"/>
 			<referrer name="TDUpdate"/>
 		</member>
 		<member name="F:hLabel">
@@ -2251,6 +2258,7 @@
 			<referrer name="CallPickups"/>
 			<referrer name="GetDistanceBetweenPoints"/>
 			<referrer name="UpdateBubble"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
@@ -3187,8 +3195,8 @@
 			<dependency name="PlayerTextDrawSetOutline"/>
 			<dependency name="PlayerTextDrawSetProportional"/>
 			<dependency name="PlayerTextDrawSetShadow"/>
-			<dependency name="gNovac"/>
-			<dependency name="gNovac"/>
+			<dependency name="gNovac1"/>
+			<dependency name="gNovac2"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -3868,6 +3876,7 @@
 		<member name="M:GameTextForPlayer" syntax="GameTextForPlayer(playerid, string[], time, style)">
 			<attribute name="native"/>
 			<referrer name="va_GameTextForPlayer"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_otvoriracun"/>
 			<referrer name="cmd_enterhouse"/>
@@ -4923,6 +4932,7 @@
 		<member name="M:IsPlayerInRangeOfPoint" syntax="IsPlayerInRangeOfPoint(playerid, range, x, y, z)">
 			<attribute name="native"/>
 			<referrer name="IC"/>
+			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_z_rover"/>
@@ -6842,6 +6852,15 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
+		<member name="M:PlayerTextDrawShow" syntax="PlayerTextDrawShow(playerid, text)">
+			<attribute name="native"/>
+			<referrer name="S@@_OnPlayerSpawn"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+		</member>
 		<member name="M:ProveraRPImena" syntax="ProveraRPImena(playerid)">
 			<stacksize value="31"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -7658,11 +7677,14 @@
 			<dependency name="Onogore"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
+			<dependency name="PlayerTextDrawShow"/>
 			<dependency name="SetPlayerInterior"/>
 			<dependency name="SetPlayerPos"/>
 			<dependency name="SetPlayerSkin"/>
 			<dependency name="SetPlayerVirtualWorld"/>
 			<dependency name="TextDrawShowForPlayer"/>
+			<dependency name="gNovac1"/>
+			<dependency name="gNovac2"/>
 			<dependency name="hInterID"/>
 			<dependency name="hInterX"/>
 			<dependency name="hInterY"/>
@@ -8083,7 +8105,6 @@
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveProm"/>
 			<dependency name="SetPlayerScore"/>
-			<dependency name="SetTimer"/>
 			<dependency name="SetTimerEx"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="UlogovanProvera"/>
@@ -9164,7 +9185,6 @@
 		<member name="M:SetTimer" syntax="SetTimer(funcname[], interval, repeating)">
 			<attribute name="native"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 			<param name="funcname">
 				<paraminfo> [] </paraminfo>
@@ -9446,9 +9466,9 @@
 			<stacksize value="6"/>
 			<dependency name="setproperty"/>
 		</member>
-		<member name="M:TDUpdate" syntax="TDUpdate()">
+		<member name="M:TDUpdate" syntax="TDUpdate(playerid)">
 			<attribute name="public"/>
-			<stacksize value="528"/>
+			<stacksize value="651"/>
 			<dependency name="Player@YSII_Ag"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
@@ -9456,13 +9476,15 @@
 			<dependency name="TextDrawSetString"/>
 			<dependency name="UpdateBubble"/>
 			<dependency name="format"/>
-			<dependency name="gNovac"/>
-			<dependency name="gNovac"/>
+			<dependency name="gNovac1"/>
+			<dependency name="gNovac2"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="pBanka"/>
 			<dependency name="pNovac"/>
 			<dependency name="sdtd"/>
+			<param name="playerid">
+			</param>
 		</member>
 		<member name="M:TextDrawAlignment" syntax="TextDrawAlignment(text, alignment)">
 			<attribute name="native"/>
@@ -11199,10 +11221,13 @@
 		</member>
 		<member name="M:cmd_popraviauto" syntax="cmd_popraviauto(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="6"/>
+			<stacksize value="7"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="GivePlayerMoney"/>
 			<dependency name="IsPlayerInAnyVehicle"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
 			<dependency name="RepairVehicle"/>
 			<dependency name="SendClientMessage"/>
 			<param name="playerid">
