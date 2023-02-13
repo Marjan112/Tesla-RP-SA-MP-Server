@@ -661,7 +661,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6196">
+		<member name="C:__line" value="6172">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -6728,6 +6728,29 @@
 			<dependency name="strcmp"/>
 			<dependency name="va_SendClientMessage"/>
 		</member>
+		<member name="M:PlayAudioStreamForPlayer" syntax="PlayAudioStreamForPlayer(playerid, url[], posX, posY, posZ, distance, usepos)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
+			<param name="playerid">
+			</param>
+			<param name="url">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="posX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="posY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="posZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="distance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="usepos">
+			</param>
+		</member>
 		<member name="M:PlayerSpectatePlayer" syntax="PlayerSpectatePlayer(playerid, targetplayerid, mode)">
 			<attribute name="native"/>
 			<referrer name="SpecTimer"/>
@@ -8096,6 +8119,7 @@
 			<dependency name="GetName"/>
 			<dependency name="GetPlayerName"/>
 			<dependency name="INI_ParseFile"/>
+			<dependency name="PlayAudioStreamForPlayer"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PromInfo"/>
@@ -8104,6 +8128,7 @@
 			<dependency name="RemoveBuildingForPlayer"/>
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveProm"/>
+			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerScore"/>
 			<dependency name="SetTimerEx"/>
 			<dependency name="ShowPlayerDialog"/>
@@ -8712,6 +8737,7 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>
@@ -9425,6 +9451,12 @@
 			<dependency name="vEngine"/>
 			<dependency name="vLights"/>
 			<dependency name="vObj"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:StopAudioStreamForPlayer" syntax="StopAudioStreamForPlayer(playerid)">
+			<attribute name="native"/>
+			<referrer name="cmd_stopmusic"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -11712,6 +11744,16 @@
 			<dependency name="pRate"/>
 			<dependency name="pRespekti"/>
 			<dependency name="strcat"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_stopmusic" syntax="cmd_stopmusic(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="StopAudioStreamForPlayer"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
