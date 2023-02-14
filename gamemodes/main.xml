@@ -661,7 +661,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6738">
+		<member name="C:__line" value="7537">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -850,6 +850,30 @@
 		</member>
 		<member name="C:d_rent" value="7">
 			<referrer name="cmd_rent"/>
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi1" value="43">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi2" value="44">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi3" value="45">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi4" value="46">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi5" value="47">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi6" value="48">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi7" value="49">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_skupa_vozila_slotovi8" value="50">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_stats" value="4">
@@ -7342,6 +7366,14 @@
 			<dependency name="d_port"/>
 			<dependency name="d_reg"/>
 			<dependency name="d_rent"/>
+			<dependency name="d_skupa_vozila_slotovi1"/>
+			<dependency name="d_skupa_vozila_slotovi2"/>
+			<dependency name="d_skupa_vozila_slotovi3"/>
+			<dependency name="d_skupa_vozila_slotovi4"/>
+			<dependency name="d_skupa_vozila_slotovi5"/>
+			<dependency name="d_skupa_vozila_slotovi6"/>
+			<dependency name="d_skupa_vozila_slotovi7"/>
+			<dependency name="d_skupa_vozila_slotovi8"/>
 			<dependency name="editaorg"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
