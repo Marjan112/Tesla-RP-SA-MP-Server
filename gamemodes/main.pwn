@@ -136,6 +136,8 @@ new Bool: PokrenutaPljacka[MAX_PLAYERS] = false;
 
 // new antiSpam[MAX_PLAYERS];
 
+new naLoadingScreenu[MAX_PLAYERS];
+
 new RandomPoruke[][] = {
 	"{03adfc}[INFO]: {ffffff}Server se ukljucuje u 11 ujutru, a iskljucuje u 23:30.",
 	"{03adfc}[INFO]: {ffffff}Ako zelite da se zaposlite, morate otici na salteru za zaposljavanje u vladi!",
@@ -2467,8 +2469,16 @@ public OnPlayerConnect(playerid) {
 		return 0;
 	}
 
-	PlayAudioStreamForPlayer(playerid, "https://tubular-faloodeh-cc9493.netlify.app/muzika.mp3");
-	SCM(playerid, -1, "Da bi ste zaustavili muziku, kucajte /stopmusic");
+	if(PlayerInfo[playerid][pBan] == 1) {
+		SetTimerEx("BanMessage", 500, false, "i", playerid);
+		return 0;
+	}
+
+	PlayAudioStreamForPlayer(playerid, "https://bit.ly/3DZzu3J");
+
+	CallLoadingScreen(playerid);
+
+	SetTimerEx("loadingscreen", 127000, false, "i", playerid);
 
 	RemoveBuildingForPlayer(playerid, 1265, 1520.7734, -1016.2891, 23.4453, 0.25);
 	RemoveBuildingForPlayer(playerid, 1265, 1519.8984, -1016.2344, 23.4453, 0.25);
@@ -2562,19 +2572,6 @@ public OnPlayerConnect(playerid) {
 			break;
 		}
 	}
-	if(fexist(UserPath(playerid))) {
-	    INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
-		PlayerInfo[playerid][pIP] = GETIP(playerid);
-		if(PlayerInfo[playerid][pBan] == 1) {
-			SetTimerEx("BanMessage", 500, false, "i", playerid);
-			return 0;
-		}
-		SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
-		ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
-		PlayerInfo[playerid][pNeededRep] = 12;
-	}
-	else ShowPlayerDialog(playerid, d_reg, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Registracija na server", "{ffffff}Da bi ste se registrovali ukucajte\nvasu zelejenu sifru za vas {03adfc}nalog{ffffff}.\nSifra mora imati minimum 6 karaktera, maximum 26 karaktera.\nLozinka mora sadrzati brojeve i karaktere poput: \"@_-#\"", "{03adfc}Registruj se", "{03adfc}Odustani");
-	SetTimerEx("TDUpdate", 1000, true, "i", playerid);
 	return 1;
 }
 
@@ -2639,12 +2636,6 @@ public OnPlayerSpawn(playerid) {
 		return 1;
 	}
 	SetPlayerPos(playerid, 1682.222045, -2246.613281, 13.550828);
-	return 1;
-}
-
-CMD:stopmusic(playerid, params[]) {
-	#pragma unused params
-	StopAudioStreamForPlayer(playerid);
 	return 1;
 }
 
@@ -2999,7 +2990,7 @@ CMD:heal(playerid, params[]) {
 
 CMD:komande(playerid, params[]) {
 	#pragma unused params
-	SPD(playerid, d_komande, DIALOG_STYLE_MSGBOX, "{03adfc}Sve komande Tesla RP-a", "{03adfc}Osnovne komande: {ffffff}/me, /do, /ooc, /givemoney, /engine, /toci, /rent, /unrent, /kupikucu, /enterhouse,\n/exithouse, /house, /stats, /organizacije, /sellhouse, /postavihrent,\n /skinihrent, /otvoriracun, /deposit, /withdraw, /kredit, /quitjob, /listaposlova\n, /inv, /getajob, /prevozputnika, /prekiniposao, /exitveh, /stuck, /prevoznovca, /gps, /komande\n{03adfc}Komande za LSPD: {ffffff}/otvori, /zatvori, /zakljucaj, /otkljucaj, /p_gklasa, /p_skodarapid, /p_teslas,\n /lisice, /skinilisice, /pduty\n{03adfc}Komande za FIB: /f_urus, /f_gklasa, /f_tesla{ffffff}\n{03adfc}Komande za Zemunski Klan: {ffffff}/z_urus, /z_aventador, /z_teslas, /z_gklasam, /z_cfmoto625, /z_rover, /lisice\n /otvori, /zatvori, /otkljucaj, /zakljucaj, /lisice, /skinilisice\n{03adfc}Komande za organizacije: {ffffff}/orginv, /leaveorg\n{03adfc}Komande za lidere: {ffffff}/orgkick\n{03adfc}Admin komande: {ffa500}/akomande", "{03adfc}Izadji", "");
+	SPD(playerid, d_komande, DIALOG_STYLE_MSGBOX, "{03adfc}Sve komande Tesla RP-a", "{03adfc}Osnovne komande: {ffffff}/me, /do, /ooc, /givemoney, /engine, /toci, /rent, /unrent, /kupikucu, /enterhouse, /popraviauto\n/exithouse, /house, /stats, /organizacije, /sellhouse, /postavihrent,\n /skinihrent, /otvoriracun, /deposit, /withdraw, /kredit, /quitjob, /listaposlova\n, /inv, /getajob, /prevozputnika, /prekiniposao, /exitveh, /stuck, /prevoznovca, /gps, /komande\n{03adfc}Komande za LSPD: {ffffff}/otvori, /zatvori, /zakljucaj, /otkljucaj, /p_gklasa, /p_skodarapid, /p_teslas,\n /lisice, /skinilisice, /pduty\n{03adfc}Komande za FIB: /f_urus, /f_gklasa, /f_tesla{ffffff}\n{03adfc}Komande za Zemunski Klan: {ffffff}/z_urus, /z_aventador, /z_teslas, /z_gklasam, /z_cfmoto625, /z_rover, /z_amg\n/lisice\n /otvori, /zatvori, /otkljucaj, /zakljucaj, /lisice, /skinilisice\n{03adfc}Komande za organizacije: {ffffff}/orginv, /leaveorg\n{03adfc}Komande za lidere: {ffffff}/orgkick\n{03adfc}Komande za vozila: {ffffff}/mojavozila, /dostupnavozila\n{03adfc}Admin komande: /akomande", "{03adfc}Izadji", "");
 	return 1;
 }
 
@@ -5821,7 +5812,7 @@ function StartEngine(playerid) {
 	return 1;
 }
 
-function TDUpdate(playerid) {
+function TDUpdate() {
 	new string[512], godina, mesec, dan, sat, minut;
 	getdate(godina, mesec, dan), gettime(sat, minut);
 	format(string, sizeof(string), "%s%d/%s%d/%s%d", ((dan < 10) ? ("0") : ("")), dan, ((mesec < 10) ? ("0") : ("")), mesec, ((godina < 10) ? ("0") : ("")), godina);
@@ -5829,11 +5820,13 @@ function TDUpdate(playerid) {
 	format(string, sizeof(string), "%s%d:%s%d", ((sat < 10) ? ("0") : ("")), sat, ((minut < 10) ? ("0") : ("")), minut);
 	TextDrawSetString(sdtd[1], string);
 	new bankastr[128];
-	format(bankastr, sizeof(bankastr), "%d", PlayerInfo[playerid][pNovac]);
-	PlayerTextDrawSetString(playerid, gNovac1[playerid], bankastr);
-	format(bankastr, sizeof(bankastr), "%d", PlayerInfo[playerid][pBanka]);
-	PlayerTextDrawSetString(playerid, gNovac2[playerid], bankastr);
-	foreach(new i : Player) UpdateBubble(i);
+	foreach(new i : Player) {
+		format(bankastr, sizeof(bankastr), "%d", PlayerInfo[i][pNovac]);
+		PlayerTextDrawSetString(i, gNovac1[i], bankastr);
+		format(bankastr, sizeof(bankastr), "%d", PlayerInfo[i][pBanka]);
+		PlayerTextDrawSetString(i, gNovac2[i], bankastr);
+		UpdateBubble(i);
+	}
 	return 1;
 }
 
@@ -6167,6 +6160,35 @@ function RandomMessages() {
 function Timer() {
 	if(timer <= 0) timer = 10;
 	timer--;
+	return 1;
+}
+
+function loadingscreen(playerid) {
+	PlayerTextDrawHide(playerid, Loadingscreen0[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen2[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen3[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen1[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen4[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen5[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen6[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen7[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen8[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen9[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen10[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen11[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen12[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen13[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen14[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen15[playerid]);
+	if(fexist(UserPath(playerid))) {
+	    INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
+		PlayerInfo[playerid][pIP] = GETIP(playerid);
+		SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
+		ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
+		PlayerInfo[playerid][pNeededRep] = 12;
+	}
+	else ShowPlayerDialog(playerid, d_reg, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Registracija na server", "{ffffff}Da bi ste se registrovali ukucajte\nvasu zelejenu sifru za vas {03adfc}nalog{ffffff}.\nSifra mora imati minimum 6 karaktera, maximum 26 karaktera.\nLozinka mora sadrzati brojeve i karaktere poput: \"@_-#\"", "{03adfc}Registruj se", "{03adfc}Odustani");
+	SetTimer("TDUpdate", 1000, true);
 	return 1;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
