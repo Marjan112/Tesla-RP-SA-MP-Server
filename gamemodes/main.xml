@@ -661,7 +661,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7537">
+		<member name="C:__line" value="7553">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -816,6 +816,7 @@
 		</member>
 		<member name="C:d_moja_vozila" value="34">
 			<referrer name="cmd_mojavozila"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_nevalidno_ime" value="8">
 			<referrer name="SSCANF_OnPlayerConnect"/>
@@ -4368,6 +4369,21 @@
 			<param name="vehicleid">
 			</param>
 		</member>
+		<member name="M:GetVehiclePos" syntax="GetVehiclePos(vehicleid, &amp;x, &amp;y, &amp;z)">
+			<attribute name="native"/>
+			<referrer name="S@@_OnDialogResponse"/>
+			<param name="vehicleid">
+			</param>
+			<param name="x">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+		</member>
 		<member name="M:GetVehicleVelocity" syntax="GetVehicleVelocity(vehicleid, &amp;X, &amp;Y, &amp;Z)">
 			<attribute name="native"/>
 			<referrer name="SpeedVehicle"/>
@@ -7289,6 +7305,7 @@
 			<dependency name="GetPlayerMoney"/>
 			<dependency name="GetPlayerPos"/>
 			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetVehiclePos"/>
 			<dependency name="GivePlayerMoney"/>
 			<dependency name="GivePlayerWeapon"/>
 			<dependency name="HouseInfo"/>
@@ -7359,6 +7376,7 @@
 			<dependency name="d_moja_jeftina_vozila_slotovi6"/>
 			<dependency name="d_moja_jeftina_vozila_slotovi7"/>
 			<dependency name="d_moja_jeftina_vozila_slotovi8"/>
+			<dependency name="d_moja_vozila"/>
 			<dependency name="d_nevalidno_ime"/>
 			<dependency name="d_orgdrzavna"/>
 			<dependency name="d_orgime"/>

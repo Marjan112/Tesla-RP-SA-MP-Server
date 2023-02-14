@@ -83,7 +83,8 @@ enum {
 	d_skupa_vozila_slotovi5,
 	d_skupa_vozila_slotovi6,
 	d_skupa_vozila_slotovi7,
-	d_skupa_vozila_slotovi8
+	d_skupa_vozila_slotovi8,
+	d_boja_vozila
 };
 
 new IsPlayerSpec[MAX_PLAYERS];
@@ -6712,6 +6713,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					}
 				}
 			} else SCM(playerid, SIVA, "Odustali ste od kupovine auta!");
+		}
+		case d_moja_vozila: {
+			if(response) {
+				switch(listitem + 1) {
+					case 1: {
+						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4];
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							
+						}
+					}
+				}
+			}
 		}
 		//
 		case d_ban: if(response) Kick(playerid);
