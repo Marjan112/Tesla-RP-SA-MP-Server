@@ -661,7 +661,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="6194">
+		<member name="C:__line" value="6738">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -797,6 +797,21 @@
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_moja_jeftina_vozila_slotovi3" value="37">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi4" value="38">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi5" value="39">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi6" value="40">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi7" value="41">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_moja_jeftina_vozila_slotovi8" value="42">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_moja_vozila" value="34">
@@ -2037,8 +2052,6 @@
 		</member>
 		<member name="F:m_temp">
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
-		</member>
-		<member name="F:naLoadingScreenu">
 		</member>
 		<member name="F:orgLabel">
 			<tagname value="Text3D"/>
@@ -7317,6 +7330,11 @@
 			<dependency name="d_moja_jeftina_vozila_slotovi1"/>
 			<dependency name="d_moja_jeftina_vozila_slotovi2"/>
 			<dependency name="d_moja_jeftina_vozila_slotovi3"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi4"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi5"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi6"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi7"/>
+			<dependency name="d_moja_jeftina_vozila_slotovi8"/>
 			<dependency name="d_nevalidno_ime"/>
 			<dependency name="d_orgdrzavna"/>
 			<dependency name="d_orgime"/>
@@ -8276,6 +8294,7 @@
 			<dependency name="RemoveBuildingForPlayer"/>
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveProm"/>
+			<dependency name="SendClientMessage"/>
 			<dependency name="SetTimerEx"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="UlogovanProvera"/>
@@ -8874,6 +8893,7 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
+			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_dostupnavozila"/>

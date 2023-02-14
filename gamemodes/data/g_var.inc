@@ -106,7 +106,7 @@ new ImenaVozila[212][] = {
     {"News Chopper"},
     {"Gclass G500"},
     {"FBI Rancher"},
-    {"Fiat 125"},
+    {"Fiat 126"},
     {"Greenwood"},
     {"Jetmax"},
     {"Hotring"},
