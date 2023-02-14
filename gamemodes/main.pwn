@@ -2478,6 +2478,8 @@ public OnPlayerConnect(playerid) {
 
 	CallLoadingScreen(playerid);
 
+	SCM(playerid, -1, "Molimo Vas, ne pretiskajte dugme \"Spawn\" dok se ne ulogujete, da nebi izgubili vase podatke, hvala!");
+
 	SetTimerEx("loadingscreen", 127000, false, "i", playerid);
 
 	RemoveBuildingForPlayer(playerid, 1265, 1520.7734, -1016.2891, 23.4453, 0.25);
