@@ -4653,14 +4653,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					INI_WriteString(File, "Zatvoren", fmat);
 					INI_WriteInt(File, "Skin", 6);
 					INI_WriteString(File, "IP", GETIP(playerid));
-					INI_WriteInt(File, "Auto", -1);
-					INI_WriteInt(File, "Auto1", -1);
-					INI_WriteInt(File, "Auto2", -1);
-					INI_WriteInt(File, "Auto3", -1);
-					INI_WriteInt(File, "Auto4", -1);
-					INI_WriteInt(File, "Auto5", -1);
-					INI_WriteInt(File, "Auto6", -1);
-					INI_WriteInt(File, "Auto7", -1);
+					INI_WriteInt(File, "Auto", 0);
+					INI_WriteInt(File, "Auto1", 0);
+					INI_WriteInt(File, "Auto2", 0);
+					INI_WriteInt(File, "Auto3", 0);
+					INI_WriteInt(File, "Auto4", 0);
+					INI_WriteInt(File, "Auto5", 0);
+					INI_WriteInt(File, "Auto6", 0);
+					INI_WriteInt(File, "Auto7", 0);
 					INI_Close(File);
 					INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra = true, .extra = playerid);
 					GivePlayerMoney(playerid, 25000);
@@ -5138,161 +5138,161 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 				switch(listitem + 1) {
 					case 1: {
 						if(GetPlayerMoney(playerid) < 700000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 2: {
 						if(GetPlayerMoney(playerid) < 500000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 3: {
 						if(GetPlayerMoney(playerid) < 600000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi3, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 4: {
 						if(GetPlayerMoney(playerid) < 600000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi4, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 5: {
 						if(GetPlayerMoney(playerid) < 500000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi5, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 6: {
 						if(GetPlayerMoney(playerid) < 400000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi6, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 7: {
 						if(GetPlayerMoney(playerid) < 400000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi7, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 8: {
 						if(GetPlayerMoney(playerid) < 400000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi7, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
@@ -5303,7 +5303,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5312,7 +5312,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5321,7 +5321,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5330,7 +5330,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5339,7 +5339,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5348,7 +5348,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5357,7 +5357,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5366,7 +5366,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 411;
 							GivePlayerMoney(playerid, -700000);
@@ -5381,7 +5381,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5390,7 +5390,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5399,7 +5399,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5408,7 +5408,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5417,7 +5417,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5426,7 +5426,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5435,7 +5435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5444,7 +5444,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 489;
 							GivePlayerMoney(playerid, -500000);
@@ -5459,7 +5459,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5468,7 +5468,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5477,7 +5477,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5486,7 +5486,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5495,7 +5495,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5504,7 +5504,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5513,7 +5513,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5522,7 +5522,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 500;
 							GivePlayerMoney(playerid, -600000);
@@ -5537,7 +5537,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5546,7 +5546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5555,7 +5555,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5564,7 +5564,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5573,7 +5573,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5582,7 +5582,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5591,7 +5591,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5600,7 +5600,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 402;
 							GivePlayerMoney(playerid, -600000);
@@ -5615,7 +5615,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5624,7 +5624,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5633,7 +5633,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5642,7 +5642,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5651,7 +5651,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5660,7 +5660,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5669,7 +5669,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5678,7 +5678,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 545;
 							GivePlayerMoney(playerid, -500000);
@@ -5693,7 +5693,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5702,7 +5702,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5711,7 +5711,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5720,7 +5720,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5729,7 +5729,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5738,7 +5738,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5747,7 +5747,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5756,7 +5756,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5771,7 +5771,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5780,7 +5780,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5789,7 +5789,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5798,7 +5798,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5807,7 +5807,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5816,7 +5816,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5825,7 +5825,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5834,7 +5834,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5849,7 +5849,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5858,7 +5858,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5867,7 +5867,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5876,7 +5876,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5885,7 +5885,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5894,7 +5894,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5903,7 +5903,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5912,7 +5912,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 579;
 							GivePlayerMoney(playerid, -400000);
@@ -5929,161 +5929,161 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 				switch(listitem + 1) {
 					case 1: {
 						if(GetPlayerMoney(playerid) < 200000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi1, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 2: {
 						if(GetPlayerMoney(playerid) < 200000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi2, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 3: {
 						if(GetPlayerMoney(playerid) < 300000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi3, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 4: {
 						if(GetPlayerMoney(playerid) < 150000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi4, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 5: {
 						if(GetPlayerMoney(playerid) < 70000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi5, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 6: {
 						if(GetPlayerMoney(playerid) < 30000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi6, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 7: {
 						if(GetPlayerMoney(playerid) < 30000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi7, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
 					case 8: {
 						if(GetPlayerMoney(playerid) < 15000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == -1 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == -1 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == -1 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == -1 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == -1 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == -1 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == -1 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
 						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == -1 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
+						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
 						strcat(string, slots);
 						SPD(playerid, d_moja_jeftina_vozila_slotovi8, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
@@ -6094,7 +6094,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6103,7 +6103,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6112,7 +6112,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6121,7 +6121,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1)  return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0)  return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6130,7 +6130,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6139,7 +6139,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6148,7 +6148,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6157,7 +6157,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 470;
 							GivePlayerMoney(playerid, -200000);
@@ -6172,7 +6172,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6181,7 +6181,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6190,7 +6190,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6199,7 +6199,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6208,7 +6208,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6217,7 +6217,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6226,7 +6226,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6235,7 +6235,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 421;
 							GivePlayerMoney(playerid, -200000);
@@ -6250,7 +6250,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6259,7 +6259,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6268,7 +6268,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6277,7 +6277,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6286,7 +6286,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6295,7 +6295,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6304,7 +6304,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6313,7 +6313,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 579;
 							GivePlayerMoney(playerid, -300000);
@@ -6328,7 +6328,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6337,7 +6337,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6346,7 +6346,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6355,7 +6355,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6364,7 +6364,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6373,7 +6373,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6382,7 +6382,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6391,7 +6391,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 560;
 							GivePlayerMoney(playerid, -150000);
@@ -6406,7 +6406,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6415,7 +6415,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6424,7 +6424,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6433,7 +6433,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6442,7 +6442,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6451,7 +6451,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6460,7 +6460,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6469,7 +6469,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 496;
 							GivePlayerMoney(playerid, -70000);
@@ -6484,7 +6484,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6493,7 +6493,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6502,7 +6502,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 410;
 							GivePlayerMoney(playerid, -70000);
@@ -6511,7 +6511,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6520,7 +6520,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6529,7 +6529,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6538,7 +6538,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6547,7 +6547,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 410;
 							GivePlayerMoney(playerid, -30000);
@@ -6562,7 +6562,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6571,7 +6571,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6580,7 +6580,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6589,7 +6589,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6598,7 +6598,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6607,7 +6607,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6616,7 +6616,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6625,7 +6625,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 471;
 							GivePlayerMoney(playerid, -20000);
@@ -6640,7 +6640,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6649,7 +6649,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Taj slot je zauzet!");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto1] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6658,7 +6658,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto2] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6667,7 +6667,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto3] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6676,7 +6676,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto4] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6685,7 +6685,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto5] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6694,7 +6694,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto6] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6703,7 +6703,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je vec zauzet!");
 						else {
 							PlayerInfo[playerid][pAuto7] = 491;
 							GivePlayerMoney(playerid, -15000);
@@ -6718,82 +6718,82 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
 							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
