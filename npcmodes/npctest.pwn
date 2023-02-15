@@ -19,7 +19,7 @@ main()
 public OnNPCModeInit()
 {
 	printf("npctest: OnNPCModeInit");
-	SetTimer("TimerTest",10000,1);
+	SetTimer("TimerTest",30000,1);
 }
 
 //------------------------------------------
@@ -72,8 +72,6 @@ public TimerTest()
 	SendChat(msg);
 
 	SendCommand("/me waits around patiently");
-	SendCommand("/groundsit");
-	
 }
 
 //------------------------------------------

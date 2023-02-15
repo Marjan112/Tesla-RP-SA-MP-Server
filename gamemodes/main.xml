@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7624">
+		<member name="C:__line" value="7405">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -755,9 +755,6 @@
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_inv_org_bolnica" value="18">
-			<referrer name="cmd_orginv"/>
-		</member>
-		<member name="C:d_inv_org_fib" value="19">
 			<referrer name="cmd_orginv"/>
 		</member>
 		<member name="C:d_inv_org_ilegalna" value="21">
@@ -1118,15 +1115,6 @@
 		<member name="F:FALSE">
 			<tagname value="bool"/>
 		</member>
-		<member name="F:Fibs@YSII_Ag">
-			<referrer name="SSCANF_OnPlayerDisconnect"/>
-			<referrer name="S@@_OnDialogResponse"/>
-		</member>
-		<member name="F:Fibs@YSII_Cg">
-			<tagname value="_Y_ITER_C3"/>
-			<referrer name="SSCANF_OnPlayerDisconnect"/>
-			<referrer name="S@@_OnDialogResponse"/>
-		</member>
 		<member name="F:HouseInfo">
 			<referrer name="SaveHouse"/>
 			<referrer name="zcmd_OnGameModeInit"/>
@@ -1347,9 +1335,6 @@
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_akomande"/>
@@ -1528,9 +1513,6 @@
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_z_cfmoto625"/>
 			<referrer name="cmd_z_gklasam"/>
 			<referrer name="cmd_z_teslas"/>
@@ -2073,6 +2055,10 @@
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
 			<referrer name="BusTimer"/>
 			<referrer name="BankTimer"/>
+		</member>
+		<member name="F:loginOdustao">
+			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="F:m_temp">
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
@@ -3251,11 +3237,6 @@
 			<param name="playerid">
 			</param>
 		</member>
-		<member name="M:CallFIB" syntax="CallFIB()">
-			<stacksize value="16"/>
-			<referrer name="zcmd_OnGameModeInit"/>
-			<dependency name="CreateDynamicObject"/>
-		</member>
 		<member name="M:CallJelka" syntax="CallJelka()">
 			<stacksize value="16"/>
 			<dependency name="CreateDynamicObject"/>
@@ -3572,9 +3553,6 @@
 		</member>
 		<member name="M:ChangeVehiclePaintjob" syntax="ChangeVehiclePaintjob(vehicleid, paintjobid)">
 			<attribute name="native"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<param name="vehicleid">
@@ -3656,7 +3634,6 @@
 		<member name="M:CreateDynamicObject" syntax="CreateDynamicObject(modelid, x, y, z, rx, ry, rz, worldid, interiorid, playerid, streamdistance, drawdistance, areaid, priority)">
 			<attribute name="native"/>
 			<referrer name="SnijegObjekti"/>
-			<referrer name="CallFIB"/>
 			<referrer name="CallJelka"/>
 			<referrer name="CallMapBolnica"/>
 			<referrer name="CallMapLSPD"/>
@@ -3804,9 +3781,6 @@
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_garaza"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_z_cfmoto625"/>
 			<referrer name="cmd_z_gklasam"/>
 			<referrer name="cmd_z_teslas"/>
@@ -4136,9 +4110,6 @@
 			<attribute name="native"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_z_cfmoto625"/>
 			<referrer name="cmd_z_gklasam"/>
 			<referrer name="cmd_z_teslas"/>
@@ -4239,9 +4210,6 @@
 			<referrer name="cmd_curpos"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_lisice"/>
 			<referrer name="cmd_stuck"/>
 			<referrer name="cmd_napraviorg"/>
@@ -4299,9 +4267,6 @@
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_prevoznovca"/>
 			<referrer name="cmd_prevozputnika"/>
 			<referrer name="cmd_z_cfmoto625"/>
@@ -5107,9 +5072,6 @@
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_pduty"/>
 			<referrer name="cmd_getajob"/>
 			<referrer name="cmd_quitjob"/>
@@ -7150,9 +7112,6 @@
 			<attribute name="native"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_z_cfmoto625"/>
 			<referrer name="cmd_z_gklasam"/>
 			<referrer name="cmd_z_teslas"/>
@@ -7292,8 +7251,6 @@
 			<dependency name="Crveni@YSII_Cg"/>
 			<dependency name="Delete3DTextLabel"/>
 			<dependency name="DestroyPickup"/>
-			<dependency name="Fibs@YSII_Ag"/>
-			<dependency name="Fibs@YSII_Cg"/>
 			<dependency name="GETIP"/>
 			<dependency name="GETIP"/>
 			<dependency name="GameTextForPlayer"/>
@@ -7405,6 +7362,7 @@
 			<dependency name="hX"/>
 			<dependency name="hY"/>
 			<dependency name="hZ"/>
+			<dependency name="loginOdustao"/>
 			<dependency name="orgDrzavna"/>
 			<dependency name="orgIme"/>
 			<dependency name="orgLabel"/>
@@ -8376,8 +8334,6 @@
 			<dependency name="Cops@YSII_Cg"/>
 			<dependency name="Crveni@YSII_Ag"/>
 			<dependency name="Crveni@YSII_Cg"/>
-			<dependency name="Fibs@YSII_Ag"/>
-			<dependency name="Fibs@YSII_Cg"/>
 			<dependency name="GetName"/>
 			<dependency name="GetName"/>
 			<dependency name="IsPlayerSpec"/>
@@ -8397,6 +8353,7 @@
 			<dependency name="aDuty"/>
 			<dependency name="editaorg"/>
 			<dependency name="false"/>
+			<dependency name="loginOdustao"/>
 			<dependency name="pADuty"/>
 			<dependency name="pAdmin"/>
 			<dependency name="pOrganizacija"/>
@@ -8954,9 +8911,6 @@
 			<referrer name="cmd_garaza"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_setskin"/>
@@ -9458,9 +9412,6 @@
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="cmd_z_rover"/>
 			<referrer name="cmd_z_amg"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_z_cfmoto625"/>
 			<referrer name="cmd_z_gklasam"/>
 			<referrer name="cmd_z_teslas"/>
@@ -10459,102 +10410,6 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:cmd_f_gklasa" syntax="cmd_f_gklasa(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="17"/>
-			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="CreateVehicle"/>
-			<dependency name="GetPlayerFacingAngle"/>
-			<dependency name="GetPlayerPos"/>
-			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="IsPlayerInRangeOfPoint"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PutPlayerInVehicle"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="SetVehicleParamsEx"/>
-			<dependency name="VehInfo"/>
-			<dependency name="VehInfo"/>
-			<dependency name="pOrganizacija"/>
-			<dependency name="strcmp"/>
-			<dependency name="vAlarm"/>
-			<dependency name="vBonnet"/>
-			<dependency name="vBoot"/>
-			<dependency name="vDoor"/>
-			<dependency name="vEngine"/>
-			<dependency name="vFuel"/>
-			<dependency name="vLights"/>
-			<dependency name="vObj"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:cmd_f_tesla" syntax="cmd_f_tesla(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="17"/>
-			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="CreateVehicle"/>
-			<dependency name="GetPlayerFacingAngle"/>
-			<dependency name="GetPlayerPos"/>
-			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="IsPlayerInRangeOfPoint"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PutPlayerInVehicle"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="SetVehicleParamsEx"/>
-			<dependency name="VehInfo"/>
-			<dependency name="VehInfo"/>
-			<dependency name="pOrganizacija"/>
-			<dependency name="strcmp"/>
-			<dependency name="vAlarm"/>
-			<dependency name="vBonnet"/>
-			<dependency name="vBoot"/>
-			<dependency name="vDoor"/>
-			<dependency name="vEngine"/>
-			<dependency name="vFuel"/>
-			<dependency name="vLights"/>
-			<dependency name="vObj"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:cmd_f_urus" syntax="cmd_f_urus(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="17"/>
-			<dependency name="ChangeVehiclePaintjob"/>
-			<dependency name="CreateVehicle"/>
-			<dependency name="GetPlayerFacingAngle"/>
-			<dependency name="GetPlayerPos"/>
-			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="IsPlayerInRangeOfPoint"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PutPlayerInVehicle"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="SetVehicleParamsEx"/>
-			<dependency name="VehInfo"/>
-			<dependency name="VehInfo"/>
-			<dependency name="pOrganizacija"/>
-			<dependency name="strcmp"/>
-			<dependency name="vAlarm"/>
-			<dependency name="vBonnet"/>
-			<dependency name="vBoot"/>
-			<dependency name="vDoor"/>
-			<dependency name="vEngine"/>
-			<dependency name="vFuel"/>
-			<dependency name="vLights"/>
-			<dependency name="vObj"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
 		<member name="M:cmd_garaza" syntax="cmd_garaza(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="134"/>
@@ -11204,7 +11059,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="d_inv_org_bolnica"/>
-			<dependency name="d_inv_org_fib"/>
 			<dependency name="d_inv_org_ilegalna"/>
 			<dependency name="d_inv_org_lspd"/>
 			<dependency name="format"/>
@@ -13023,9 +12877,6 @@
 			<referrer name="cmd_garaza"/>
 			<referrer name="cmd_z_amg"/>
 			<referrer name="cmd_pokrenipljacku"/>
-			<referrer name="cmd_f_tesla"/>
-			<referrer name="cmd_f_gklasa"/>
-			<referrer name="cmd_f_urus"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_pduty"/>
@@ -13544,7 +13395,6 @@
 			<dependency name="AdminInfo"/>
 			<dependency name="BannedInfo"/>
 			<dependency name="BannedInfo"/>
-			<dependency name="CallFIB"/>
 			<dependency name="CallMapBolnica"/>
 			<dependency name="CallMapLSPD"/>
 			<dependency name="CallMapZemunci"/>

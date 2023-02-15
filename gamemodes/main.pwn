@@ -23,7 +23,7 @@
 #define BANIP 4
 #define SNEG 0
 //-------------------------------------------------
-#define IsPlayerPoliceman(%1) !strcmp(PlayerInfo[%1][pOrganizacija], "LSPD") || !strcmp(PlayerInfo[%1][pOrganizacija], "FIB")
+#define IsPlayerPoliceman(%1) !strcmp(PlayerInfo[%1][pOrganizacija], "LSPD")
 #define IsPlayerVillian(%1) !strcmp(PlayerInfo[%1][pOrganizacija], "Zemunski Klan") || !strcmp(PlayerInfo[%1][pOrganizacija], "Crveni") || !strcmp(PlayerInfo[%1][pOrganizacija], "Yakuza")
 ////////////////////////////////////////////////////
 
@@ -126,7 +126,6 @@ new Iterator: Houses<MAX_HOUSES>;
 new Iterator: Orgs<MAX_ORGS>;
 new Iterator: Proms<MAX_PLAYERS>;
 new Iterator: Cops<MAX_PLAYERS>;
-new Iterator: Fibs<MAX_PLAYERS>;
 new Iterator: Yakuza<MAX_PLAYERS>;
 new Iterator: Crveni<MAX_PLAYERS>;
 new Iterator: Zemunski_Klan<MAX_PLAYERS>;
@@ -143,6 +142,8 @@ new timer = 10;
 
 new Bool: PokrenutaPljacka[MAX_PLAYERS] = false;
 
+
+new loginOdustao[MAX_PLAYERS] = 0;
 // new antiSpam[MAX_PLAYERS];
 
 new RandomPoruke[][] = {
@@ -152,119 +153,6 @@ new RandomPoruke[][] = {
 	"{03adfc}[INFO]: {ffffff}Ako zelite da se prijavite za neku organizaciju morate uci u kanal za zeljenu organizaciju i popuniti upitnik!",
 	"{03adfc}[INFO]: {ffffff}Ako Vam treba neka pomoc, ukucajte /askq."
 };
-
-stock CallFIB() {
-    CreateDynamicObject(17559, 1310.222534, -1323.534790, -3.336741, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1301.865356, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1311.484619, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1321.224243, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1330.774169, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.342285, -1335.364379, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1321.587890, -1340.102783, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1312.177368, -1340.152099, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1302.558105, -1340.202148, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.617919, -1340.222534, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1335.364379, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1325.844482, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1316.264282, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1306.732421, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1293.881958, -1300.571899, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.717407, -1321.101684, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1308.318359, -1321.050048, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1317.755737, -1320.992065, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1324.407348, -1320.877563, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.701416, -1332.856933, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1315.781860, -1332.913696, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19387, 1321.134155, -1332.916625, -0.059583, 0.000000, 0.000000, -90.599983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1311.051757, -1337.664672, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1326.008789, -1333.361328, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.996337, -1333.990966, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.985107, -1334.591064, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.973388, -1335.220703, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.961547, -1335.841064, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.950195, -1336.451293, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.937866, -1337.091674, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.925781, -1337.721557, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.913208, -1338.361450, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.901611, -1338.981323, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(11729, 1325.888549, -1339.641601, -1.814133, 0.000000, 0.000000, -91.099952, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.432495, -1337.773681, -2.702438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.432495, -1337.773681, 1.787560, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.419555, -1339.822875, 1.830486, 88.799942, -1.099999, 1.100001, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1313.419555, -1334.742919, 1.724112, 88.799942, -1.099999, 1.100001, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19387, 1305.582275, -1332.942993, -0.059583, 0.000000, 0.000000, -90.599983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1311.820556, -1332.932739, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1299.241333, -1332.999511, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1289.631469, -1333.049804, -0.842438, 0.000000, 0.000000, -89.700126, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1309.479003, -1339.615112, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1307.478881, -1339.615112, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1305.479003, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1303.479736, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1301.479858, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1299.389526, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1297.299438, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2180, 1295.319702, -1339.605102, -1.865661, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1309.938842, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1307.667968, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1305.767944, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1303.747314, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1301.657104, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1299.687255, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1297.417236, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19999, 1295.827392, -1338.705078, -1.793842, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1309.983520, -1339.491577, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1308.056884, -1339.609375, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1306.020629, -1339.733886, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1304.065063, -1339.853393, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1302.020141, -1339.678222, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1299.964233, -1339.803955, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1297.880126, -1339.630737, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19893, 1295.883666, -1339.752807, -1.075942, 0.000000, 0.000000, -176.499969, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19387, 1302.111938, -1331.465820, -0.059583, 0.000000, 0.000000, 179.700134, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1302.102050, -1325.844482, -0.842438, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.048583, -1331.930786, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.015625, -1330.211425, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1293.985839, -1328.661499, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.020385, -1326.776367, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1293.986572, -1324.495727, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2056, 1294.052978, -1322.754272, -0.260816, 0.000000, 0.000000, 91.099983, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1299.961059, -1325.844482, -2.602437, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1299.961059, -1328.163818, -2.602437, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19054, 1303.407470, -1322.445922, -1.143917, 0.000000, 0.000000, 75.899986, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19055, 1302.987182, -1324.006469, -1.245745, 0.000000, 0.000000, -90.000007, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19057, 1304.986572, -1322.015258, -1.115745, 0.000000, 0.000000, -32.899997, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(2964, 1311.635620, -1324.464355, -1.826891, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(1723, 1323.195190, -1327.370239, -1.796245, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(1723, 1320.075561, -1327.519165, -1.796245, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19786, 1324.097167, -1332.734619, -0.269866, 0.000000, 0.000000, 177.499984, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19054, 1325.345947, -1321.719604, -1.143917, 0.000000, 0.000000, 75.899986, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1324.679687, -1335.497680, 0.888697, 1.499999, -90.600006, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1321.340332, -1335.497314, 0.853733, 1.499999, -90.600006, 0.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1318.030883, -1335.477783, 0.819606, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1314.601074, -1335.536621, 0.783700, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1311.242309, -1335.594726, 0.748526, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1307.833251, -1335.653442, 0.712829, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1304.353759, -1335.712524, 0.676399, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1300.944580, -1335.771484, 0.640702, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1297.535766, -1335.830078, 0.605005, 1.499999, -90.600006, 1.000000, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1295.425170, -1335.865600, 0.582917, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1295.492431, -1326.149169, 0.837357, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.970703, -1326.256225, 0.921672, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1302.411621, -1326.199951, 0.909798, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1305.341430, -1326.220947, 0.940470, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1308.851928, -1326.166625, 0.979308, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1312.232055, -1326.191162, 1.014691, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1315.641235, -1326.215820, 1.050388, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1319.161499, -1326.241943, 1.087237, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1322.491943, -1326.265747, 1.122096, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1325.201904, -1326.285522, 1.150465, -1.000000, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1325.131958, -1322.195800, 1.107659, 1.900000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1317.104858, -1322.333984, 0.991389, 0.899999, -90.800064, -86.800048, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1307.959594, -1322.489868, 1.017658, 0.400000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1298.460815, -1322.652832, 0.972704, -0.099998, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1326.049926, -1326.741088, 1.057617, 1.499999, -90.600006, -0.399999, -1, -1, -1, 300.00, 300.00); 
-    CreateDynamicObject(19449, 1325.135986, -1322.196533, 0.987731, 1.900000, -90.600006, -89.000038, -1, -1, -1, 300.00, 300.00);
-}
 
 stock CallJelka() {
     CreateDynamicObject(19076, 1432.422729, -830.832031, 56.613811, 9.999951, 0.899999, -0.199999, -1, -1, -1, 300.00, 300.00); 
@@ -1398,8 +1286,7 @@ public OnGameModeInit() {
 	#if SNEG == 1
 	CallJelka();
 	#endif
-	//fib stanica
-	CallFIB();
+	
 	//Sneg
 	#if SNEG == 1
 	Snow();
@@ -2485,7 +2372,7 @@ public OnPlayerConnect(playerid) {
 
 	CallLoadingScreen(playerid);
 
-	SCM(playerid, -1, "HINT: Ne pretiskajte \"Spawn\" dok se ne ulogujete na server.");
+	SCM(playerid, -1, "HINT: Ne pretiskajte \"Spawn\" i ne izlazite iz igrice dok se ne ulogujete na server!");
 
 	SetTimerEx("loadingscreen", 127000, false, "i", playerid);
 
@@ -2585,7 +2472,6 @@ public OnPlayerConnect(playerid) {
 }
 
 public OnPlayerDisconnect(playerid, reason) {
-	SavePlayer(playerid);
 	UlogovanProvera[playerid] = 0;
 	editaorg[playerid] = -1;
 	if(pADuty[playerid]) {
@@ -2609,13 +2495,13 @@ public OnPlayerDisconnect(playerid, reason) {
 	if(PlayerInfo[playerid][pAdmin] > 0) Itter_Remove(Admins, playerid);
 	if(!strcmp(PlayerInfo[playerid][pPromoter], "Da")) Itter_Remove(Proms, playerid);
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) Itter_Remove(Cops, playerid);
-	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) Itter_Remove(Fibs, playerid);
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza")) Itter_Remove(Yakuza, playerid);
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni")) Itter_Remove(Crveni, playerid);
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) Itter_Remove(Zemunski_Klan, playerid);
 	IsPlayerSpec[playerid] = 0;
 	// DestroyPlayerObject(playerid, snegobj[playerid]);
-	if(!UlogovanProvera[playerid]) return UlogovanProvera[playerid];
+	if(!UlogovanProvera[playerid] || loginOdustao[playerid]) return 1;
+	SavePlayer(playerid);
 	return 1;
 }
 
@@ -2845,95 +2731,6 @@ CMD:pokrenipljacku(playerid, params[]) {
 	return 1;
 }
 
-CMD:f_tesla(playerid, params[]) {
-	#pragma unused params
-	if(strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) return 0;
-	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1284.8795,-1320.9938,13.6421)) {
-		new car, Float:X, Float:Y, Float:Z, Float:R, /*edit,*/ vehid;
-		GetPlayerPos(playerid, X, Y, Z);
-		GetPlayerFacingAngle(playerid, R);
-		car = CreateVehicle(411, X, Y, Z, R, 252, 252, -1);
-		// edit = CreateDynamicObject(19620,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
-    	// AttachDynamicObjectToVehicle(edit, car, 0.000, 0.000, 0.879, 0.000, 0.000, 0.000);
-		PutPlayerInVehicle(playerid, car, 0);
-		vehid = GetPlayerVehicleID(playerid);
-		ChangeVehiclePaintjob(vehid, 0);
-		VehInfo[vehid][vEngine] = 0;
-		VehInfo[vehid][vFuel] = 100;
-		SetVehicleParamsEx(
-			vehid, 
-			VehInfo[vehid][vEngine], 
-			VehInfo[vehid][vLights], 
-			VehInfo[vehid][vAlarm],
-			VehInfo[vehid][vDoor],
-			VehInfo[vehid][vBonnet],
-			VehInfo[vehid][vBoot],
-			VehInfo[vehid][vObj]
-		);
-	} else SCM(playerid, SIVA, "Niste blizu FIB stanice!");
-	return 1;
-}
-
-//505
-CMD:f_gklasa(playerid, params[]) {
-	#pragma unused params
-	if(strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) return 0;
-	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1284.8795,-1320.9938,13.6421)) {
-		new car, Float:X, Float:Y, Float:Z, Float:R, /*edit,*/ vehid;
-		GetPlayerPos(playerid, X, Y, Z);
-		GetPlayerFacingAngle(playerid, R);
-		car = CreateVehicle(505, X, Y, Z, R, 252, 252, -1);
-		// edit = CreateDynamicObject(19620,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
-    	// AttachDynamicObjectToVehicle(edit, car, 0.000, 0.000, 0.879, 0.000, 0.000, 0.000);
-		PutPlayerInVehicle(playerid, car, 0);
-		vehid = GetPlayerVehicleID(playerid);
-		ChangeVehiclePaintjob(vehid, 0);
-		VehInfo[vehid][vEngine] = 0;
-		VehInfo[vehid][vFuel] = 100;
-		SetVehicleParamsEx(
-			vehid, 
-			VehInfo[vehid][vEngine], 
-			VehInfo[vehid][vLights], 
-			VehInfo[vehid][vAlarm],
-			VehInfo[vehid][vDoor],
-			VehInfo[vehid][vBonnet],
-			VehInfo[vehid][vBoot],
-			VehInfo[vehid][vObj]
-		);
-	} else SCM(playerid, SIVA, "Niste blizu FIB stanice!");
-	return 1;
-}
-
-//500
-CMD:f_urus(playerid, params[]) {
-	#pragma unused params
-	if(strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) return 0;
-	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1284.8795,-1320.9938,13.6421)) {
-		new car, Float:X, Float:Y, Float:Z, Float:R, /*edit,*/ vehid;
-		GetPlayerPos(playerid, X, Y, Z);
-		GetPlayerFacingAngle(playerid, R);
-		car = CreateVehicle(500, X, Y, Z, R, 252, 252, -1);
-		// edit = CreateDynamicObject(19620,0.0,0.0,-1000.0,0.0,0.0,0.0,-1,-1,-1,300.0,300.0);
-    	// AttachDynamicObjectToVehicle(edit, car, 0.000, 0.000, 0.879, 0.000, 0.000, 0.000);
-		PutPlayerInVehicle(playerid, car, 0);
-		vehid = GetPlayerVehicleID(playerid);
-		ChangeVehiclePaintjob(vehid, 0);
-		VehInfo[vehid][vEngine] = 0;
-		VehInfo[vehid][vFuel] = 100;
-		SetVehicleParamsEx(
-			vehid, 
-			VehInfo[vehid][vEngine], 
-			VehInfo[vehid][vLights], 
-			VehInfo[vehid][vAlarm],
-			VehInfo[vehid][vDoor],
-			VehInfo[vehid][vBonnet],
-			VehInfo[vehid][vBoot],
-			VehInfo[vehid][vObj]
-		);
-	} else SCM(playerid, SIVA, "Niste blizu FIB stanice!");
-	return 1;
-}
-
 CMD:leaveorg(playerid, params[]) {
 	#pragma unused params
 	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Nema")) return SCM(playerid, SIVA, "Vi niste ni u jednoj organizaciji!");
@@ -2999,7 +2796,7 @@ CMD:heal(playerid, params[]) {
 
 CMD:komande(playerid, params[]) {
 	#pragma unused params
-	SPD(playerid, d_komande, DIALOG_STYLE_MSGBOX, "{03adfc}Sve komande Tesla RP-a", "{03adfc}Osnovne komande: {ffffff}/me, /do, /ooc, /givemoney, /engine, /toci, /rent, /unrent, /kupikucu, /enterhouse, /popraviauto\n/exithouse, /house, /stats, /organizacije, /sellhouse, /postavihrent,\n /skinihrent, /otvoriracun, /deposit, /withdraw, /kredit, /quitjob, /listaposlova\n, /inv, /getajob, /prevozputnika, /prekiniposao, /exitveh, /stuck, /prevoznovca, /gps, /komande\n{03adfc}Komande za LSPD: {ffffff}/otvori, /zatvori, /zakljucaj, /otkljucaj, /p_gklasa, /p_skodarapid, /p_teslas,\n /lisice, /skinilisice, /pduty\n{03adfc}Komande za FIB: /f_urus, /f_gklasa, /f_tesla{ffffff}\n{03adfc}Komande za Zemunski Klan: {ffffff}/z_urus, /z_aventador, /z_teslas, /z_gklasam, /z_cfmoto625, /z_rover, /z_amg\n/lisice\n /otvori, /zatvori, /otkljucaj, /zakljucaj, /lisice, /skinilisice\n{03adfc}Komande za organizacije: {ffffff}/orginv, /leaveorg\n{03adfc}Komande za lidere: {ffffff}/orgkick\n{03adfc}Komande za vozila: {ffffff}/mojavozila, /dostupnavozila\n{03adfc}Admin komande: /akomande", "{03adfc}Izadji", "");
+	SPD(playerid, d_komande, DIALOG_STYLE_MSGBOX, "{03adfc}Sve komande Tesla RP-a", "{03adfc}Osnovne komande: {ffffff}/me, /do, /ooc, /givemoney, /engine, /toci, /rent, /unrent, /kupikucu, /enterhouse, /popraviauto\n/exithouse, /house, /stats, /organizacije, /sellhouse, /postavihrent,\n /skinihrent, /otvoriracun, /deposit, /withdraw, /kredit, /quitjob, /listaposlova\n, /inv, /getajob, /prevozputnika, /prekiniposao, /exitveh, /stuck, /prevoznovca, /gps, /komande\n{03adfc}Komande za LSPD: {ffffff}/otvori, /zatvori, /zakljucaj, /otkljucaj, /p_gklasa, /p_skodarapid, /p_teslas,\n /lisice, /skinilisice, /pduty\n{03adfc}Komande za Zemunski Klan: {ffffff}/z_urus, /z_aventador, /z_teslas, /z_gklasam, /z_cfmoto625, /z_rover, /z_amg\n/lisice\n /otvori, /zatvori, /otkljucaj, /zakljucaj, /lisice, /skinilisice\n{03adfc}Komande za organizacije: {ffffff}/orginv, /leaveorg\n{03adfc}Komande za lidere: {ffffff}/orgkick\n{03adfc}Komande za vozila: {ffffff}/mojavozila, /dostupnavozila\n{03adfc}Admin komande: /akomande", "{03adfc}Izadji", "");
 	return 1;
 }
 
@@ -3157,8 +2954,7 @@ CMD:orginv(playerid, params[]) {
 			break;
 		}
 	}
-	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) SPD(playerid, d_inv_org_fib, DIALOG_STYLE_LIST, "FIB Inventory", "Lisice\nAK-47\nM4", "Uzmi", "Odustani");
-	else if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) SPD(playerid, d_inv_org_lspd, DIALOG_STYLE_LIST, "LSPD Inventory", "Lisice\nAK-47\nM4", "Uzmi", "Odustani");
+	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) SPD(playerid, d_inv_org_lspd, DIALOG_STYLE_LIST, "LSPD Inventory", "Lisice\nAK-47\nM4", "Uzmi", "Odustani");
 	else if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Bolnica")) SPD(playerid, d_inv_org_bolnica, DIALOG_STYLE_LIST, "Bolnica Inventory", "Med Kit\nGlock 19", "Uzmi", "Odustani");
 	else if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan") || !strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni")) SPD(playerid, d_inv_org_ilegalna, DIALOG_STYLE_LIST, il, il2, "Uzmi", "Odustani");
 	else SCM(playerid, SIVA, "Da vidite Vas inventar kucajte /inv");
@@ -3300,7 +3096,7 @@ CMD:sellhouse(playerid, params[]) {
 
 CMD:organizacije(playerid, params[]) {
 	#pragma unused params
-	SPD(playerid, d_organizacije, DIALOG_STYLE_MSGBOX, "Lista organizacija", "{03adfc}1 - LSPD (drzavna organizacija)\n{ffff00}2 - FIB (drzavna organizacija)\n{ff0000}3 - Bolnica (drzavna organizacija)\n{00ff00}4 - Zemunski Klan (ilegalna organizacija)\n}{aa3333}5 - Crveni (ilegalna organizacija)\n{fffb00}6 - Yakuza (ilegalna organizacija)", "{ffffff}Zatvori", "");
+	SPD(playerid, d_organizacije, DIALOG_STYLE_MSGBOX, "Lista organizacija", "{03adfc}1 - LSPD (drzavna organizacija)\n{ff0000}2 - Bolnica (drzavna organizacija)\n{00ff00}3 - Zemunski Klan (ilegalna organizacija)\n}{aa3333}4 - Crveni (ilegalna organizacija)\n{fffb00}5 - Yakuza (ilegalna organizacija)", "{ffffff}Zatvori", "");
 	return 1;
 }
 
@@ -3311,22 +3107,20 @@ CMD:skinilidera(playerid, params[]) {
 		SCM(playerid, CRVENA, "[USAGE]: /skinilidera [id organizacije]");
 		SCM(playerid, -1, "ID Organizacija:");
 		SCM(playerid, PLAVA_NEBO, "1 - LSPD(drzavna organizacija)");
-		SCM(playerid, ZUTA, "2 - FIB(drzavna organizacija)");
-		SCM(playerid, CRVENA, "3 - Bolnica(drzavna organizacija)");
-		SCM(playerid, ZELENA, "4 - Zemunski Klan(ilegalna organizacija)");
-		SCM(playerid, SVETLA_CRVENA, "5 - Crveni(ilegalna organizacija)");
-		SCM(playerid, SVETLA_ZUTA, "6 - Yakuza(ilegalna organizacija)");
+		SCM(playerid, CRVENA, "2 - Bolnica(drzavna organizacija)");
+		SCM(playerid, ZELENA, "3 - Zemunski Klan(ilegalna organizacija)");
+		SCM(playerid, SVETLA_CRVENA, "4 - Crveni(ilegalna organizacija)");
+		SCM(playerid, SVETLA_ZUTA, "5 - Yakuza(ilegalna organizacija)");
 		return 1;
 	}
 	format(orgfile, sizeof(orgfile), ORGPATH, id);
 	format(niko, sizeof(niko), "Niko");
 	if(id < 0 || id > 6) {
 		SCM(playerid, PLAVA_NEBO, "1 - LSPD(drzavna organizacija)");
-		SCM(playerid, ZUTA, "2 - FIB(drzavna organizacija)");
-		SCM(playerid, CRVENA, "3 - Bolnica(drzavna organizacija)");
-		SCM(playerid, ZELENA, "4 - Zemunski Klan(ilegalna organizacija)");
-		SCM(playerid, SVETLA_CRVENA, "5 - Crveni(ilegalna organizacija)");
-		SCM(playerid, SVETLA_ZUTA, "6 - Yakuza(ilegalna organizacija)");
+		SCM(playerid, CRVENA, "2 - Bolnica(drzavna organizacija)");
+		SCM(playerid, ZELENA, "3 - Zemunski Klan(ilegalna organizacija)");
+		SCM(playerid, SVETLA_CRVENA, "4 - Crveni(ilegalna organizacija)");
+		SCM(playerid, SVETLA_ZUTA, "5 - Yakuza(ilegalna organizacija)");
 		return 1;
 	}
 	pid = GetPlayerID(OrgInfo[id][orgLeader]);
@@ -3355,33 +3149,30 @@ CMD:makeleader(playerid, params[]) {
 		SCM(playerid, CRVENA, "[USAGE]: {ffffff}/makeleader [id igraca] [id organizacije]");
 		SCM(playerid, SIVA, "ID Organizacija:");
 		SCM(playerid, PLAVA_NEBO, "1 - LSPD(drzavna organizacija)");
-		SCM(playerid, ZUTA, "2 - FIB(drzavna organizacija)");
-		SCM(playerid, CRVENA, "3 - Bolnica(drzavna organizacija)");
-		SCM(playerid, ZELENA, "4 - Zemunski Klan(ilegalna organizacija)");
-		SCM(playerid, SVETLA_CRVENA, "5 - Crveni(ilegalna organizacija)");
-		SCM(playerid, SVETLA_ZUTA, "6 - Yakuza(ilegalna organizacija)");
+		SCM(playerid, CRVENA, "2 - Bolnica(drzavna organizacija)");
+		SCM(playerid, ZELENA, "3 - Zemunski Klan(ilegalna organizacija)");
+		SCM(playerid, SVETLA_CRVENA, "4 - Crveni(ilegalna organizacija)");
+		SCM(playerid, SVETLA_ZUTA, "5 - Yakuza(ilegalna organizacija)");
 		return 1;
 	}
 	if(PlayerInfo[playerid][pLeader] != 0) return va_SCM(playerid, SIVA, "[GRESKA]: {ffffff}Igrac %s je lider neke organizacije!", GetName(playerid));
 	if(orgid < 0 || orgid > 6) {
 		SCM(playerid, SIVA, "ID Organizacija:");
 		SCM(playerid, PLAVA_NEBO, "1 - LSPD(drzavna organizacija)");
-		SCM(playerid, ZUTA, "2 - FIB(drzavna organizacija)");
-		SCM(playerid, CRVENA, "3 - Bolnica(drzavna organizacija)");
-		SCM(playerid, ZELENA, "4 - Zemunski Klan(ilegalna organizacija)");
-		SCM(playerid, SVETLA_CRVENA, "5 - Crveni(ilegalna organizacija)");
-		SCM(playerid, SVETLA_ZUTA, "6 - Yakuza(ilegalna organizacija)");
+		SCM(playerid, CRVENA, "2 - Bolnica(drzavna organizacija)");
+		SCM(playerid, ZELENA, "3 - Zemunski Klan(ilegalna organizacija)");
+		SCM(playerid, SVETLA_CRVENA, "4 - Crveni(ilegalna organizacija)");
+		SCM(playerid, SVETLA_ZUTA, "5 - Yakuza(ilegalna organizacija)");
 		return 1;
 	}
 	PlayerInfo[playerid][pLeader] = orgid;
 	OrgInfo[orgid][orgLeader] = GetName(id);
 	switch(orgid) {
 		case 1: format(string, sizeof(string), "LSPD");
-		case 2: format(string, sizeof(string), "FIB");
-		case 3: format(string, sizeof(string), "Bolnica");
-		case 4: format(string, sizeof(string), "Zemunski Klan");
-		case 5: format(string, sizeof(string), "Crveni");
-		case 6: format(string, sizeof(string), "Yakuza");
+		case 2: format(string, sizeof(string), "Bolnica");
+		case 3: format(string, sizeof(string), "Zemunski Klan");
+		case 4: format(string, sizeof(string), "Crveni");
+		case 5: format(string, sizeof(string), "Yakuza");
 	}
 	PlayerInfo[playerid][pOrganizacija] = string;
 	SavePlayer(id);
@@ -4205,7 +3996,7 @@ CMD:rent(playerid, params[]) {
 CMD:port(playerid, params[]) {
 	#pragma unused params
 	if(PlayerInfo[playerid][pAdmin] < 1) return SCM(playerid, CRVENA, "Niste ovlasceni da koristite ovu komadnu!");
-	SPD(playerid, d_port, DIALOG_STYLE_LIST, "{03adfc}Portovi", "[{03adfc}1{ffffff}] - {03adfc}Spawn\n{ffffff}[{03adfc}2{ffffff}] - {03adfc}Kuca Zemunaca1\n{ffffff}[{03adfc}3{ffffff}] - {03adfc}Spawn Rent\n{ffffff}[{03adfc}4{ffffff}] - {03adfc}Policijska Stanica\n{ffffff}[{03adfc}5{ffffff}] - {03adfc}Bolnica\n{ffffff}[{03adfc}6{ffffff}] - {03adfc}Vlada\n{ffffff}[{03adfc}7{ffffff}] - {03adfc}FIB\n{ffffff}[{03adfc}8{ffffff}] - {03adfc}Autobuska Stanica\n{ffffff}[{03adfc}9{ffffff}] - {03adfc}Banka", "{03adfc}Izaberi", "{03adfc}Odustani");
+	SPD(playerid, d_port, DIALOG_STYLE_LIST, "{03adfc}Portovi", "[{03adfc}1{ffffff}] - {03adfc}Spawn\n{ffffff}[{03adfc}2{ffffff}] - {03adfc}Kuca Zemunaca1\n{ffffff}[{03adfc}3{ffffff}] - {03adfc}Spawn Rent\n{ffffff}[{03adfc}4{ffffff}] - {03adfc}Policijska Stanica\n{ffffff}[{03adfc}5{ffffff}] - {03adfc}Bolnica\n{ffffff}[{03adfc}6{ffffff}] - {03adfc}Vlada\n{ffffff}[{03adfc}7{ffffff}] - {03adfc}Autobuska Stanica\n{ffffff}[{03adfc}8{ffffff}] - {03adfc}Banka", "{03adfc}Izaberi", "{03adfc}Odustani");
 	return 1;
 }
 
@@ -4670,7 +4461,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			}
 	    }
 	    case d_log: {
-	        if(!response) return Kick(playerid);
+	        if(!response) {
+				loginOdustao[playerid] = 1;
+				SetTimerEx("KickPlayer", 500, false, "i", playerid);
+			}
 		    if(response) {
 		        if(udb_hash(inputtext) == PlayerInfo[playerid][pLozinka]) {
 		            INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
@@ -4679,7 +4473,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					if(PlayerInfo[playerid][pAdmin] > 0) Itter_Add(Admins, playerid);
 					if(!strcmp(PlayerInfo[playerid][pPromoter], "Da")) Itter_Add(Proms, playerid);
 					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) Itter_Add(Cops, playerid);
-					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "FIB")) Itter_Add(Fibs, playerid);
 					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Yakuza")) Itter_Add(Yakuza, playerid);
 					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Crveni")) Itter_Add(Crveni, playerid);
 					if(!strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) Itter_Add(Zemunski_Klan, playerid);
@@ -4752,17 +4545,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					}
 					case 7: {
 						SetPlayerInterior(playerid, 0);
-						if(IsPlayerInAnyVehicle(playerid)) SetVehiclePos(vehid, 1286.8000,-1329.2859,13.6546);
-						else SetPlayerPos(playerid, 1286.8000,-1329.2859,13.6546);
-						SCM(playerid, -1, "Uspesno ste se teleportovali do {03adfc}FIB-a.");
-					}
-					case 8: {
-						SetPlayerInterior(playerid, 0);
 						if(IsPlayerInAnyVehicle(playerid)) SetVehiclePos(vehid, 1219.1619,-1811.7039,16.5938);
 						else SetPlayerPos(playerid, 1219.1619,-1811.7039,16.5938);
 						SCM(playerid, -1, "Uspesno ste se teleportovali do {03adfc}Autobuske stanice.");
 					}
-					case 9: {
+					case 8: {
 						SetPlayerInterior(playerid, 0);
 						if(IsPlayerInAnyVehicle(playerid)) SetVehiclePos(vehid, 1456.9044,-1022.7017,23.8281);
 						else SetPlayerPos(playerid, 1456.9044,-1022.7017,23.8281);
@@ -6958,12 +6745,6 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
 		if(IsPlayerInRangeOfPoint(playerid, 3, 384.808624,173.804992,1008.382812)) {
 			SetPlayerInterior(playerid, 0);
 			SetPlayerPos(playerid, 1481.0361,-1772.3120,18.7958);
-			SetCameraBehindPlayer(playerid);
-		}
-		//Fib stanica
-		if(IsPlayerInRangeOfPoint(playerid, 3, 1286.8000,-1329.2859,13.6546)) {
-			SetPlayerInterior(playerid, 0);
-			SetPlayerPos(playerid, 1302.411621, -1326.199951, -0.909798);
 			SetCameraBehindPlayer(playerid);
 		}
 		//Aftobuska stanica

@@ -11,7 +11,7 @@ main(){}
 
 NextPlayback()
 {
-   StartRecordingPlayback(PLAYER_RECORDING_TYPE_ONFOOT,"shotrun");
+    StartRecordingPlayback(PLAYER_RECORDING_TYPE_ONFOOT,"truth1");
 }
 
 //------------------------------------------

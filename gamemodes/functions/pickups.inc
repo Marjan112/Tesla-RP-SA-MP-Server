@@ -88,8 +88,6 @@ stock CallPickups() {
 	CreatePickup(1239, 1, 358.2361,178.6533,1008.3828);
 	Create3DTextLabel("Da bi ste se zaposlili kucajte\n{ffff00}/getajob", -1, 358.2361,178.6533,1008.3828, 5, 0);
 	
-	CreatePickup(19132, 1, 1286.8000,-1329.2859,13.6546);
-	Create3DTextLabel("{ffff00}[ {ffffff}FIB {ffff00}]\n{ffffff}Da bi ste usli u FIB stanicu pretisnite {ffff00}Enter {ffffff}ili {ffff00}F", -1, 1286.8000,-1329.2859,13.6546, 5, 0);
 	CreatePickup(19132, 1, 1219.1619,-1811.7039,16.5938);
 	Create3DTextLabel("{03adfc}[ {ffffff}BUS STANICA {03adfc}]\n{ffffff}Da bi ste usli u bus stanicu pretisnite {03adfc}Enter {ffffff}ili {03adfc}F", -1, 1219.1619,-1811.7039,16.5938, 5, 0);
 
