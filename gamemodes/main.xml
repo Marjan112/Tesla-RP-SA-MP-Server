@@ -482,7 +482,7 @@
 				<tagname value="Float"/>
 			</member>
 		</member>
-		<member name="T:pInfo" value="848">
+		<member name="T:pInfo" value="855">
 			<tagname value="pInfo"/>
 			<member name="C:pLozinka" value="0">
 			</member>
@@ -577,27 +577,41 @@
 			<member name="C:pIP" value="805">
 				<size value="32"/>
 			</member>
-			<member name="C:pGraze" value="837">
+			<member name="C:pAuto" value="837">
 			</member>
-			<member name="C:pAuto" value="838">
+			<member name="C:pAuto1" value="838">
 			</member>
-			<member name="C:pAuto1" value="839">
+			<member name="C:pAuto2" value="839">
 			</member>
-			<member name="C:pAuto2" value="840">
+			<member name="C:pAuto3" value="840">
 			</member>
-			<member name="C:pAuto3" value="841">
+			<member name="C:pAuto4" value="841">
 			</member>
-			<member name="C:pAuto4" value="842">
+			<member name="C:pAuto5" value="842">
 			</member>
-			<member name="C:pAuto5" value="843">
+			<member name="C:pAuto6" value="843">
 			</member>
-			<member name="C:pAuto6" value="844">
+			<member name="C:pAuto7" value="844">
 			</member>
-			<member name="C:pAuto7" value="845">
+			<member name="C:pSniper" value="845">
 			</member>
-			<member name="C:pSniper" value="846">
+			<member name="C:pSniperMunicija" value="846">
 			</member>
-			<member name="C:pSniperMunicija" value="847">
+			<member name="C:pAutoBoja" value="847">
+			</member>
+			<member name="C:pAutoBoja1" value="848">
+			</member>
+			<member name="C:pAutoBoja2" value="849">
+			</member>
+			<member name="C:pAutoBoja3" value="850">
+			</member>
+			<member name="C:pAutoBoja4" value="851">
+			</member>
+			<member name="C:pAutoBoja5" value="852">
+			</member>
+			<member name="C:pAutoBoja6" value="853">
+			</member>
+			<member name="C:pAutoBoja7" value="854">
 			</member>
 		</member>
 		<member name="T:promInfo" value="130">
@@ -931,6 +945,7 @@
 			<referrer name="cmd_skinilidera"/>
 			<referrer name="cmd_spec"/>
 			<referrer name="cmd_zakljucaj"/>
+			<referrer name="cmd_otvori"/>
 			<referrer name="cmd_promduty"/>
 			<referrer name="cmd_skiniprom"/>
 			<referrer name="cmd_unban"/>
@@ -11279,6 +11294,7 @@
 			<dependency name="ZatvorVrata"/>
 			<dependency name="pOrganizacija"/>
 			<dependency name="strcmp"/>
+			<dependency name="true"/>
 			<param name="playerid">
 			</param>
 			<param name="params">

@@ -177,7 +177,6 @@ enum pInfo {
 	pZavezan[128],
 	pSkin,
 	pIP[32],
-	pGraze,
 	pAuto,
 	pAuto1,
 	pAuto2,
@@ -188,5 +187,6 @@ enum pInfo {
 	pAuto7,
 	pSniper,
 	pSniperMunicija
+	
 };
 new PlayerInfo[MAX_PLAYERS+1][pInfo];

@@ -84,7 +84,7 @@ enum {
 	d_skupa_vozila_slotovi6,
 	d_skupa_vozila_slotovi7,
 	d_skupa_vozila_slotovi8,
-	d_boja_vozila
+	d_jeftina_boja_vozila1
 };
 
 new IsPlayerSpec[MAX_PLAYERS];
@@ -3061,12 +3061,12 @@ CMD:lisice(playerid, params[]) {
 	GetPlayerPos(playerid, pos[0][0], pos[0][1], pos[0][2]);
 	GetPlayerPos(id, pos[1][0], pos[1][1], pos[1][2]);
 	if(GetDistanceBetweenPoints(pos[0][0], pos[0][1], pos[0][2], pos[1][0], pos[1][1], pos[1][2]) > 5.0) return SCM(playerid, SIVA, "Taj igrac je previse daleko!");
-	if(!strcmp(PlayerInfo[playerid][pZavezan], "Da")) {
+	if(!strcmp(PlayerInfo[id][pZavezan], "Da")) {
 		format(str, sizeof(str), "Ne");
 		PlayerInfo[id][pZavezan] = str;
 		ProxDetectorf(20, playerid, "* %s skida lisice igracu %s.", GetName(playerid), GetName(id));
 		SetPlayerSpecialAction(id, SPECIAL_ACTION_NONE);
-	} else if(!strcmp(PlayerInfo[playerid][pZavezan], "Ne")) {
+	} else if(!strcmp(PlayerInfo[id][pZavezan], "Ne")) {
 		format(str, sizeof(str), "Da");
 		PlayerInfo[id][pZavezan] = str;
 		ProxDetectorf(20, playerid, "* %s vadi lisice i stavlja ih igracu %s.", GetName(playerid), GetName(id));
@@ -4022,7 +4022,7 @@ CMD:otkljucaj(playerid, params[]) {
 			SaveVr(ZatvorVrata[1]);
 		}
 	}
-	if(IsPlayerPoliceman(playerid)) {
+	if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) {
 		if(IsPlayerInRangeOfPoint(playerid, 3.0, 1261.842773, -775.345886, 1084.255981)) {
 			ZakljucanaVrata[ZatvorVrata[2]] = false;
 			SaveVr(ZatvorVrata[2]);
@@ -4045,9 +4045,9 @@ CMD:zakljucaj(playerid, params[]) {
 			if(!ZatvorenaVrata[ZatvorVrata[1]]) return SCM(playerid, SIVA, "Prvo zatvorite vrata.");
 			ZakljucanaVrata[ZatvorVrata[1]] = true;
 			SaveVr(ZatvorVrata[1]);
-		} 
+		}
 	}
-	if(IsPlayerPoliceman(playerid)) {
+	else if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) {
 		if(IsPlayerInRangeOfPoint(playerid, 3.0, 266.395690, 87.476341, 998.878662)) {
 			if(!ZatvorenaVrata[ZatvorVrata[2]]) return SCM(playerid, SIVA, "Prvo zatvorite vrata.");
 			ZakljucanaVrata[ZatvorVrata[2]] = true;
@@ -4086,13 +4086,13 @@ CMD:otvori(playerid, params[]) {
 			MoveDynamicObject(ZatvorVrata[1], 1261.842773, -775.345886, 1081.754028, 2.0, 0, 0, 0);
 		}
 	}
-	if(IsPlayerPoliceman(playerid)) {
+	else if(!strcmp(PlayerInfo[playerid][pOrganizacija], "LSPD")) {
 		if(IsPlayerInRangeOfPoint(playerid, 3.0, 266.395690, 87.476341, 1001.319213)) {
-			if(ZakljucanaVrata[ZatvorVrata[2]]) return SCM(playerid, SIVA, "Vrata su zakljucana.");
+			if(ZakljucanaVrata[ZatvorVrata[2]] == true) return SCM(playerid, SIVA, "Vrata su zakljucana.");
 			MoveDynamicObject(ZatvorVrata[2], 266.395690, 87.476341, 998.878662, 2.0, 0, 0, 89.799964);
 		}
 		if(IsPlayerInRangeOfPoint(playerid, 3.0, 266.379943, 82.966346, 1001.319213)) {
-			if(ZakljucanaVrata[ZatvorVrata[3]]) return SCM(playerid, SIVA, "Vrata su zakljucana.");
+			if(ZakljucanaVrata[ZatvorVrata[3]] == true) return SCM(playerid, SIVA, "Vrata su zakljucana.");
 			MoveDynamicObject(ZatvorVrata[3], 266.379943, 82.966346, 998.878601, 2.0, 0, 0, 89.799964);
 		}
 	}
@@ -6720,10 +6720,81 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 					case 1: {
 						if(PlayerInfo[playerid][pAuto] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4];
+							new Float:posr[4], vehid;
 							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 2: {
+						if(PlayerInfo[playerid][pAuto1] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 3: {
+						if(PlayerInfo[playerid][pAuto2] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 4: {
+						if(PlayerInfo[playerid][pAuto3] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 5: {
+						if(PlayerInfo[playerid][pAuto4] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 6: {
+						if(PlayerInfo[playerid][pAuto5] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 7: {
+						if(PlayerInfo[playerid][pAuto6] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
+						}
+					}
+					case 8: {
+						if(PlayerInfo[playerid][pAuto7] != -1) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						else {
+							new Float:posr[4], vehid;
+							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							GetPlayerFacingAngle(playerid, posr[3]);
+							vehid = CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0], posr[1], pos[2], posr[3], 157, 157, -1);
+							PutPlayerInVehicle(playerid, vehid, 0);
 						}
 					}
 				}
