@@ -1261,6 +1261,13 @@ public OnGameModeInit() {
 	AddStaticVehicle(579, 1546.1759,-1684.2830,5.8906,83.7368,157, 157); // xsestice_kod_policiju13
 	AddStaticVehicle(579, 1527.5652,-1688.1669,5.8906,270.4853,157, 157); // xsestice_kod_policiju14
 	AddStaticVehicle(579, 1528.0876,-1683.9585,5.8906,267.6653,157, 157); // xsestice_kod_policiju15
+
+	//Astoniiiuuii
+	AddStaticVehicle(578, 1558.5232,-1711.4496,5.8906,352.1514,157, 157); // aston 1
+	AddStaticVehicle(578, 1564.1165,-1710.8629,5.8906,347.4514,157, 157); // aston 2
+	AddStaticVehicle(578, 1570.0297,-1710.9692,5.8906,352.7781,157, 157); // aston
+	AddStaticVehicle(578, 1573.7767,-1711.1471,5.8906,343.6913,157, 157); // aston 3
+	AddStaticVehicle(578, 1578.3018,-1710.3701,5.8906,347.4514,157, 157); // aston 4
 //----------------------- VOZILA ----------------------------
 	//J_BUS -> JOB_BUS
 	j_bus[0] = AddStaticVehicle(431, 1275.6406, -1796.2198, 13.5000, -89.8200, -1, -1);
