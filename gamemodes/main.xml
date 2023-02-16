@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7405">
+		<member name="C:__line" value="7101">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -861,15 +861,6 @@
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_skupa_vozila_slotovi5" value="47">
-			<referrer name="S@@_OnDialogResponse"/>
-		</member>
-		<member name="C:d_skupa_vozila_slotovi6" value="48">
-			<referrer name="S@@_OnDialogResponse"/>
-		</member>
-		<member name="C:d_skupa_vozila_slotovi7" value="49">
-			<referrer name="S@@_OnDialogResponse"/>
-		</member>
-		<member name="C:d_skupa_vozila_slotovi8" value="50">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_stats" value="4">
@@ -4333,21 +4324,6 @@
 			<param name="vehicleid">
 			</param>
 		</member>
-		<member name="M:GetVehiclePos" syntax="GetVehiclePos(vehicleid, &amp;x, &amp;y, &amp;z)">
-			<attribute name="native"/>
-			<referrer name="S@@_OnDialogResponse"/>
-			<param name="vehicleid">
-			</param>
-			<param name="x">
-				<paraminfo>Float &amp; </paraminfo>
-			</param>
-			<param name="y">
-				<paraminfo>Float &amp; </paraminfo>
-			</param>
-			<param name="z">
-				<paraminfo>Float &amp; </paraminfo>
-			</param>
-		</member>
 		<member name="M:GetVehicleVelocity" syntax="GetVehicleVelocity(vehicleid, &amp;X, &amp;Y, &amp;Z)">
 			<attribute name="native"/>
 			<referrer name="SpeedVehicle"/>
@@ -7261,7 +7237,6 @@
 			<dependency name="GetPlayerMoney"/>
 			<dependency name="GetPlayerPos"/>
 			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="GetVehiclePos"/>
 			<dependency name="GivePlayerMoney"/>
 			<dependency name="GivePlayerWeapon"/>
 			<dependency name="HouseInfo"/>
@@ -7345,9 +7320,6 @@
 			<dependency name="d_skupa_vozila_slotovi3"/>
 			<dependency name="d_skupa_vozila_slotovi4"/>
 			<dependency name="d_skupa_vozila_slotovi5"/>
-			<dependency name="d_skupa_vozila_slotovi6"/>
-			<dependency name="d_skupa_vozila_slotovi7"/>
-			<dependency name="d_skupa_vozila_slotovi8"/>
 			<dependency name="editaorg"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
@@ -10866,7 +10838,7 @@
 		</member>
 		<member name="M:cmd_mojavozila" syntax="cmd_mojavozila(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="777"/>
+			<stacksize value="393"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ImenaVozila"/>
 			<dependency name="IsPlayerInRangeOfPoint"/>

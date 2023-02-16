@@ -2557,7 +2557,7 @@ CMD:curpos(playerid, params[]) {
 CMD:mojavozila(playerid, params[]) {
 	#pragma unused params
 	if(!IsPlayerInRangeOfPoint(playerid, 100, 1654.5542,-1074.7708,23.8984)) return SCM(playerid, SIVA, "Niste kod parkinga.");
-	new string[512], str[256];
+	new string[256], str[128];
 	format(str, sizeof(str), "1. %s\n", PlayerInfo[playerid][pAuto] == 0 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto] - 400]);
 	strcat(string, str);
 	format(str, sizeof(str), "2. %s\n", PlayerInfo[playerid][pAuto1] == 0 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto1] - 400]);
@@ -4883,17 +4883,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 				new str[256], string[512];
 				switch(listitem + 1) {
 					case 1: {
-						format(str, sizeof(str), "1. Jeep Wrangler - $200000\n");
+						format(str, sizeof(str), "1. Hummer H1 Alpha - $200000\n");
 						strcat(string, str);
 						format(str, sizeof(str), "2. Skoda Rapid - $200000\n");
 						strcat(string, str);
-						format(str, sizeof(str), "3. Mercedes GLE 53 - $300000\n");
+						format(str, sizeof(str), "3. BMW X6M - $300000\n");
 						strcat(string, str);
-						format(str, sizeof(str), "4. Passat CCR Line - $150000\n");
+						format(str, sizeof(str), "4. BMW M5 - $150000\n");
 						strcat(string, str);
 						format(str, sizeof(str), "5. Fiat 500 - $70000\n");
 						strcat(string, str);
-						format(str, sizeof(str), "6. Smart - $30000\n");
+						format(str, sizeof(str), "6. Ferrari 458 Speciale - $30000\n");
 						strcat(string, str);
 						format(str, sizeof(str), "7. CF Moto 625 - $20000\n");
 						strcat(string, str);
@@ -4902,17 +4902,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						SPD(playerid, d_dostupna_jeftina_vozila, DIALOG_STYLE_LIST, "Dostupna Jeftina Vozila", string, "Kupi", "Odustani");
 					}
 					case 2: {
-						format(str, sizeof(str), "1. Tesla Model S - $700000\n");
+						format(str, sizeof(str), "1. Hennessey Venom GT - $700000\n");
 						strcat(string, str);
 						format(str, sizeof(str), "2. G-klasa - $500000\n");
 						strcat(string, str);
-						format(str, sizeof(str), "3. Lamborghini Urus - $600000\n");
+						format(str, sizeof(str), "3. Toyota Land Cruiser 1978 - $600000\n");
 						strcat(string, str);
-						format(str, sizeof(str), "4. Lamborghini Hurracan - $600000\n");
+						format(str, sizeof(str), "4. Aston Martin Vantage S - $600000\n");
 						strcat(string, str);
-						format(str, sizeof(str), "5. Audi R8 Sport - $500000\n");
-						strcat(string, str);
-						format(str, sizeof(str), "6. Range Rover Sport - $400000");
+						format(str, sizeof(str), "5. Shelby GT500 428 Cobra Jet 1969 - $500000\n");
 						strcat(string, str);
 						SPD(playerid, d_dostupna_skupa_vozila, DIALOG_STYLE_LIST, "Dostupna Skupa Vozila", string, "Kupi", "Odustani");
 					}
@@ -5023,66 +5021,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 						strcat(string, slots);
 						SPD(playerid, d_skupa_vozila_slotovi5, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
 					}
-					case 6: {
-						if(GetPlayerMoney(playerid) < 400000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						SPD(playerid, d_skupa_vozila_slotovi6, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-					}
-					case 7: {
-						if(GetPlayerMoney(playerid) < 400000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						SPD(playerid, d_skupa_vozila_slotovi7, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-					}
-					case 8: {
-						if(GetPlayerMoney(playerid) < 400000) return SCM(playerid, SIVA, "Nemate dovoljno novca.");
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto] == 0 ? "1. {ff0000}[Zauzeto]" : "1. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto1] == 0 ? "2. {ff0000}[Zauzeto]" : "2. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto2] == 0 ? "3. {ff0000}[Zauzeto]" : "3. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto3] == 0 ? "4. {ff0000}[Zauzeto]" : "4. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto4] == 0 ? "5. {ff0000}[Zauzeto]" : "5. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto5] == 0 ? "6. {ff0000}[Zauzeto]" : "6. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto6] == 0 ? "7. {ff0000}[Zauzeto]" : "7. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						format(slots, sizeof(slots), "%s", PlayerInfo[playerid][pAuto7] == 0 ? "8. {ff0000}[Zauzeto]" : "8. {00ff00}[Slobodno]");
-						strcat(string, slots);
-						SPD(playerid, d_skupa_vozila_slotovi7, DIALOG_STYLE_LIST, "Slobodni slotovi", string, "Izaberi", "Odustani");
-					}
 				}
 			}
 		}
@@ -5095,7 +5033,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 2: {
@@ -5104,7 +5042,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto1] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 3: {
@@ -5113,7 +5051,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto2] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 4: {
@@ -5122,7 +5060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto3] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 5: {
@@ -5131,7 +5069,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto4] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 6: {
@@ -5140,7 +5078,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto5] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 7: {
@@ -5149,7 +5087,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto6] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 8: {
@@ -5158,7 +5096,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto6] = 411;
 							GivePlayerMoney(playerid, -700000);
 							GameTextForPlayer(playerid, "~r~-$700000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Tesla Model S za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke  Hennessey Venom GT za $700000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 				}
@@ -5251,7 +5189,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 2: {
@@ -5260,7 +5198,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto1] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 3: {
@@ -5269,7 +5207,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto2] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 4: {
@@ -5278,7 +5216,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto3] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 5: {
@@ -5287,7 +5225,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto4] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 6: {
@@ -5296,7 +5234,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto5] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 7: {
@@ -5305,7 +5243,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto6] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 8: {
@@ -5314,7 +5252,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto7] = 500;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Urus za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Toyota Land Cruiser 1978 za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 				}
@@ -5329,7 +5267,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 2: {
@@ -5338,7 +5276,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto1] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 3: {
@@ -5347,7 +5285,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto2] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 4: {
@@ -5356,7 +5294,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto3] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 5: {
@@ -5365,7 +5303,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto4] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 6: {
@@ -5374,7 +5312,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto5] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 7: {
@@ -5383,7 +5321,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto6] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 8: {
@@ -5392,7 +5330,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto7] = 402;
 							GivePlayerMoney(playerid, -600000);
 							GameTextForPlayer(playerid, "~r~-$600000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Lamborghini Hurracan za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Aston Martin Vantage S za $600000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 				}
@@ -5407,7 +5345,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 2: {
@@ -5416,7 +5354,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto1] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 3: {
@@ -5425,7 +5363,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto2] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 4: {
@@ -5434,7 +5372,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto3] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 5: {
@@ -5443,7 +5381,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto4] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 6: {
@@ -5452,7 +5390,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto5] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 7: {
@@ -5461,7 +5399,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto6] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 					case 8: {
@@ -5470,241 +5408,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							PlayerInfo[playerid][pAuto7] = 545;
 							GivePlayerMoney(playerid, -500000);
 							GameTextForPlayer(playerid, "~r~-$500000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Audi R8 Sport za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-				}
-			}
-		}
-		case d_skupa_vozila_slotovi6: {
-			if(response) {
-				switch(listitem + 1) {
-					case 1: {
-						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto1] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto2] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto3] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto4] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto5] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto6] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto7] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-				}
-			}
-		}
-		case d_skupa_vozila_slotovi7: {
-			if(response) {
-				switch(listitem + 1) {
-					case 1: {
-						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto1] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto2] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto3] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto4] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto5] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto6] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto7] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-				}
-			}
-		}
-		case d_skupa_vozila_slotovi8: {
-			if(response) {
-				switch(listitem + 1) {
-					case 1: {
-						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto1] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto2] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto3] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto4] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto5] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto6] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
-						}
-					}
-					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Taj slot je zauzet!");
-						else {
-							PlayerInfo[playerid][pAuto7] = 579;
-							GivePlayerMoney(playerid, -400000);
-							GameTextForPlayer(playerid, "~r~-$400000", 5000, 1);
-							SCM(playerid, SIVA, "Kupili ste auto marke Range Rover Sport za $400000, da bi ste uzeli auto morate otici do parkinga kod banke.");
+							SCM(playerid, SIVA, "Kupili ste auto marke Shelby GT500 428 Cobra Jet 1969 za $500000, da bi ste uzeli auto morate otici do parkinga kod banke.");
 						}
 					}
 				}
@@ -6505,83 +6209,75 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 			if(response) {
 				switch(listitem + 1) {
 					case 1: {
-						if(PlayerInfo[playerid][pAuto] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 2: {
-						if(PlayerInfo[playerid][pAuto1] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto1] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 3: {
-						if(PlayerInfo[playerid][pAuto2] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto2] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 4: {
-						if(PlayerInfo[playerid][pAuto3] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto3] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 5: {
-						if(PlayerInfo[playerid][pAuto4] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto4] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 6: {
-						if(PlayerInfo[playerid][pAuto5] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto5] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 7: {
-						if(PlayerInfo[playerid][pAuto6] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto6] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 					case 8: {
-						if(PlayerInfo[playerid][pAuto7] != 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
+						if(PlayerInfo[playerid][pAuto7] == 0) return SCM(playerid, SIVA, "Nemate vozilo u tom garaznom mestu.");
 						else {
-							new Float:posr[4], vehid;
-							GetVehiclePos(playerid, posr[0], posr[1], posr[2]);
+							new Float:posr[4];
+							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							vehid = CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
-							PutPlayerInVehicle(playerid, vehid, 0);
+							CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
 						}
 					}
 				}
