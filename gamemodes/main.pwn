@@ -3993,7 +3993,10 @@ CMD:unrent(playerid, params[]) {
 
 CMD:rent(playerid, params[]) {
 	#pragma unused params
-	if(IsPlayerInRangeOfPoint(playerid, 3.0, 1561.0580,-2227.5750,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1282.4895,-1265.0306,13.6425)) {
+	if(
+		IsPlayerInRangeOfPoint(playerid, 3.0, 1561.0580,-2227.5750,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1282.4895,-1265.0306,13.6425) ||\
+		IsPlayerInRangeOfPoint(playerid, 3.0, 1332.6646,-1235.4896,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1417.8558,-1704.8744,13.5469)
+	) {
 		if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate neko vozilo!");
 		SPD(playerid, d_rent, DIALOG_STYLE_LIST, "{03adfc}Vreme rentanja | Fiat 500", "10 min\t\t$1000\n20 min\t\t$2000\n30 min\t\t$3000", "{03adfc}Izaberi", "{03adfc}Odustani");
 	} else SCM(playerid, CRVENA, "[GRESKA]: {ffffff}Niste u blizini rent objekta!");
