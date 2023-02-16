@@ -1262,11 +1262,11 @@ public OnGameModeInit() {
 	AddStaticVehicle(436, 1527.5652,-1688.1669,5.8906,270.4853,157, 157); // xsestice_kod_policiju14
 	AddStaticVehicle(436, 1528.0876,-1683.9585,5.8906,267.6653,157, 157); // xsestice_kod_policiju15
 	//Astoniiiuuii
-	AddStaticVehicle(407, 1558.5232,-1711.4496,5.8906,352.1514,157, 157); // aston 1
-	AddStaticVehicle(407, 1564.1165,-1710.8629,5.8906,347.4514,157, 157); // aston 2
-	AddStaticVehicle(407, 1570.0297,-1710.9692,5.8906,352.7781,157, 157); // aston
-	AddStaticVehicle(407, 1573.7767,-1711.1471,5.8906,343.6913,157, 157); // aston 3
-	AddStaticVehicle(407, 1578.3018,-1710.3701,5.8906,347.4514,157, 157); // aston 4
+	AddStaticVehicle(402, 1558.5232,-1711.4496,5.8906,352.1514,157, 157); // aston 1
+	AddStaticVehicle(402, 1564.1165,-1710.8629,5.8906,347.4514,157, 157); // aston 2
+	AddStaticVehicle(402, 1570.0297,-1710.9692,5.8906,352.7781,157, 157); // aston
+	AddStaticVehicle(402, 1573.7767,-1711.1471,5.8906,343.6913,157, 157); // aston 3
+	AddStaticVehicle(402, 1578.3018,-1710.3701,5.8906,347.4514,157, 157); // aston 4
 	//helis kod policiju
 	AddStaticVehicle(497,1569.8029,-1698.8800,31.0771,78.4108, -1, -1); // helikopter_blabla
 //----------------------- VOZILA ----------------------------
@@ -2651,7 +2651,7 @@ CMD:me(playerid, params[]) {
 	return 1;
 }
 
-CMD:z_rover(playerid, params[]) {
+CMD:z_bmwx6m(playerid, params[]) {
 	#pragma unused params
 	if(strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) return 0;
 	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1280.4720,-828.6748,83.1406)) {
@@ -2704,7 +2704,7 @@ CMD:garaza(playerid, params[]) {
 }
 
 //451
-CMD:z_amg(playerid, params[]) {
+CMD:z_ferrari(playerid, params[]) {
 	#pragma unused params
 	if(strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) return 0;
 	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1280.4720,-828.6748,83.1406)) {
@@ -2752,7 +2752,6 @@ CMD:askq(playerid, params[]) {
 	return 1;
 }
 
-// Komanda nije gotova
 CMD:pokrenipljacku(playerid, params[]) {
 	#pragma unused params
 	if(PokrenutaPljacka[playerid]) return SCM(playerid, SIVA, "Pljacka je vec pokrenuta!");
@@ -3564,7 +3563,7 @@ CMD:z_cfmoto625(playerid, params[]) {
 	return 1;
 }
 
-CMD:z_gklasam(playerid, params[]) {
+CMD:z_cayenne(playerid, params[]) {
 	#pragma unused params
 	if(strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) return 0;
 	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1280.4720,-828.6748,83.1406)) {
@@ -3606,7 +3605,7 @@ CMD:z_gklasam(playerid, params[]) {
 	return 1;
 }
 
-CMD:z_teslas(playerid, params[]) {
+CMD:z_venomgt(playerid, params[]) {
 	#pragma unused params
 	if(strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) return 0;
 	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1280.4720,-828.6748,83.1406)) {
@@ -3629,26 +3628,11 @@ CMD:z_teslas(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		// Attach3DTextLabelToVehicle(
-		// 	Create3DTextLabel(
-		// 		"{00ff00}[ Zemunski Klan ]",
-		// 		-1,
-		// 		X,
-		// 		Y,
-		// 		Z,
-		// 		10,
-		// 		0
-		// 	),
-		// 	vehid,
-		// 	0,
-		// 	0,
-		// 	0
-		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
 	return 1;
 }
 
-CMD:z_aventador(playerid, params[]) {
+CMD:z_aston(playerid, params[]) {
 	#pragma unused params
 	if(strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) return 0;
 	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1280.4720,-828.6748,83.1406)) {
@@ -3671,64 +3655,7 @@ CMD:z_aventador(playerid, params[]) {
 			VehInfo[vehid][vBoot],
 			VehInfo[vehid][vObj]
 		);
-		// Attach3DTextLabelToVehicle(
-		// 	Create3DTextLabel(
-		// 		"{00ff00}[ Zemunski Klan ]",
-		// 		-1,
-		// 		X,
-		// 		Y,
-		// 		Z,
-		// 		10,
-		// 		0
-		// 	),
-		// 	vehid,
-		// 	0,
-		// 	0,
-		// 	0
-		// );
 	} else SCM(playerid, SIVA, "Niste kod Zemunskog spawna!");
-	return 1;
-}
-
-CMD:z_urus(playerid, params[]) {
-	#pragma unused params
-	if(strcmp(PlayerInfo[playerid][pOrganizacija], "Zemunski Klan")) return 0;
-	if(IsPlayerInRangeOfPoint(playerid, 10.0, 1280.4720,-828.6748,83.1406)) {
-		new veh, Float:X, Float:Y, Float:Z, Float:R, vehid;
-		GetPlayerPos(playerid, X, Y, Z);
-		GetPlayerFacingAngle(playerid, R);
-		veh = CreateVehicle(500, X, Y, Z, R, 157, 157, -1);
-		PutPlayerInVehicle(playerid, veh, 0);
-		vehid = GetPlayerVehicleID(playerid);
-		ChangeVehicleColor(vehid, 0, 0);
-		VehInfo[vehid][vEngine] = 0;
-		VehInfo[vehid][vFuel] = 100;
-		SetVehicleParamsEx(
-			vehid, 
-			VehInfo[vehid][vEngine], 
-			VehInfo[vehid][vLights], 
-			VehInfo[vehid][vAlarm],
-			VehInfo[vehid][vDoor],
-			VehInfo[vehid][vBonnet],
-			VehInfo[vehid][vBoot],
-			VehInfo[vehid][vObj]
-		);
-		// Attach3DTextLabelToVehicle(
-		// 	Create3DTextLabel(
-		// 		"{00ff00}[ Zemunski Klan ]",
-		// 		-1,
-		// 		X,
-		// 		Y,
-		// 		Z,
-		// 		10,
-		// 		0
-		// 	),
-		// 	vehid,
-		// 	0,
-		// 	0,
-		// 	0
-		// );
-	} else SCM(playerid, SIVA, "Niste kod zemunske kuce.");
 	return 1;
 }
 
