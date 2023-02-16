@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7131">
+		<member name="C:__line" value="7356">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -714,6 +714,9 @@
 			<referrer name="SSCANF_GetClosestString"/>
 			<referrer name="SSCANF_GetClosestValue"/>
 		</member>
+		<member name="C:d_BMWX6M_vreme" value="55">
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
 		<member name="C:d_alist" value="2">
 			<referrer name="cmd_admini"/>
 		</member>
@@ -723,6 +726,9 @@
 		</member>
 		<member name="C:d_askq" value="35">
 			<referrer name="cmd_askq"/>
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_audiRS7_vreme" value="56">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_ban" value="3">
@@ -741,6 +747,9 @@
 		</member>
 		<member name="C:d_dostupna_vozila" value="32">
 			<referrer name="cmd_dostupnavozila"/>
+			<referrer name="S@@_OnDialogResponse"/>
+		</member>
+		<member name="C:d_fiat500_vreme" value="54">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_gps" value="27">
@@ -2349,7 +2358,6 @@
 			<attribute name="native"/>
 			<referrer name="operator++(Float:)"/>
 			<referrer name="SpeedVehicle"/>
-			<referrer name="SnijegObjekti"/>
 			<referrer name="S@@_OnDialogResponse"/>
 			<param name="oper1">
 				<paraminfo>Float </paraminfo>
@@ -3648,7 +3656,6 @@
 		</member>
 		<member name="M:CreateDynamicObject" syntax="CreateDynamicObject(modelid, x, y, z, rx, ry, rz, worldid, interiorid, playerid, streamdistance, drawdistance, areaid, priority)">
 			<attribute name="native"/>
-			<referrer name="SnijegObjekti"/>
 			<referrer name="CallJelka"/>
 			<referrer name="CallMapBolnica"/>
 			<referrer name="CallMapLSPD"/>
@@ -4197,6 +4204,7 @@
 			<referrer name="cmd_toci"/>
 			<referrer name="cmd_givemoney"/>
 			<referrer name="S@@_OnDialogResponse"/>
+			<referrer name="TDUpdate"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -7309,13 +7317,16 @@
 			<dependency name="Zemunski_Klan@YSII_Ag"/>
 			<dependency name="Zemunski_Klan@YSII_Cg"/>
 			<dependency name="cmd_stats"/>
+			<dependency name="d_BMWX6M_vreme"/>
 			<dependency name="d_ammu_nation"/>
 			<dependency name="d_askq"/>
+			<dependency name="d_audiRS7_vreme"/>
 			<dependency name="d_ban"/>
 			<dependency name="d_bolnica"/>
 			<dependency name="d_dostupna_jeftina_vozila"/>
 			<dependency name="d_dostupna_skupa_vozila"/>
 			<dependency name="d_dostupna_vozila"/>
+			<dependency name="d_fiat500_vreme"/>
 			<dependency name="d_gps"/>
 			<dependency name="d_gps_poslovi"/>
 			<dependency name="d_hrentcena"/>
@@ -9028,7 +9039,6 @@
 		</member>
 		<member name="M:SetDynamicObjectMaterial" syntax="SetDynamicObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor)">
 			<attribute name="native"/>
-			<referrer name="SnijegObjekti"/>
 			<referrer name="CallMapBolnica"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<param name="objectid">
@@ -9522,37 +9532,6 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:SnijegObjekti" syntax="SnijegObjekti(modelid, x, y, z, rx, ry, rz)">
-			<stacksize value="17"/>
-			<referrer name="Snow"/>
-			<dependency name="operator+(Float:,Float:)"/>
-			<dependency name="CreateDynamicObject"/>
-			<dependency name="SetDynamicObjectMaterial"/>
-			<param name="modelid">
-			</param>
-			<param name="x">
-				<paraminfo>Float </paraminfo>
-			</param>
-			<param name="y">
-				<paraminfo>Float </paraminfo>
-			</param>
-			<param name="z">
-				<paraminfo>Float </paraminfo>
-			</param>
-			<param name="rx">
-				<paraminfo>Float </paraminfo>
-			</param>
-			<param name="ry">
-				<paraminfo>Float </paraminfo>
-			</param>
-			<param name="rz">
-				<paraminfo>Float </paraminfo>
-			</param>
-		</member>
-		<member name="M:Snow" syntax="Snow()">
-			<stacksize value="10"/>
-			<dependency name="SnijegObjekti"/>
-		</member>
 		<member name="M:SpecTimer" syntax="SpecTimer(playerid)">
 			<attribute name="public"/>
 			<stacksize value="7"/>
@@ -9648,7 +9627,8 @@
 		</member>
 		<member name="M:TDUpdate" syntax="TDUpdate()">
 			<attribute name="public"/>
-			<stacksize value="652"/>
+			<stacksize value="653"/>
+			<dependency name="GetPlayerMoney"/>
 			<dependency name="Player@YSII_Ag"/>
 			<dependency name="PlayerInfo"/>
 			<dependency name="PlayerInfo"/>
@@ -9661,7 +9641,6 @@
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="pBanka"/>
-			<dependency name="pNovac"/>
 			<dependency name="sdtd"/>
 		</member>
 		<member name="M:TextDrawAlignment" syntax="TextDrawAlignment(text, alignment)">

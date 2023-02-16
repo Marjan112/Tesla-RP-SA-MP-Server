@@ -1,6 +1,7 @@
-#if defined _snow_included
+#if defined _snow_included || !defined SNEG
     #endinput
 #endif
+
 #define _snow_included
 
 #pragma library Snow
