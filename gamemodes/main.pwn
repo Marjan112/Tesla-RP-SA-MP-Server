@@ -1282,13 +1282,9 @@ public OnGameModeInit() {
 	// CreateDynamicObject(19302, 266.379943, 82.966346, 998.878601, 0.000000, 0.000000, 89.799964, -1, -1, -1, 300.00, 300.00); 
 	//bolnica enterijer
 	CallMapBolnica();
-	//jelka
+	//jelka i sneg
 	#if SNEG == 1
 	CallJelka();
-	#endif
-	
-	//Sneg
-	#if SNEG == 1
 	Snow();
 	#endif
 
