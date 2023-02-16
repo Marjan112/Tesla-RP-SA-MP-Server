@@ -1291,6 +1291,11 @@ public OnGameModeInit() {
 	#if SNEG == 1
 	Snow();
 	#endif
+
+	// Ne znam sta je ovo, sava mi je poslao to da ubacim
+	CreateDynamicObject(9241, 1567.998413, -1698.313842, 29.248987, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+	CreateDynamicObject(5822, 1545.589965, -1701.108764, 21.334142, 0.000000, 0.000000, 3.900007, -1, -1, -1, 300.00, 300.00);
+
 	Create3DTextLabel("Pretisnite {03adfc}H {ffffff}da bi ste otvorili kapiju", -1, 1245.65881, -766.94067, 92.77000, 25.0, 0);
 	CreatePickup(19132, 1, 1258.7070,-785.2449,92.0302);
 	Create3DTextLabel("Pretisnite {03adfc}Enter {ffffff}ili {03adfc}F{ffffff}\nDa bi ste usli u kucu", -1, 1258.7070,-785.2449,92.0302, 5.0, 0);
@@ -2412,6 +2417,12 @@ public OnPlayerConnect(playerid) {
 	RemoveBuildingForPlayer(playerid, 673, 2293.100, -1900.328, 11.444, 0.250);
 	RemoveBuildingForPlayer(playerid, 1226, 2280.550, -1898.568, 16.389, 0.250);
 	RemoveBuildingForPlayer(playerid, 1308, 2277.198, -1905.050, 12.741, 0.250);
+
+	// Ne znam sta je ovo sava mi je poslao to da ubacim ovde
+	RemoveBuildingForPlayer(playerid, 620, 1541.449, -1709.640, 13.046, 0.250);
+	RemoveBuildingForPlayer(playerid, 647, 1541.449, -1713.300, 14.429, 0.250);
+
+
 
 	UlogovanProvera[playerid] = 0;
 
