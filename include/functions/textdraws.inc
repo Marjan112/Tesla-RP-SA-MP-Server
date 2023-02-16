@@ -19,7 +19,7 @@
 	native PlayerTextDrawShow(playerid, PlayerText: text)
 #endif
 
-#include "../gamemodes/data/tags.inc"
+#include "../include/data/tags.inc"
 
 new Text: sdtd[3];
 new Text: Onogore[5];

@@ -5,7 +5,7 @@
 
 #pragma library Mapicons
 
-#include "../gamemodes/data/tags.inc"
+#include "../include/data/tags.inc"
 
 #if !defined _samp_included
     #tryinclude <a_samp>

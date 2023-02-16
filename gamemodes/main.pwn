@@ -7,14 +7,14 @@
 #include <sscanf2>
 #include <streamer>
 #include <zcmd>
-#include "../gamemodes/data/structures.inc"
-#include "../gamemodes/data/tags.inc"
-#include "../gamemodes/functions/f_vehicles.inc"
-#include "../gamemodes/functions/save.inc"
-#include "../gamemodes/functions/textdraws.inc"
-#include "../gamemodes/functions/mapicons.inc"
-#include "../gamemodes/functions/pickups.inc"
-#include "../gamemodes/functions/snow.inc"
+#include "../include/data/structures.inc"
+#include "../include/data/tags.inc"
+#include "../include/functions/f_vehicles.inc"
+#include "../include/functions/save.inc"
+#include "../include/functions/textdraws.inc"
+#include "../include/functions/mapicons.inc"
+#include "../include/functions/pickups.inc"
+#include "../include/functions/snow.inc"
 ////////////////////////////////////////////////////
 #define ALL MAX_PLAYERS + MAX_PLAYERS
 #define HOUSE 1

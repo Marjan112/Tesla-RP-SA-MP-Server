@@ -3,7 +3,7 @@
 #endif
 #define _structures_included
 
-#include "../gamemodes/data/macros.inc"
+#include "../include/data/macros.inc"
 
 #pragma library Structures
 

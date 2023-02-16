@@ -5,7 +5,7 @@
 
 #pragma library F_vehicles
 
-#include "../gamemodes/data/tags.inc"
+#include "../include/data/tags.inc"
 #if !defined _vehicles_included
     #tryinclude <a_vehicles>
 #endif

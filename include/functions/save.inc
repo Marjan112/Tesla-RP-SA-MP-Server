@@ -6,10 +6,10 @@
 #pragma library Save
 
 #if !defined _structures_included
-    #tryinclude "../gamemodes/data/structures.inc"
+    #tryinclude "../include/data/structures.inc"
 #endif
 
-#include "../gamemodes/data/g_var.inc"
+#include "../include/data/g_var.inc"
 
 stock SaveVehicles(id) {
 	new vfile[64];
