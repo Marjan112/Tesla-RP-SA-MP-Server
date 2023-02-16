@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7380">
+		<member name="C:__line" value="7307">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -746,7 +746,6 @@
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_dostupna_vozila" value="32">
-			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_fiat500_vreme" value="54">
@@ -1352,8 +1351,8 @@
 			<referrer name="S@@_OnPlayerSpawn"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_kill"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
@@ -1391,10 +1390,9 @@
 			<referrer name="cmd_specoff"/>
 			<referrer name="cmd_spec"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_cc"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
@@ -1531,13 +1529,12 @@
 		<member name="F:VehInfo">
 			<referrer name="SaveVehicles"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -2385,7 +2382,6 @@
 			<referrer name="UpdateBubble"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
-			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -3560,13 +3556,12 @@
 		</member>
 		<member name="M:ChangeVehicleColor" syntax="ChangeVehicleColor(vehicleid, color1, color2)">
 			<attribute name="native"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<param name="vehicleid">
 			</param>
 			<param name="color1">
@@ -3800,14 +3795,13 @@
 		</member>
 		<member name="M:CreateVehicle" syntax="CreateVehicle(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren)">
 			<attribute name="native"/>
-			<referrer name="cmd_z_rover"/>
+			<referrer name="cmd_z_bmwx6m"/>
 			<referrer name="cmd_garaza"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -4130,13 +4124,12 @@
 		</member>
 		<member name="M:GetPlayerFacingAngle" syntax="GetPlayerFacingAngle(playerid, &amp;ang)">
 			<attribute name="native"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -4231,18 +4224,17 @@
 			<attribute name="native"/>
 			<referrer name="IC"/>
 			<referrer name="cmd_curpos"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_lisice"/>
 			<referrer name="cmd_stuck"/>
 			<referrer name="cmd_napraviorg"/>
 			<referrer name="cmd_napravikucu"/>
 			<referrer name="cmd_spec"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -4288,15 +4280,14 @@
 			<attribute name="native"/>
 			<referrer name="SpeedVehicle"/>
 			<referrer name="cmd_popraviauto"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_prevoznovca"/>
 			<referrer name="cmd_prevozputnika"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -5076,9 +5067,8 @@
 			<referrer name="IC"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
-			<referrer name="cmd_dostupnavozila"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_pduty"/>
 			<referrer name="cmd_getajob"/>
@@ -5091,10 +5081,9 @@
 			<referrer name="cmd_enterhouse"/>
 			<referrer name="cmd_kupikucu"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -7118,13 +7107,12 @@
 		</member>
 		<member name="M:PutPlayerInVehicle" syntax="PutPlayerInVehicle(playerid, vehicleid, seatid)">
 			<attribute name="native"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -8909,14 +8897,13 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
-			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
 			<referrer name="cmd_me"/>
-			<referrer name="cmd_z_rover"/>
+			<referrer name="cmd_z_bmwx6m"/>
 			<referrer name="cmd_garaza"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
@@ -8951,10 +8938,9 @@
 			<referrer name="cmd_specoff"/>
 			<referrer name="cmd_spec"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_cc"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
@@ -9416,13 +9402,12 @@
 		<member name="M:SetVehicleParamsEx" syntax="SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective)">
 			<attribute name="native"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="cmd_z_rover"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_bmwx6m"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>
@@ -9491,7 +9476,6 @@
 			<attribute name="native"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_mojavozila"/>
-			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="cmd_askq"/>
 			<referrer name="cmd_akomande"/>
 			<referrer name="cmd_komande"/>
@@ -10273,20 +10257,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="__file"/>
 			<dependency name="__line"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:cmd_dostupnavozila" syntax="cmd_dostupnavozila(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="9"/>
-			<dependency name="Float:operator=(_:)"/>
-			<dependency name="IsPlayerInRangeOfPoint"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="ShowPlayerDialog"/>
-			<dependency name="d_dostupna_vozila"/>
 			<param name="playerid">
 			</param>
 			<param name="params">
@@ -11951,7 +11921,7 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:cmd_z_amg" syntax="cmd_z_amg(playerid, params[])">
+		<member name="M:cmd_z_aston" syntax="cmd_z_aston(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
 			<dependency name="ChangeVehicleColor"/>
@@ -11983,7 +11953,39 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:cmd_z_aventador" syntax="cmd_z_aventador(playerid, params[])">
+		<member name="M:cmd_z_bmwx6m" syntax="cmd_z_bmwx6m(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="17"/>
+			<dependency name="ChangeVehicleColor"/>
+			<dependency name="CreateVehicle"/>
+			<dependency name="GetPlayerFacingAngle"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="PutPlayerInVehicle"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetVehicleParamsEx"/>
+			<dependency name="VehInfo"/>
+			<dependency name="VehInfo"/>
+			<dependency name="pOrganizacija"/>
+			<dependency name="strcmp"/>
+			<dependency name="vAlarm"/>
+			<dependency name="vBonnet"/>
+			<dependency name="vBoot"/>
+			<dependency name="vDoor"/>
+			<dependency name="vEngine"/>
+			<dependency name="vFuel"/>
+			<dependency name="vLights"/>
+			<dependency name="vObj"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_z_cayenne" syntax="cmd_z_cayenne(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
 			<dependency name="ChangeVehicleColor"/>
@@ -12047,7 +12049,7 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:cmd_z_gklasam" syntax="cmd_z_gklasam(playerid, params[])">
+		<member name="M:cmd_z_ferrari" syntax="cmd_z_ferrari(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
 			<dependency name="ChangeVehicleColor"/>
@@ -12079,71 +12081,7 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:cmd_z_rover" syntax="cmd_z_rover(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="17"/>
-			<dependency name="ChangeVehicleColor"/>
-			<dependency name="CreateVehicle"/>
-			<dependency name="GetPlayerFacingAngle"/>
-			<dependency name="GetPlayerPos"/>
-			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="IsPlayerInRangeOfPoint"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PutPlayerInVehicle"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="SetVehicleParamsEx"/>
-			<dependency name="VehInfo"/>
-			<dependency name="VehInfo"/>
-			<dependency name="pOrganizacija"/>
-			<dependency name="strcmp"/>
-			<dependency name="vAlarm"/>
-			<dependency name="vBonnet"/>
-			<dependency name="vBoot"/>
-			<dependency name="vDoor"/>
-			<dependency name="vEngine"/>
-			<dependency name="vFuel"/>
-			<dependency name="vLights"/>
-			<dependency name="vObj"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:cmd_z_teslas" syntax="cmd_z_teslas(playerid, params[])">
-			<attribute name="public"/>
-			<stacksize value="17"/>
-			<dependency name="ChangeVehicleColor"/>
-			<dependency name="CreateVehicle"/>
-			<dependency name="GetPlayerFacingAngle"/>
-			<dependency name="GetPlayerPos"/>
-			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="IsPlayerInRangeOfPoint"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PutPlayerInVehicle"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="SetVehicleParamsEx"/>
-			<dependency name="VehInfo"/>
-			<dependency name="VehInfo"/>
-			<dependency name="pOrganizacija"/>
-			<dependency name="strcmp"/>
-			<dependency name="vAlarm"/>
-			<dependency name="vBonnet"/>
-			<dependency name="vBoot"/>
-			<dependency name="vDoor"/>
-			<dependency name="vEngine"/>
-			<dependency name="vFuel"/>
-			<dependency name="vLights"/>
-			<dependency name="vObj"/>
-			<param name="playerid">
-			</param>
-			<param name="params">
-				<paraminfo> [] </paraminfo>
-			</param>
-		</member>
-		<member name="M:cmd_z_urus" syntax="cmd_z_urus(playerid, params[])">
+		<member name="M:cmd_z_venomgt" syntax="cmd_z_venomgt(playerid, params[])">
 			<attribute name="public"/>
 			<stacksize value="17"/>
 			<dependency name="ChangeVehicleColor"/>
@@ -12852,9 +12790,9 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
-			<referrer name="cmd_z_rover"/>
+			<referrer name="cmd_z_bmwx6m"/>
 			<referrer name="cmd_garaza"/>
-			<referrer name="cmd_z_amg"/>
+			<referrer name="cmd_z_ferrari"/>
 			<referrer name="cmd_pokrenipljacku"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
@@ -12873,10 +12811,9 @@
 			<referrer name="cmd_addmem"/>
 			<referrer name="cmd_promovisi"/>
 			<referrer name="cmd_z_cfmoto625"/>
-			<referrer name="cmd_z_gklasam"/>
-			<referrer name="cmd_z_teslas"/>
-			<referrer name="cmd_z_aventador"/>
-			<referrer name="cmd_z_urus"/>
+			<referrer name="cmd_z_cayenne"/>
+			<referrer name="cmd_z_venomgt"/>
+			<referrer name="cmd_z_aston"/>
 			<referrer name="cmd_p_teslas"/>
 			<referrer name="cmd_p_skodarapid"/>
 			<referrer name="cmd_p_gklasa"/>

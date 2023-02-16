@@ -2613,12 +2613,12 @@ CMD:mojavozila(playerid, params[]) {
 	return 1;
 }
 
-CMD:dostupnavozila(playerid, params[]) {
-	#pragma unused params
-	if(!IsPlayerInRangeOfPoint(playerid, 3, 2261.3198,-1920.5042,13.5508)) return SCM(playerid, SIVA, "Niste kod auto salona!");
-	SPD(playerid, d_dostupna_vozila, DIALOG_STYLE_LIST, "Dostupna Vozila", "Jeftina Vozila\nSkupa Vozila", "Izaberi", "Odustani");
-	return 1;
-}
+// CMD:dostupnavozila(playerid, params[]) {
+// 	#pragma unused params
+// 	if(!IsPlayerInRangeOfPoint(playerid, 3, 2261.3198,-1920.5042,13.5508)) return SCM(playerid, SIVA, "Niste kod auto salona!");
+// 	SPD(playerid, d_dostupna_vozila, DIALOG_STYLE_LIST, "Dostupna Vozila", "Jeftina Vozila\nSkupa Vozila", "Izaberi", "Odustani");
+// 	return 1;
+// }
 
 CMD:kill(playerid, params[]) {
 	new id;
@@ -2830,7 +2830,7 @@ CMD:heal(playerid, params[]) {
 
 CMD:komande(playerid, params[]) {
 	#pragma unused params
-	SPD(playerid, d_komande, DIALOG_STYLE_MSGBOX, "{03adfc}Sve komande Tesla RP-a", "{03adfc}Osnovne komande: {ffffff}/me, /do, /ooc, /givemoney, /engine, /toci, /rent, /unrent, /kupikucu, /enterhouse, /popraviauto\n/exithouse, /house, /stats, /organizacije, /sellhouse, /postavihrent,\n /skinihrent, /otvoriracun, /deposit, /withdraw, /kredit, /quitjob, /listaposlova\n, /inv, /getajob, /prevozputnika, /prekiniposao, /exitveh, /stuck, /prevoznovca, /gps, /komande\n{03adfc}Komande za LSPD: {ffffff}/otvori, /zatvori, /zakljucaj, /otkljucaj, /p_gklasa, /p_skodarapid, /p_teslas,\n /lisice, /skinilisice, /pduty\n{03adfc}Komande za Zemunski Klan: {ffffff}/z_urus, /z_aventador, /z_teslas, /z_gklasam, /z_cfmoto625, /z_rover, /z_amg\n/lisice\n /otvori, /zatvori, /otkljucaj, /zakljucaj, /lisice, /skinilisice\n{03adfc}Komande za organizacije: {ffffff}/orginv, /leaveorg\n{03adfc}Komande za lidere: {ffffff}/orgkick\n{03adfc}Komande za vozila: {ffffff}/mojavozila, /dostupnavozila\n{03adfc}Admin komande: /akomande", "{03adfc}Izadji", "");
+	SPD(playerid, d_komande, DIALOG_STYLE_MSGBOX, "{03adfc}Sve komande Tesla RP-a", "{03adfc}Osnovne komande: {ffffff}/me, /do, /ooc, /givemoney, /engine, /toci, /rent, /unrent, /kupikucu, /enterhouse, /popraviauto\n/exithouse, /house, /stats, /organizacije, /sellhouse, /postavihrent,\n /skinihrent, /otvoriracun, /deposit, /withdraw, /kredit, /quitjob, /listaposlova\n, /inv, /getajob, /prevozputnika, /prekiniposao, /exitveh, /stuck, /prevoznovca, /gps, /komande\n{03adfc}Komande za LSPD: {ffffff}/otvori, /zatvori, /zakljucaj, /otkljucaj, /p_gklasa, /p_skodarapid, /p_teslas,\n /lisice, /skinilisice, /pduty\n{03adfc}Komande za Zemunski Klan: {ffffff}/z_cfmoto625, /z_cayenne, z_venomgt, z_aston, z_ferrari, z_bmwx6m, \n/lisice\n /otvori, /zatvori, /otkljucaj, /zakljucaj, /lisice, /skinilisice\n{03adfc}Komande za organizacije: {ffffff}/orginv, /leaveorg\n{03adfc}Komande za lidere: {ffffff}/orgkick\n{03adfc}Komande za vozila: {ffffff}/mojavozila, /dostupnavozila\n{03adfc}Admin komande: /akomande", "{03adfc}Izadji", "");
 	return 1;
 }
 
