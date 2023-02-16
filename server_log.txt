@@ -5718,3 +5718,99 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [19:19:20]  
 [19:19:20]  
 [19:19:20]  
+[19:21:22]  -------------------------------------------
+[19:21:22]            SampVoice unloading...           
+[19:21:22]  -------------------------------------------
+[19:21:22] [dbg:raknet:free] : module releasing...
+[19:21:22] [dbg:raknet:free] : module released
+[19:21:22] [sv:dbg:network:free] : module releasing...
+[19:21:22] [sv:dbg:network:free] : module released
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:21:31] weburl = "www.sa-mp.com"  (string)
+[19:21:31] 
+[19:21:31] Server Plugins
+[19:21:31] --------------
+[19:21:31]  Loading plugin: sscanf
+[19:21:31] 
+[19:21:31]  ===============================
+[19:21:31] 
+[19:21:31]       sscanf plugin loaded.     
+[19:21:31] 
+[19:21:31]          Version: 2.13.2
+[19:21:31] 
+[19:21:31]    (c) 2022 Alex "Y_Less" Cole  
+[19:21:31] 
+[19:21:31]  ===============================
+[19:21:31] 
+[19:21:31]   Loaded.
+[19:21:32]  Loading plugin: streamer
+[19:21:32] 
+
+*** Streamer Plugin v2.9.5 by Incognito loaded ***
+
+[19:21:32]   Loaded.
+[19:21:32]  Loading plugin: sampvoice
+[19:21:32] [sv:dbg:network:init] : module initializing...
+[19:21:32] [dbg:raknet:init] : module initializing...
+[19:21:32] [dbg:raknet:init] : installed hook to 'GetRakServerInterface' function (ptr:0044FAD0)
+[19:21:32] [dbg:raknet:init] : installed hook to 'OnPlayerDisconnect' function (ptr:0046D970)
+[19:21:32] [dbg:raknet:init] : module initialized
+[19:21:32] [sv:dbg:network:init] : module initialized
+[19:21:32]  -------------------------------------------    
+[19:21:32]    ___                __   __    _              
+[19:21:32]   / __| __ _ _ __  _ _\ \ / /__ (_) __ ___    
+[19:21:32]   \__ \/ _` | '  \| '_ \   / _ \| |/ _/ -_)
+[19:21:32]   |___/\__,_|_|_|_| .__/\_/\___/|_|\__\___|
+[19:21:32]                   |_|                           
+[19:21:32]  -------------------------------------------    
+[19:21:32]            SampVoice by MOR loaded              
+[19:21:32]  -------------------------------------------    
+[19:21:32]   Loaded.
+[19:21:32]  Loaded 3 plugins.
+
+[19:21:32] 
+[19:21:32] Ban list
+[19:21:32] --------
+[19:21:32]  Loaded: samp.ban
+[19:21:32] 
+[19:21:32] 
+[19:21:32] Filterscripts
+[19:21:32] ---------------
+[19:21:32]   Loading filterscript 'animacije.amx'...
+[19:21:32] [sv:dbg:main:AmxLoad] : net game pointer (value:023AA6A0) received
+[19:21:32] [sv:dbg:network:bind] : voice server running on port 60757
+[19:21:32]   Loading filterscript 'JVVC.amx'...
+[19:21:32] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:21:32]   Loading filterscript 'cardealership.amx'...
+[19:21:32] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:21:32]   Loading filterscript 'flymode.amx'...
+[19:21:32] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:21:32]   Loaded 4 filterscripts.
+
+[19:21:32] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:21:32]  
+[19:21:32]  
+[19:21:32]  
+[19:21:32]  ======================================= 
+[19:21:32]  |                                     | 
+[19:21:32]  |        YSI version 3.09.0684        | 
+[19:21:32]  |        By Alex "Y_Less" Cole        | 
+[19:21:32]  |                                     | 
+[19:21:32]  ======================================= 
+[19:21:32]  
+[19:21:32]  
+[19:21:32]  
+[19:21:32] --- TESLA ROLEPLAY ---
+[19:21:32] Mod je ucitan.
+[19:21:32] Number of vehicle models: 11
+[19:22:13] [connection] 127.0.0.1:62808 requests connection cookie.
+[19:22:14] [connection] incoming connection: 127.0.0.1:62808 id: 0
+[19:22:14] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
