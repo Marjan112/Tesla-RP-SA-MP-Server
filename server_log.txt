@@ -5545,3 +5545,93 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [19:06:59] [join] Maki_Zemunac has joined the server (0:127.0.0.1)
 [19:10:40] [sv:dbg:network:connect] : disconnecting player (0) ...
 [19:10:40] [part] Maki_Zemunac has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:18:47] weburl = "www.sa-mp.com"  (string)
+[19:18:47] 
+[19:18:47] Server Plugins
+[19:18:47] --------------
+[19:18:47]  Loading plugin: sscanf
+[19:18:47] 
+[19:18:47]  ===============================
+[19:18:47] 
+[19:18:47]       sscanf plugin loaded.     
+[19:18:47] 
+[19:18:47]          Version: 2.13.2
+[19:18:47] 
+[19:18:47]    (c) 2022 Alex "Y_Less" Cole  
+[19:18:47] 
+[19:18:47]  ===============================
+[19:18:47] 
+[19:18:47]   Loaded.
+[19:18:47]  Loading plugin: streamer
+[19:18:47] 
+
+*** Streamer Plugin v2.9.5 by Incognito loaded ***
+
+[19:18:47]   Loaded.
+[19:18:47]  Loading plugin: sampvoice
+[19:18:47] [sv:dbg:network:init] : module initializing...
+[19:18:47] [dbg:raknet:init] : module initializing...
+[19:18:47] [dbg:raknet:init] : installed hook to 'GetRakServerInterface' function (ptr:0044FAD0)
+[19:18:47] [dbg:raknet:init] : installed hook to 'OnPlayerDisconnect' function (ptr:0046D970)
+[19:18:47] [dbg:raknet:init] : module initialized
+[19:18:47] [sv:dbg:network:init] : module initialized
+[19:18:47]  -------------------------------------------    
+[19:18:47]    ___                __   __    _              
+[19:18:47]   / __| __ _ _ __  _ _\ \ / /__ (_) __ ___    
+[19:18:47]   \__ \/ _` | '  \| '_ \   / _ \| |/ _/ -_)
+[19:18:47]   |___/\__,_|_|_|_| .__/\_/\___/|_|\__\___|
+[19:18:47]                   |_|                           
+[19:18:47]  -------------------------------------------    
+[19:18:47]            SampVoice by MOR loaded              
+[19:18:47]  -------------------------------------------    
+[19:18:47]   Loaded.
+[19:18:47]  Loaded 3 plugins.
+
+[19:18:47] 
+[19:18:47] Ban list
+[19:18:47] --------
+[19:18:47]  Loaded: samp.ban
+[19:18:47] 
+[19:18:47] 
+[19:18:47] Filterscripts
+[19:18:47] ---------------
+[19:18:47]   Loading filterscript 'animacije.amx'...
+[19:18:47] [sv:dbg:main:AmxLoad] : net game pointer (value:0228A6A0) received
+[19:18:47] [sv:dbg:network:bind] : voice server running on port 58513
+[19:18:47]   Loading filterscript 'JVVC.amx'...
+[19:18:47] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:18:47]   Loading filterscript 'cardealership.amx'...
+[19:18:47] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:18:47]   Loading filterscript 'flymode.amx'...
+[19:18:47] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:18:47]   Loaded 4 filterscripts.
+
+[19:18:47] [sv:dbg:main:AmxLoad] : failed to bind voice server
+[19:18:47]  
+[19:18:47]  
+[19:18:47]  
+[19:18:47]  ======================================= 
+[19:18:47]  |                                     | 
+[19:18:47]  |        YSI version 3.09.0684        | 
+[19:18:47]  |        By Alex "Y_Less" Cole        | 
+[19:18:47]  |                                     | 
+[19:18:47]  ======================================= 
+[19:18:47]  
+[19:18:47]  
+[19:18:47]  
+[19:19:05]  -------------------------------------------
+[19:19:05]            SampVoice unloading...           
+[19:19:05]  -------------------------------------------
+[19:19:06] [dbg:raknet:free] : module releasing...
+[19:19:06] [dbg:raknet:free] : module released
+[19:19:06] [sv:dbg:network:free] : module releasing...
+[19:19:06] [sv:dbg:network:free] : module released
