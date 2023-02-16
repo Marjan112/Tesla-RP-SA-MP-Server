@@ -43,6 +43,10 @@ stock CallPickups() {
 	Create3DTextLabel("{03adfc}[ RENT ]\n{ffffff}Da bi ste rentali vozilo {03adfc}/rent", -1, 1561.0580,-2227.5750,13.5469, 10.0, 0);
 	CreatePickup(1239, 1, 1282.4895,-1265.0306,13.6425);
 	Create3DTextLabel("{03adfc}[ RENT ]\n{ffffff}Da bi ste rentali vozilo {03adfc}/rent", -1, 1282.4895,-1265.0306,13.6425, 10.0, 0);
+	CreatePickup(1239, 1, 1332.6646,-1235.4896,13.5469);
+	Create3DTextLabel("{03adfc}[ RENT ]\n{ffffff}Da bi ste rentali vozilo {03adfc}/rent", -1, 1332.6646,-1235.4896,13.5469, 10.0, 0);
+	CreatePickup(1239, 1, 1417.8558,-1704.8744,13.5469);
+	Create3DTextLabel("{03adfc}[ RENT ]\n{ffffff}Da bi ste rentali vozilo {03adfc}/rent", -1, 1417.8558,-1704.8744,13.5469, 10.0, 0);
 
 	CreatePickup(19132, 1, 1555.5020,-1675.6063,16.1953);
 	Create3DTextLabel("{03adfc}[{ffffff}Policijska Stanica{03adfc}]\n{ffffff}Da bi ste usli u policijsku stanicu pretisnite {03adfc}F {ffffff}ili {03adfc}Enter", -1, 1555.5020,-1675.6063,16.1953, 7, 0);
