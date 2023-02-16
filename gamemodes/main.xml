@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7111">
+		<member name="C:__line" value="7131">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -717,11 +717,11 @@
 		<member name="C:d_alist" value="2">
 			<referrer name="cmd_admini"/>
 		</member>
-		<member name="C:d_ammu_nation" value="27">
+		<member name="C:d_ammu_nation" value="30">
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 		</member>
-		<member name="C:d_askq" value="32">
+		<member name="C:d_askq" value="35">
 			<referrer name="cmd_askq"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
@@ -729,105 +729,105 @@
 			<referrer name="cmd_ban"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_bolnica" value="15">
+		<member name="C:d_bolnica" value="18">
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 		</member>
-		<member name="C:d_dostupna_jeftina_vozila" value="30">
+		<member name="C:d_dostupna_jeftina_vozila" value="33">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_dostupna_skupa_vozila" value="31">
+		<member name="C:d_dostupna_skupa_vozila" value="34">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_dostupna_vozila" value="29">
+		<member name="C:d_dostupna_vozila" value="32">
 			<referrer name="cmd_dostupnavozila"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_gps" value="24">
+		<member name="C:d_gps" value="27">
 			<referrer name="cmd_gps"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_gps_poslovi" value="25">
+		<member name="C:d_gps_poslovi" value="28">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_hrentcena" value="14">
+		<member name="C:d_hrentcena" value="17">
 			<referrer name="cmd_postavihrent"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_inv_org_bolnica" value="18">
+		<member name="C:d_inv_org_bolnica" value="21">
 			<referrer name="cmd_orginv"/>
 		</member>
-		<member name="C:d_inv_org_ilegalna" value="21">
+		<member name="C:d_inv_org_ilegalna" value="24">
 			<referrer name="cmd_orginv"/>
 		</member>
-		<member name="C:d_inv_org_lspd" value="20">
+		<member name="C:d_inv_org_lspd" value="23">
 			<referrer name="cmd_orginv"/>
 		</member>
-		<member name="C:d_inv_oruzje" value="17">
+		<member name="C:d_inv_oruzje" value="20">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_inventar" value="16">
+		<member name="C:d_inventar" value="19">
 			<referrer name="cmd_inv"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_joblist" value="23">
+		<member name="C:d_joblist" value="26">
 			<referrer name="cmd_getajob"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_komande" value="28">
+		<member name="C:d_komande" value="31">
 			<referrer name="cmd_akomande"/>
 			<referrer name="cmd_komande"/>
 		</member>
-		<member name="C:d_listaposlova" value="22">
+		<member name="C:d_listaposlova" value="25">
 			<referrer name="cmd_listaposlova"/>
 		</member>
 		<member name="C:d_log" value="1">
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="loadingscreen"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi1" value="35">
+		<member name="C:d_moja_jeftina_vozila_slotovi1" value="38">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi2" value="36">
+		<member name="C:d_moja_jeftina_vozila_slotovi2" value="39">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi3" value="37">
+		<member name="C:d_moja_jeftina_vozila_slotovi3" value="40">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi4" value="38">
+		<member name="C:d_moja_jeftina_vozila_slotovi4" value="41">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi5" value="39">
+		<member name="C:d_moja_jeftina_vozila_slotovi5" value="42">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi6" value="40">
+		<member name="C:d_moja_jeftina_vozila_slotovi6" value="43">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi7" value="41">
+		<member name="C:d_moja_jeftina_vozila_slotovi7" value="44">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_jeftina_vozila_slotovi8" value="42">
+		<member name="C:d_moja_jeftina_vozila_slotovi8" value="45">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_moja_vozila" value="34">
+		<member name="C:d_moja_vozila" value="37">
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_nevalidno_ime" value="8">
+		<member name="C:d_nevalidno_ime" value="11">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_organizacije" value="13">
+		<member name="C:d_organizacije" value="16">
 			<referrer name="cmd_organizacije"/>
 		</member>
-		<member name="C:d_orgdrzavna" value="11">
+		<member name="C:d_orgdrzavna" value="14">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_orgime" value="10">
+		<member name="C:d_orgime" value="13">
 			<referrer name="cmd_napraviorg"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_orginfo" value="12">
+		<member name="C:d_orginfo" value="15">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_payday" value="5">
@@ -837,7 +837,7 @@
 			<referrer name="cmd_port"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_promlist" value="9">
+		<member name="C:d_promlist" value="12">
 			<referrer name="cmd_promoteri"/>
 		</member>
 		<member name="C:d_reg" value="0">
@@ -848,19 +848,19 @@
 			<referrer name="cmd_rent"/>
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_skupa_vozila_slotovi1" value="43">
+		<member name="C:d_skupa_vozila_slotovi1" value="46">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_skupa_vozila_slotovi2" value="44">
+		<member name="C:d_skupa_vozila_slotovi2" value="47">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_skupa_vozila_slotovi3" value="45">
+		<member name="C:d_skupa_vozila_slotovi3" value="48">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_skupa_vozila_slotovi4" value="46">
+		<member name="C:d_skupa_vozila_slotovi4" value="49">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
-		<member name="C:d_skupa_vozila_slotovi5" value="47">
+		<member name="C:d_skupa_vozila_slotovi5" value="50">
 			<referrer name="S@@_OnDialogResponse"/>
 		</member>
 		<member name="C:d_stats" value="4">
@@ -1193,6 +1193,26 @@
 			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen15">
+			<tagname value="PlayerText"/>
+			<referrer name="CallLoadingScreen"/>
+			<referrer name="loadingscreen"/>
+		</member>
+		<member name="F:Loadingscreen16">
+			<tagname value="PlayerText"/>
+			<referrer name="CallLoadingScreen"/>
+			<referrer name="loadingscreen"/>
+		</member>
+		<member name="F:Loadingscreen17">
+			<tagname value="PlayerText"/>
+			<referrer name="CallLoadingScreen"/>
+			<referrer name="loadingscreen"/>
+		</member>
+		<member name="F:Loadingscreen18">
+			<tagname value="PlayerText"/>
+			<referrer name="CallLoadingScreen"/>
+			<referrer name="loadingscreen"/>
+		</member>
+		<member name="F:Loadingscreen19">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
 			<referrer name="loadingscreen"/>
@@ -3244,6 +3264,10 @@
 			<dependency name="Loadingscreen13"/>
 			<dependency name="Loadingscreen14"/>
 			<dependency name="Loadingscreen15"/>
+			<dependency name="Loadingscreen16"/>
+			<dependency name="Loadingscreen17"/>
+			<dependency name="Loadingscreen18"/>
+			<dependency name="Loadingscreen19"/>
 			<dependency name="Loadingscreen2"/>
 			<dependency name="Loadingscreen3"/>
 			<dependency name="Loadingscreen4"/>
@@ -12623,6 +12647,10 @@
 			<dependency name="Loadingscreen13"/>
 			<dependency name="Loadingscreen14"/>
 			<dependency name="Loadingscreen15"/>
+			<dependency name="Loadingscreen16"/>
+			<dependency name="Loadingscreen17"/>
+			<dependency name="Loadingscreen18"/>
+			<dependency name="Loadingscreen19"/>
 			<dependency name="Loadingscreen2"/>
 			<dependency name="Loadingscreen3"/>
 			<dependency name="Loadingscreen4"/>

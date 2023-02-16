@@ -42,6 +42,10 @@ new PlayerText:Loadingscreen12[MAX_PLAYERS];
 new PlayerText:Loadingscreen13[MAX_PLAYERS];
 new PlayerText:Loadingscreen14[MAX_PLAYERS];
 new PlayerText:Loadingscreen15[MAX_PLAYERS];
+new PlayerText:Loadingscreen16[MAX_PLAYERS];
+new PlayerText:Loadingscreen17[MAX_PLAYERS];
+new PlayerText:Loadingscreen18[MAX_PLAYERS];
+new PlayerText:Loadingscreen19[MAX_PLAYERS];
 
 stock Void: CallSDTD() {
     sdtd[0] = TextDrawCreate(38.999980, 429.748260, "00:00");
@@ -182,7 +186,7 @@ stock CallLoadingScreen(playerid) {
 
 	Loadingscreen3[playerid] = CreatePlayerTextDraw(playerid, 10.000000, 397.807403, "LD_SPAC:white");
 	PlayerTextDrawLetterSize(playerid, Loadingscreen3[playerid], 0.000000, 0.000000);
-	PlayerTextDrawTextSize(playerid, Loadingscreen3[playerid], 617.666687, 14.518524);
+	PlayerTextDrawTextSize(playerid, Loadingscreen3[playerid], 1250.666870, 15.762967);
 	PlayerTextDrawAlignment(playerid, Loadingscreen3[playerid], 1);
 	PlayerTextDrawColor(playerid, Loadingscreen3[playerid], 16777215);
 	PlayerTextDrawSetShadow(playerid, Loadingscreen3[playerid], 0);
@@ -309,6 +313,46 @@ stock CallLoadingScreen(playerid) {
 	PlayerTextDrawFont(playerid, Loadingscreen15[playerid], 2);
 	PlayerTextDrawSetProportional(playerid, Loadingscreen15[playerid], 1);
 
+	Loadingscreen16[playerid] = CreatePlayerTextDraw(playerid, 471.333251, 234.785064, "HINT: Ne klikcite \"spawn\"");
+	PlayerTextDrawLetterSize(playerid, Loadingscreen16[playerid], 0.299666, 1.583407);
+	PlayerTextDrawAlignment(playerid, Loadingscreen16[playerid], 1);
+	PlayerTextDrawColor(playerid, Loadingscreen16[playerid], -1);
+	PlayerTextDrawSetShadow(playerid, Loadingscreen16[playerid], 0);
+	PlayerTextDrawSetOutline(playerid, Loadingscreen16[playerid], 1);
+	PlayerTextDrawBackgroundColor(playerid, Loadingscreen16[playerid], 51);
+	PlayerTextDrawFont(playerid, Loadingscreen16[playerid], 1);
+	PlayerTextDrawSetProportional(playerid, Loadingscreen16[playerid], 1);
+
+	Loadingscreen17[playerid] = CreatePlayerTextDraw(playerid, 450.333648, 248.888900, "dok se ne ulogujete na server");
+	PlayerTextDrawLetterSize(playerid, Loadingscreen17[playerid], 0.336666, 1.600000);
+	PlayerTextDrawAlignment(playerid, Loadingscreen17[playerid], 1);
+	PlayerTextDrawColor(playerid, Loadingscreen17[playerid], -1);
+	PlayerTextDrawSetShadow(playerid, Loadingscreen17[playerid], 0);
+	PlayerTextDrawSetOutline(playerid, Loadingscreen17[playerid], 1);
+	PlayerTextDrawBackgroundColor(playerid, Loadingscreen17[playerid], 51);
+	PlayerTextDrawFont(playerid, Loadingscreen17[playerid], 1);
+	PlayerTextDrawSetProportional(playerid, Loadingscreen17[playerid], 1);
+
+	Loadingscreen18[playerid] = CreatePlayerTextDraw(playerid, 465.000000, 263.822052, "da ne bi ste izgubili");
+	PlayerTextDrawLetterSize(playerid, Loadingscreen18[playerid], 0.418666, 1.624888);
+	PlayerTextDrawAlignment(playerid, Loadingscreen18[playerid], 1);
+	PlayerTextDrawColor(playerid, Loadingscreen18[playerid], -1);
+	PlayerTextDrawSetShadow(playerid, Loadingscreen18[playerid], 0);
+	PlayerTextDrawSetOutline(playerid, Loadingscreen18[playerid], 1);
+	PlayerTextDrawBackgroundColor(playerid, Loadingscreen18[playerid], 51);
+	PlayerTextDrawFont(playerid, Loadingscreen18[playerid], 1);
+	PlayerTextDrawSetProportional(playerid, Loadingscreen18[playerid], 1);
+
+	Loadingscreen19[playerid] = CreatePlayerTextDraw(playerid, 465.666778, 278.755493, "sve sto posedujete");
+	PlayerTextDrawLetterSize(playerid, Loadingscreen19[playerid], 0.449999, 1.600000);
+	PlayerTextDrawAlignment(playerid, Loadingscreen19[playerid], 1);
+	PlayerTextDrawColor(playerid, Loadingscreen19[playerid], -1);
+	PlayerTextDrawSetShadow(playerid, Loadingscreen19[playerid], 0);
+	PlayerTextDrawSetOutline(playerid, Loadingscreen19[playerid], 1);
+	PlayerTextDrawBackgroundColor(playerid, Loadingscreen19[playerid], 51);
+	PlayerTextDrawFont(playerid, Loadingscreen19[playerid], 1);
+	PlayerTextDrawSetProportional(playerid, Loadingscreen19[playerid], 1);
+
 	PlayerTextDrawShow(playerid, Loadingscreen0[playerid]);
 	PlayerTextDrawShow(playerid, Loadingscreen1[playerid]);
 	PlayerTextDrawShow(playerid, Loadingscreen2[playerid]);
@@ -325,4 +369,8 @@ stock CallLoadingScreen(playerid) {
 	PlayerTextDrawShow(playerid, Loadingscreen13[playerid]);
 	PlayerTextDrawShow(playerid, Loadingscreen14[playerid]);
 	PlayerTextDrawShow(playerid, Loadingscreen15[playerid]);
+	PlayerTextDrawShow(playerid, Loadingscreen16[playerid]);
+	PlayerTextDrawShow(playerid, Loadingscreen17[playerid]);
+	PlayerTextDrawShow(playerid, Loadingscreen18[playerid]);
+	PlayerTextDrawShow(playerid, Loadingscreen19[playerid]);
 }

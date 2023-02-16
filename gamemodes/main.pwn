@@ -41,6 +41,9 @@ enum {
 	d_payday,
 	d_port,
 	d_rent,
+	d_rent_fiat500_vreme,
+	d_rent_BMWX6M_vreme,
+	d_rent_AudiRS6_vreme,
 	d_nevalidno_ime,
 	d_promlist,
 	d_orgime,
@@ -83,8 +86,7 @@ enum {
 	d_skupa_vozila_slotovi5,
 	d_skupa_vozila_slotovi6,
 	d_skupa_vozila_slotovi7,
-	d_skupa_vozila_slotovi8,
-	d_jeftina_boja_vozila1
+	d_skupa_vozila_slotovi8
 };
 
 new IsPlayerSpec[MAX_PLAYERS];
@@ -3998,7 +4000,7 @@ CMD:rent(playerid, params[]) {
 		IsPlayerInRangeOfPoint(playerid, 3.0, 1332.6646,-1235.4896,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1417.8558,-1704.8744,13.5469)
 	) {
 		if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate neko vozilo!");
-		SPD(playerid, d_rent, DIALOG_STYLE_LIST, "{03adfc}Vreme rentanja | Fiat 500", "10 min\t\t$1000\n20 min\t\t$2000\n30 min\t\t$3000", "{03adfc}Izaberi", "{03adfc}Odustani");
+		SPD(playerid, d_rent, DIALOG_STYLE_LIST, "{03adfc}Vreme rentanja", "Fiat 500\nBMW X6M\nAudi RS7", "{03adfc}Izaberi", "{03adfc}Odustani");
 	} else SCM(playerid, CRVENA, "[GRESKA]: {ffffff}Niste u blizini rent objekta!");
 	return 1;
 }
@@ -4570,114 +4572,126 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 		}
 		case d_rent: {
 			if(response) {
-				new Float:X, Float:Y, Float:Z, Float:FA, vehid, vehicle;
-				GetPlayerPos(playerid, X, Y, Z);
-				GetPlayerFacingAngle(playerid, FA);
 				switch(listitem + 1) {
-					case 1: {
-						if(GetPlayerMoney(playerid) < 1000) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Nemate dovoljno novca!");
-						else if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate vozilo!");
-						else {
-							rentvreme[playerid] = 10;
-							vehicle = CreateVehicle(496, X, Y, Z, FA, 137, 137, -1);
-							PutPlayerInVehicle(playerid, vehicle, 0);
-							vehid = GetPlayerVehicleID(playerid);
-							VehInfo[vehid][vEngine] = 0;
-                            VehInfo[vehid][vLights] = 0;
-                            VehInfo[vehid][vAlarm] = 0;
-                            VehInfo[vehid][vDoor] = 0;
-                            VehInfo[vehid][vBonnet] = 0;
-							VehInfo[vehid][vBoot] = 0;
-                            VehInfo[vehid][vObj] = 0;
-                            VehInfo[vehid][vFuel] = 100;
-							SetVehicleParamsEx(
-                                vehid,
-                                VehInfo[vehid][vEngine],
-                                VehInfo[vehid][vLights],
-                                VehInfo[vehid][vAlarm],
-                                VehInfo[vehid][vDoor],
-                                VehInfo[vehid][vBonnet],
-                                VehInfo[vehid][vBoot],
-                                VehInfo[vehid][vObj]
-                            );
-							renta[playerid] = vehid;
-							rented[vehid] = 1;
-							GivePlayerMoney(playerid, -1000);
-							PlayerInfo[playerid][pNovac] -= 1000;
-							GameTextForPlayer(playerid, "~r~-$1000", 2000, 1);
-							SCM(playerid, PLAVA, "Uspesno ste rentali vozilo!");
-						}
-					} //10 minuta
-					case 2: {
-						if(GetPlayerMoney(playerid) < 2000) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Nemate dovoljno novca!");
-						else if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate vozilo!");
-						else {
-							rentvreme[playerid] = 20;
-							vehicle = CreateVehicle(496, X, Y, Z, FA, 137, 137, -1);
-							PutPlayerInVehicle(playerid, vehicle, 0);
-							vehid = GetPlayerVehicleID(playerid);
-							VehInfo[vehid][vEngine] = 0;
-                            VehInfo[vehid][vLights] = 0;
-                            VehInfo[vehid][vAlarm] = 0;
-                            VehInfo[vehid][vDoor] = 0;
-                            VehInfo[vehid][vBonnet] = 0;
-							VehInfo[vehid][vBoot] = 0;
-                            VehInfo[vehid][vObj] = 0;
-                            VehInfo[vehid][vFuel] = 100;
-							SetVehicleParamsEx(
-                                vehid,
-                                VehInfo[vehid][vEngine],
-                                VehInfo[vehid][vLights],
-                                VehInfo[vehid][vAlarm],
-                                VehInfo[vehid][vDoor],
-                                VehInfo[vehid][vBonnet],
-                                VehInfo[vehid][vBoot],
-                                VehInfo[vehid][vObj]
-                            );
-							renta[playerid] = vehid;
-							rented[vehid] = 1;
-							GivePlayerMoney(playerid, -2000);
-							PlayerInfo[playerid][pNovac] -= 2000;
-							GameTextForPlayer(playerid, "~r~-$2000", 2000, 1);
-							SCM(playerid, PLAVA, "Uspesno ste rentali vozilo!");
-						}
-					} //20 minuta
-					case 3: {
-						if(GetPlayerMoney(playerid) < 3000) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Nemate dovoljno novca!");
-						else if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate vozilo!");
-						else {
-							rentvreme[playerid] = 30;
-							vehicle = CreateVehicle(496, X, Y, Z, FA, 137, 137, -1);
-							PutPlayerInVehicle(playerid, vehicle, 0);
-							vehid = GetPlayerVehicleID(playerid);
-							VehInfo[vehid][vEngine] = 0;
-                            VehInfo[vehid][vLights] = 0;
-                            VehInfo[vehid][vAlarm] = 0;
-                            VehInfo[vehid][vDoor] = 0;
-                            VehInfo[vehid][vBonnet] = 0;
-							VehInfo[vehid][vBoot] = 0;
-                            VehInfo[vehid][vObj] = 0;
-                            VehInfo[vehid][vFuel] = 100;
-							SetVehicleParamsEx(
-                                vehid,
-                                VehInfo[vehid][vEngine],
-                                VehInfo[vehid][vLights],
-                                VehInfo[vehid][vAlarm],
-                                VehInfo[vehid][vDoor],
-                                VehInfo[vehid][vBonnet],
-                                VehInfo[vehid][vBoot],
-                                VehInfo[vehid][vObj]
-                            );
-							renta[playerid] = vehid;
-							rented[vehid] = 1;
-							GivePlayerMoney(playerid, -3000);
-							PlayerInfo[playerid][pNovac] -= 3000;
-							GameTextForPlayer(playerid, "~r~-$3000", 2000, 1);
-							SCM(playerid, PLAVA, "Uspesno ste rentali vozilo!");
-						}
-					} //30 minuta
+					case 1: /*Fiat 500*/ SPD(playerid, d_fiat500_vreme, DIALOG_STYLE_LIST, "Fiat 500 | Vreme", "10 min\t\t$100\n20 min\t\t$200\n30 min\t\t$300", "Rentaj", "Odustani");	
+					case 2: /*BMW X6M*/ SPD(playerid, d_BMWX6M_vreme, DIALOG_STYLE_LIST, "BMW X6M | Vreme", "10 min\t\t$1000\n20 min\t\t$2000\n30 min\t\t$3000", "Rentaj", "Odustani");	
+					case 3: /*Audi RS7*/ SPD(playerid, d_audiRS7_vreme, DIALOG_STYLE_LIST, "Audi RS7 | Vreme", "10 min\t\t$10000\n20 min\t\t$20000\n30 min\t\t$30000", "Rentaj", "Odustani");	
 				}
 			} else SCM(playerid, SIVA, "Odustali ste od rentanja vozila!");
+		}
+		case d_fiat500_vreme: {
+			if(response) {
+				switch(listitem + 1) {
+					case 1: {
+						new Float:X, Float:Y, Float:Z, Float:FA, vehid, vehicle;
+						GetPlayerPos(playerid, X, Y, Z);
+						GetPlayerFacingAngle(playerid, FA);
+						switch(listitem + 1) {
+							case 1: {
+								if(GetPlayerMoney(playerid) < 100) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Nemate dovoljno novca!");
+								else if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate vozilo!");
+								else {
+									rentvreme[playerid] = 10;
+									vehicle = CreateVehicle(496, X, Y, Z, FA, 137, 137, -1);
+									PutPlayerInVehicle(playerid, vehicle, 0);
+									vehid = GetPlayerVehicleID(playerid);
+									VehInfo[vehid][vEngine] = 0;
+									VehInfo[vehid][vLights] = 0;
+									VehInfo[vehid][vAlarm] = 0;
+									VehInfo[vehid][vDoor] = 0;
+									VehInfo[vehid][vBonnet] = 0;
+									VehInfo[vehid][vBoot] = 0;
+									VehInfo[vehid][vObj] = 0;
+									VehInfo[vehid][vFuel] = 100;
+									SetVehicleParamsEx(
+										vehid,
+										VehInfo[vehid][vEngine],
+										VehInfo[vehid][vLights],
+										VehInfo[vehid][vAlarm],
+										VehInfo[vehid][vDoor],
+										VehInfo[vehid][vBonnet],
+										VehInfo[vehid][vBoot],
+										VehInfo[vehid][vObj]
+									);
+									renta[playerid] = vehid;
+									rented[vehid] = 1;
+									GivePlayerMoney(playerid, -100);
+									GameTextForPlayer(playerid, "~r~-$100", 2000, 1);
+									SCM(playerid, PLAVA, "Uspesno ste rentali vozilo!");
+								}
+							} //10 minuta
+							case 2: {
+								if(GetPlayerMoney(playerid) < 200) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Nemate dovoljno novca!");
+								else if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate vozilo!");
+								else {
+									rentvreme[playerid] = 20;
+									vehicle = CreateVehicle(496, X, Y, Z, FA, 137, 137, -1);
+									PutPlayerInVehicle(playerid, vehicle, 0);
+									vehid = GetPlayerVehicleID(playerid);
+									VehInfo[vehid][vEngine] = 0;
+									VehInfo[vehid][vLights] = 0;
+									VehInfo[vehid][vAlarm] = 0;
+									VehInfo[vehid][vDoor] = 0;
+									VehInfo[vehid][vBonnet] = 0;
+									VehInfo[vehid][vBoot] = 0;
+									VehInfo[vehid][vObj] = 0;
+									VehInfo[vehid][vFuel] = 100;
+									SetVehicleParamsEx(
+										vehid,
+										VehInfo[vehid][vEngine],
+										VehInfo[vehid][vLights],
+										VehInfo[vehid][vAlarm],
+										VehInfo[vehid][vDoor],
+										VehInfo[vehid][vBonnet],
+										VehInfo[vehid][vBoot],
+										VehInfo[vehid][vObj]
+									);
+									renta[playerid] = vehid;
+									rented[vehid] = 1;
+									GivePlayerMoney(playerid, -200);
+									PlayerInfo[playerid][pNovac] -= 200;
+									GameTextForPlayer(playerid, "~r~-$200", 200, 1);
+									SCM(playerid, PLAVA, "Uspesno ste rentali vozilo!");
+								}
+							} //20 minuta
+							case 3: {
+								if(GetPlayerMoney(playerid) < 300) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Nemate dovoljno novca!");
+								else if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate vozilo!");
+								else {
+									rentvreme[playerid] = 30;
+									vehicle = CreateVehicle(496, X, Y, Z, FA, 137, 137, -1);
+									PutPlayerInVehicle(playerid, vehicle, 0);
+									vehid = GetPlayerVehicleID(playerid);
+									VehInfo[vehid][vEngine] = 0;
+									VehInfo[vehid][vLights] = 0;
+									VehInfo[vehid][vAlarm] = 0;
+									VehInfo[vehid][vDoor] = 0;
+									VehInfo[vehid][vBonnet] = 0;
+									VehInfo[vehid][vBoot] = 0;
+									VehInfo[vehid][vObj] = 0;
+									VehInfo[vehid][vFuel] = 100;
+									SetVehicleParamsEx(
+										vehid,
+										VehInfo[vehid][vEngine],
+										VehInfo[vehid][vLights],
+										VehInfo[vehid][vAlarm],
+										VehInfo[vehid][vDoor],
+										VehInfo[vehid][vBonnet],
+										VehInfo[vehid][vBoot],
+										VehInfo[vehid][vObj]
+									);
+									renta[playerid] = vehid;
+									rented[vehid] = 1;
+									GivePlayerMoney(playerid, -300);
+									PlayerInfo[playerid][pNovac] -= 300;
+									GameTextForPlayer(playerid, "~r~-$300", 2000, 1);
+									SCM(playerid, PLAVA, "Uspesno ste rentali vozilo!");
+								}
+							} //30 minuta
+						}
+					}
+				}
+			}
 		}
 		case d_orgime: {
 			if(response) {
@@ -7097,6 +7111,10 @@ function loadingscreen(playerid) {
 	PlayerTextDrawHide(playerid, Loadingscreen13[playerid]);
 	PlayerTextDrawHide(playerid, Loadingscreen14[playerid]);
 	PlayerTextDrawHide(playerid, Loadingscreen15[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen16[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen17[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen18[playerid]);
+	PlayerTextDrawHide(playerid, Loadingscreen19[playerid]);
 	if(fexist(UserPath(playerid))) {
 	    INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
 		PlayerInfo[playerid][pIP] = GETIP(playerid);
