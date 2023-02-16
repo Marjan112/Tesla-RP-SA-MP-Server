@@ -1245,6 +1245,22 @@ public OnGameModeInit() {
 	EnableStuntBonusForAll(0);
 	AddPlayerClass(6, 1682.4265,-2246.7871,13.5507,183.6684, 0, 0, 0, 0, 0, 0);
 	AddStaticVehicle(487, 1291.1667,-788.3718,96.4609, 146.8603, 194, 0);
+	AddStaticVehicle(579, 1538.6821,-1644.0242,5.8906,177.7382,157, 157); // xsestice_kod_policiju1
+	AddStaticVehicle(579, 1534.4747,-1644.3923,5.8906,177.1115,157, 157); // xsestice_kod_policiju2
+	AddStaticVehicle(579, 1530.3728,-1644.5403,5.8906,177.1115,157, 157); // xsestice_kod_policiju3
+	AddStaticVehicle(579, 1526.4443,-1644.9153,5.8906,177.1115,157, 157); // xsestice_kod_policiju4
+	//ovo dole su mustanzi***
+	AddStaticVehicle(579, 1546.3947,-1650.9940,5.8906,91.2569,157, 157); // xsestice_kod_policiju5
+	AddStaticVehicle(579, 1545.3251,-1654.9899,5.8906,96.5836,157, 157); // xsestice_kod_policiju6
+	AddStaticVehicle(579, 1545.2200,-1659.0795,5.8906,85.6169,157, 157); // xsestice_kod_policiju7
+	AddStaticVehicle(579, 1545.0292,-1663.2391,5.8906,89.6902,157, 157); // xsestice_kod_policiju8
+	AddStaticVehicle(579, 1544.9818,-1668.0010,5.8906,86.8702,157, 157); // xsestice_kod_policiju9
+	AddStaticVehicle(579, 1545.7311,-1671.9292,5.8906,89.0636,157, 157); // xsestice_kod_policiju10
+	AddStaticVehicle(579, 1544.9178,-1676.1082,5.8906,88.4369,157, 157); // xsestice_kod_policiju11
+	AddStaticVehicle(579, 1544.2170,-1680.0044,5.8906,88.4369,157, 157); // xsestice_kod_policiju12
+	AddStaticVehicle(579, 1546.1759,-1684.2830,5.8906,83.7368,157, 157); // xsestice_kod_policiju13
+	AddStaticVehicle(579, 1527.5652,-1688.1669,5.8906,270.4853,157, 157); // xsestice_kod_policiju14
+	AddStaticVehicle(579, 1528.0876,-1683.9585,5.8906,267.6653,157, 157); // xsestice_kod_policiju15
 //----------------------- VOZILA ----------------------------
 	//J_BUS -> JOB_BUS
 	j_bus[0] = AddStaticVehicle(431, 1275.6406, -1796.2198, 13.5000, -89.8200, -1, -1);
