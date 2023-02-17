@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7307">
+		<member name="C:__line" value="7309">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -2271,6 +2271,7 @@
 		<member name="M:operator+(Float:,_:)" syntax="operator+(Float:,_:)(oper1, oper2)">
 			<tagname value="Float"/>
 			<stacksize value="4"/>
+			<referrer name="S@@_OnDialogResponse"/>
 			<dependency name="float"/>
 			<dependency name="floatadd"/>
 			<param name="oper1">
@@ -7233,6 +7234,7 @@
 		<member name="M:S@@_OnDialogResponse" syntax="S@@_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])">
 			<attribute name="public"/>
 			<stacksize value="777"/>
+			<dependency name="operator+(Float:,_:)"/>
 			<dependency name="operator+(Float:,Float:)"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="operator&gt;=(Float:,_:)"/>
@@ -10620,6 +10622,7 @@
 			<dependency name="hOwned"/>
 			<dependency name="hOwner"/>
 			<dependency name="hPickup"/>
+			<dependency name="hVirtualWorld"/>
 			<dependency name="hX"/>
 			<dependency name="hY"/>
 			<dependency name="hZ"/>
