@@ -2137,6 +2137,7 @@ public OnGameModeInit() {
         if(fexist(hfile)) {
 			new string[512];
             INI_ParseFile(hfile, "LoadHouses", .bExtra = true, .extra = i);
+			HouseInfo[i][hVirtualWorld] = i;
             if(!strcmp(HouseInfo[i][hOnRent], "Da")) {
 				format(string, sizeof(string), "{ffa500}[{ffffff}Kuca za rent{ffa500}]\nVlasnik: {ffffff}%s\n{ffa500}Cena: {ffffff}%d\n{ffa500}On Rent: {ffffff}%s\n{ffa500}Rent: {ffffff}%s\n{ffa500}Level: {ffffff}%d\n{ffa500}Adresa: {ffffff}%d\n{ffa500}Ako zelite da rentate kucu kucajte /renthouse", HouseInfo[i][hOwner], HouseInfo[i][hCena], HouseInfo[i][hOnRent], HouseInfo[i][hRent], HouseInfo[i][hLevel], i);
 				hPickup[i] = CreatePickup(19523, 1, HouseInfo[i][hX], HouseInfo[i][hY], HouseInfo[i][hZ]);
@@ -2152,6 +2153,7 @@ public OnGameModeInit() {
                 hLabel[i] = Create3DTextLabel(string, -1, HouseInfo[i][hX], HouseInfo[i][hY], HouseInfo[i][hZ], 10.0, 0, 0);
             }
 			Itter_Add(Houses, i);
+			SaveHouse(i);
         }
     }
 	//admin
@@ -6988,6 +6990,7 @@ function LoadHouses(id, name[], value[]) {
 	INI_Float("InterX", HouseInfo[id][hInterX]);
 	INI_Float("InterY", HouseInfo[id][hInterY]);
 	INI_Float("InterZ", HouseInfo[id][hInterZ]);
+	INI_Int("VirtualWorld", HouseInfo[id][hVirtualWorld]);
 	INI_String("Rent", HouseInfo[id][hRent], 128);
 	INI_Int("Rented", HouseInfo[id][hRented]);
 	INI_String("OnRent", HouseInfo[id][hOnRent], 3);

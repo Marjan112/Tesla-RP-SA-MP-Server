@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7309">
+		<member name="C:__line" value="7312">
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -5373,6 +5373,7 @@
 			<dependency name="hOwner"/>
 			<dependency name="hRent"/>
 			<dependency name="hRented"/>
+			<dependency name="hVirtualWorld"/>
 			<dependency name="hX"/>
 			<dependency name="hY"/>
 			<dependency name="hZ"/>
@@ -8584,6 +8585,7 @@
 		</member>
 		<member name="M:SaveHouse" syntax="SaveHouse(id)">
 			<stacksize value="72"/>
+			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="S@@_OnGameModeExit"/>
 			<referrer name="cmd_skinihrent"/>
 			<referrer name="cmd_sellhouse"/>
@@ -13342,6 +13344,7 @@
 			<dependency name="PromInfo"/>
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveBanned"/>
+			<dependency name="SaveHouse"/>
 			<dependency name="SaveProm"/>
 			<dependency name="SaveVr"/>
 			<dependency name="SetDynamicObjectMaterial"/>
@@ -13369,6 +13372,7 @@
 			<dependency name="hOwner"/>
 			<dependency name="hPickup"/>
 			<dependency name="hRent"/>
+			<dependency name="hVirtualWorld"/>
 			<dependency name="hX"/>
 			<dependency name="hY"/>
 			<dependency name="hZ"/>
