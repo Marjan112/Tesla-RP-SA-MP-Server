@@ -2593,7 +2593,7 @@ CMD:curpos(playerid, params[]) {
 
 CMD:mojavozila(playerid, params[]) {
 	#pragma unused params
-	if(!IsPlayerInRangeOfPoint(playerid, 100, 1654.5542,-1074.7708,23.8984)) return SCM(playerid, SIVA, "Niste kod parkinga.");
+	if(!IsPlayerInRangeOfPoint(playerid, 80, 1654.5542,-1074.7708,23.8984)) return SCM(playerid, SIVA, "Niste kod parkinga.");
 	new string[256], str[128];
 	format(str, sizeof(str), "1. %s\n", PlayerInfo[playerid][pAuto] == 0 ? "[N/A]" : ImenaVozila[PlayerInfo[playerid][pAuto] - 400]);
 	strcat(string, str);
