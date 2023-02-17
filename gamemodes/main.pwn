@@ -3432,6 +3432,7 @@ CMD:kupikucu(playerid, params[]) {
 			PlayerInfo[playerid][pNovac] -= HouseInfo[i][hCena];
 			va_GameTextForPlayer(playerid, "~r~-$%d", 2000, 1, HouseInfo[i][hCena]);
 			PlayerInfo[playerid][pKuca] = i;
+			HouseInfo[i][hVirtualWorld] = i;
 			HouseInfo[i][hOwner] = GetName(playerid);
 			HouseInfo[i][hOwned] = 1;
 			Delete3DTextLabel(hLabel[i]);
