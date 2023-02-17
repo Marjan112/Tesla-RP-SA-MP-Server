@@ -3949,8 +3949,9 @@ CMD:unrent(playerid, params[]) {
 CMD:rent(playerid, params[]) {
 	#pragma unused params
 	if(
-		IsPlayerInRangeOfPoint(playerid, 3.0, 1561.0580,-2227.5750,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1282.4895,-1265.0306,13.6425) ||\
-		IsPlayerInRangeOfPoint(playerid, 3.0, 1332.6646,-1235.4896,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1417.8558,-1704.8744,13.5469)
+		IsPlayerInRangeOfPoint(playerid, 3, 1561.0580,-2227.5750,13.5469) || IsPlayerInRangeOfPoint(playerid, 3, 1282.4895,-1265.0306,13.6425) ||\
+		IsPlayerInRangeOfPoint(playerid, 3, 1321.3162,-916.1013,37.5146) || IsPlayerInRangeOfPoint(playerid, 3, 1212.7651,-1324.7166,13.5593) ||\
+		IsPlayerInRangeOfPoint(playerid, 3, 1511.1891,-1702.4183,14.0469)
 	) {
 		if(renta[playerid] != -1) return SCM(playerid, CRVENA, "[RENT]: {ffffff}Vi vec rentate neko vozilo!");
 		SPD(playerid, d_rent, DIALOG_STYLE_LIST, "{03adfc}Vreme rentanja", "Fiat 500\nBMW X6M\nAudi RS7", "{03adfc}Izaberi", "{03adfc}Odustani");
@@ -6416,7 +6417,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 2: {
@@ -6425,7 +6426,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto1], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 3: {
@@ -6434,7 +6435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto2], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 4: {
@@ -6443,7 +6444,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto3], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 5: {
@@ -6452,7 +6453,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto4], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 6: {
@@ -6461,7 +6462,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto5], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 7: {
@@ -6470,7 +6471,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto6], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 					case 8: {
@@ -6479,7 +6480,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 							new Float:posr[4];
 							GetPlayerPos(playerid, posr[0], posr[1], posr[2]);
 							GetPlayerFacingAngle(playerid, posr[3]);
-							CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0], posr[1], posr[2], posr[3], 157, 157, -1);
+							CreateVehicle(PlayerInfo[playerid][pAuto7], posr[0]+5, posr[1]+5, posr[2]+3, posr[3], 157, 157, -1);
 						}
 					}
 				}
