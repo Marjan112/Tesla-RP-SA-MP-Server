@@ -659,7 +659,7 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7331">
+		<member name="C:__line" value="7330">
 			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
@@ -792,7 +792,6 @@
 		</member>
 		<member name="C:d_log" value="1">
 			<referrer name="S@@_OnDialogResponse"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="C:d_moja_jeftina_vozila_slotovi1" value="38">
 			<referrer name="S@@_OnDialogResponse"/>
@@ -851,7 +850,6 @@
 		</member>
 		<member name="C:d_reg" value="0">
 			<referrer name="S@@_OnDialogResponse"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="C:d_rent" value="7">
 			<referrer name="cmd_rent"/>
@@ -942,7 +940,6 @@
 			<referrer name="LoadHouses"/>
 			<referrer name="LoadOrgs"/>
 			<referrer name="LoadVehs"/>
-			<referrer name="loadingscreen"/>
 		</member>
 
 		<!-- variables -->
@@ -1170,102 +1167,82 @@
 		<member name="F:Loadingscreen0">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen1">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen10">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen11">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen12">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen13">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen14">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen15">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen16">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen17">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen18">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen19">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen2">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen3">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen4">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen5">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen6">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen7">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen8">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:Loadingscreen9">
 			<tagname value="PlayerText"/>
 			<referrer name="CallLoadingScreen"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:MATCH_NAME_FIRST">
 			<library>sscanf</library>  <remarks>  The <c>MATCH_NAME_FIRST</c> option as a constant string so you can get compile-  time spell checking on the name.  Specify whether <c>u</c> etc keep searching  for better matching player names after finding one:  <code>  SSCANF_Option(MATCH_NAME_FIRST, 0); // Enable scanning for the best name match not the first (default).  <br />  SSCANF_Option(MATCH_NAME_FIRST, 1); // Enable scanning for the first name match not the best (old behaviour).  </code>  </remarks> 
@@ -1423,7 +1400,6 @@
 			<referrer name="cmd_v"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="cmd_makeadmin"/>
-			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerStateChange"/>
@@ -1433,7 +1409,6 @@
 			<referrer name="TDUpdate"/>
 			<referrer name="PayDay"/>
 			<referrer name="CarUpdate"/>
-			<referrer name="loadingscreen"/>
 		</member>
 		<member name="F:PokrenutaPljacka">
 			<tagname value="bool"/>
@@ -3264,7 +3239,6 @@
 		</member>
 		<member name="M:CallLoadingScreen" syntax="CallLoadingScreen(playerid)">
 			<stacksize value="6"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<dependency name="CreatePlayerTextDraw"/>
 			<dependency name="Loadingscreen0"/>
 			<dependency name="Loadingscreen1"/>
@@ -4006,7 +3980,6 @@
 			<stacksize value="37"/>
 			<referrer name="cmd_ban"/>
 			<referrer name="S@@_OnDialogResponse"/>
-			<referrer name="loadingscreen"/>
 			<dependency name="GETIP"/>
 			<dependency name="GetPlayerIp"/>
 			<param name="playerid">
@@ -4708,7 +4681,6 @@
 			<referrer name="cmd_unban"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="S@@_OnDialogResponse"/>
-			<referrer name="loadingscreen"/>
 			<dependency name="CallRemoteFunction"/>
 			<dependency name="Callback_Call"/>
 			<dependency name="Callback_Get"/>
@@ -5985,13 +5957,9 @@
 		</member>
 		<member name="M:OnPlayerCommandReceived" syntax="OnPlayerCommandReceived(playerid, cmdtext[])">
 			<attribute name="public"/>
-			<stacksize value="6"/>
-			<dependency name="PlayerInfo"/>
+			<stacksize value="5"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="UlogovanProvera"/>
-			<dependency name="loadingscreen"/>
-			<dependency name="pAdmin"/>
-			<dependency name="strcmp"/>
 			<param name="playerid">
 			</param>
 			<param name="cmdtext">
@@ -6958,15 +6926,6 @@
 				<paraminfo>PlayerText </paraminfo>
 			</param>
 			<param name="font">
-			</param>
-		</member>
-		<member name="M:PlayerTextDrawHide" syntax="PlayerTextDrawHide(playerid, text)">
-			<attribute name="native"/>
-			<referrer name="loadingscreen"/>
-			<param name="playerid">
-			</param>
-			<param name="text">
-				<paraminfo>PlayerText </paraminfo>
 			</param>
 		</member>
 		<member name="M:PlayerTextDrawLetterSize" syntax="PlayerTextDrawLetterSize(playerid, text, x, y)">
@@ -8296,7 +8255,6 @@
 			<referrer name="Itter_OnPlayerConnect"/>
 			<dependency name="AdminInfo"/>
 			<dependency name="AdminInfo"/>
-			<dependency name="CallLoadingScreen"/>
 			<dependency name="CallMapIcons"/>
 			<dependency name="CallNovac"/>
 			<dependency name="GetName"/>
@@ -8310,7 +8268,6 @@
 			<dependency name="RemoveBuildingForPlayer"/>
 			<dependency name="SaveAdmin"/>
 			<dependency name="SaveProm"/>
-			<dependency name="SendClientMessage"/>
 			<dependency name="SetTimerEx"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="UlogovanProvera"/>
@@ -8910,7 +8867,6 @@
 			<referrer name="IC"/>
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
-			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="cmd_banip"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
@@ -9336,7 +9292,6 @@
 		<member name="M:SetPlayerScore" syntax="SetPlayerScore(playerid, score)">
 			<attribute name="native"/>
 			<referrer name="PayDay"/>
-			<referrer name="loadingscreen"/>
 			<param name="playerid">
 			</param>
 			<param name="score">
@@ -9380,7 +9335,6 @@
 			<attribute name="native"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
-			<referrer name="loadingscreen"/>
 			<param name="funcname">
 				<paraminfo> [] </paraminfo>
 			</param>
@@ -9514,7 +9468,6 @@
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerKeyStateChange"/>
 			<referrer name="PayDay"/>
-			<referrer name="loadingscreen"/>
 			<param name="playerid">
 			</param>
 			<param name="dialogid">
@@ -9864,7 +9817,6 @@
 			<stacksize value="158"/>
 			<referrer name="SavePlayer"/>
 			<referrer name="S@@_OnDialogResponse"/>
-			<referrer name="loadingscreen"/>
 			<dependency name="GetPlayerName"/>
 			<dependency name="UserPath"/>
 			<dependency name="format"/>
@@ -12225,7 +12177,6 @@
 			<referrer name="ftouch"/>
 			<referrer name="NewID"/>
 			<referrer name="zcmd_OnGameModeInit"/>
-			<referrer name="loadingscreen"/>
 			<param name="pattern">
 				<paraminfo> [] </paraminfo>
 			</param>
@@ -12606,50 +12557,6 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
-		<member name="M:loadingscreen" syntax="loadingscreen(playerid)">
-			<attribute name="public"/>
-			<stacksize value="141"/>
-			<referrer name="OnPlayerCommandReceived"/>
-			<dependency name="GETIP"/>
-			<dependency name="INI_ParseFile"/>
-			<dependency name="Loadingscreen0"/>
-			<dependency name="Loadingscreen1"/>
-			<dependency name="Loadingscreen10"/>
-			<dependency name="Loadingscreen11"/>
-			<dependency name="Loadingscreen12"/>
-			<dependency name="Loadingscreen13"/>
-			<dependency name="Loadingscreen14"/>
-			<dependency name="Loadingscreen15"/>
-			<dependency name="Loadingscreen16"/>
-			<dependency name="Loadingscreen17"/>
-			<dependency name="Loadingscreen18"/>
-			<dependency name="Loadingscreen19"/>
-			<dependency name="Loadingscreen2"/>
-			<dependency name="Loadingscreen3"/>
-			<dependency name="Loadingscreen4"/>
-			<dependency name="Loadingscreen5"/>
-			<dependency name="Loadingscreen6"/>
-			<dependency name="Loadingscreen7"/>
-			<dependency name="Loadingscreen8"/>
-			<dependency name="Loadingscreen9"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerInfo"/>
-			<dependency name="PlayerTextDrawHide"/>
-			<dependency name="SetPlayerScore"/>
-			<dependency name="SetTimer"/>
-			<dependency name="ShowPlayerDialog"/>
-			<dependency name="UserPath"/>
-			<dependency name="UserPath"/>
-			<dependency name="d_log"/>
-			<dependency name="d_reg"/>
-			<dependency name="fexist"/>
-			<dependency name="pGodine"/>
-			<dependency name="pIP"/>
-			<dependency name="pNeededRep"/>
-			<dependency name="true"/>
-			<param name="playerid">
-			</param>
-		</member>
 		<member name="M:main" syntax="main()">
 			<attribute name="entry"/>
 			<stacksize value="3"/>
@@ -12881,7 +12788,6 @@
 			<referrer name="cmd_promoteri"/>
 			<referrer name="cmd_unban"/>
 			<referrer name="cmd_skiniadmina"/>
-			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerStateChange"/>

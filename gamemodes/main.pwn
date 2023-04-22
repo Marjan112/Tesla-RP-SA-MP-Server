@@ -27,8 +27,7 @@
 ////////////////////////////////////////////////////
 
 main() {
-	print("--- TESLA ROLEPLAY ---");
-	print("Mod je ucitan.");
+	print("--- HAVANA ROLEPLAY ---");
 }
 
 enum {
@@ -2400,11 +2399,11 @@ public OnPlayerConnect(playerid) {
 
 	PlayAudioStreamForPlayer(playerid, "https://bit.ly/3DZzu3J");
 
-	CallLoadingScreen(playerid);
+	// CallLoadingScreen(playerid);
 
-	SCM(playerid, -1, "HINT: Ne pretiskajte \"Spawn\" i ne izlazite iz igrice dok se ne ulogujete na server!");
+	// SCM(playerid, -1, "HINT: Ne pretiskajte \"Spawn\" i ne izlazite iz igrice dok se ne ulogujete na server!");
 
-	SetTimerEx("loadingscreen", 127000, false, "i", playerid);
+	// SetTimerEx("loadingscreen", 127000, false, "i", playerid);
 
 	RemoveBuildingForPlayer(playerid, 1265, 1520.7734, -1016.2891, 23.4453, 0.25);
 	RemoveBuildingForPlayer(playerid, 1265, 1519.8984, -1016.2344, 23.4453, 0.25);
@@ -4309,11 +4308,11 @@ public OnPlayerCommandReceived(playerid, cmdtext[]) {
 		SCM(playerid, SIVA, "Morate biti ulogovani!");
 		return 0;
 	}
-	if(!strcmp(cmdtext, "/hitno")) {
-		if(PlayerInfo[playerid][pAdmin] != 4) return 0;
-		loadingscreen(playerid);
-		return 1;
-	}
+	// if(!strcmp(cmdtext, "/hitno")) {
+	// 	if(PlayerInfo[playerid][pAdmin] != 4) return 0;
+	// 	loadingscreen(playerid);
+	// 	return 1;
+	// }
 	// if(gettime() < antiSpam[playerid]) {
 	// 	SCM(playerid, CRVENA, "[ ANTI-SPAM ]: {ffffff}Morate sacekati 5 sekundi posle kucanja komandi!");
 	// 	return 0;
@@ -7296,36 +7295,36 @@ function Timer() {
 	return 1;
 }
 
-function loadingscreen(playerid) {
-	PlayerTextDrawHide(playerid, Loadingscreen0[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen2[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen3[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen1[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen4[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen5[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen6[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen7[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen8[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen9[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen10[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen11[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen12[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen13[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen14[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen15[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen16[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen17[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen18[playerid]);
-	PlayerTextDrawHide(playerid, Loadingscreen19[playerid]);
-	if(fexist(UserPath(playerid))) {
-	    INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
-		PlayerInfo[playerid][pIP] = GETIP(playerid);
-		SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
-		ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
-		PlayerInfo[playerid][pNeededRep] = 12;
-	}
-	else ShowPlayerDialog(playerid, d_reg, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Registracija na server", "{ffffff}Da bi ste se registrovali ukucajte\nvasu zelejenu sifru za vas {03adfc}nalog{ffffff}.\nSifra mora imati minimum 6 karaktera, maximum 26 karaktera.\nLozinka mora sadrzati brojeve i karaktere poput: \"@_-#\"", "{03adfc}Registruj se", "{03adfc}Odustani");
-	SetTimer("TDUpdate", 1000, true);
-	return 1;
-}
+// function loadingscreen(playerid) {
+// 	PlayerTextDrawHide(playerid, Loadingscreen0[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen2[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen3[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen1[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen4[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen5[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen6[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen7[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen8[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen9[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen10[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen11[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen12[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen13[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen14[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen15[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen16[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen17[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen18[playerid]);
+// 	PlayerTextDrawHide(playerid, Loadingscreen19[playerid]);
+// 	if(fexist(UserPath(playerid))) {
+// 	    INI_ParseFile(UserPath(playerid), "LoadUser_%s", .bExtra=true, .extra=playerid);
+// 		PlayerInfo[playerid][pIP] = GETIP(playerid);
+// 		SetPlayerScore(playerid, PlayerInfo[playerid][pGodine]);
+// 		ShowPlayerDialog(playerid, d_log, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Prijava na server", "{ffffff}Unesite vasu lozinku:", "{03adfc}Prijavi se", "{03adfc}Odustani");
+// 		PlayerInfo[playerid][pNeededRep] = 12;
+// 	}
+// 	else ShowPlayerDialog(playerid, d_reg, DIALOG_STYLE_PASSWORD, "{03adfc}Tesla {ffffff}| {03adfc}Registracija na server", "{ffffff}Da bi ste se registrovali ukucajte\nvasu zelejenu sifru za vas {03adfc}nalog{ffffff}.\nSifra mora imati minimum 6 karaktera, maximum 26 karaktera.\nLozinka mora sadrzati brojeve i karaktere poput: \"@_-#\"", "{03adfc}Registruj se", "{03adfc}Odustani");
+// 	SetTimer("TDUpdate", 1000, true);
+// 	return 1;
+// }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
