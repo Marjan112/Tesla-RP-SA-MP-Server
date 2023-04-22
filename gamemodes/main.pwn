@@ -16,7 +16,7 @@
 #include "../include/functions/pickups.inc"
 #include "../include/functions/snow.inc"
 ////////////////////////////////////////////////////
-#define ALL MAX_PLAYERS + MAX_PLAYERS
+#define ALL MAX_PLAYERS + 1
 #define HOUSE 1
 #define ORG 2
 #define VEH 3
