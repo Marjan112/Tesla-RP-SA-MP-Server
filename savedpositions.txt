@@ -1,0 +1,120 @@
+AddPlayerClass(0,-29.1040,-186.8172,1003.5469,357.2758,0,0,0,0,0,0); // kasirka16
+AddPlayerClass(265,1229.0701,-1804.3704,-143.5792,11.8964,0,0,0,0,0,0); // 
+AddPlayerClass(265,1227.9121,-1811.0134,-142.8179,283.2224,0,0,0,0,0,0); // Ulaz Autobuska
+AddPlayerClass(265,1234.3916,-1782.9769,-22.3899,260.5863,0,0,0,0,0,0); // ulaz Autobuska 2
+AddPlayerClass(0,1249.3962,-1789.4542,-22.4684,278.8356,0,0,0,0,0,0); // Bus - Duznost
+AddPlayerClass(0,1248.5493,-1781.2704,-22.4640,93.0274,0,0,0,0,0,0); // aut stan 1
+AddPlayerClass(0,1248.4607,-1784.1327,-22.4635,85.8206,0,0,0,0,0,0); // aut stan 2
+AddPlayerClass(0,1561.9327,-2359.7192,13.5469,178.4216,0,0,0,0,0,0); // RentPickup
+AddPlayerClass(0,1642.4037,-2335.4792,13.5469,5.6279,0,0,0,0,0,0); // Spawn Ispravka
+AddPlayerClass(17,2045.9384,-1907.9607,13.5469,82.5388,0,0,0,0,0,0); // Auto Skola
+AddPlayerClass(0,-2033.4347,-117.5634,1035.1719,88.1788,0,0,0,0,0,0); // salter za  ispit
+AddPlayerClass(0,-2035.0933,-117.4539,1035.1719,269.8671,0,0,0,0,0,0); // actor u auto skoli
+AddPlayerClass(0,-2026.8964,-103.6025,1035.1832,21.7749,0,0,0,0,0,0); // izlaz auto skola
+AddPlayerClass(0,1943.4155,-1767.3209,13.3906,88.2565,0,0,0,0,0,0); // BnzinskaPumpa1
+AddPlayerClass(0,1943.4420,-1771.2220,13.3906,96.4033,0,0,0,0,0,0); // BnzinskaPumpa2
+AddPlayerClass(0,1943.2670,-1774.3669,13.3906,83.2431,0,0,0,0,0,0); // BnzinskaPumpa3
+AddPlayerClass(0,1942.9414,-1778.5494,13.3906,82.9298,0,0,0,0,0,0); // BnzinskaPumpa4
+AddStaticVehicle(522,605.0720,1704.5323,6.5634,124.3828,0,0); // BenzinskaPumpa5
+AddStaticVehicle(522,608.8611,1700.0101,6.5656,303.3731,0,0); // BenzinskaPumpa6
+AddStaticVehicle(522,611.7049,1694.6202,6.5492,123.5563,0,0); // BenzinskaPumpa7
+AddStaticVehicle(522,615.9272,1690.4963,6.5688,302.8387,0,0); // BenzinskaPumpa8
+AddStaticVehicle(522,619.3588,1685.4036,6.5654,124.5471,0,0); // BenzinskaPumpa9
+AddStaticVehicle(522,621.6530,1679.8074,6.5675,303.7806,0,0); // BenzinskaPumpa10
+AddPlayerClass(0,1008.1039,-938.5986,42.1797,11.8998,0,0,0,0,0,0); // BenzinskaPumpaPrazna
+AddPlayerClass(0,1682.4265,-2246.7871,13.5507,183.6684,0,0,0,0,0,0); // spawn
+AddPlayerClass(0,1561.0580,-2227.5750,13.5469,178.8916,0,0,0,0,0,0); // RentPickup
+AddPlayerClass(0,1258.7070,-785.2449,92.0302,264.7457,0,0,0,0,0,0); // PickupKucaZemunaca
+AddPlayerClass(0,1262.6282,-785.3718,1091.9063,89.2150,0,0,0,0,0,0); // KucaZemunacaIzlaz
+AddPlayerClass(0,1259.6388,-785.3708,92.0313,264.4329,0,0,0,0,0,0); // UlazKucaZemunaca
+AddPlayerClass(0,1263.5231,-772.8199,1084.0078,174.6974,0,0,0,0,0,0); // ZatvorZemunca
+AddPlayerClass(0,1291.1667,-788.3718,96.4609,146.8603,0,0,0,0,0,0); // ZemunciHelis
+AddPlayerClass(0,1538.7338,-1676.0779,5.8906,188.5813,0,0,0,0,0,0); // PoliciskaStanica
+AddPlayerClass(0,1280.4720,-828.6748,83.1406,182.3383,0,0,0,0,0,0); // zemuncispawnvehicle
+AddPlayerClass(0,1555.5020,-1675.6063,16.1953,267.2057,0,0,0,0,0,0); // policijskaulaz
+AddPlayerClass(0,1541.7653,-1675.5189,13.5532,269.4223,0,0,0,0,0,0); // port_policijska_stanica
+AddPlayerClass(0,1543.0642,-1675.9728,13.5557,269.0857,0,0,0,0,0,0); // Policijska Stanica
+AddPlayerClass(0,2244.6240,-1664.3992,15.4766,175.5782,0,0,0,0,0,0); // binco_Ulaz
+AddPlayerClass(0,207.7175,-110.5605,1005.1328,179.2283,0,0,0,0,0,0); // binco_izlaz
+AddPlayerClass(0,216.9796,-100.5289,1005.2578,321.5849,0,0,0,0,0,0); // binco_pickup
+AddPlayerClass(0,1402.7260,-25.7708,1000.8640,0.9166,0,0,0,0,0,0); // izlaz
+AddPlayerClass(0,1457.0255,-1009.9204,26.8438,358.7234,0,0,0,0,0,0); // banka_ulaz
+AddPlayerClass(0,2308.8625,-11.0133,26.7422,177.9879,0,0,0,0,0,0); // npc_banka
+AddPlayerClass(0,2318.3066,-15.2257,26.7496,87.1073,0,0,0,0,0,0); // npc_banka_salter
+AddPlayerClass(0,2318.3066,-12.6831,26.7496,88.6740,0,0,0,0,0,0); // npc_banka_salter1
+AddPlayerClass(0,2318.3064,-9.9949,26.7496,89.3007,0,0,0,0,0,0); // npc_banka_salter2
+AddPlayerClass(0,2318.3064,-7.3824,26.7496,88.9874,0,0,0,0,0,0); // npc_banka_salter3
+AddPlayerClass(0,2316.6213,-7.2423,26.7422,268.6038,0,0,0,0,0,0); // b_salter1
+AddPlayerClass(0,2316.6208,-9.9597,26.7422,267.6640,0,0,0,0,0,0); // b_salter2
+AddPlayerClass(0,2316.6211,-12.6467,26.7422,265.4707,0,0,0,0,0,0); // b_salter3
+AddPlayerClass(0,2316.6213,-15.4728,26.7422,268.6041,0,0,0,0,0,0); // b_salter4
+AddPlayerClass(0,1172.0773,-1323.3525,15.4030,93.3499,0,0,0,0,0,0); // bolnica_R
+AddPlayerClass(0,1402.7532,-25.7685,1000.8640,2.1465,0,0,0,0,0,0); // bolnica_izlaz
+AddPlayerClass(0,1403.7251,-41.4474,1000.8640,330.5464,0,0,0,0,0,0); // bolnica_npc
+AddPlayerClass(0,1402.6412,-41.3697,1000.8640,358.1200,0,0,0,0,0,0); // bolnica_npc
+AddPlayerClass(0,1402.7065,-39.0211,1000.8640,180.5543,0,0,0,0,0,0); // bolnicar_dialog
+AddPlayerClass(0,1481.0361,-1772.3120,18.7958,177.2799,0,0,0,0,0,0); // vlada_pickup
+AddPlayerClass(0,1481.1985,-1742.1227,13.6469,182.5301,0,0,0,0,0,0); // vlada_Port
+AddPlayerClass(0,356.2971,186.2106,1008.3762,267.7336,0,0,0,0,0,0); // vlada_actor1
+AddPlayerClass(0,356.2968,182.6558,1008.3762,269.6137,0,0,0,0,0,0); // vlada_actor2
+AddPlayerClass(0,356.2963,178.6558,1008.3762,270.8670,0,0,0,0,0,0); // vlada_actor3
+AddPlayerClass(0,359.7154,173.7350,1008.3893,266.8172,0,0,0,0,0,0); // vlada_actor4
+AddPlayerClass(0,356.2979,169.0176,1008.3762,266.1906,0,0,0,0,0,0); // vlada_actor5
+AddPlayerClass(0,356.2959,166.3219,1008.3762,269.0106,0,0,0,0,0,0); // vlada_actor6
+AddPlayerClass(0,356.2952,163.2074,1008.3762,269.3239,0,0,0,0,0,0); // vlada_actor7
+AddPlayerClass(0,361.8299,173.6672,1008.3828,92.3120,0,0,0,0,0,0); // vlada_lista_poslova
+AddPlayerClass(0,358.2364,168.9949,1008.3828,87.0841,0,0,0,0,0,0); // pickup_quitjob
+AddPlayerClass(0,1286.8000,-1329.2859,13.6546,268.8606,0,0,0,0,0,0); // fib_ulaz
+AddPlayerClass(0,1219.1619,-1811.7039,16.5938,354.5850,0,0,0,0,0,0); // autobuska_ulaz
+AddPlayerClass(0,1248.8618,-1789.4351,-22.4656,284.7986,0,0,0,0,0,0); // bus_info
+AddStaticVehicle(411,1269.8174,-1844.3251,12.9815,184.0898,0,0); // cp1
+AddStaticVehicle(411,1315.6774,-1637.1493,12.9704,359.8045,0,0); // cp2
+AddStaticVehicle(411,1097.0704,-1278.5746,13.0779,92.8515,0,0); // cp3
+AddStaticVehicle(411,1615.5275,-1164.2144,23.4863,271.2128,0,0); // cp4
+AddStaticVehicle(411,2027.1211,-1074.5443,24.1709,247.7424,0,0); // cp5
+AddStaticVehicle(411,2075.4597,-1609.0992,12.9598,96.4025,0,0); // cp6
+AddStaticVehicle(411,1609.6073,-1589.6415,13.1351,88.6860,0,0); // cp7
+AddStaticVehicle(411,1215.7935,-1845.0688,12.9700,28.4043,0,0); // cp8
+AddPlayerClass(0,358.2361,178.6533,1008.3828,86.4575,0,0,0,0,0,0); // zaposljavanje
+AddPlayerClass(0,1456.9044,-1022.7017,23.8281,358.2277,0,0,0,0,0,0); // banka_port
+AddPlayerClass(0,2315.6370,0.1642,26.7422,359.0365,0,0,0,0,0,0); // za_zaposlene_banka_pick
+AddPlayerClass(0,152.4736,1376.4524,1089.0525,70.5773,0,0,0,0,0,0); // lvl_3_rand_spavaca1
+AddPlayerClass(0,147.4516,1385.5363,1089.0525,330.4782,0,0,0,0,0,0); // lvl_3_rand_spavaca2
+AddPlayerClass(0,135.7340,1385.1111,1089.0525,83.4242,0,0,0,0,0,0); // lvl_3_rand_spavaca3
+AddPlayerClass(0,140.4110,1386.3579,1084.5214,357.8835,0,0,0,0,0,0); // lvl_3_rand_spavaca4
+AddPlayerClass(0,-87.4072,-1163.9280,2.3447,243.0684,0,0,0,0,0,0); // /save pumpa_van_grada
+AddPlayerClass(0,-92.0625,-1175.3973,2.3264,233.3549,0,0,0,0,0,0); // /save pumpa_van_grada1
+AddPlayerClass(0,-95.7507,-1174.4496,2.4173,67.9133,0,0,0,0,0,0); // /save pumpa_van_grada2
+AddPlayerClass(0,-91.2888,-1162.3960,2.3622,19.6595,0,0,0,0,0,0); // /save pumpa_van_grada3
+AddPlayerClass(0,1325.1102,-1709.0538,13.6395,271.3849,0,0,0,0,0,0); // centralna_banka
+AddStaticVehicle(498,1468.7570,-1025.2145,23.9290,182.4740,128,255); // b_cp1
+AddStaticVehicle(498,1316.8466,-1713.1470,13.6483,100.9258,128,255); // b_cp2
+AddPlayerClass(0,1004.2919,-939.7656,42.2797,354.5146,0,0,0,0,0,0); // pumpa
+AddStaticVehicle(498,1550.4214,-1020.8382,24.0744,6.3533,128,255); // b_cp3
+AddPlayerClass(0,1325.1090,-1709.0313,13.6395,262.6215,0,0,0,0,0,0); // druga_banka'
+AddPlayerClass(0,1529.3566,-1029.8085,23.9814,43.9438,0,0,0,0,0,0); // nakar_gps_ger9oj
+AddPlayerClass(0,1315.4775,-897.6816,39.6781,2.1916,0,0,0,0,0,0); // prodavnica
+AddPlayerClass(0,-29.0230,-186.8195,1003.5469,356.9668,0,0,0,0,0,0); // kasirka_uchar_16
+AddPlayerClass(0,1368.9985,-1279.7140,13.5469,266.7796,0,0,0,0,0,0); // amunation
+AddPlayerClass(6,254.6660,77.2368,1003.6406,356.6983,0,0,0,0,0,0); // policija_svlacionica
+AddPlayerClass(6,290.1594,-104.4914,1001.5156,175.1689,0,0,0,0,0,0); // ammu_acotr
+AddPlayerClass(6,291.3272,-106.2224,1001.5156,359.7007,0,0,0,0,0,0); // dialog_puske
+AddPlayerClass(2,296.8170,-112.0710,1001.5156,184.6617,0,0,0,0,0,0); // ammu_bugfix
+AddPlayerClass(2,1245.3945,-767.3284,92.1434,1.2067,0,0,0,0,0,0); // test
+AddPlayerClass(2,1284.8795,-1320.9938,13.6421,337.4168,0,0,0,0,0,0); // fib_kola
+AddPlayerClass(6,1109.5514,1052.3843,-19.9389,90.7526,0,0,0,0,0,0); // banka_centralna_izlaz
+AddPlayerClass(6,1101.9955,1064.0131,-22.3529,2.1130,0,0,0,0,0,0); // pljacka_pickup
+AddPlayerClass(6,1103.7693,1048.0475,-19.9389,89.0892,0,0,0,0,0,0); // novi_interier_banka_otvoriracun
+AddPlayerClass(6,1103.7697,1051.5986,-19.9389,87.2326,0,0,0,0,0,0); // novi_interier_banka_kredit
+AddPlayerClass(6,1103.7705,1055.1908,-19.9389,91.6193,0,0,0,0,0,0); // novi_interier_banka_depositiwithdraw
+AddPlayerClass(2,1282.4895,-1265.0306,13.6425,295.2699,0,0,0,0,0,0); // rent_2
+AddPlayerClass(2,1248.8230,-800.9311,84.1406,356.9669,0,0,0,0,0,0); // pickup_z_garaza
+AddPlayerClass(2,1010.2318,-658.3732,121.1434,217.1580,0,0,0,0,0,0); // savin_auto
+AddPlayerClass(2,1654.6721,-1074.5894,23.8984,1.9153,0,0,0,0,0,0); // actor_kod_parking
+AddPlayerClass(2,2261.3198,-1920.5042,13.5508,2.0873,0,0,0,0,0,0); // actor_kod_car_dealership
+AddPlayerClass(2,2261.2512,-1902.8901,13.5469,179.5119,0,0,0,0,0,0); // car_dealershipp
+AddPlayerClass(2,2261.4954,-1919.0536,13.5508,176.4408,0,0,0,0,0,0); // auto_salon_pickup_blavla
+AddPlayerClass(2,1654.5542,-1074.7708,23.8984,356.9136,0,0,0,0,0,0); // actor_kod_parkingg
+AddPlayerClass(2,1621.6886,-1041.4026,23.8984,87.7811,0,0,0,0,0,0); // actor_kod_parking_2
+AddPlayerClass(2,1626.1387,-1137.2966,23.9063,359.1069,0,0,0,0,0,0); // actor_kod_parking_3
+AddPlayerClass(2,488.8923,-1732.2811,11.2193,70.9127,0,0,0,0,0,0); // marker_za_popravku_objekra_na_tockovima

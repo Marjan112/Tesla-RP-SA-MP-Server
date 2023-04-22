@@ -146,7 +146,6 @@ new timer = 10;
 
 new Bool: PokrenutaPljacka[MAX_PLAYERS] = false;
 
-
 new loginOdustao[MAX_PLAYERS] = 0;
 // new antiSpam[MAX_PLAYERS];
 
@@ -2571,6 +2570,21 @@ public OnPlayerSpawn(playerid) {
 	return 1;
 }
 
+CMD:banip(playerid, params[]) {
+	if(PlayerInfo[playerid][pAdmin] < 2) return NisteOvlasceni(playerid);
+	new id, str[256], File: banfile, dan, mesec, godina, sekunda, minut, sat;
+	if(sscanf(params, "us[128]", id, str)) return SCM(playerid, CRVENA, "[USAGE]: {ffffff}/banip [ID IGRACA] [RAZLOG]");
+	va_SCMTA(-1, "Igrac %s je banovan sa servera. Razlog: %s", GetName(id), str);
+	banfile = fopen("banned.log", io_append);
+	gettime(sat, minut, sekunda);
+	getdate(godina, mesec, dan);
+	format(str, sizeof(str), "[%02d:%02d:%02d | %02d/%02d/%d] %s IP: %s\n", sat, minut, sekunda, dan, mesec, godina, str, PlayerInfo[id][pIP]);
+	fwrite(banfile, str);
+	fclose(banfile);
+	SetTimerEx("KickPlayer", 500, false, "i", id);
+	return 1;
+}
+
 CMD:popraviauto(playerid, params[]) {
 	#pragma unused params
 	if(!IsPlayerInAnyVehicle(playerid)) return SCM(playerid, SIVA, "Niste u vozilu.");
@@ -4295,12 +4309,17 @@ public OnPlayerCommandReceived(playerid, cmdtext[]) {
 		SCM(playerid, SIVA, "Morate biti ulogovani!");
 		return 0;
 	}
+	if(!strcmp(cmdtext, "/hitno")) {
+		if(PlayerInfo[playerid][pAdmin] != 4) return 0;
+		loadingscreen(playerid);
+		return 1;
+	}
 	// if(gettime() < antiSpam[playerid]) {
 	// 	SCM(playerid, CRVENA, "[ ANTI-SPAM ]: {ffffff}Morate sacekati 5 sekundi posle kucanja komandi!");
 	// 	return 0;
 	// }
 	// else antiSpam[playerid] = gettime() + 5;
-	return 1;
+	return 0;
 }
 
 public OnPlayerDeath(playerid, killerid, reason) {

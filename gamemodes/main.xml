@@ -659,7 +659,8 @@
 		</member>
 		<member name="C:__PawnBuild" value="4">
 		</member>
-		<member name="C:__line" value="7312">
+		<member name="C:__line" value="7331">
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -891,6 +892,7 @@
 			<referrer name="UzetSlot"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kick"/>
 			<referrer name="cmd_otkljucaj"/>
 			<referrer name="cmd_promduty"/>
@@ -1349,6 +1351,7 @@
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
 			<referrer name="S@@_OnPlayerSpawn"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_z_bmwx6m"/>
@@ -1420,6 +1423,7 @@
 			<referrer name="cmd_v"/>
 			<referrer name="cmd_skiniadmina"/>
 			<referrer name="cmd_makeadmin"/>
+			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerStateChange"/>
@@ -1977,6 +1981,7 @@
 		<member name="F:__file">
 		</member>
 		<member name="F:__file">
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -4085,6 +4090,7 @@
 			<stacksize value="157"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -5776,6 +5782,7 @@
 		</member>
 		<member name="M:NisteOvlasceni" syntax="NisteOvlasceni(playerid)">
 			<stacksize value="5"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_akomande"/>
@@ -5978,9 +5985,13 @@
 		</member>
 		<member name="M:OnPlayerCommandReceived" syntax="OnPlayerCommandReceived(playerid, cmdtext[])">
 			<attribute name="public"/>
-			<stacksize value="5"/>
+			<stacksize value="6"/>
+			<dependency name="PlayerInfo"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="UlogovanProvera"/>
+			<dependency name="loadingscreen"/>
+			<dependency name="pAdmin"/>
+			<dependency name="strcmp"/>
 			<param name="playerid">
 			</param>
 			<param name="cmdtext">
@@ -8428,6 +8439,7 @@
 		</member>
 		<member name="M:SSCANF__" syntax="SSCANF__(file[], line, data[], format[], ...)">
 			<attribute name="native"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kill"/>
 			<referrer name="cmd_ooc"/>
 			<referrer name="cmd_do"/>
@@ -8899,6 +8911,7 @@
 			<referrer name="NisteOvlasceni"/>
 			<referrer name="ClearChat"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_popraviauto"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_kill"/>
@@ -9382,6 +9395,7 @@
 			<referrer name="va_SetTimerEx"/>
 			<referrer name="S@@_OnPlayerDisconnect"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_kick"/>
 			<referrer name="cmd_spec"/>
 			<referrer name="cmd_engine"/>
@@ -10195,6 +10209,36 @@
 			<dependency name="pBan"/>
 			<dependency name="pBanRazlog"/>
 			<dependency name="va_SendClientMessage"/>
+			<dependency name="va_SendClientMessageToAll"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_banip" syntax="cmd_banip(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="399"/>
+			<dependency name="GetName"/>
+			<dependency name="GetName"/>
+			<dependency name="NisteOvlasceni"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="PlayerInfo"/>
+			<dependency name="SSCANF__"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="__file"/>
+			<dependency name="__line"/>
+			<dependency name="false"/>
+			<dependency name="fclose"/>
+			<dependency name="fopen"/>
+			<dependency name="format"/>
+			<dependency name="fwrite"/>
+			<dependency name="getdate"/>
+			<dependency name="gettime"/>
+			<dependency name="io_append"/>
+			<dependency name="pAdmin"/>
+			<dependency name="pIP"/>
 			<dependency name="va_SendClientMessageToAll"/>
 			<param name="playerid">
 			</param>
@@ -12171,6 +12215,7 @@
 			<referrer name="ftouch"/>
 			<referrer name="INI_ParseFile"/>
 			<referrer name="INI_WriteBuffer"/>
+			<referrer name="cmd_banip"/>
 			<param name="handle">
 				<paraminfo>File </paraminfo>
 			</param>
@@ -12327,6 +12372,7 @@
 			<referrer name="ftouch"/>
 			<referrer name="INI_ParseFile"/>
 			<referrer name="INI_WriteBuffer"/>
+			<referrer name="cmd_banip"/>
 			<param name="name">
 				<paraminfo> [] </paraminfo>
 			</param>
@@ -12363,6 +12409,7 @@
 			<referrer name="UserPath"/>
 			<referrer name="zcmd_OnGameModeInit"/>
 			<referrer name="SSCANF_OnPlayerConnect"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_mojavozila"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
@@ -12473,6 +12520,7 @@
 		<member name="M:fwrite" syntax="fwrite(handle, string[])">
 			<attribute name="native"/>
 			<referrer name="INI_WriteBuffer"/>
+			<referrer name="cmd_banip"/>
 			<param name="handle">
 				<paraminfo>File </paraminfo>
 			</param>
@@ -12482,6 +12530,7 @@
 		</member>
 		<member name="M:getdate" syntax="getdate(&amp;year, &amp;month, &amp;day)">
 			<attribute name="native"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="TDUpdate"/>
 			<param name="year">
 				<paraminfo> &amp; </paraminfo>
@@ -12526,6 +12575,7 @@
 		</member>
 		<member name="M:gettime" syntax="gettime(&amp;hour, &amp;minute, &amp;second)">
 			<attribute name="native"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="TDUpdate"/>
 			<referrer name="Time"/>
 			<param name="hour">
@@ -12559,6 +12609,7 @@
 		<member name="M:loadingscreen" syntax="loadingscreen(playerid)">
 			<attribute name="public"/>
 			<stacksize value="141"/>
+			<referrer name="OnPlayerCommandReceived"/>
 			<dependency name="GETIP"/>
 			<dependency name="INI_ParseFile"/>
 			<dependency name="Loadingscreen0"/>
@@ -12830,6 +12881,7 @@
 			<referrer name="cmd_promoteri"/>
 			<referrer name="cmd_unban"/>
 			<referrer name="cmd_skiniadmina"/>
+			<referrer name="OnPlayerCommandReceived"/>
 			<referrer name="S@@_OnPlayerEnterCheckpoint"/>
 			<referrer name="S@@_OnDialogResponse"/>
 			<referrer name="S@@_OnPlayerStateChange"/>
@@ -13126,6 +13178,7 @@
 		<member name="M:va_SendClientMessageToAll" syntax="va_SendClientMessageToAll(colour, fmat[], ...)">
 			<stacksize value="1047"/>
 			<referrer name="SSCANF_OnPlayerDisconnect"/>
+			<referrer name="cmd_banip"/>
 			<referrer name="cmd_leaveorg"/>
 			<referrer name="cmd_orgkick"/>
 			<referrer name="cmd_kick"/>
